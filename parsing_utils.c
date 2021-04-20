@@ -6,11 +6,15 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 14:13:54 by user42            #+#    #+#             */
-/*   Updated: 2021/04/20 16:34:48 by user42           ###   ########.fr       */
+/*   Updated: 2021/04/20 17:05:23 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
+
+//replace this with split and then atoi
+//more efficient && gain line
+//this function will be in charge of calling everyone
 
 int		*calc_resolution(char *str, int tab_size)
 {
