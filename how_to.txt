@@ -1,5 +1,3 @@
-(how the fuck do i use the minilibX ???)
-
 read all args in map file
 
 check if everything is there
@@ -9,3 +7,20 @@ place character
 use raycasting to render walls, ceiling & floor
 
 render texture on them
+
+------------------------
+
+BABY STEPS !!!!
+
+need a function that'll get path from args of ./cub3D:
+(w/ main->ac-av) (start w/ main, see for the rest later, BABY STEPS)
+need to open and read file from path
+	- if bad path return error message (specific function ?)
+	- open w/ O_RDONLY
+	- GNL :
+		- each line must be checked
+			- if line is good -> treat infos:
+			- STRUCT
+		- ignore empty lines as long as no map
+		- check if map is closed
+			-put map in char** | int** (char since NSEW)
