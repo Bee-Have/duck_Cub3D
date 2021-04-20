@@ -1,0 +1,11 @@
+(how the fuck do i use the minilibX ???)
+
+read all args in map file
+
+check if everything is there
+
+translate map from infos to representation
+place character
+use raycasting to render walls, ceiling & floor
+
+render texture on them
