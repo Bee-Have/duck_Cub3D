@@ -1,19 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_managment.c                                  :+:      :+:    :+:   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/20 15:03:10 by user42            #+#    #+#             */
-/*   Updated: 2021/04/21 17:13:04 by amarini-         ###   ########.fr       */
+/*   Created: 2021/04/21 13:40:32 by amarini-          #+#    #+#             */
+/*   Updated: 2021/04/21 13:40:45 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "libft.h"
 
-void	simple_error(void)
+char	*strtrim(char *str, int length, int start)
 {
-	write(1, "there is something wrong\n", 26);
-	exit (1);
+	char	*result;
+	int		i;
+
+	i = 0;
+	if (length == 0)
+		result = (char *)malloc(sizeof(char));
+	else
+		result = (char *)malloc((length + 1) * sizeof(char));
+	result[length] = '\0';
+	while (i < length)
+	{
+		result[i] = str[start];
+		i++;
+		start++;
+	}
+	free(str);
+	return (result);
 }

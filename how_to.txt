@@ -24,3 +24,17 @@ need to open and read file from path
 		- ignore empty lines as long as no map
 		- check if map is closed
 			-put map in char** | int** (char since NSEW)
+
+----------------------------------
+
+to find map
+
+how to store lines ?
+we don't know the size of the map
+
+for each line you got, put it in char**
+when last line is reached
+	check for each '0' if they are surounded by either '1' or '0' or "NSEW"
+		if not send ERROR
+	if there is no "NSEW" return ERROR
+	if everything is good print map to be sure;
