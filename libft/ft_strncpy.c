@@ -1,20 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_managment.c                                  :+:      :+:    :+:   */
+/*   ft_strncopy.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/20 15:03:10 by user42            #+#    #+#             */
-/*   Updated: 2021/04/22 17:34:44 by amarini-         ###   ########.fr       */
+/*   Created: 2021/04/22 17:31:57 by amarini-          #+#    #+#             */
+/*   Updated: 2021/04/22 17:32:37 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "libft.h"
 
-void	simple_error(char *str)
+char	*ft_strncpy(char *dst, char *src, int idst)
 {
-	str = ft_strjoin(ft_strcpy(str), "\n");
-	write(1, str, ft_strlen(str));
-	exit (1);
+	int		i;
+
+	i = 0;
+	while (src[i] != '\0')
+	{
+		dst[idst] = src[i];
+		i++;
+		idst++;
+	}
+	return (dst);
 }

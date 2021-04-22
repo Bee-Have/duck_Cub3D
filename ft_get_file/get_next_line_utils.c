@@ -6,50 +6,11 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/22 11:03:00 by amarini-          #+#    #+#             */
-/*   Updated: 2021/04/21 14:17:41 by amarini-         ###   ########.fr       */
+/*   Updated: 2021/04/22 17:31:46 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_get_file.h"
-
-char	*ft_strncpy(char *dst, char *src, int idst)
-{
-	int		i;
-
-	i = 0;
-	while (src[i] != '\0')
-	{
-		dst[idst] = src[i];
-		i++;
-		idst++;
-	}
-	return (dst);
-}
-
-char	*ft_strjoin(char *dst, char *src)
-{
-	int		i;
-	int		maxlen;
-	char	*result;
-
-	i = 0;
-	if (!dst || ft_strlen(dst) == 0)
-		maxlen = ft_strlen(src);
-	else
-		maxlen = ft_strlen(dst) + ft_strlen(src);
-	result = (char *)malloc((maxlen + 1) * sizeof(char));
-	if (!result)
-		return (NULL);
-	result[maxlen] = '\0';
-	if (dst || ft_strlen(dst) != 0)
-	{
-		result = ft_strncpy(result, dst, i);
-		i = ft_strlen(dst);
-	}
-	result = ft_strncpy(result, src, i);
-	free(dst);
-	return (result);
-}
 
 char	*ft_substr(char *str, int start, int len, int line)
 {

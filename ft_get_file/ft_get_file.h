@@ -6,7 +6,7 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 14:14:11 by amarini-          #+#    #+#             */
-/*   Updated: 2021/04/21 15:24:59 by amarini-         ###   ########.fr       */
+/*   Updated: 2021/04/22 17:32:57 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ int		find_newline(char *str, int read);
 int		read_fd(int fd, int *index, char **leftover);
 int		get_next_line(int fd, char **line);
 
-char	*ft_strncpy(char *dst, char *src, int idst);
-char	*ft_strjoin(char *dst, char *src);
 char	*ft_substr(char *str, int start, int len, int line);
 
 int		ft_get_file(char *path, char ***content);

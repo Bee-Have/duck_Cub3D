@@ -6,7 +6,7 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 13:42:11 by user42            #+#    #+#             */
-/*   Updated: 2021/04/21 17:08:12 by amarini-         ###   ########.fr       */
+/*   Updated: 2021/04/22 12:18:22 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,38 +20,39 @@ t_list	*init_struct(void)
 	list = (t_list *)malloc(sizeof(t_list));
 	if (!list)
 		return (NULL);
-	// list->res = (int *)malloc(2 * sizeof(char));
-	// if (!list->res)
-	// 	return (NULL);
-	// list->floor = (int *)malloc(3 * sizeof(char));
-	// if (!list->floor)
-	// 	return (NULL);
-	// list->ceiling = (int *)malloc(3 * sizeof(char));
-	// if (!list->ceiling)
-	// 	return (NULL);
 	list->found_map = 0;
 	return (list);
 }
 
 void	free_list(t_list **list)
 {
+	free_2d_array(&(*list)->file);
+	if ((*list)->res)
+		free_2d_array(&(*list)->res);
+	if ((*list)->floor)
+		free_2d_array(&(*list)->floor);
+	if ((*list)->ceiling)
+		free_2d_array(&(*list)->ceiling);
+	if ((*list)->map)
+		free_2d_array(&(*list)->map);
+	free((*list)->no);
+	free((*list)->so);
+	free((*list)->ea);
+	free((*list)->we);
+	free((*list)->sprite);
+	free((*list));
+}
+
+void	free_2d_array(char ***array)
+{
 	int		index;
 
 	index = 0;
-	if ((*list)->res)
-		free((*list)->res);
-	if ((*list)->floor)
-		free((*list)->floor);
-	if ((*list)->ceiling)
-		free((*list)->ceiling);
-	if ((*list)->map)
+	while ((*array)[index] != NULL)
 	{
-		while ((*list)->map[index] != NULL)
-		{
-			free((*list)->map[index]);
-			index++;
-		}
-		free((*list)->map);
+		free((*array)[index]);
+		index++;
 	}
-	free(list);
+	free((*array));
+	return ;
 }

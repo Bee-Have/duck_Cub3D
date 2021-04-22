@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   init_parsing.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 13:12:51 by user42            #+#    #+#             */
-/*   Updated: 2021/04/21 17:12:43 by amarini-         ###   ########.fr       */
+/*   Updated: 2021/04/22 18:18:31 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,27 @@
 
 void	get_infos(char *path)
 {
-	char	**file;
 	int		index;
 	int		read;
 	t_list	*list;
 
 	if (!path)
 		return ;
-	printf("got file path\n");
 	index = 0;
 	list = init_struct();
-	read = ft_get_file(path, &file);
+	read = ft_get_file(path, &list->file);
 	if (read == -1)
-		simple_error();
-	printf("got file infos\n");
-	while (file[index] != NULL)
+		simple_error("could not read map file");
+	while (list->file[index] != NULL)
 	{
-		printf("gonna treat this line\n");
-		printf("[%s]\n", file[index]);
 		if (list->found_map == 0)
-			treat_infos(file[index], &list);
+			treat_infos(list->file[index], &list);
 		if (list->found_map == 1)
 			break ;
 		index++;
 	}
-	list->map = map_register(file, &index);
+	list->map = map_register(list->file, &index);
+	print_map(list->map);
 	free_list(&list);
 	return ;
 }
@@ -46,51 +42,34 @@ void	get_infos(char *path)
 void	treat_infos(char *line, t_list **list)
 {
 	if (line[0] == '\0')
-	{
-		printf("ingnoring empty line\n");
 		return ;
-	}
 	else if (line[0] == 'R')
 	{
-		printf("found resolution\n");
-		(*list)->res = calc_resolution(line, 2);
-		print_map((*list)->res);
+		(*list)->res = res_colors_register(line, 2);
 		if ((*list)->res[2] != NULL)
-			simple_error();
+			simple_error("incorect number of agruments for Resolution");
 	}
 	else if (line[0] == 'N' && line[1] == 'O')
-	{
-		printf("found north texture\n");
-	}
+		(*list)->no = texture_register(line);
 	else if (line[0] == 'S' && line[1] == 'O')
-	{
-		printf("found south texture\n");
-	}
+		(*list)->so = texture_register(line);
 	else if (line[0] == 'W' && line[1] == 'E')
-	{
-		printf("found west texture\n");
-	}
+		(*list)->we = texture_register(line);
 	else if (line[0] == 'E' && line[1] == 'A')
-	{
-		printf("found east texture\n");
-	}
+		(*list)->ea = texture_register(line);
 	else if (line[0] == 'S')
-	{
-		printf("found sprite texture\n");
-	}
+		(*list)->sprite = texture_register(line);
 	else if (line[0] == 'F')
 	{
-		printf("found floor color\n");
-		(*list)->floor = calc_resolution(line, 3);
+		(*list)->floor = res_colors_register(line, 3);
 		if ((*list)->floor[3] != NULL)
-			simple_error();
+			simple_error("incorect number of arguments for Floor Color");
 	}
 	else if (line[0] == 'C')
 	{
-		printf("found floor color\n");
-		(*list)->ceiling = calc_resolution(line, 3);
+		(*list)->ceiling = res_colors_register(line, 3);
 		if ((*list)->ceiling[3] != NULL)
-			simple_error();
+			simple_error("incorect number of arguments for Ceiling Color");
 	}
 	else if (str_cmp(0, line, "01") == 1)
 		(*list)->found_map = 1;

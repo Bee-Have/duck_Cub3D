@@ -38,3 +38,26 @@ when last line is reached
 		if not send ERROR
 	if there is no "NSEW" return ERROR
 	if everything is good print map to be sure;
+
+map check
+
+must check that the next line is not empty
+must check next character is not '\0'
+
+if the next line is empty, still check,
+	if current char is a 02NSEW -> ERROR
+if the next character is '\0', stil check
+	if current char is 02NSEW -> ERROR
+
+if a '0'|'2'|'N'|'S'|'E'|'W' is the current character
+and if surrounding it is not a "012NSEW"
+	then return error
+
+-------------------------------------------------
+
+textures
+
+store textures path as 'char*'
+check if you can open, if not, send errors
+
+NEED TO MAKE A REAL ERROR FUNCTION THINGY

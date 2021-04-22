@@ -6,7 +6,7 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 13:40:32 by amarini-          #+#    #+#             */
-/*   Updated: 2021/04/21 13:40:45 by amarini-         ###   ########.fr       */
+/*   Updated: 2021/04/22 11:56:30 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,5 @@ char	*strtrim(char *str, int length, int start)
 		i++;
 		start++;
 	}
-	free(str);
 	return (result);
 }

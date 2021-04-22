@@ -6,7 +6,7 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 12:31:36 by user42            #+#    #+#             */
-/*   Updated: 2021/04/21 17:11:55 by amarini-         ###   ########.fr       */
+/*   Updated: 2021/04/22 17:25:13 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,13 @@
 
 typedef struct s_list
 {
+	char	**file;
 	char	**res;
-	//texture NO
-	//texture SO
-	//texture WE
-	//texture EA
-	//texture SPRITE
+	char	*no;
+	char	*so;
+	char	*ea;
+	char	*we;
+	char	*sprite;
 	char	**floor;
 	char	**ceiling;
 	int		found_map;
@@ -38,13 +39,17 @@ typedef struct s_list
 void	get_infos(char *path);
 void	treat_infos(char *line, t_list **list);
 
-char	**calc_resolution(char *str, int tab_size);
-char	**map_register(char **file, int *index);
-
 t_list	*init_struct(void);
 void	free_list(t_list **list);
+void	free_2d_array(char ***array);
 
-void	simple_error(void);
+char	**res_colors_register(char *str, int tab_size);
+char	**map_register(char **file, int *index);
+void	map_error_check(char **map);
+
+char	*texture_register(char *str);
+
+void	simple_error(char *str);
 
 //DEBUG (a enlever plus tard)
 void	print_map(char **map);
