@@ -1,33 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_res_colors.c                               :+:      :+:    :+:   */
+/*   parsing_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/20 14:13:54 by user42            #+#    #+#             */
-/*   Updated: 2021/04/22 18:18:13 by amarini-         ###   ########.fr       */
+/*   Created: 2021/04/22 12:02:14 by amarini-          #+#    #+#             */
+/*   Updated: 2021/04/23 10:41:44 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
-
-char	**res_colors_register(char *str, int tab_size)
-{
-	int		i;
-	int		index;
-	char	**result;
-	char	*tmp;
-	
-	i = 0;
-	index = 0;
-	while (str[index] < '0' || str[index] > '9')
-		index++;
-	tmp = strtrim(str, ft_strlen(str) - index, index);
-	result = ft_split((const char *)tmp, " ,");
-	free(tmp);
-	return (result);
-}
 
 char	**map_register(char **file, int *index)
 {
@@ -50,11 +33,12 @@ char	**map_register(char **file, int *index)
 	}
 	while (file[(*index)] != NULL && str_cmp(0, file[(*index)], "012NSEW") == 1)
 		(*index)++;
-	map_error_check(result);
+	map_open_check(result);
+	map_pj_check(result);
 	return (result);
 }
 
-void	map_error_check(char **map)
+void	map_open_check(char **map)
 {
 	int		index;
 	int		indexcpy;
@@ -73,26 +57,53 @@ void	map_error_check(char **map)
 			indexcpy = index;
 			if (str_cmp(map[indexcpy][icpy], NULL, "02NSEW") == 1
 				&& (i == 0 || map[indexcpy][++icpy] == '\0'))
-				simple_error("Your map is not closed");
+				simple_error("Your map is not closed or there is a wrong character inside");
 			icpy = i;
 			if (str_cmp(map[indexcpy][icpy], NULL, "02NSEW") == 1
 					&& (index == 0 || map[++indexcpy] == NULL))
-				simple_error("Your map is not closed");
+				simple_error("Your map is not closed or there is a wrong character inside");
 			indexcpy = index;
 			if (str_cmp(map[indexcpy][icpy], NULL, "02NSEW") == 1
 					&& (str_cmp(map[indexcpy][--icpy], NULL, "012NSEW") == 0
 					|| str_cmp(map[indexcpy][++icpy], NULL, "012NSEW") == 0))
-				simple_error("Your map is not closed");
+				simple_error("Your map is not closed or there is a wrong character inside");
 			icpy = i;
 			if (str_cmp(map[indexcpy][icpy], NULL, "02NSEW") == 1
 					&& (str_cmp(map[--indexcpy][icpy], NULL, "012NSEW") == 0
 					|| str_cmp(map[++indexcpy][icpy], NULL, "012NSEW") == 0))
-				simple_error("Your map is not closed");
+				simple_error("Your map is not closed or there is a wrong character inside");
 			indexcpy = index;
 			i++;
 		}
 		i = 0;
 		index++;
 	}
+	return ;
+}
+
+void	map_pj_check(char **map)
+{
+	int		pj;
+	int		index;
+	int		i;
+
+	pj = 0;
+	index = 0;
+	i = 0;
+	while (map[index] != NULL)
+	{
+		while (map[index][i] != '\0')
+		{
+			if (str_cmp(map[index][i], NULL, "NSEW") == 1)
+				pj++;
+			if (pj > 1)
+				simple_error("There is more then one player on the map");
+			i++;
+		}
+		i = 0;
+		index++;
+	}
+	if (pj == 0)
+		simple_error("There is no player on the map");
 	return ;
 }

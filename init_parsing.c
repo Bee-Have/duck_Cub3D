@@ -6,7 +6,7 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 13:12:51 by user42            #+#    #+#             */
-/*   Updated: 2021/04/22 18:18:31 by amarini-         ###   ########.fr       */
+/*   Updated: 2021/04/23 13:43:03 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,13 @@ void	get_infos(char *path)
 {
 	int		index;
 	int		read;
+	void	*mlx;
 	t_list	*list;
 
 	if (!path)
 		return ;
 	index = 0;
+	mlx = mlx_init();
 	list = init_struct();
 	read = ft_get_file(path, &list->file);
 	if (read == -1)
