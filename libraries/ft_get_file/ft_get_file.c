@@ -6,7 +6,7 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 14:13:03 by amarini-          #+#    #+#             */
-/*   Updated: 2021/04/21 17:14:42 by amarini-         ###   ########.fr       */
+/*   Updated: 2021/04/26 14:27:21 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,11 @@ int		ft_count_lines(char *path)
 
 int		ft_get_file(char *path, char ***content)
 {
-	int		result;
 	int		length;
 	int		index;
 	int		read;
 	int		fd;
 
-	result = 1;
 	index = 0;
 	read = 1;
 	length = ft_count_lines(path) - 1;

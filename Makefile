@@ -2,35 +2,45 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 NAME = cub3D
 SRCS = init_parsing.c list_managment.c parsing_map.c \
-		parsing_res_color_rextures.c main.c \
+		parsing_res_colors_textures main.c
 OBJS = $(SRCS:.c=.o)
-LIB_DIR = libraries/libft/ \
+#LIB_DIR = libraries/libft/ \
 			libraries/ft_get_file/ \
 			libraries/minilibx-linux/
-LIBS = libft.a libgetfile.a libmlx.a
-LIB_FLAGS = -L$(LIB_DIR) -l$(LIB_DIR) -lm
+LIBS_TEST = -I ./libraries/libft/ -L ./libraries/libft/\
+			-I ./libraries/ft_get_file/ -L ./libraries/ft_get_file/ \
+			-I ./libraries/minilibx-linux/ -L ./libraries/minilibx-linux/
+LIBS = -L ./libraries/libft -lft -L ./libraries/ft_get_file -lgetfile
+LIB_MLX = -L ./libraries/minilibx-linux -lmlx -lm -Imlx_linux -lXext -lX11 -lm
 
 all: install $(NAME)
 
 $(OBJS): $(SRCS)
-		$(CC) $(CFLAGS) -I/usr/include -Imlx_linux -03 -c $< -o $@
+		$(CC) $(CFLAGS) -c $< -o $@
 
 install:
-		cd $(LIB_DIR) && $(MAKE) all
-		#$(CC) -L$(LIB_DIR) -l$(LIB) -lm
+		cd libraries/libft/ && $(MAKE) all
+		cd libraries/ft_get_file/ && $(MAKE) all
+		cd libraries/minilibx-linux/ && $(MAKE) all
 
 $(NAME): $(OBJS)
-		cp $(LIBS) $(NAME)
-		$(CC) $(CFLAGS) $@ $^ $(LIBS)
+		cp libraries/libft/libft.a $(NAME)
+		cp libraries/ft_get_file/libgetfile.a $(NAME)
+		cp libraries/minilibx-linux/libmlx.a $(NAME)
+		echo "bonjour"
+		$(CC) $(CFLAGS) ${LIBS_TEST}  $^ -o $@
 
 clean:
 		rm -f *.o
-		cd $(LIB_DIR) && $(MAKE) clean
+		cd libraries/libft/ && $(MAKE) clean
+		cd libraries/ft_get_file/ && $(MAKE) clean
+		cd libraries/minilibx-linux/ && $(MAKE) clean
 
 fclean: clean
 		rm -f $(NAME)
-		cd $(LIB_DIR) && $(MAKE) fclean
+		cd libraries/libft/ && $(MAKE) fclean
+		cd libraries/ft_get_file/ && $(MAKE) fclean
 
 re: fclean all
 
-.PHONY : clean fclean re all
+.PHONY : clean fclean re all install

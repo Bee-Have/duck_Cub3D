@@ -6,7 +6,7 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 12:31:36 by user42            #+#    #+#             */
-/*   Updated: 2021/04/23 13:42:26 by amarini-         ###   ########.fr       */
+/*   Updated: 2021/04/26 16:00:50 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 #include <math.h>
 #include <fcntl.h>
 #include <mlx.h>
-#include "libft/libft.h"
-#include "ft_get_file/ft_get_file.h"
+#include "libraries/libft/libft.h"
+#include "libraries/ft_get_file/ft_get_file.h"
 
 typedef struct s_list
 {
@@ -43,6 +43,8 @@ void	treat_infos(char *line, t_list **list);
 t_list	*init_struct(void);
 void	free_list(t_list **list);
 void	free_2d_array(char ***array);
+
+void	init_minilibx(t_list **list);
 
 char	**res_colors_register(char *str, int tab_size);
 char	*texture_register(char *str);
