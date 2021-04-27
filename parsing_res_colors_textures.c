@@ -6,20 +6,18 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 14:13:54 by user42            #+#    #+#             */
-/*   Updated: 2021/04/23 10:29:55 by amarini-         ###   ########.fr       */
+/*   Updated: 2021/04/27 16:16:36 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "include/cub3D.h"
 
-char	**res_colors_register(char *str, int tab_size)
+char	**res_colors_register(char *str)
 {
-	int		i;
 	int		index;
 	char	**result;
 	char	*tmp;
-	
-	i = 0;
+
 	index = 0;
 	while (str[index] < '0' || str[index] > '9')
 		index++;

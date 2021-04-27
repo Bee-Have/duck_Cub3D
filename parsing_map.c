@@ -6,15 +6,14 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 12:02:14 by amarini-          #+#    #+#             */
-/*   Updated: 2021/04/23 10:41:44 by amarini-         ###   ########.fr       */
+/*   Updated: 2021/04/27 11:00:08 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "include/cub3D.h"
 
 char	**map_register(char **file, int *index)
 {
-	int		i;
 	int		length;
 	char	**result;
 

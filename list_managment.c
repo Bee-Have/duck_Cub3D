@@ -6,11 +6,11 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 13:42:11 by user42            #+#    #+#             */
-/*   Updated: 2021/04/22 12:18:22 by amarini-         ###   ########.fr       */
+/*   Updated: 2021/04/27 10:56:33 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "include/cub3D.h"
 
 t_list	*init_struct(void)
 {

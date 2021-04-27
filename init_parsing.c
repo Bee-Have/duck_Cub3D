@@ -6,11 +6,11 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 13:12:51 by user42            #+#    #+#             */
-/*   Updated: 2021/04/26 14:39:06 by amarini-         ###   ########.fr       */
+/*   Updated: 2021/04/27 16:20:40 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "include/cub3D.h"
 
 void	get_infos(char *path)
 {
@@ -46,7 +46,7 @@ void	treat_infos(char *line, t_list **list)
 		return ;
 	else if (line[0] == 'R')
 	{
-		(*list)->res = res_colors_register(line, 2);
+		(*list)->res = res_colors_register(line);
 		if ((*list)->res[2] != NULL)
 			simple_error("incorect number of agruments for Resolution");
 	}
@@ -62,13 +62,13 @@ void	treat_infos(char *line, t_list **list)
 		(*list)->sprite = texture_register(line);
 	else if (line[0] == 'F')
 	{
-		(*list)->floor = res_colors_register(line, 3);
+		(*list)->floor = res_colors_register(line);
 		if ((*list)->floor[3] != NULL)
 			simple_error("incorect number of arguments for Floor Color");
 	}
 	else if (line[0] == 'C')
 	{
-		(*list)->ceiling = res_colors_register(line, 3);
+		(*list)->ceiling = res_colors_register(line);
 		if ((*list)->ceiling[3] != NULL)
 			simple_error("incorect number of arguments for Ceiling Color");
 	}

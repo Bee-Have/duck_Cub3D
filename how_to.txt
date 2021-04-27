@@ -61,3 +61,6 @@ store textures path as 'char*'
 check if you can open, if not, send errors
 
 NEED TO MAKE A REAL ERROR FUNCTION THINGY
+
+----------------------------------------------
+
