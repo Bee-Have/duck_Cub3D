@@ -6,7 +6,7 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 13:12:51 by user42            #+#    #+#             */
-/*   Updated: 2021/04/28 11:14:10 by amarini-         ###   ########.fr       */
+/*   Updated: 2021/04/28 18:17:33 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	get_infos(char *path)
 {
 	int		index;
 	int		read;
-	t_list	*list;
+	t_cub	*list;
 
 	if (!path)
 		return ;
@@ -40,7 +40,9 @@ void	get_infos(char *path)
 	return ;
 }
 
-void	treat_infos(char *line, t_list **list)
+//pointeur sur fonction en fonction de la premiere lettre de chaque ligne
+//plus pratique + plus rapide
+void	treat_infos(char *line, t_cub **list)
 {
 	if (line[0] == '\0')
 		return ;

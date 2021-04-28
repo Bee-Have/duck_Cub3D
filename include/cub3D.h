@@ -6,7 +6,7 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 12:31:36 by user42            #+#    #+#             */
-/*   Updated: 2021/04/28 15:27:01 by amarini-         ###   ########.fr       */
+/*   Updated: 2021/04/28 18:14:20 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@
 #include "../libraries/ft_get_file/ft_get_file.h"
 #include "../libraries/minilibx-linux/mlx.h"
 
-typedef struct s_list
+//faire structures de structures
+//structure de res avec deux int 
+//autre struct pour couleurs
+typedef struct s_cub
 {
 	char	**file;
 	char	**res;
@@ -35,7 +38,7 @@ typedef struct s_list
 	char	**ceiling;
 	int		found_map;
 	char	**map;
-}				t_list;
+}				t_cub;
 
 typedef struct s_vars
 {
@@ -55,15 +58,15 @@ typedef struct s_data
 }				t_data;
 
 void	get_infos(char *path);
-void	treat_infos(char *line, t_list **list);
+void	treat_infos(char *line, t_cub **list);
 
-t_list	*init_struct(void);
+t_cub	*init_struct(void);
 t_vars	*init_mlx_vars(void);
 t_data	*init_mlx_data(void);
-void	free_list(t_list **list);
+void	free_list(t_cub **list);
 void	free_2d_array(char ***array);
 
-void	init_minilibx(t_list **list);
+void	init_minilibx(t_cub **list);
 void	my_mlx_pxl_put(t_data **data, int x, int y, int color);
 int		key_hook(int keycode, t_vars **vars);
 void	test_pxl_loop(t_data **data, t_vars **vars);;

@@ -6,18 +6,18 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 13:42:11 by user42            #+#    #+#             */
-/*   Updated: 2021/04/28 15:09:59 by amarini-         ###   ########.fr       */
+/*   Updated: 2021/04/28 18:12:48 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/cub3D.h"
 
-t_list		*init_struct(void)
+t_cub		*init_struct(void)
 {
-	t_list	*list;
+	t_cub	*list;
 	
 	list = NULL;
-	list = (t_list *)malloc(sizeof(t_list));
+	list = (t_cub *)malloc(sizeof(t_cub));
 	if (!list)
 		return (NULL);
 	list->found_map = 0;
@@ -54,7 +54,7 @@ t_data	*init_mlx_data(void)
 	return (mlx_lst);
 }
 
-void		free_list(t_list **list)
+void		free_list(t_cub **list)
 {
 	free_2d_array(&(*list)->file);
 	if ((*list)->res)

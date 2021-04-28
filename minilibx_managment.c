@@ -6,13 +6,13 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 14:36:42 by amarini-          #+#    #+#             */
-/*   Updated: 2021/04/28 17:41:53 by amarini-         ###   ########.fr       */
+/*   Updated: 2021/04/28 18:12:48 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/cub3D.h"
 
-void	init_minilibx(t_list **list)
+void	init_minilibx(t_cub **list)
 {
 	t_vars	*vars;
 	t_data	*img;
@@ -40,10 +40,10 @@ void	test_pxl_loop(t_data **data, t_vars **vars)
 	int	color_1;
 	int	color_2;
 
-	original_x = 480;
-	x = 480;
+	original_x = 960;
+	x = original_x;
 	y = 5;
-	gradiant = 1440;
+	gradiant = 960;
 	max = 1080;
 	color_1 = 0x00FFFF00;
 	color_2 = 0x00FF00FF;
@@ -51,16 +51,15 @@ void	test_pxl_loop(t_data **data, t_vars **vars)
 	{
 		while(x <= gradiant)
 		{
-			//printf("gradiant[%d]\n", gradiant);
 			if (x <= 960)
 				my_mlx_pxl_put(data, x, y, color_1);
 			else
 				my_mlx_pxl_put(data, x, y, color_2);
-			// color_1--;
-			// color_2--;
+			 color_1--;
+			 color_2--;
 			x++;
 		}
-		if (/*y < 540 &&*/ gradiant <= 960)
+		if (y < 540 && gradiant <= (960 + 480))
 		{
 			gradiant += 1;
 			original_x -= 1;
@@ -71,10 +70,10 @@ void	test_pxl_loop(t_data **data, t_vars **vars)
 			original_x += 1;
 		}
 		x = original_x;
-		//color_1 = 0x00FFFFFF;
-		//color_2 = 0x00FF0000;
-		// color_1--;
-		// color_2--;
+		// color_1 = 0x00FFFFFF;
+		// color_2 = 0x00FF0000;
+		 color_1--;
+		 color_2--;
 		y++;
 	}
 }
