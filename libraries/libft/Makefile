@@ -6,7 +6,7 @@
 #    By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/23 15:27:38 by amarini-          #+#    #+#              #
-#    Updated: 2021/04/23 15:38:43 by amarini-         ###   ########.fr        #
+#    Updated: 2021/04/28 11:09:40 by amarini-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,8 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 NAME = libft.a
 SRC = ft_atoi.c ft_fill_str.c ft_split.c ft_str_cmp.c ft_str_cmp.c \
-		ft_strcpy.c ft_strjoin.c ft_strlen.c ft_strncpy.c ft_strtrim.c
+		ft_strcpy.c ft_strjoin.c ft_strlen.c ft_strncpy.c ft_strtrim.c \
+		ft_split_nums.c
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)

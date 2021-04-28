@@ -6,7 +6,7 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 13:12:51 by user42            #+#    #+#             */
-/*   Updated: 2021/04/27 16:20:40 by amarini-         ###   ########.fr       */
+/*   Updated: 2021/04/28 11:14:10 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,18 +74,5 @@ void	treat_infos(char *line, t_list **list)
 	}
 	else if (str_cmp(0, line, "01") == 1)
 		(*list)->found_map = 1;
-	return ;
-}
-
-void	print_map(char **map)
-{
-	int		row;
-	
-	row = 0;
-	while (map[row] != NULL)
-	{
-		printf("[%s]\n", map[row]);
-		row++;
-	}
 	return ;
 }

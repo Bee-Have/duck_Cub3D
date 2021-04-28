@@ -6,7 +6,7 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 14:42:07 by user42            #+#    #+#             */
-/*   Updated: 2021/04/22 17:32:22 by amarini-         ###   ########.fr       */
+/*   Updated: 2021/04/28 11:07:36 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,11 @@ char	**free_everything(char **result);
 int		calc_word(char const *s, char *sep, int strpos);
 int		calc_row(char const *s, char *sep);
 int		check_for_sep(char c, char *sep);
+
+char	**ft_split_nums(char const *s);
+int		len_nums(char const *s, int strpos);
+int		calc_row_nums(char const *s);
+int		check_non_nums(char c);
 
 int		str_cmp(char c, char *str, char *cmp);
 

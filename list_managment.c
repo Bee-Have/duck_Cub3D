@@ -6,13 +6,13 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 13:42:11 by user42            #+#    #+#             */
-/*   Updated: 2021/04/27 10:56:33 by amarini-         ###   ########.fr       */
+/*   Updated: 2021/04/28 15:09:59 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/cub3D.h"
 
-t_list	*init_struct(void)
+t_list		*init_struct(void)
 {
 	t_list	*list;
 	
@@ -24,7 +24,37 @@ t_list	*init_struct(void)
 	return (list);
 }
 
-void	free_list(t_list **list)
+t_vars	*init_mlx_vars(void)
+{
+	t_vars *mlx_vars;
+
+	mlx_vars = NULL;
+	mlx_vars = (t_vars *)malloc(sizeof(t_vars));
+	if (!mlx_vars)
+		return (NULL);
+	mlx_vars->mlx = mlx_init();
+	mlx_vars->mlx_win = NULL;
+	return (mlx_vars);
+}
+
+t_data	*init_mlx_data(void)
+{
+	t_data *mlx_lst;
+	
+	mlx_lst = NULL;
+	mlx_lst = (t_data *)malloc(sizeof(t_data));
+	if (!mlx_lst)
+		return (NULL);
+	mlx_lst->img = NULL;
+	mlx_lst->bits_per_pix = 0;
+	mlx_lst->line_length = 0;
+	mlx_lst->endian = 0;
+	mlx_lst->pxl_x = 5;
+	mlx_lst->pxl_y = 5;
+	return (mlx_lst);
+}
+
+void		free_list(t_list **list)
 {
 	free_2d_array(&(*list)->file);
 	if ((*list)->res)

@@ -6,7 +6,7 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 14:13:54 by user42            #+#    #+#             */
-/*   Updated: 2021/04/27 16:16:36 by amarini-         ###   ########.fr       */
+/*   Updated: 2021/04/28 11:08:35 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,12 @@ char	**res_colors_register(char *str)
 	char	*tmp;
 
 	index = 0;
+	printf("str[%s]\n", str);
 	while (str[index] < '0' || str[index] > '9')
 		index++;
 	tmp = strtrim(str, ft_strlen(str) - index, index);
-	result = ft_split((const char *)tmp, " ,");
+	result = ft_split_nums((const char *)tmp);
+	print_map(result);
 	free(tmp);
 	return (result);
 }
