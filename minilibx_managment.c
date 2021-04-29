@@ -6,7 +6,7 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 14:36:42 by amarini-          #+#    #+#             */
-/*   Updated: 2021/04/28 18:12:48 by amarini-         ###   ########.fr       */
+/*   Updated: 2021/04/29 17:20:30 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	init_minilibx(t_cub **list)
 
 	vars = init_mlx_vars();
 	img = init_mlx_data();
-	vars->mlx_win = mlx_new_window(vars->mlx, ft_atoi((*list)->res[0]), ft_atoi((*list)->res[1]), "cub3D");
-	img->img = mlx_new_image(vars->mlx, ft_atoi((*list)->res[0]), ft_atoi((*list)->res[0]));
+	vars->mlx_win = mlx_new_window(vars->mlx, (*list)->res->width, (*list)->res->height, "cub3D");
+	img->img = mlx_new_image(vars->mlx, (*list)->res->width, (*list)->res->height);
 	img->addr = mlx_get_data_addr(img->img, &img->bits_per_pix, &img->line_length,
 								&img->endian);
 	//my_mlx_pxl_put(&img, 5, 5, 0x00FF0000);
@@ -30,6 +30,7 @@ void	init_minilibx(t_cub **list)
 	mlx_loop(vars->mlx);
 }
 
+//dis is mine and just for funny testing
 void	test_pxl_loop(t_data **data, t_vars **vars)
 {
 	int	original_x;

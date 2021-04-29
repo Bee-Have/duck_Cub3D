@@ -6,7 +6,7 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 12:31:36 by user42            #+#    #+#             */
-/*   Updated: 2021/04/28 18:14:20 by amarini-         ###   ########.fr       */
+/*   Updated: 2021/04/29 17:18:16 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,30 @@
 #include "../libraries/ft_get_file/ft_get_file.h"
 #include "../libraries/minilibx-linux/mlx.h"
 
-//faire structures de structures
-//structure de res avec deux int 
-//autre struct pour couleurs
+typedef struct s_res
+{
+	int		width;
+	int		height;
+}				t_res;
+
+typedef struct s_color
+{
+	int		R;
+	int		G;
+	int		B;
+}				t_color;
+
 typedef struct s_cub
 {
 	char	**file;
-	char	**res;
+	t_res	*res;
 	char	*no;
 	char	*so;
 	char	*ea;
 	char	*we;
 	char	*sprite;
-	char	**floor;
-	char	**ceiling;
+	t_color	*floor;
+	t_color	*ceiling;
 	int		found_map;
 	char	**map;
 }				t_cub;
@@ -61,6 +71,8 @@ void	get_infos(char *path);
 void	treat_infos(char *line, t_cub **list);
 
 t_cub	*init_struct(void);
+t_res	*init_resolution(void);
+t_color	*init_colors(void);
 t_vars	*init_mlx_vars(void);
 t_data	*init_mlx_data(void);
 void	free_list(t_cub **list);
@@ -71,14 +83,15 @@ void	my_mlx_pxl_put(t_data **data, int x, int y, int color);
 int		key_hook(int keycode, t_vars **vars);
 void	test_pxl_loop(t_data **data, t_vars **vars);;
 
-char	**res_colors_register(char *str);
-char	*texture_register(char *str);
+void	res_RGB_register(t_cub **cub, char *str);
+void	texture_register(t_cub **cub, char *str);
 
-char	**map_register(char **file, int *index);
-void	map_open_check(char **map);
-void	map_pj_check(char **map);
+void	map_register(t_cub **cub, int *index);
+void	map_open_check(t_cub **cub);
+int		open_test(char **map, int i, int index);
+void	map_pj_check(t_cub **cub);
 
-void	simple_error(char *str);
+void	simple_error(t_cub **cub, char *str);
 
 //DEBUG (a enlever plus tard)
 void	print_map(char **map);

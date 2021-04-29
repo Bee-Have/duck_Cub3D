@@ -6,7 +6,7 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 13:42:11 by user42            #+#    #+#             */
-/*   Updated: 2021/04/28 18:12:48 by amarini-         ###   ########.fr       */
+/*   Updated: 2021/04/29 11:32:57 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,47 @@
 
 t_cub		*init_struct(void)
 {
-	t_cub	*list;
-	
-	list = NULL;
-	list = (t_cub *)malloc(sizeof(t_cub));
-	if (!list)
+	t_cub	*cub;
+
+	cub = NULL;
+	cub = (t_cub *)malloc(sizeof(t_cub));
+	if (!cub)
 		return (NULL);
-	list->found_map = 0;
-	return (list);
+	cub->res = init_resolution();
+	cub->ceiling = init_colors();
+	cub->floor = init_colors();
+	cub->found_map = 0;
+	return (cub);
 }
 
-t_vars	*init_mlx_vars(void)
+t_res		*init_resolution(void)
+{
+	t_res	*res;
+
+	res = NULL;
+	res = (t_res *)malloc(sizeof(t_res));
+	if (!res)
+		return (NULL);
+	res->width = 0;
+	res->height = 0;
+	return (res);
+}
+
+t_color		*init_colors(void)
+{
+	t_color *color;
+
+	color = NULL;
+	color = (t_color *)malloc(sizeof(t_color));
+	if (!color)
+		return (NULL);
+	color->R = 0;
+	color->G = 0;
+	color->B = 0;
+	return (color);
+}
+
+t_vars		*init_mlx_vars(void)
 {
 	t_vars *mlx_vars;
 
@@ -57,12 +87,9 @@ t_data	*init_mlx_data(void)
 void		free_list(t_cub **list)
 {
 	free_2d_array(&(*list)->file);
-	if ((*list)->res)
-		free_2d_array(&(*list)->res);
-	if ((*list)->floor)
-		free_2d_array(&(*list)->floor);
-	if ((*list)->ceiling)
-		free_2d_array(&(*list)->ceiling);
+	free((*list)->res);
+	free((*list)->floor);
+	free((*list)->ceiling);
 	if ((*list)->map)
 		free_2d_array(&(*list)->map);
 	free((*list)->no);
