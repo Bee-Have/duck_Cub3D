@@ -6,7 +6,7 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 12:02:14 by amarini-          #+#    #+#             */
-/*   Updated: 2021/04/29 17:18:05 by amarini-         ###   ########.fr       */
+/*   Updated: 2021/05/10 13:55:59 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	map_register(t_cub **cub, int *index)
 	length = length - (*index);
 	result = (char **)malloc((length + 1) * sizeof(char *));
 	if (!result)
-		return (NULL);
+		return ;
 	result[length--] = NULL;
 	while (length >= 0)
 	{
@@ -34,9 +34,10 @@ void	map_register(t_cub **cub, int *index)
 	while ((*cub)->file[(*index)] != NULL
 			&& str_cmp(0, (*cub)->file[(*index)], "012NSEW") == 1)
 		(*index)++;
-	(*cub)->map = result;
+	(*cub)->map = (result);
 	map_open_check(cub);
 	map_pj_check(cub);
+	(*cub)->longest_map = max_line_len((*cub)->map);
 }
 
 void	map_open_check(t_cub **cub)
@@ -60,14 +61,6 @@ void	map_open_check(t_cub **cub)
 	}
 	return ;
 }
-
-//call other function to compare
-
-//other function has all cmp calls
-//or other function has one cmp call -> more difficult though right ?
-
-//returns 0 if BAD
-//returns 1 if GOOD
 
 int		open_test(char **map, int i, int index)
 {
@@ -114,4 +107,25 @@ void	map_pj_check(t_cub **cub)
 	if (pj == 0)
 		simple_error(cub, "There is no player on the map");
 	return ;
+}
+
+int		max_line_len(char **map)
+{
+	int		collumn;
+	int		row;
+	int		result;
+
+	collumn = 0;
+	row = 0;
+	result = 0;
+	while (map[row] != NULL)
+	{
+		while (map[row][collumn] != '\0')
+			collumn++;
+		if (result < collumn)
+			result = collumn;
+		collumn = 0;
+		row++;
+	}
+	return (result);
 }

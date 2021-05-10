@@ -6,7 +6,7 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 13:42:11 by user42            #+#    #+#             */
-/*   Updated: 2021/04/29 11:32:57 by amarini-         ###   ########.fr       */
+/*   Updated: 2021/05/10 16:29:27 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_res		*init_resolution(void)
 
 t_color		*init_colors(void)
 {
-	t_color *color;
+	t_color	*color;
 
 	color = NULL;
 	color = (t_color *)malloc(sizeof(t_color));
@@ -56,7 +56,7 @@ t_color		*init_colors(void)
 
 t_vars		*init_mlx_vars(void)
 {
-	t_vars *mlx_vars;
+	t_vars	*mlx_vars;
 
 	mlx_vars = NULL;
 	mlx_vars = (t_vars *)malloc(sizeof(t_vars));
@@ -69,7 +69,7 @@ t_vars		*init_mlx_vars(void)
 
 t_data	*init_mlx_data(void)
 {
-	t_data *mlx_lst;
+	t_data	*mlx_lst;
 	
 	mlx_lst = NULL;
 	mlx_lst = (t_data *)malloc(sizeof(t_data));
@@ -82,6 +82,20 @@ t_data	*init_mlx_data(void)
 	mlx_lst->pxl_x = 5;
 	mlx_lst->pxl_y = 5;
 	return (mlx_lst);
+}
+
+t_all	*init_all(void)
+{
+	t_all	*all;
+
+	all = NULL;
+	all = (t_all *)malloc(sizeof(t_all));
+	if (!all)
+		return (NULL);
+	return (all);
+	all->cub = NULL;
+	all->data = NULL;
+	all->vars = NULL;
 }
 
 void		free_list(t_cub **list)
