@@ -6,13 +6,13 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 13:42:11 by user42            #+#    #+#             */
-/*   Updated: 2021/05/10 16:29:27 by amarini-         ###   ########.fr       */
+/*   Updated: 2021/05/11 17:39:03 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/cub3D.h"
 
-t_cub		*init_struct(void)
+t_cub		*init_cub(void)
 {
 	t_cub	*cub;
 
@@ -24,6 +24,7 @@ t_cub		*init_struct(void)
 	cub->ceiling = init_colors();
 	cub->floor = init_colors();
 	cub->found_map = 0;
+	cub->pj = init_pj_pos();
 	return (cub);
 }
 
@@ -52,6 +53,19 @@ t_color		*init_colors(void)
 	color->G = 0;
 	color->B = 0;
 	return (color);
+}
+
+t_pj_pos	*init_pj_pos(void)
+{
+	t_pj_pos	*pj;
+
+	pj = NULL;
+	pj = (t_pj_pos *)malloc(sizeof(t_pj_pos));
+	if (!pj)
+		return (NULL);
+	pj->x = 0;
+	pj->y = 0;
+	return (pj);
 }
 
 t_vars		*init_mlx_vars(void)
@@ -84,21 +98,7 @@ t_data	*init_mlx_data(void)
 	return (mlx_lst);
 }
 
-t_all	*init_all(void)
-{
-	t_all	*all;
-
-	all = NULL;
-	all = (t_all *)malloc(sizeof(t_all));
-	if (!all)
-		return (NULL);
-	return (all);
-	all->cub = NULL;
-	all->data = NULL;
-	all->vars = NULL;
-}
-
-void		free_list(t_cub **list)
+void	free_cub(t_cub **list)
 {
 	free_2d_array(&(*list)->file);
 	free((*list)->res);
@@ -111,6 +111,7 @@ void		free_list(t_cub **list)
 	free((*list)->ea);
 	free((*list)->we);
 	free((*list)->sprite);
+	free((*list)->pj);
 	free((*list));
 }
 

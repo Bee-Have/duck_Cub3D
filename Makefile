@@ -10,7 +10,8 @@ LIBS = -L$(LIBFT_DIR) -lft -L$(GETFILE_DIR) -lgetfile \
 INCLUDES = -Iincludes/ -I$(LIBFT_DIR) -I$(GETFILE_DIR) -I$(MINILIB_DIR)
 SRCS = init_parsing.c list_managment.c parsing_map.c \
 		parsing_res_colors_textures.c main.c error_managment.c \
-		minilibx_managment.c mlx_event_manager.c debug.c
+		minilibx_managment.c mlx_event_manager.c debug.c \
+		moving_player.c window_printing.c
 OBJS = $(SRCS:.c=.o)
 
 all: install $(NAME)

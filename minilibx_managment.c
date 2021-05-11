@@ -6,7 +6,7 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 14:36:42 by amarini-          #+#    #+#             */
-/*   Updated: 2021/05/10 17:07:02 by amarini-         ###   ########.fr       */
+/*   Updated: 2021/05/11 17:53:46 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,78 +34,10 @@ void	init_minilibx(t_cub **list)
 	mlx_put_image_to_window(vars->mlx, vars->mlx_win, img->img, 0, 0);
 	mlx_key_hook(vars->mlx_win, key_hook, &vars);
 	mlx_hook(vars->mlx_win, 17, 1L<<2, close_window, &vars);
-	//mlx_hook(vars->mlx_win, 06, 1L<<6, mouse_in_window, &vars);
+	mlx_hook(vars->mlx_win, 06, 1L<<6, mouse_in_window, &vars);
 	mlx_mouse_hook(vars->mlx_win, mouse_hook, &vars);
 	//mlx_expose_hook(vars->mlx_win, window_hook, &vars);
-	mlx_loop_hook(vars->mlx, test_print_map, &vars);
 	mlx_loop(vars->mlx);
-}
-
-int		test_render_next_frame(t_all **list)
-{
-	
-}
-
-//dis is mine and just for funny testing
-void	test_print_map(t_cub *cub, t_data **data)
-{
-	int		i;
-	int		j;
-	int		max_x;
-	int		max_y;
-	int		x;
-	int		y;
-
-	i = 0;
-	j = 0;
-	max_x = 0;
-	max_y = 0;
-	x = 100;
-	y = 100;
-	while (cub->map[j] != NULL)
-	{
-		while (cub->map[j][i] != '\0')
-		{
-			if (cub->map[j][i] == '0')
-				my_mlx_pxl_put(data, x, y, 0x00FF7F7F);
-			else if (cub->map[j][i] == '1')
-				my_mlx_pxl_put(data, x, y, 0x00FFFFFF);
-			else if (str_cmp(cub->map[j][i], NULL, "NSEW") == 1)
-				my_mlx_pxl_put(data, x, y, 0x00FFFF00);
-			else
-				my_mlx_pxl_put(data, x, y, 0x007F7F7F);
-			if (max_x < 15)
-				max_x++;
-			else
-			{
-				max_x = 0;
-				i++;
-			}
-				x++;
-		}
-		while (i < cub->longest_map)
-		{
-			my_mlx_pxl_put(data, x, y, 0x007F7F7F);
-			if (max_x < 15)
-				max_x++;
-			else
-			{
-				max_x = 0;
-				i++;
-			}
-				x++;
-		}
-		i = 0;
-		x = 100;
-		if (max_y < 15)
-			max_y++;
-		else
-		{
-			max_y = 0;
-			j++;
-		}
-			y++;
-	}
 }
 
 //dis is mine and just for funny testing

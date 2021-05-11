@@ -6,7 +6,7 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 12:31:36 by user42            #+#    #+#             */
-/*   Updated: 2021/05/10 16:27:17 by amarini-         ###   ########.fr       */
+/*   Updated: 2021/05/11 17:41:51 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,20 +35,27 @@ typedef struct s_color
 	int		B;
 }				t_color;
 
+typedef struct s_pj_pos
+{
+	int		x;
+	int		y;
+}				t_pj_pos;
+
 typedef struct s_cub
 {
-	char	**file;
-	t_res	*res;
-	char	*no;
-	char	*so;
-	char	*ea;
-	char	*we;
-	char	*sprite;
-	t_color	*floor;
-	t_color	*ceiling;
-	int		found_map;
-	int		longest_map;
-	char	**map;
+	char		**file;
+	t_res		*res;
+	char		*no;
+	char		*so;
+	char		*ea;
+	char		*we;
+	char		*sprite;
+	t_color		*floor;
+	t_color		*ceiling;
+	int			found_map;
+	int			longest_map;
+	char		**map;
+	t_pj_pos	*pj;
 }				t_cub;
 
 typedef struct s_vars
@@ -68,28 +75,22 @@ typedef struct s_data
 	int		pxl_y;
 }				t_data;
 
-typedef struct s_all
-{
-	t_cub	*cub;
-	t_data	*data;
-	t_vars	*vars;
-}				t_all;
-
 void	get_infos(char *path);
 void	treat_infos(char *line, t_cub **list);
 
-t_cub	*init_struct(void);
+t_cub	*init_cub(void);
 t_res	*init_resolution(void);
 t_color	*init_colors(void);
+t_pj_pos	*init_pj_pos(void);
 t_vars	*init_mlx_vars(void);
 t_data	*init_mlx_data(void);
-t_all	*init_all(void);
-void	free_list(t_cub **list);
+void	free_cub(t_cub **list);
 void	free_2d_array(char ***array);
 
 void	init_minilibx(t_cub **list);
 void	my_mlx_pxl_put(t_data **data, int x, int y, int color);
 //my test functions
+int render_next_frame(t_data **test);
 void	test_print_map(t_cub *cub, t_data **data);
 void	test_pxl_loop(t_data **data);
 

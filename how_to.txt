@@ -64,3 +64,37 @@ NEED TO MAKE A REAL ERROR FUNCTION THINGY
 
 ----------------------------------------------
 
+FIRST 
+	- see how to move your player
+SECOND 
+	- see for the raycasting
+
+--------------------------------------------------
+
+MAP AFFICHAGE
+
+map what is printed should be scaled with the screen
+
+get the resolution
+
+
+-------------------------------------------------
+
+BABY STEPS !!!!!!!!!!!!!!!!!!!
+
+MOVING
+
+should we STORE the position of the player ?
+yes
+
+then change that position constantly and keep it in memory
+as well as it's orientation
+
+so struct for the player :
+	- POSITION
+	- ORIENTATION
+
+then
+	upon hitting key to move
+	player position = player position * key direction
+
