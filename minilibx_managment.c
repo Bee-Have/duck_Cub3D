@@ -6,7 +6,7 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 14:36:42 by amarini-          #+#    #+#             */
-/*   Updated: 2021/05/11 17:53:46 by amarini-         ###   ########.fr       */
+/*   Updated: 2021/05/12 10:27:42 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,16 @@ void	init_minilibx(t_cub **list)
 	mlx_put_image_to_window(vars->mlx, vars->mlx_win, img->img, 0, 0);
 	mlx_key_hook(vars->mlx_win, key_hook, &vars);
 	mlx_hook(vars->mlx_win, 17, 1L<<2, close_window, &vars);
-	mlx_hook(vars->mlx_win, 06, 1L<<6, mouse_in_window, &vars);
+	//mlx_hook(vars->mlx_win, 06, 1L<<6, mouse_in_window, &vars);
 	mlx_mouse_hook(vars->mlx_win, mouse_hook, &vars);
 	//mlx_expose_hook(vars->mlx_win, window_hook, &vars);
 	mlx_loop(vars->mlx);
+}
+
+//dis is new testing
+int		render_next_frame()
+{
+	
 }
 
 //dis is mine and just for funny testing

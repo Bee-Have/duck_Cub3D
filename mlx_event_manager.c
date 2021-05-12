@@ -6,7 +6,7 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/10 14:31:17 by amarini-          #+#    #+#             */
-/*   Updated: 2021/05/11 13:12:58 by amarini-         ###   ########.fr       */
+/*   Updated: 2021/05/12 10:18:55 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		key_hook(int keycode, t_vars **vars)
 {
-	printf("key [%d] was pressed\n", keycode);
+	//printf("key [%d] was pressed\n", keycode);
 	if (keycode == 65307)
 	{
 		printf("exiting window\n");

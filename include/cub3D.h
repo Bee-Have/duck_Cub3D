@@ -6,7 +6,7 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 12:31:36 by user42            #+#    #+#             */
-/*   Updated: 2021/05/11 17:41:51 by amarini-         ###   ########.fr       */
+/*   Updated: 2021/05/12 10:28:03 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,6 @@ void	free_2d_array(char ***array);
 void	init_minilibx(t_cub **list);
 void	my_mlx_pxl_put(t_data **data, int x, int y, int color);
 //my test functions
-int render_next_frame(t_data **test);
 void	test_print_map(t_cub *cub, t_data **data);
 void	test_pxl_loop(t_data **data);
 
