@@ -1,0 +1,14 @@
+
+1 -parsing args
+	- args nbr
+	- map open test
+2 -read map file
+	- fill struct with info
+3 -parsing file info
+	- check textures NSEW
+	- check colors ceiling & floor
+	- check map is closed
+	- check map chars
+4 -?
+
+
