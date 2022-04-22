@@ -4,6 +4,11 @@ CC = gcc
 
 CFLAGS = -Wall -Wextra -Werror -g3
 
+DEBUG =
+ifdef DEBUG
+CFLAGS += -fsanitize=address
+endif
+
 SRC_DIR = $(shell find srcs -type d)
 
 OBJ_DIR = objs
@@ -12,7 +17,7 @@ LIBFT_DIR = ./libft_duck
 GNL_DIR = ./Lib_get_file
 MLX_DIR = ./minilibx-linux
 
-LIBS = -L$(LIBFT_DIR) -lft -L$(GNL_DIR) -lgetfile -L$(MLX_DIR) -lmlx -lm -lbsd -lXext
+LIBS = -L$(LIBFT_DIR) -lft -L$(GNL_DIR) -lgetfile -L$(MLX_DIR) -lmlx -lX11 -lm -lbsd -lXext
 
 INC = -I$(LIBFT_DIR)/Includes -I$(GNL_DIR)/Includes -I$(MLX_DIR) -I$(INC_DIR)
 
@@ -46,7 +51,7 @@ clean:
 	rm -rf $(OBJ_DIR)
 
 fclean: clean
-	rm $(NAME)
+	rm -f $(NAME)
 
 cleanall: fclean
 	make -C $(LIBFT_DIR) fclean

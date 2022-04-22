@@ -1,0 +1,12 @@
+so, for starters, fuck me
+
+i had the maths for this, i ducking did
+and i lost it because i just have some scribbles now
+i'm so dumb
+
+pxl_unit_x = screen_width / map_width
+pxl_unit_y = screen_height / map_height
+if (x < y)
+	y = x;
+else
+	x = y;
