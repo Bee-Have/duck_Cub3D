@@ -31,9 +31,9 @@ int	main(int ac, char **av)
 
 	if (ac < 2)
 		return (EXIT_FAILURE);
-	ft_get_file(av[1], &map);
-	ft_print_tab(map);
+	map = ft_get_file(av[1]);
+	ft_print_str_tab(NULL, map);
 	init_window(map);
-	ft_freetab(map);
+	ft_free_tab((void **)map);
 	return (EXIT_SUCCESS);
 }
