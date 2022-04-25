@@ -12,3 +12,8 @@
 4 -?
 
 
+parse args
+get map
+init mlx
+start mlx loop routine
+print minimap on screen
