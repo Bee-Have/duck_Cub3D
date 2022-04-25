@@ -2,7 +2,7 @@ NAME = cub3D
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror -g3
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
 
 DEBUG =
 ifdef DEBUG
@@ -16,7 +16,7 @@ INC_DIR = ./includes/
 LIBFT_DIR = ./libft
 MLX_DIR = ./minilibx-linux
 
-LIBS = -L$(LIBFT_DIR) -lft -L$(MLX_DIR) -lmlx -lX11 -lm -lbsd -lXext
+LIBS = -L$(LIBFT_DIR) -lft -L$(MLX_DIR) -lmlx -lm -lbsd -lX11 -lXext
 
 INC = -I$(LIBFT_DIR)/includes -I$(MLX_DIR) -I$(INC_DIR)
 
