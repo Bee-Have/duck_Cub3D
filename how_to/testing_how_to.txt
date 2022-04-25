@@ -18,25 +18,4 @@ make function to draw minimap which takes a 2 vec2 :
 size will be the area in wich minimap will be printed
 pos will be the top right corner where printed
 
-size.x = map width
-size.y = map height
-pxl per unit x = (size.x * 1) / map width
-pxl per unit y = (size.y * 1) / map height
-while (map[row] != NULL)
-{
-	col = 0;
-	x = pos.x;
-	while (map[row][col] != '\0')
-	{
-		if (map[row][col] == 0)
-			img.addr[y + x] = 0x0fffff;
-		else if (map[row][col] == 1)
-			img.addr[y + x] = 0x000000;
-		else
-			img.addr[y + x] = 0x0ff0037;
-		x += pxl_per_unit_x;
-		++col;
-	}
-	y += pxl_per_unit_y;
-	++row;
-}
+

@@ -18,6 +18,11 @@ typedef struct s_color
 	unsigned int	code;
 }			t_color;
 
+typedef struct s_vec2
+{
+	int	x;
+	int	y;
+}			t_vec2;
 
 typedef struct s_img
 {
@@ -26,6 +31,7 @@ typedef struct s_img
 	int		bits_pxl;
 	int		line_len;
 	int		endian;
+	int		pxl_unit;
 }			t_img;
 
 typedef struct s_mlx

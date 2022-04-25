@@ -28,6 +28,18 @@ t_mlx	*init_mlx(int width, int height)
 	return (mlx);
 }
 
+int	get_map_pxl_unit(t_mlx *mlx)
+{
+	int	pxl_unit_x;
+	int	pxl_unit_y;
+
+	pxl_unit_x = 1920 / ft_strlen(mlx->map[0]);
+	pxl_unit_y = 1080 / ft_tab_len((void **)mlx->map);
+	if (pxl_unit_x < pxl_unit_y)
+		return (pxl_unit_x);
+	return (pxl_unit_y);
+}
+
 t_color	make_color(unsigned char a, unsigned char r, unsigned char g, unsigned char b)
 {
 	t_color	color;
@@ -40,37 +52,53 @@ t_color	make_color(unsigned char a, unsigned char r, unsigned char g, unsigned c
 	return (color);
 }
 
-int	print_all(t_mlx *mlx)
+void	minimap_to_img(t_mlx *mlx)
 {
-	int		row;
-	int		col;
-	int		x;
-	int		y;
-	char	*tmp;
+	t_vec2	map;
+	t_vec2	addr;
+	t_vec2	check;
 	t_color	color;
+	char	*tmp;
 
-	row = 0;
-	y = 0;
-	while (mlx->map[row] != NULL)
+	map.y = 0;
+	addr.y = 0;
+	check.y = 0;
+	while (mlx->map[map.y] != NULL)
 	{
-		x = 0;
-		col = 0;
-		while (mlx->map[row][col] != '\0')
+		map.x = 0;
+		addr.x = 0;
+		check.x = 0;
+		while (mlx->map[map.y][map.x] != '\0')
 		{
-			if (mlx->map[row][col] == '0')
+			if (mlx->map[map.y][map.x] == '0')
 				color = make_color(255, 255, 255, 255);
-			else if (mlx->map[row][col] == '1')
+			else if (mlx->map[map.y][map.x] == '1')
 				color = make_color(255, 0, 74, 247);
 			else
 				color = make_color(255, 255, 0, 242);
-			tmp = mlx->img.addr + ((y * mlx->img.line_len) + x);
+			tmp = mlx->img.addr + ((addr.y * 1920) + addr.x);
 			*(unsigned int *)tmp = color.code;
-			x += 4;
-			++col;
+			addr.x += 4;
+			check.x += 4;
+			if (check.x >= mlx->img.pxl_unit * 4)
+			{
+				check.x = 0;
+				++map.x;
+			}
 		}
-		++y;
-		++row;
+		addr.y += 4;
+		check.y += 4;
+		if (check.y >= mlx->img.pxl_unit * 4)
+		{
+			check.y = 0;
+			++map.y;
+		}
 	}
+}
+
+int	print_all(t_mlx *mlx)
+{
+	minimap_to_img(mlx);
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.img, 0, 0);
 	return (EXIT_SUCCESS);
 }
@@ -92,6 +120,8 @@ int	main(int ac, char **av)
 	ft_print_str_tab(NULL, map);
 	mlx = init_mlx(1920, 1080);
 	mlx->map = map;
+	mlx->img.pxl_unit = get_map_pxl_unit(mlx);
+	printf("pxl_unit-[%d]\n", mlx->img.pxl_unit);
 	mlx_routine(mlx);
 	ft_free_tab((void **)map);
 	return (0);
