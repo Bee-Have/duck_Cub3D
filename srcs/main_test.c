@@ -1,10 +1,3 @@
-<<<<<<< HEAD
-#include "cub3d.h"
-
-int	print_all(t_mlx *mlx)
-{
-	mlx_put_image_to_window(mlx->mlx, mlx->mlx_win, mlx->img.img, 0, 0);
-=======
 #include "cub3D.h"
 
 t_img	init_img(void)
@@ -79,7 +72,6 @@ int	print_all(t_mlx *mlx)
 		++row;
 	}
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.img, 0, 0);
->>>>>>> master
 	return (EXIT_SUCCESS);
 }
 
