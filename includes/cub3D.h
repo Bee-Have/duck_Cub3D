@@ -9,6 +9,18 @@
 #ifndef CUB3D_H
 #define CUB3D_H
 
+typedef struct s_pos
+{
+	float	x;
+	float	y;
+}			t_pos;
+
+typedef struct s_vec2
+{
+	int	x;
+	int	y;
+}			t_vec2;
+
 typedef struct s_color
 {
 	unsigned char	a;
@@ -17,12 +29,6 @@ typedef struct s_color
 	unsigned char	b;
 	unsigned int	code;
 }			t_color;
-
-typedef struct s_vec2
-{
-	int	x;
-	int	y;
-}			t_vec2;
 
 typedef struct s_img
 {
@@ -41,6 +47,7 @@ typedef struct s_mlx
 	t_img	img;
 
 	char	**map;
+	t_pos	pj;
 }			t_mlx;
 
 #endif

@@ -1,5 +1,33 @@
 #include "cub3D.h"
 
+t_pos	get_pj_pos(char **map)
+{
+	t_pos	pj;
+	int		row;
+	int		col;
+
+	pj.x = -1;
+	pj.y = -1;
+	row = 0;
+	while (map[row] != NULL)
+	{
+		col = 0;
+		while (map[row][col] != '\0')
+		{
+			if (map[row][col] == 'N' || map[row][col] == 'S'
+				|| map[row][col] == 'E' || map[row][col] == 'W')
+			{
+				pj.y = row;
+				pj.x = col;
+				return (pj);
+			}
+			++col;
+		}
+		++row;
+	}
+	return (pj);
+}
+
 t_img	init_img(void)
 {
 	t_img	img;
@@ -75,7 +103,7 @@ void	minimap_to_img(t_mlx *mlx)
 			else if (mlx->map[map.y][map.x] == '1')
 				color = make_color(255, 0, 74, 247);
 			else
-				color = make_color(255, 255, 0, 242);
+				color = make_color(255, 255, 110, 110);
 			tmp = mlx->img.addr + ((addr.y * 1920) + addr.x);
 			*(unsigned int *)tmp = color.code;
 			addr.x += 4;
@@ -120,6 +148,8 @@ int	main(int ac, char **av)
 	ft_print_str_tab(NULL, map);
 	mlx = init_mlx(1920, 1080);
 	mlx->map = map;
+	mlx->pj = get_pj_pos(mlx->map);
+	mlx->map[mlx->pj.y][mlx->pj.x] = 0;
 	mlx->img.pxl_unit = get_map_pxl_unit(mlx);
 	printf("pxl_unit-[%d]\n", mlx->img.pxl_unit);
 	mlx_routine(mlx);

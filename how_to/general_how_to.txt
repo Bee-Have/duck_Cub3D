@@ -17,3 +17,11 @@ get map
 init mlx
 start mlx loop routine
 print minimap on screen
+
+get pj position at start
+store position
+replace pj position by 0 on map
+add all minimap pixels on map
+parse map again
+if position is same as pj
+color pxl map 
