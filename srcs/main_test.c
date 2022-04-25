@@ -81,32 +81,6 @@ void	mlx_routine(t_mlx *mlx)
 	mlx_loop(mlx->mlx);
 }
 
-<<<<<<< HEAD
-void	init_window(char **map)
-{
-	t_mlx	mlx;
-
-	mlx.mlx = mlx_init();
-	mlx.mlx_win = mlx_new_window(mlx.mlx, 1920, 1080, "cub3D");
-	mlx.img.img = mlx_new_image(mlx.mlx, 1920, 1080);
-	mlx.img.addr = (int *)mlx_get_data_addr(&mlx.img.img, &mlx.img.bits_per_pxl
-								, &mlx.img.line_length, &mlx.img.endian);
-	mlx.map = map;
-	mlx_routine(&mlx);
-}
-
-int	main(int ac, char **av)
-{
-	char	**map;
-
-	if (ac < 2)
-		return (EXIT_FAILURE);
-	map = ft_get_file(av[1]);
-	ft_print_str_tab(NULL, map);
-	init_window(map);
-	ft_free_tab((void **)map);
-	return (EXIT_SUCCESS);
-=======
 int	main(int ac, char **av)
 {
 	t_mlx	*mlx;
@@ -121,5 +95,4 @@ int	main(int ac, char **av)
 	mlx_routine(mlx);
 	ft_free_tab((void **)map);
 	return (0);
->>>>>>> master
 }
