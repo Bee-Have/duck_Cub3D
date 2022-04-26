@@ -18,4 +18,9 @@ make function to draw minimap which takes a 2 vec2 :
 size will be the area in wich minimap will be printed
 pos will be the top right corner where printed
 
-
+for position of player :
+after minimap was added to img.addr
+x = (col * pxl_unit) + (pxl_unit / 2)
+y = ((row * pxl_unit) * 1920) + (pxl_unit / 2)
+char *tmp = img.addr + (y + x);
+*(unsigned int*)tmp = color;
