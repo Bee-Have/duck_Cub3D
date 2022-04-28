@@ -146,12 +146,19 @@ void	pj_to_img(t_mlx *mlx)
 {
 	t_color	color;
 	t_vec2	addr;
+	t_pos	test;
 	t_vec2	check;
 	char	*tmp;
 
 	color = make_color(255, 255, 0, 0);
-	addr.y = ((mlx->pj.pos.y * mlx->img.pxl_unit) + (mlx->img.pxl_unit / 2)) * 4;
-	addr.x = ((mlx->pj.pos.x * mlx->img.pxl_unit) + (mlx->img.pxl_unit / 2)) * 4;
+	test.y = ((mlx->pj.pos.y * mlx->img.pxl_unit) + (mlx->img.pxl_unit / 2)) * 4;
+	test.x = ((mlx->pj.pos.x * mlx->img.pxl_unit) + (mlx->img.pxl_unit / 2)) * 4;
+	addr.y = (((int)mlx->pj.pos.y * mlx->img.pxl_unit) + (mlx->img.pxl_unit / 2)) * 4;
+	addr.x = (((int)mlx->pj.pos.x * mlx->img.pxl_unit) + (mlx->img.pxl_unit / 2)) * 4;
+	while (addr.y < test.y)
+		addr.y += 4;
+	while (addr.x < test.x)
+		addr.x += 4;
 	check.y = 0;
 	while (check.y < mlx->img.pxl_unit / 2)
 	{
