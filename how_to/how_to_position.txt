@@ -1,0 +1,6 @@
+position is float
+
+pj position to addr position
+
+pxl position is in float
+	position transformed is not going to be on starting of pxl

@@ -2,7 +2,7 @@ NAME = cub3D
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
+CFLAGS = -Wall -Wextra -Werror -g3
 
 DEBUG =
 ifdef DEBUG
@@ -22,7 +22,8 @@ INC = -I$(LIBFT_DIR)/includes -I$(MLX_DIR) -I$(INC_DIR)
 
 vpath %.c $(foreach dir, $(SRC_DIR), $(dir):)
 
-SRC = main_test.c
+#SRC = main_test.c
+SRC = main_minimap.c
 
 OBJ = $(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
 
