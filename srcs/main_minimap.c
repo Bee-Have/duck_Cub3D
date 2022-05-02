@@ -175,10 +175,12 @@ int	print_all(t_mlx *mlx)
 }
 
 #define ESC 65307
-#define UP 65362
-#define DOWN 65364
-#define RIGHT 65363
-#define LEFT 65361
+#define UP 119
+#define DOWN 115
+#define RIGHT 100
+#define LEFT 97
+#define R_RIGHT 65363
+#define R_LEFT 65361
 #define SPEED 0.1
 int	key_hook(int keycode, t_mlx *mlx)
 {
