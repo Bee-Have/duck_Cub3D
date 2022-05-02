@@ -24,6 +24,7 @@ typedef struct s_pos
 typedef struct s_pj
 {
 	t_pos	pos;
+	int		rot;
 }			t_pj;
 
 typedef struct s_color

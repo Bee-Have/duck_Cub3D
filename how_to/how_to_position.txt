@@ -2,5 +2,28 @@ position is float
 
 pj position to addr position
 
-pxl position is in float
-	position transformed is not going to be on starting of pxl
+player rotation
+upon pressing button -> direction changes
+direction will be added to position
+it will replace speed
+
+N = x=0 y=-1
+S = x=0 y=1
+E = x=1 y=0
+W = x=-1 y=0
+
+W =
+pos.x = pos.x + (speed * cos(direction * (pi / 180))));
+pos.y = pos.y + (speed * sin(direction * (pi / 180))));
+
+S = 
+pos.x = pos.x - (speed * cos(direction * (pi / 180))));
+pos.y = pos.y - (speed * sin(direction * (pi / 180))));
+
+A =
+pos.x = pos.x + (speed * cos((direction - 90) * (pi / 180))));
+pos.y = pos.y + (speed * sin((direction - 90) * (pi / 180))));
+
+D =
+pos.x = pos.x + (speed * cos((direction + 90) * (pi / 180))));
+pos.y = pos.y + (speed * sin((direction + 90) * (pi / 180))));

@@ -61,6 +61,15 @@ t_pj	init_pj(char **map)
 	t_pj	pj;
 
 	pj.pos = get_pj_pos(map);
+	pj.rot = 0;
+	if (map[(int)pj.pos.y][(int)pj.pos.x] == 'N')
+		pj.rot = 90;
+	else if (map[(int)pj.pos.y][(int)pj.pos.x] == 'S')
+		pj.rot = 270;
+	else if (map[(int)pj.pos.y][(int)pj.pos.x] == 'E')
+		pj.rot = 0;
+	else if (map[(int)pj.pos.y][(int)pj.pos.x] == 'W')
+		pj.rot = 180;
 	return (pj);
 }
 
@@ -150,12 +159,12 @@ void	pj_to_img(t_mlx *mlx)
 	addr.x = mlx->pj.pos.x * mlx->img.pxl_unit;
 	tmp = (int *)mlx->img.addr;
 	check.y = 0;
-	while (check.y < 20)
+	while (check.y < 200)
 	{
 
 		addr.x = mlx->pj.pos.x * mlx->img.pxl_unit;
 		check.x = 0;
-		while (check.x < 20)
+		while (check.x < 200)
 		{
 			tmp[(addr.y * 1920) + addr.x] = color.code;
 			++addr.x;
@@ -182,19 +191,45 @@ int	print_all(t_mlx *mlx)
 #define R_RIGHT 65363
 #define R_LEFT 65361
 #define SPEED 0.1
+#define R_SPEED 5
 int	key_hook(int keycode, t_mlx *mlx)
 {
 	//printf("code-[%d]\n", keycode);
 	if (keycode == ESC)
 		mlx_destroy_window(mlx->mlx, mlx->win);
-	if (keycode == UP)
-		mlx->pj.pos.y -= SPEED;
+
+	if (keycode == R_LEFT)
+	{
+		mlx->pj.rot -= R_SPEED;
+		if (mlx->pj.rot < 0)
+			mlx->pj.rot = 360 - (mlx->pj.rot * -1);
+	}
+	else if (keycode == R_RIGHT)
+	{
+		mlx->pj.rot += R_SPEED;
+		if (mlx->pj.rot > 360)
+			mlx->pj.rot = 0 + (mlx->pj.rot - 360);
+	}
 	if (keycode == DOWN)
-		mlx->pj.pos.y += SPEED;
-	if (keycode == RIGHT)
-		mlx->pj.pos.x += SPEED;
+	{
+		mlx->pj.pos.x = mlx->pj.pos.x + (SPEED * cosf(mlx->pj.rot * (M_PI / 180)));
+		mlx->pj.pos.y = mlx->pj.pos.y + (SPEED * sinf(mlx->pj.rot * (M_PI / 180)));
+	}
+	if (keycode == UP)
+	{
+		mlx->pj.pos.x = mlx->pj.pos.x - (SPEED * cosf(mlx->pj.rot * (M_PI / 180)));
+		mlx->pj.pos.y = mlx->pj.pos.y - (SPEED * sinf(mlx->pj.rot * (M_PI / 180)));
+	}
 	if (keycode == LEFT)
-		mlx->pj.pos.x -= SPEED;
+	{
+		mlx->pj.pos.x = mlx->pj.pos.x + (SPEED * cosf((mlx->pj.rot + 90) * (M_PI / 180)));
+		mlx->pj.pos.y = mlx->pj.pos.y + (SPEED * sinf((mlx->pj.rot + 90) * (M_PI / 180)));
+	}
+	if (keycode == RIGHT)
+	{
+		mlx->pj.pos.x = mlx->pj.pos.x + (SPEED * cosf((mlx->pj.rot - 90) * (M_PI / 180)));
+		mlx->pj.pos.y = mlx->pj.pos.y + (SPEED * sinf((mlx->pj.rot - 90) * (M_PI / 180)));
+	}
 	return (EXIT_SUCCESS);
 }
 
