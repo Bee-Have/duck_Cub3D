@@ -97,18 +97,35 @@ t_color	make_color(unsigned char a, unsigned char r, unsigned char g, unsigned c
 	return (color);
 }
 
-void	pxl_to_img(t_mlx *mlx, t_color color, t_vec2 *addr, int max)
+void	draw_pxl(t_mlx *mlx, t_vec2 pos, t_color color)
 {
-	char	*tmp;
-	int		check;
+	int	*tmp;
 
-	check = 0;
-	while (check < max)
+	if (pos.x < 0 || pos.x > 1920 || pos.y < 0 || pos.y > 1080)
+		return ;
+	tmp = (int *)mlx->img.addr;
+	tmp[(pos.y * 1920) + pos.x] = color.code;
+}
+
+void	draw_square(t_mlx *mlx, t_color color, t_vec2 pos, int max)
+{
+	int		x;
+	t_vec2	check;
+
+	x = pos.x;
+	check.y = 0;
+	while (pos.y < 1080 && check.y < max)
 	{
-		tmp = mlx->img.addr + (((*addr).y * 1920) + (*addr).x);
-		*(unsigned int *)tmp = color.code;
-		(*addr).x += 4;
-		check += 4;
+		pos.x = x;
+		check.x = 0;
+		while (pos.x < 1920 && check.x < max)
+		{
+			draw_pxl(mlx, pos, color);
+			++pos.x;
+			++check.x;
+		}
+		++pos.y;
+		++check.y;
 	}
 }
 
@@ -134,45 +151,116 @@ void	minimap_to_img(t_mlx *mlx)
 				color = make_color(255, 0, 74, 247);
 			else
 				color = make_color(255, 255, 110, 110);
-			pxl_to_img(mlx, color, &addr, mlx->img.pxl_unit * 4);
+			draw_square(mlx, color, addr, mlx->img.pxl_unit);
+			addr.x += mlx->img.pxl_unit;
 			++map.x;
 		}
-		addr.y += 4;
-		check += 4;
-		if (check >= mlx->img.pxl_unit * 4)
-		{
-			check = 0;
-			++map.y;
-		}
+		addr.y += mlx->img.pxl_unit;
+		++map.y;
 	}
 }
 
-void	pj_to_img(t_mlx *mlx)
+void	switch_vec2(t_vec2 *vector)
+{
+	int	tmp;
+
+	tmp = (*vector).x;
+	(*vector).x = (*vector).y;
+	(*vector).y = tmp;
+}
+
+//m = slope
+void	plot_pxl(t_mlx *mlx, t_vec2 start, t_vec2 end, t_vec2 m, int decide)
 {
 	t_color	color;
-	t_vec2	addr;
-	t_vec2	check;
-	int		*tmp;
+	int		err;
+	int		i;
+	int		len;
 
-	color = make_color(255, 255, 0, 0);
-	addr.y = mlx->pj.pos.y * mlx->img.pxl_unit;
-	addr.x = mlx->pj.pos.x * mlx->img.pxl_unit;
-	tmp = (int *)mlx->img.addr;
-	check.y = 0;
-	while (check.y < 200)
+	color = make_color(255, 0, 255, 0);
+	err = 2 * m.y - m.x;
+	len = 2;
+	i = 0;
+	while (i < m.x)
 	{
-
-		addr.x = mlx->pj.pos.x * mlx->img.pxl_unit;
-		check.x = 0;
-		while (check.x < 200)
+		if (start.x < end.x)
+			++start.x;
+		else
+			--start.x;
+		if (err < 0)
 		{
-			tmp[(addr.y * 1920) + addr.x] = color.code;
-			++addr.x;
-			check.x += 4;
+			if (decide == 1)
+			{
+				switch_vec2(&start);
+				draw_square(mlx, color, start, len);
+				switch_vec2(&start);
+			}
+			else
+				draw_square(mlx, color, start, len);
+			err = err + 2 * m.y;
 		}
-		++addr.y;
-		check.y += 4;
+		else
+		{
+			if (start.y < end.y)
+				++start.y;
+			else
+				--start.y;
+			if (decide == 1)
+			{
+				switch_vec2(&start);
+				draw_square(mlx, color, start, len);
+				switch_vec2(&start);
+			}
+			else
+				draw_square(mlx, color, start, len);
+			err = err + 2 * m.y - 2 * m.x;
+		}
+		//draw_square(mlx, color, start, len);
+		++i;
 	}
+}
+
+//m = slope
+void	draw_line(t_mlx *mlx, t_vec2 start, t_vec2 end)
+{
+	int		dx;
+	int		dy;
+	t_vec2	m;
+
+	dx = abs(end.x - start.x);
+	dy = abs(end.y - start.y);
+	m.x = dx;
+	m.y = dy;
+	if (dx < dy)
+	{
+		switch_vec2(&start);
+		switch_vec2(&end);
+		switch_vec2(&m);
+		plot_pxl(mlx, start, end, m, 1);
+	}
+	else
+		plot_pxl(mlx, start, end, m, 0);
+}
+
+#define LEN 200
+#define SPEED 0.1
+void	pj_to_img(t_mlx *mlx)
+{
+	t_color	red;
+	t_vec2	pos;
+	t_vec2	dir;
+	int		size;
+
+	size = 100;
+	red = make_color(255, 255, 0, 0);
+	pos.y = mlx->pj.pos.y * mlx->img.pxl_unit;
+	pos.x = mlx->pj.pos.x * mlx->img.pxl_unit;
+	draw_square(mlx, red, pos, size);
+	pos.y += size / 2;
+	pos.x += size / 2;
+	dir.y = pos.y - (LEN * sinf(mlx->pj.rot * (M_PI / 180)));
+	dir.x = pos.x - (LEN * cosf(mlx->pj.rot * (M_PI / 180)));
+	draw_line(mlx, pos, dir);
 }
 
 int	print_all(t_mlx *mlx)
@@ -236,6 +324,7 @@ int	key_hook(int keycode, t_mlx *mlx)
 void	mlx_routine(t_mlx *mlx)
 {
 	mlx_loop_hook(mlx->mlx, print_all, mlx);
+	//mlx_loop_hook(mlx->mlx, test_line, mlx);
 	mlx_hook(mlx->win, 2, 1, key_hook, mlx);
 	mlx_loop(mlx->mlx);
 }

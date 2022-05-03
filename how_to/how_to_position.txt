@@ -27,3 +27,9 @@ pos.y = pos.y + (speed * sin((direction - 90) * (pi / 180))));
 D =
 pos.x = pos.x + (speed * cos((direction + 90) * (pi / 180))));
 pos.y = pos.y + (speed * sin((direction + 90) * (pi / 180))));
+
+
+calculate player dir :
+position of player + direction
+direction = degree
+pos_dir = pos + dir in radiens + len of line
