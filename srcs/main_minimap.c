@@ -107,20 +107,49 @@ void	draw_pxl(t_mlx *mlx, t_vec2 pos, t_color color)
 	tmp[(pos.y * 1920) + pos.x] = color.code;
 }
 
-void	draw_square(t_mlx *mlx, t_color color, t_vec2 pos, int max)
+void	draw_square(t_mlx *mlx, t_color color, t_vec2 pos, int size)
 {
 	int		x;
 	t_vec2	check;
 
 	x = pos.x;
 	check.y = 0;
-	while (pos.y < 1080 && check.y < max)
+	while (pos.y < 1080 && check.y < size)
 	{
 		pos.x = x;
 		check.x = 0;
-		while (pos.x < 1920 && check.x < max)
+		while (pos.x < 1920 && check.x < size)
 		{
 			draw_pxl(mlx, pos, color);
+			++pos.x;
+			++check.x;
+		}
+		++pos.y;
+		++check.y;
+	}
+}
+
+void	draw_circle(t_mlx *mlx, t_color color, t_vec2 pos, int size)
+{
+	t_vec2	check;
+	t_vec2	center;
+	float	dist;
+	int		x;
+
+	center.x = pos.x + size / 2;
+	center.y = pos.y + size / 2;
+	x = pos.x;
+	check.y = 0;
+	while (pos.y < 1080 && check.y < size)
+	{
+		pos.x = x;
+		check.x = 0;
+		while (pos.x < 1920 && check.x < size)
+		{
+			dist = sqrt((pos.x - center.x) * (pos.x - center.x) +
+						(pos.y - center.y) * (pos.y - center.y));
+			if (dist < (size / 2))
+				draw_pxl(mlx, pos, color);
 			++pos.x;
 			++check.x;
 		}
@@ -242,7 +271,7 @@ void	draw_line(t_mlx *mlx, t_vec2 start, t_vec2 end)
 		plot_pxl(mlx, start, end, m, 0);
 }
 
-#define LEN 200
+#define LEN 110
 #define SPEED 0.1
 void	pj_to_img(t_mlx *mlx)
 {
@@ -255,7 +284,8 @@ void	pj_to_img(t_mlx *mlx)
 	red = make_color(255, 255, 0, 0);
 	pos.y = mlx->pj.pos.y * mlx->img.pxl_unit;
 	pos.x = mlx->pj.pos.x * mlx->img.pxl_unit;
-	draw_square(mlx, red, pos, size);
+	//draw_square(mlx, red, pos, size);
+	draw_circle(mlx, red, pos, size);
 	pos.y += size / 2;
 	pos.x += size / 2;
 	dir.y = pos.y - (LEN * sinf(mlx->pj.rot * (M_PI / 180)));

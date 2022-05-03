@@ -12,9 +12,16 @@ OK-make pxlput same for everyone
 OK-signify the front of the player
 	OK-draw ray in front of him
 	OK-test drawing ray with moving end point (ray drawing a circle basically)
-	KO-maybe see how to change orientation of the square directly ?
+	OK-make cicle instead of circle
+	NOPE-(KO-maybe see how to change orientation of the square directly ?)
 KO-make minimap able to be put anywhere on the image
-KO-make minimap resizable
-KO-crop map around player
+	KO-Make function with : position, size ?
+		KO-position should be "vague" : TOP_LEFT TOP_RIGHT BOTTOM_LEFT BOTTOM_RIGHT
+			KO-translate "vague" position into automatic position stuck to side
+			KO-calculate offset
+	KO-make minimap resizable
+		KO-establish "max" size for minimap (width, height can be different)
+		KO-depending on size of map calculate new size
+	KO-crop map around player ?
 
 KO-test raycasting

@@ -33,3 +33,12 @@ calculate player dir :
 position of player + direction
 direction = degree
 pos_dir = pos + dir in radiens + len of line
+
+square has max size
+circle rayon is (size/2)
+calculate center position of circle
+	center.x += (size / 2)
+	center.y += (size / 2)
+dist = sqrt((pos.x - center.x) * (pos.x - center.x) + (pos.y - center.y) * (pos.y - center.y))
+if dist < 1 && dist > 0
+	position is in circle
