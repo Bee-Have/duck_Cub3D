@@ -1,0 +1,20 @@
+STRUCTURE:
+KO-define structure for code/file/folders
+KO-define clear structs and what they contain
+KO-implement parsing
+KO-implement clean/clear mlx routine
+KO-implement clean/clear keycode events
+
+TESTING:
+KO-move pxl_unit from img to mlx
+OK-make pxlput same for everyone
+	OK-add draw_pxl
+OK-signify the front of the player
+	OK-draw ray in front of him
+	OK-test drawing ray with moving end point (ray drawing a circle basically)
+	KO-maybe see how to change orientation of the square directly ?
+KO-make minimap able to be put anywhere on the image
+KO-make minimap resizable
+KO-crop map around player
+
+KO-test raycasting
