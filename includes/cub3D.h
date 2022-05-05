@@ -43,7 +43,6 @@ typedef struct s_img
 	int		bits_pxl;
 	int		line_len;
 	int		endian;
-	int		pxl_unit;
 }			t_img;
 
 typedef struct s_mlx
@@ -52,6 +51,7 @@ typedef struct s_mlx
 	void	*win;
 	t_img	img;
 
+	t_vec2	screen;
 	char	**map;
 	t_pj	pj;
 }			t_mlx;

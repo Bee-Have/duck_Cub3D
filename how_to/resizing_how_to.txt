@@ -54,7 +54,14 @@ map_end.x = area_end.x - offset.x;
 map_end.y = area_end.y - offset.y;
 }
 
+PJ POS:
+{
+pj_pos.x = map_start.x + (pj.pos.x * pxl_unit.x);
+pj_pos.y = map_start.y + (pj.pos.y * pxl_unit.y);
+}
+
 FUNCTION:
 {
-void	draw_minimap(t_mlx *mlx, t_vec2 pos, t_vec2 size, t_color color);
+void	draw_minimap(t_mlx *mlx, t_vec2 pos, t_vec2 pxl_unit, t_color color);
+void	pj_to_img(t_mlx *mlx, t_vec2 map_start, t_vec2 pxl_unit);
 }
