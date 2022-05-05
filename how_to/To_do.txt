@@ -24,4 +24,8 @@ KO-make minimap able to be put anywhere on the image
 		KO-depending on size of map calculate new size
 	KO-crop map around player ?
 
+EVENT:
+KO-make keycode event as bool pressed an unpressed (cant advance and rotate)
+KO-left right of mouse is handled as right left arrows
+
 KO-test raycasting

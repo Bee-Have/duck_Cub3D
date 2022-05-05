@@ -25,6 +25,8 @@ t_mlx	*init_mlx(int width, int height)
 	mlx->img.img = mlx_new_image(mlx->mlx, width, height);
 	mlx->img.addr = mlx_get_data_addr(mlx->img.img, &mlx->img.bits_pxl, &mlx->img.line_len
 								, &mlx->img.endian);
+	mlx->screen.x = width;
+	mlx->screen.y = height;
 	return (mlx);
 }
 
@@ -107,18 +109,18 @@ void	draw_pxl(t_mlx *mlx, t_vec2 pos, t_color color)
 	tmp[(pos.y * 1920) + pos.x] = color.code;
 }
 
-void	draw_square(t_mlx *mlx, t_color color, t_vec2 pos, int size)
+void	draw_square(t_mlx *mlx, t_color color, t_vec2 pos, t_vec2 size)
 {
 	int		x;
 	t_vec2	check;
 
 	x = pos.x;
 	check.y = 0;
-	while (pos.y < 1080 && check.y < size)
+	while (pos.y < 1080 && check.y < size.y)
 	{
 		pos.x = x;
 		check.x = 0;
-		while (pos.x < 1920 && check.x < size)
+		while (pos.x < 1920 && check.x < size.x)
 		{
 			draw_pxl(mlx, pos, color);
 			++pos.x;
@@ -148,44 +150,13 @@ void	draw_circle(t_mlx *mlx, t_color color, t_vec2 pos, int size)
 		{
 			dist = sqrt((pos.x - center.x) * (pos.x - center.x) +
 						(pos.y - center.y) * (pos.y - center.y));
-			if (dist < (size / 2))
+			if (dist < size / 2)
 				draw_pxl(mlx, pos, color);
 			++pos.x;
 			++check.x;
 		}
 		++pos.y;
 		++check.y;
-	}
-}
-
-void	minimap_to_img(t_mlx *mlx)
-{
-	t_vec2	map;
-	t_vec2	addr;
-	int		check;
-	t_color	color;
-
-	map.y = 0;
-	addr.y = 0;
-	check = 0;
-	while (mlx->map[map.y] != NULL)
-	{
-		map.x = 0;
-		addr.x = 0;
-		while (mlx->map[map.y][map.x] != '\0')
-		{
-			if (mlx->map[map.y][map.x] == '0')
-				color = make_color(255, 255, 255, 255);
-			else if (mlx->map[map.y][map.x] == '1')
-				color = make_color(255, 0, 74, 247);
-			else
-				color = make_color(255, 255, 110, 110);
-			draw_square(mlx, color, addr, mlx->img.pxl_unit);
-			addr.x += mlx->img.pxl_unit;
-			++map.x;
-		}
-		addr.y += mlx->img.pxl_unit;
-		++map.y;
 	}
 }
 
@@ -204,11 +175,12 @@ void	plot_pxl(t_mlx *mlx, t_vec2 start, t_vec2 end, t_vec2 m, int decide)
 	t_color	color;
 	int		err;
 	int		i;
-	int		len;
+	t_vec2	len;
 
 	color = make_color(255, 0, 255, 0);
 	err = 2 * m.y - m.x;
-	len = 2;
+	len.x = 2;
+	len.y = 2;
 	i = 0;
 	while (i < m.x)
 	{
@@ -244,7 +216,6 @@ void	plot_pxl(t_mlx *mlx, t_vec2 start, t_vec2 end, t_vec2 m, int decide)
 				draw_square(mlx, color, start, len);
 			err = err + 2 * m.y - 2 * m.x;
 		}
-		//draw_square(mlx, color, start, len);
 		++i;
 	}
 }
@@ -284,7 +255,6 @@ void	pj_to_img(t_mlx *mlx)
 	red = make_color(255, 255, 0, 0);
 	pos.y = mlx->pj.pos.y * mlx->img.pxl_unit;
 	pos.x = mlx->pj.pos.x * mlx->img.pxl_unit;
-	//draw_square(mlx, red, pos, size);
 	draw_circle(mlx, red, pos, size);
 	pos.y += size / 2;
 	pos.x += size / 2;
@@ -293,10 +263,79 @@ void	pj_to_img(t_mlx *mlx)
 	draw_line(mlx, pos, dir);
 }
 
+void	draw_minimap(t_mlx *mlx, t_vec2 pos, t_vec2 pxl_unit)
+{
+	t_color	color;
+	t_vec2	imap;
+	int		check;
+	int		xaddr;
+
+	xaddr = pos.x;
+	imap.y = 0;
+	check = 0;
+	while (mlx->map[imap.y] != NULL)
+	{
+		imap.x = 0;
+		pos.x = xaddr;
+		while (mlx->map[imap.y][imap.x] != '\0')
+		{
+			if (mlx->map[map.y][map.x] == '0')
+				color = make_color(255, 255, 255, 255);
+			else if (mlx->map[map.y][map.x] == '1')
+				color = make_color(255, 0, 74, 247);
+			else
+				color = make_color(255, 255, 110, 110);
+			draw_square(mlx, color, pos, pxl_unit);
+			pos.x += pxl_unit.x;
+			++imap.x;
+		}
+		pos.y += pxl_unit.y;
+		++map.y
+	}
+}
+
+#define T_LEFT 0
+#define T_RIGHT 1
+#define B_LEFT 2
+#define B_RIGHT 3
+void	minimap_manager(t_mlx *mlx, int corner)
+{
+	t_vec2	area_size;
+	t_vec2	area_start;
+	t_vec2	pxl_unit;
+	t_vec2	map_size;
+	t_vec2	map_start;
+	t_vec2	offset;
+
+	color = make_color()
+	area_size.x = mlx->screen.x / 4;
+	area_size.y = mlx->screen.y / 4;
+	pxl_unit.x = area_size.x / ft_strlen(mlx->map[0]);
+	pxl_unit.y = area_size.y / ft_tab_len((void **)mlx->map);
+	map_size.x = ft_strlen(mlx->map[0]) * pxl_unit.x;
+	map_size.y = ft_tab_len((void **)mlx->map) * pxl_unit.y;
+	offset.x = (area_size.x - map_size.x) / 2;
+	offset.y = (area_size.y - map_size.y) / 2;
+	area_start.x = 0;
+	area_start.y = 0;
+	if (corner == T_RIGHT)
+		area_start.x = mlx->screen.x - area_size.x;
+	else if (corner == B_LEFT)
+		area_start.y = mlx->screen.x - area_size.x;
+	else if (corner == B_RIGHT)
+	{
+		area_start.x = mlx->screen.x - area_size.x;
+		area_start.y = mlx->screen.y - area_size.y;
+	}
+	map_start.x = area_start.x + offset.x;
+	map_start.y = area_start.y + offset.y;
+	draw_minimap(mlx, map_start, pxl_unit);
+}
+
 int	print_all(t_mlx *mlx)
 {
-	minimap_to_img(mlx);
-	pj_to_img(mlx);
+	//minimap_to_img(mlx);
+	//pj_to_img(mlx);
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.img, 0, 0);
 	return (EXIT_SUCCESS);
 }
