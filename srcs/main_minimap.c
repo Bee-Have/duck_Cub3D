@@ -316,7 +316,7 @@ void	minimap_manager(t_mlx *mlx, int corner)
 	if (corner == T_RIGHT)
 		area_start.x = mlx->screen.x - area_size.x;
 	else if (corner == B_LEFT)
-		area_start.y = mlx->screen.x - area_size.x;
+		area_start.y = mlx->screen.y - area_size.y;
 	else if (corner == B_RIGHT)
 	{
 		area_start.x = mlx->screen.x - area_size.x;
