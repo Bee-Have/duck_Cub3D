@@ -27,6 +27,12 @@ t_mlx	*init_mlx(int width, int height)
 								, &mlx->img.endian);
 	mlx->screen.x = width;
 	mlx->screen.y = height;
+	mlx->event.is_w_pressed = 0;
+	mlx->event.is_a_pressed = 0;
+	mlx->event.is_s_pressed = 0;
+	mlx->event.is_d_pressed = 0;
+	mlx->event.is_left_pressed = 0;
+	mlx->event.is_right_pressed = 0;
 	return (mlx);
 }
 
@@ -328,18 +334,6 @@ void	minimap_manager(t_mlx *mlx, int corner)
 	draw_pj(mlx, map_start, pxl_unit);
 }
 
-int	print_all(t_mlx *mlx)
-{
-	//minimap_to_img(mlx);
-	//pj_to_img(mlx);
-	minimap_manager(mlx, T_LEFT);
-	minimap_manager(mlx, T_RIGHT);
-	minimap_manager(mlx, B_LEFT);
-	minimap_manager(mlx, B_RIGHT);
-	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.img, 0, 0);
-	return (EXIT_SUCCESS);
-}
-
 #define ESC 65307
 #define UP 119
 #define DOWN 115
@@ -349,40 +343,73 @@ int	print_all(t_mlx *mlx)
 #define R_LEFT 65361
 #define SPEED 0.1
 #define R_SPEED 5
-int	key_hook(int keycode, t_mlx *mlx)
+int	key_press(int keycode, t_mlx *mlx)
 {
 	//printf("code-[%d]\n", keycode);
 	if (keycode == ESC)
 		mlx_destroy_window(mlx->mlx, mlx->win);
-
 	if (keycode == R_LEFT)
+		mlx->event.is_left_pressed = 1;
+	else if (keycode == R_RIGHT)
+		mlx->event.is_right_pressed = 1;
+	if (keycode == DOWN)
+		mlx->event.is_s_pressed = 1;
+	if (keycode == UP)
+		mlx->event.is_w_pressed = 1;
+	if (keycode == LEFT)
+		mlx->event.is_a_pressed = 1;
+	if (keycode == RIGHT)
+		mlx->event.is_d_pressed = 1;
+	return (EXIT_SUCCESS);
+}
+
+int	key_release(int keycode, t_mlx *mlx)
+{
+	if (keycode == R_LEFT)
+		mlx->event.is_left_pressed = 0;
+	else if (keycode == R_RIGHT)
+		mlx->event.is_right_pressed = 0;
+	if (keycode == DOWN)
+		mlx->event.is_s_pressed = 0;
+	if (keycode == UP)
+		mlx->event.is_w_pressed = 0;
+	if (keycode == LEFT)
+		mlx->event.is_a_pressed = 0;
+	if (keycode == RIGHT)
+		mlx->event.is_d_pressed = 0;
+	return (EXIT_SUCCESS);
+}
+
+int	update_keys_events(t_mlx *mlx)
+{
+	if (mlx->event.is_left_pressed == 1)
 	{
 		mlx->pj.rot -= R_SPEED;
 		if (mlx->pj.rot < 0)
 			mlx->pj.rot = 360 - (mlx->pj.rot * -1);
 	}
-	else if (keycode == R_RIGHT)
+	if (mlx->event.is_right_pressed == 1)
 	{
 		mlx->pj.rot += R_SPEED;
 		if (mlx->pj.rot > 360)
 			mlx->pj.rot = 0 + (mlx->pj.rot - 360);
 	}
-	if (keycode == DOWN)
+	if (mlx->event.is_s_pressed == 1)
 	{
 		mlx->pj.pos.x = mlx->pj.pos.x + (SPEED * cosf(mlx->pj.rot * (M_PI / 180)));
 		mlx->pj.pos.y = mlx->pj.pos.y + (SPEED * sinf(mlx->pj.rot * (M_PI / 180)));
 	}
-	if (keycode == UP)
+	if (mlx->event.is_w_pressed == 1)
 	{
 		mlx->pj.pos.x = mlx->pj.pos.x - (SPEED * cosf(mlx->pj.rot * (M_PI / 180)));
 		mlx->pj.pos.y = mlx->pj.pos.y - (SPEED * sinf(mlx->pj.rot * (M_PI / 180)));
 	}
-	if (keycode == LEFT)
+	if (mlx->event.is_a_pressed == 1)
 	{
 		mlx->pj.pos.x = mlx->pj.pos.x + (SPEED * cosf((mlx->pj.rot + 90) * (M_PI / 180)));
 		mlx->pj.pos.y = mlx->pj.pos.y + (SPEED * sinf((mlx->pj.rot + 90) * (M_PI / 180)));
 	}
-	if (keycode == RIGHT)
+	if (mlx->event.is_d_pressed == 1)
 	{
 		mlx->pj.pos.x = mlx->pj.pos.x + (SPEED * cosf((mlx->pj.rot - 90) * (M_PI / 180)));
 		mlx->pj.pos.y = mlx->pj.pos.y + (SPEED * sinf((mlx->pj.rot - 90) * (M_PI / 180)));
@@ -390,11 +417,22 @@ int	key_hook(int keycode, t_mlx *mlx)
 	return (EXIT_SUCCESS);
 }
 
+int	update_all(t_mlx *mlx)
+{
+	update_keys_events(mlx);
+	minimap_manager(mlx, T_LEFT);
+	minimap_manager(mlx, T_RIGHT);
+	minimap_manager(mlx, B_LEFT);
+	minimap_manager(mlx, B_RIGHT);
+	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.img, 0, 0);
+	return (EXIT_SUCCESS);
+}
+
 void	mlx_routine(t_mlx *mlx)
 {
-	mlx_loop_hook(mlx->mlx, print_all, mlx);
-	//mlx_loop_hook(mlx->mlx, test_line, mlx);
-	mlx_hook(mlx->win, 2, 1, key_hook, mlx);
+	mlx_loop_hook(mlx->mlx, update_all, mlx);
+	mlx_hook(mlx->win, 2, 1L<<0, key_press, mlx);
+	mlx_hook(mlx->win, 3, 1L<<1, key_release, mlx);
 	mlx_loop(mlx->mlx);
 }
 

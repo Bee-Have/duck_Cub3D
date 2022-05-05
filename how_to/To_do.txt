@@ -6,7 +6,7 @@ KO-implement clean/clear mlx routine
 KO-implement clean/clear keycode events
 
 TESTING:
-KO-move pxl_unit from img to mlx
+OK-delete pxl_unit from img to mlx
 OK-make pxlput same for everyone
 	OK-add draw_pxl
 OK-signify the front of the player
@@ -14,14 +14,14 @@ OK-signify the front of the player
 	OK-test drawing ray with moving end point (ray drawing a circle basically)
 	OK-make cicle instead of circle
 	NOPE-(KO-maybe see how to change orientation of the square directly ?)
-KO-make minimap able to be put anywhere on the image
-	KO-Make function with : position, size ?
-		KO-position should be "vague" : TOP_LEFT TOP_RIGHT BOTTOM_LEFT BOTTOM_RIGHT
-			KO-translate "vague" position into automatic position stuck to side
-			KO-calculate offset
-	KO-make minimap resizable
-		KO-establish "max" size for minimap (width, height can be different)
-		KO-depending on size of map calculate new size
+OK-make minimap able to be put anywhere on the image
+	OK-Make function with : position, size ?
+		OK-position should be "vague" : TOP_LEFT TOP_RIGHT BOTTOM_LEFT BOTTOM_RIGHT
+			OK-translate "vague" position into automatic position stuck to side
+			OK-calculate offset
+	OK-make minimap resizable
+		OK-establish "max" size for minimap (width, height can be different)
+		OK-depending on size of map calculate new size
 	KO-crop map around player ?
 
 EVENT:

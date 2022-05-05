@@ -30,3 +30,9 @@ if the position on the map fuckes up
 calculate position on addr without virgule
 then, until value without virgule < value with virgule
 addr+=4 ; map+= 0,1
+
+on key press :
+bool
+bool how though
+while ?
+do it with the mlx events no ?

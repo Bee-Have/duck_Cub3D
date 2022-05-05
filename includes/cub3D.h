@@ -45,11 +45,23 @@ typedef struct s_img
 	int		endian;
 }			t_img;
 
+typedef struct s_event
+{
+	char	is_w_pressed;
+	char	is_a_pressed;
+	char	is_s_pressed;
+	char	is_d_pressed;
+	char	is_left_pressed;
+	char	is_right_pressed;
+}			t_event;
+
 typedef struct s_mlx
 {
 	void	*mlx;
 	void	*win;
 	t_img	img;
+
+	t_event	event;
 
 	t_vec2	screen;
 	char	**map;
