@@ -343,11 +343,6 @@ void	minimap_manager(t_mlx *mlx, int corner)
 	draw_pj(mlx, map_start, pxl_unit);
 }
 
-void	raycasting_manager(t_mlx *mlx)
-{
-
-}
-
 #define ESC 65307
 #define UP 119
 #define DOWN 115
