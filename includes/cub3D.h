@@ -17,13 +17,15 @@ typedef struct s_vec2
 
 typedef struct s_pos
 {
-	float	x;
-	float	y;
+	double	x;
+	double	y;
 }			t_pos;
 
 typedef struct s_pj
 {
 	t_pos	pos;
+	t_pos	dir;
+	t_pos	plane;
 	int		rot;
 }			t_pj;
 

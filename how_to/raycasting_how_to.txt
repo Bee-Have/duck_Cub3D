@@ -1,0 +1,110 @@
+define how to trace rays in efficient way
+	basically, instead of going from pxl to pxl, go from pxl_unit to pxl_unit
+	vectors :
+		starting position : pj_pos;
+		direction : where pj is looking (WARNING : NOT a position)
+		plane : basically the camera/FOV (field of view)
+			plane must be perpendicular to the player position
+		ray_dir : where the ray is crossing the plane
+			ray_dir is the direction which the ray will take
+			the rays start at player position
+			ray_dir will be used for the DDA algorythm
+FOV is used to determine how many rays to draw
+	FOV = pj dir + plane len
+WARNING :
+	upon rotating, everything has to rotate with player (plane && direction)
+	rotate using matrix (something about cos and sin ?)
+
+pos : the position of the player;
+camera_x : the position on the plane : where we are on the screen img (pxl)
+raydir : the calculated direction of the plane
+	(raydir starting position is the player position)
+plane : plane len (basically)
+dir : the direction of the player (where he is looking)
+map : (int)pos (position in the map)
+side_dist : length of ray from current pos to next square
+delta_dist : length of ray from one side_dist to another
+step : what direction to step in x/y direction (-1 or 1)
+hit : did we hit a wall ?
+side : which side of wall was hit
+
+raycasting will be :
+while x < total_horizontal_pxls
+{
+	(one for each pixel in the screen image)
+	camera_x = 2 * x / double(w) - 1; ???
+	raydir.x = dir.x + plane.x * camera_x;
+	raydir.y = dir.y + plane.y * camera_y;
+
+	map.x = (int)pos.x;
+	map.y = (int)pos.y;
+	if (delta_dist.x == 0)
+		delta_dist = 1e30;
+	else
+		delta_dist = abs(1 / ray_dir.x);
+	if (delta_dist.y == 0)
+		delta_dist = 1e30;
+	else
+		delta_dist = abs(1 / ray_dir.y);
+	hit = 0;
+
+	if (raydir.x < 0)
+	{
+		step.x = -1;
+		side_dist.x = (pos.x - map.x) * delta_dist;
+	}
+	else
+	{
+		step.x = 1;
+		side_dist.x = (map.x + 1.0 - pos.x) * delta_dist.x;
+	}
+	if (raydir.y < 0)
+	{
+		step.y = -1;
+		side_dist.y = (pos.y - map.y) * delta_dist.y;
+	}
+	else
+	{
+		step.y = 1;
+		side_dist.y = (map.y + 1.0 - pos.y) *delta_dist.y;
+	}
+
+	while (hit == 0)
+	{
+		if (side_dist.x < side_dist.y)
+		{
+			side_dist.x += side_dist.x;
+			map.x += step.x;
+			side = 0;
+		}
+		else
+		{
+			side_dist.y += delta_dist.y;
+			map.y += step.y;
+			side = 1;
+		}
+		if (worl_map[map.y][map.x] > 0)
+			hit = 1;
+	}
+}
+
+us dda algo to draw line of raycasting
+DDA algorythm : line drawing algorithm
+check points are not at the same pos:
+	if (x1 == x2 && y1 == y2)
+		return ;
+calculate step :
+	dx = abs(x2 - x1); dy = abs(y2 - y1)
+	if (dx >= dy)
+		step = dx;
+	else
+		step = dy;
+define step for x && y :
+	xin = dx / step; yin = dy / step;
+iterate through step :
+	while (i < step)
+	{
+		x += xin;
+		y += xin;
+		putpixel(x,y);
+	}

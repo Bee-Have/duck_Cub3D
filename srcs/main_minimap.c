@@ -301,6 +301,7 @@ int	map_pxl_unit(t_vec2 area, char **map)
 #define T_RIGHT 1
 #define B_LEFT 2
 #define B_RIGHT 3
+#define CENTER 4
 void	minimap_manager(t_mlx *mlx, int corner)
 {
 	t_vec2	area_size;
@@ -310,8 +311,16 @@ void	minimap_manager(t_mlx *mlx, int corner)
 	t_vec2	offset;
 	int		pxl_unit;
 
-	area_size.x = mlx->screen.x / 4;
-	area_size.y = mlx->screen.y / 4;
+	if (corner == CENTER)
+	{
+		area_size.x = mlx->screen.x;
+		area_size.y = mlx->screen.y;
+	}
+	else
+	{
+		area_size.x = mlx->screen.x / 4;
+		area_size.y = mlx->screen.y / 4;
+	}
 	pxl_unit = map_pxl_unit(area_size, mlx->map);
 	map_size.x = ft_strlen(mlx->map[0]) * pxl_unit;
 	map_size.y = ft_tab_len((void **)mlx->map) * pxl_unit;
@@ -332,6 +341,11 @@ void	minimap_manager(t_mlx *mlx, int corner)
 	map_start.y = area_start.y + offset.y;
 	draw_minimap(mlx, map_start, pxl_unit);
 	draw_pj(mlx, map_start, pxl_unit);
+}
+
+void	raycasting_manager(t_mlx *mlx)
+{
+
 }
 
 #define ESC 65307
@@ -420,10 +434,11 @@ int	update_keys_events(t_mlx *mlx)
 int	update_all(t_mlx *mlx)
 {
 	update_keys_events(mlx);
-	minimap_manager(mlx, T_LEFT);
-	minimap_manager(mlx, T_RIGHT);
-	minimap_manager(mlx, B_LEFT);
-	minimap_manager(mlx, B_RIGHT);
+	minimap_manager(mlx, CENTER);
+	// minimap_manager(mlx, T_LEFT);
+	// minimap_manager(mlx, T_RIGHT);
+	// minimap_manager(mlx, B_LEFT);
+	// minimap_manager(mlx, B_RIGHT);
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.img, 0, 0);
 	return (EXIT_SUCCESS);
 }

@@ -5,6 +5,9 @@ KO-implement parsing
 KO-implement clean/clear mlx routine
 KO-implement clean/clear keycode events
 
+OTHER:
+KO-Make menu on ESC (don't wuite right away)
+
 TESTING:
 OK-delete pxl_unit from img to mlx
 OK-make pxlput same for everyone
@@ -25,7 +28,7 @@ OK-make minimap able to be put anywhere on the image
 	KO-crop map around player ?
 
 EVENT:
-KO-make keycode event as bool pressed an unpressed (cant advance and rotate)
+OK-make keycode event as bool pressed an unpressed (cant advance and rotate)
 KO-left right of mouse is handled as right left arrows
 
 KO-test raycasting
