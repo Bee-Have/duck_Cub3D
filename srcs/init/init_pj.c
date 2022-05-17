@@ -6,7 +6,7 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 15:25:34 by amarini-          #+#    #+#             */
-/*   Updated: 2022/05/17 15:29:05 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/05/17 18:30:20 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,9 @@ t_pj	init_pj(char **map)
 		pj.rot = 0;
 	if (map[(int)pj.pos.y][(int)pj.pos.x] == 'W')
 		pj.rot = 180;
+	pj.dir.x = pj.pos.x - (cosf(pj.rot * (M_PI / 180)));
+	pj.dir.y = pj.pos.y - (sinf(pj.rot * (M_PI / 180)));
+	pj.plane.x = 0;
+	pj.plane.x = 0.66;
 	return (pj);
 }

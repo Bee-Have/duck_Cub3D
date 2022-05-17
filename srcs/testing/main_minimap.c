@@ -25,8 +25,6 @@ t_mlx	*init_mlx(int width, int height)
 	mlx->img.img = mlx_new_image(mlx->mlx, width, height);
 	mlx->img.addr = mlx_get_data_addr(mlx->img.img, &mlx->img.bits_pxl, &mlx->img.line_len
 								, &mlx->img.endian);
-	mlx->screen.x = width;
-	mlx->screen.y = height;
 	mlx->event.is_w_pressed = 0;
 	mlx->event.is_a_pressed = 0;
 	mlx->event.is_s_pressed = 0;
@@ -265,15 +263,15 @@ void	draw_minimap(t_mlx *mlx, t_vec2 pos, int pxl_unit)
 	xaddr = pos.x;
 	imap.y = 0;
 	check = 0;
-	while (mlx->map[imap.y] != NULL)
+	while (mlx->map_info.map[imap.y] != NULL)
 	{
 		imap.x = 0;
 		pos.x = xaddr;
-		while (mlx->map[imap.y][imap.x] != '\0')
+		while (mlx->map_info.map[imap.y][imap.x] != '\0')
 		{
-			if (mlx->map[imap.y][imap.x] == '0')
+			if (mlx->map_info.map[imap.y][imap.x] == '0')
 				color = make_color(255, 255, 255, 255);
-			else if (mlx->map[imap.y][imap.x] == '1')
+			else if (mlx->map_info.map[imap.y][imap.x] == '1')
 				color = make_color(255, 0, 74, 247);
 			else
 				color = make_color(255, 255, 110, 110);
@@ -313,29 +311,29 @@ void	minimap_manager(t_mlx *mlx, int corner)
 
 	if (corner == CENTER)
 	{
-		area_size.x = mlx->screen.x;
-		area_size.y = mlx->screen.y;
+		area_size.x = mlx->map_info.screen.x;
+		area_size.y = mlx->map_info.screen.y;
 	}
 	else
 	{
-		area_size.x = mlx->screen.x / 4;
-		area_size.y = mlx->screen.y / 4;
+		area_size.x = mlx->map_info.screen.x / 4;
+		area_size.y = mlx->map_info.screen.y / 4;
 	}
-	pxl_unit = map_pxl_unit(area_size, mlx->map);
-	map_size.x = ft_strlen(mlx->map[0]) * pxl_unit;
-	map_size.y = ft_tab_len((void **)mlx->map) * pxl_unit;
+	pxl_unit = map_pxl_unit(area_size, mlx->map_info.map);
+	map_size.x = ft_strlen(mlx->map_info.map[0]) * pxl_unit;
+	map_size.y = ft_tab_len((void **)mlx->map_info.map) * pxl_unit;
 	offset.x = (area_size.x - map_size.x) / 2;
 	offset.y = (area_size.y - map_size.y) / 2;
 	area_start.x = 0;
 	area_start.y = 0;
 	if (corner == T_RIGHT)
-		area_start.x = mlx->screen.x - area_size.x;
+		area_start.x = mlx->map_info.screen.x - area_size.x;
 	else if (corner == B_LEFT)
-		area_start.y = mlx->screen.y - area_size.y;
+		area_start.y = mlx->map_info.screen.y - area_size.y;
 	else if (corner == B_RIGHT)
 	{
-		area_start.x = mlx->screen.x - area_size.x;
-		area_start.y = mlx->screen.y - area_size.y;
+		area_start.x = mlx->map_info.screen.x - area_size.x;
+		area_start.y = mlx->map_info.screen.y - area_size.y;
 	}
 	map_start.x = area_start.x + offset.x;
 	map_start.y = area_start.y + offset.y;
@@ -448,18 +446,23 @@ void	mlx_routine(t_mlx *mlx)
 
 int	main(int ac, char **av)
 {
-	t_mlx	*mlx;
-	char	**map;
+	t_mlx		*mlx;
+	t_map_info	map_info;
+	char		**map;
 
 	if (ac != 2)
 		return (1);
-	map = ft_get_file(av[1]);
+	map_info.map = ft_get_file(av[1]);
 	ft_print_str_tab(NULL, map);
-	mlx = init_mlx(1920, 1080);
-	mlx->map = map;
-	mlx->pj = init_pj(mlx->map);
+	mlx->map_info = map_info;
+	mlx->map_info.pxl_unit = 0;
+	mlx->map_info.screen.x = 1920;
+	mlx->map_info.screen.y = 1080;
+	mlx = init_mlx(mlx->map_info.screen.x, mlx->map_info.screen.y);
+	mlx->map_info.map = map;
+	mlx->pj = init_pj(mlx->map_info.map);
 	printf("pj-[%f][%f]\n", mlx->pj.pos.y, mlx->pj.pos.x);
-	mlx->map[(int)mlx->pj.pos.y][(int)mlx->pj.pos.x] = '0';
+	mlx->map_info.map[(int)mlx->pj.pos.y][(int)mlx->pj.pos.x] = '0';
 	mlx_routine(mlx);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 18:09:36 by amarini-          #+#    #+#             */
-/*   Updated: 2022/05/17 15:35:02 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/05/17 18:24:40 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,6 @@ t_mlx	*init_mlx(int width, int height)
 	mlx->img.img = mlx_new_image(mlx->mlx, width, height);
 	mlx->img.addr = mlx_get_data_addr(mlx->img.img, &mlx->img.bits_pxl
 								, &mlx->img.line_len, &mlx->img.endian);
-	mlx->screen.x = width;
-	mlx->screen.y = height;
 	init_events(mlx);
-	mlx->map = NULL;
 	return (mlx);
 }

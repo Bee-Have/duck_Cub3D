@@ -6,7 +6,7 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 16:10:57 by amarini-          #+#    #+#             */
-/*   Updated: 2022/05/17 16:08:53 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/05/17 18:45:34 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ int	main(int ac, char **av)
 	mlx = init_mlx(1920, 1080);
 	// init map
 	//! this is temporary because the file will not only include the map
-	mlx->map = ft_get_file(av[1]);
+	mlx->map_info = init_map_info(ft_get_file(av[1]), 1920, 1080);
 	// init pj
-	mlx->pj = init_pj(mlx->map);
+	mlx->pj = init_pj(mlx->map_info.map);
 	// start mlx routine
 	mlx_routine(mlx);
-	ft_free_tab((void **)mlx->map);
+	ft_free_tab((void **)mlx->map_info.map);
 	free(mlx);
 	return (EXIT_SUCCESS);
 }

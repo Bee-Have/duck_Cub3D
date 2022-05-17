@@ -50,6 +50,13 @@ typedef struct s_pj
 	int		rot;
 }			t_pj;
 
+typedef struct s_map_info
+{
+	char	**map;
+	int		pxl_unit;
+	t_vec2	screen;
+}			t_map_info;
+
 typedef struct s_color
 {
 	unsigned char	a;
@@ -86,12 +93,13 @@ typedef struct s_mlx
 
 	t_event	event;
 
-	t_vec2	screen;
-	char	**map;
+	t_map_info	map_info;
 	t_pj	pj;
 }			t_mlx;
 
 //? INIT
+// structs
+t_map_info	init_map_info(char **map, int width, int height);
 // mlx
 t_img	init_img(void);
 t_mlx	*init_mlx(int width, int height);
@@ -107,5 +115,7 @@ int		update_all(t_mlx *mlx);
 int		key_press(int keycode, t_mlx *mlx);
 int		key_release(int keycode, t_mlx *mlx);
 int		update_keys_events(t_mlx *mlx);
+// raycasting
+void	raycasting_routine(t_mlx *mlx);
 
 #endif
