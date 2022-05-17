@@ -76,6 +76,10 @@ t_pj	init_pj(char **map)
 		pj.rot = 0;
 	else if (map[(int)pj.pos.y][(int)pj.pos.x] == 'W')
 		pj.rot = 180;
+	pj.dir.x = pj.pos.x - (cosf(pj.rot * (M_PI / 180)));
+	pj.dir.y = pj.pos.y - (sinf(pj.rot * (M_PI / 180)));
+	pj.plane.x = 0;
+	pj.plane.x = 0.66;
 	return (pj);
 }
 
@@ -162,14 +166,14 @@ void	switch_vec2(t_vec2 *vector)
 }
 
 //m = slope
-void	plot_pxl(t_mlx *mlx, t_vec2 start, t_vec2 end, t_vec2 m, int decide)
+void	plot_pxl(t_mlx *mlx, t_vec2 start, t_vec2 end, t_vec2 m, int decide, t_color color)
 {
-	t_color	color;
+	// t_color	color;
 	int		err;
 	int		i;
 	int		len;
 
-	color = make_color(255, 0, 255, 0);
+	// color = make_color(255, 0, 255, 0);
 	err = 2 * m.y - m.x;
 	len = 1;
 	i = 0;
@@ -212,7 +216,7 @@ void	plot_pxl(t_mlx *mlx, t_vec2 start, t_vec2 end, t_vec2 m, int decide)
 }
 
 //m = slope
-void	draw_line(t_mlx *mlx, t_vec2 start, t_vec2 end)
+void	draw_line(t_mlx *mlx, t_vec2 start, t_vec2 end, t_color color)
 {
 	int		dx;
 	int		dy;
@@ -227,10 +231,97 @@ void	draw_line(t_mlx *mlx, t_vec2 start, t_vec2 end)
 		switch_vec2(&start);
 		switch_vec2(&end);
 		switch_vec2(&m);
-		plot_pxl(mlx, start, end, m, 1);
+		plot_pxl(mlx, start, end, m, 1, color);
 	}
 	else
-		plot_pxl(mlx, start, end, m, 0);
+		plot_pxl(mlx, start, end, m, 0, color);
+}
+
+void	raycasting_routine(t_mlx *mlx)
+{
+	t_color	color;
+	int		x;
+	double	camera_x;
+	t_pos	ray_dir;
+	t_vec2	map;
+	t_pos	side_dist;
+	t_pos	delta_dist;
+	// double	perp_wall_dist;
+	t_vec2	step;
+	int		hit;
+	int		side;
+
+	x = 0;
+	color = make_color(255, 255, 196, 0);
+	while (x < mlx->map_info.screen.x)
+	{
+		map.x = (int)mlx->pj.pos.x;
+		map.y = (int)mlx->pj.pos.y;
+		hit = 0;
+		// camera_x = 2 * x / (double)mlx->map_info.screen.x - 1;
+		
+		ray_dir.x = mlx->pj.dir.x + mlx->pj.plane.x * camera_x;
+		ray_dir.y = mlx->pj.dir.y + mlx->pj.plane.y * camera_x;
+
+		if (ray_dir.x == 0)
+			delta_dist.x = 1e30;
+		else
+			delta_dist.x = fabs(1 / ray_dir.x);
+		if (ray_dir.y == 0)
+			delta_dist.y = 1e30;
+		else
+			delta_dist.y = fabs(1 / ray_dir.y);
+
+		if (ray_dir.x < 0)
+		{
+			step.x = -1;
+			side_dist.x = (mlx->pj.pos.x - map.x) * delta_dist.x;
+		}
+		else
+		{
+			step.x = 1;
+			side_dist.x = (map.x + 1.0 - mlx->pj.pos.x) * delta_dist.x;
+		}
+		if (ray_dir.y < 0)
+		{
+			step.y = -1;
+			side_dist.y = (mlx->pj.pos.y - map.y) * delta_dist.y;
+		}
+		else
+		{
+			step.y = 1;
+			side_dist.y = (map.y + 1.0 - mlx->pj.pos.y) * delta_dist.y;
+		}
+
+		while (hit == 0)
+		{
+			if (side_dist.x < side_dist.y)
+			{
+				side_dist.x += delta_dist.x;
+				map.x += step.x;
+				side = 0;
+			}
+			else
+			{
+				side_dist.y += delta_dist.y;
+				map.y += step.y;
+				side = 1;
+			}
+			//! the map will not always be square/rectangular
+			if (map.y < 0 || map.y > ft_tab_len((void **)mlx->map_info.map)
+				|| map.x < 0 || map.x > (int)ft_strlen(mlx->map_info.map[0])
+				|| mlx->map_info.map[map.y][map.x] == '1')
+			{
+				t_vec2	start;
+				start.x = (int)mlx->pj.pos.x;
+				start.y = (int)mlx->pj.pos.y;
+				draw_line(mlx, start, map, color);
+				printf("HIT-[%d][%d]_[%d][%d]\n", start.y, start.x, map.y, map.x);
+				hit = 1;
+			}
+		}
+		++x;
+	}
 }
 
 #define SPEED 0.1
@@ -250,7 +341,8 @@ void	draw_pj(t_mlx *mlx, t_vec2 map_start, int pxl_unit)
 	pos.x += size / 2;
 	dir.y = pos.y - (pxl_unit * sinf(mlx->pj.rot * (M_PI / 180)));
 	dir.x = pos.x - (pxl_unit * cosf(mlx->pj.rot * (M_PI / 180)));
-	draw_line(mlx, pos, dir);
+	color = make_color(255, 0, 255, 0);
+	draw_line(mlx, pos, dir, color);
 }
 
 void	draw_minimap(t_mlx *mlx, t_vec2 pos, int pxl_unit)
@@ -432,6 +524,7 @@ int	update_all(t_mlx *mlx)
 	// minimap_manager(mlx, T_RIGHT);
 	// minimap_manager(mlx, B_LEFT);
 	// minimap_manager(mlx, B_RIGHT);
+	raycasting_routine(mlx);
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.img, 0, 0);
 	return (EXIT_SUCCESS);
 }
@@ -448,18 +541,16 @@ int	main(int ac, char **av)
 {
 	t_mlx		*mlx;
 	t_map_info	map_info;
-	char		**map;
 
 	if (ac != 2)
 		return (1);
 	map_info.map = ft_get_file(av[1]);
-	ft_print_str_tab(NULL, map);
+	ft_print_str_tab(NULL, map_info.map);
+	mlx = init_mlx(1920, 1080);
 	mlx->map_info = map_info;
 	mlx->map_info.pxl_unit = 0;
 	mlx->map_info.screen.x = 1920;
 	mlx->map_info.screen.y = 1080;
-	mlx = init_mlx(mlx->map_info.screen.x, mlx->map_info.screen.y);
-	mlx->map_info.map = map;
 	mlx->pj = init_pj(mlx->map_info.map);
 	printf("pj-[%f][%f]\n", mlx->pj.pos.y, mlx->pj.pos.x);
 	mlx->map_info.map[(int)mlx->pj.pos.y][(int)mlx->pj.pos.x] = '0';

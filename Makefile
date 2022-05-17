@@ -22,12 +22,12 @@ INC = -I$(LIBFT_DIR)/includes -I$(MLX_DIR) -I$(INC_DIR)
 
 vpath %.c $(foreach dir, $(SRC_DIR), $(dir):)
 
-# SRC = main_minimap.c
-SRC = main.c \
-	init_structs.c init_mlx.c init_pj.c \
-	mlx_routine.c routine_manager.c \
-	raycasting.c \
-	key_events.c
+SRC = main_minimap.c
+# SRC = main.c \
+# 	init_structs.c init_mlx.c init_pj.c \
+# 	mlx_routine.c routine_manager.c \
+# 	raycasting.c \
+# 	key_events.c
 
 OBJ = $(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
 
