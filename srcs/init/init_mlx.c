@@ -6,7 +6,7 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 18:09:36 by amarini-          #+#    #+#             */
-/*   Updated: 2022/05/16 20:08:02 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/05/17 15:35:02 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ t_img	init_img(void)
 
 static void	init_events(t_mlx *mlx)
 {
-	mlx->event.is_w_pressed = 0
-	mlx->event.is_a_pressed = 0
-	mlx->event.is_s_pressed = 0
-	mlx->event.is_d_pressed = 0
-	mlx->event.is_left_pressed = 0
-	mlx->event.is_right_pressed = 0
+	mlx->event.is_w_pressed = 0;
+	mlx->event.is_a_pressed = 0;
+	mlx->event.is_s_pressed = 0;
+	mlx->event.is_d_pressed = 0;
+	mlx->event.is_left_pressed = 0;
+	mlx->event.is_right_pressed = 0;
 	return ;
 }
 
@@ -50,7 +50,6 @@ t_mlx	*init_mlx(int width, int height)
 	mlx->screen.x = width;
 	mlx->screen.y = height;
 	init_events(mlx);
-	mlx->pj = NULL;
 	mlx->map = NULL;
 	return (mlx);
 }

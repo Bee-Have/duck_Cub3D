@@ -9,6 +9,27 @@
 #ifndef CUB3D_H
 #define CUB3D_H
 
+// minimap general position
+#define T_LEFT 0
+#define T_RIGHT 1
+#define B_LEFT 2
+#define B_RIGHT 3
+#define CENTER 4
+
+// keycodes :
+#define ESC 65307
+#define UP 119
+#define DOWN 115
+#define RIGHT 100
+#define LEFT 97
+#define R_RIGHT 65363
+#define R_LEFT 65361
+
+// gameplay pj
+#define SPEED 0.1
+#define R_SPEED 5
+
+// structs
 typedef struct s_vec2
 {
 	int	x;
@@ -69,5 +90,22 @@ typedef struct s_mlx
 	char	**map;
 	t_pj	pj;
 }			t_mlx;
+
+//? INIT
+// mlx
+t_img	init_img(void);
+t_mlx	*init_mlx(int width, int height);
+// gameplay
+t_pj	init_pj(char **map);
+
+//? ROUTINE
+// mlx
+void	mlx_routine(t_mlx *mlx);
+// update
+int		update_all(t_mlx *mlx);
+// keys events
+int		key_press(int keycode, t_mlx *mlx);
+int		key_release(int keycode, t_mlx *mlx);
+int		update_keys_events(t_mlx *mlx);
 
 #endif
