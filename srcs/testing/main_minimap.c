@@ -73,9 +73,9 @@ t_pj	init_pj(char **map)
 	else if (map[(int)pj.pos.y][(int)pj.pos.x] == 'S')
 		pj.rot = 270;
 	else if (map[(int)pj.pos.y][(int)pj.pos.x] == 'E')
-		pj.rot = 0;
-	else if (map[(int)pj.pos.y][(int)pj.pos.x] == 'W')
 		pj.rot = 180;
+	else if (map[(int)pj.pos.y][(int)pj.pos.x] == 'W')
+		pj.rot = 0;
 	pj.dir.x = pj.pos.x - (cosf(pj.rot * (M_PI / 180)));
 	pj.dir.y = pj.pos.y - (sinf(pj.rot * (M_PI / 180)));
 	pj.plane.x = 0;
@@ -237,7 +237,7 @@ void	draw_line(t_mlx *mlx, t_vec2 start, t_vec2 end, t_color color)
 		plot_pxl(mlx, start, end, m, 0, color);
 }
 
-void	raycasting_routine(t_mlx *mlx)
+void	raycasting_routine(t_mlx *mlx, t_vec2 map_start)
 {
 	t_color	color;
 	int		x;
@@ -249,20 +249,18 @@ void	raycasting_routine(t_mlx *mlx)
 	// double	perp_wall_dist;
 	t_vec2	step;
 	int		hit;
-	int		side;
+	//int		side;
 
 	x = 0;
-	color = make_color(255, 255, 196, 0);
+	color = make_color(255, 0, 0, 0);
 	while (x < mlx->map_info.screen.x)
 	{
 		map.x = (int)mlx->pj.pos.x;
 		map.y = (int)mlx->pj.pos.y;
 		hit = 0;
-		// camera_x = 2 * x / (double)mlx->map_info.screen.x - 1;
-		
+		camera_x = 2 * x / (double)mlx->map_info.screen.x - 1;
 		ray_dir.x = mlx->pj.dir.x + mlx->pj.plane.x * camera_x;
 		ray_dir.y = mlx->pj.dir.y + mlx->pj.plane.y * camera_x;
-
 		if (ray_dir.x == 0)
 			delta_dist.x = 1e30;
 		else
@@ -299,13 +297,13 @@ void	raycasting_routine(t_mlx *mlx)
 			{
 				side_dist.x += delta_dist.x;
 				map.x += step.x;
-				side = 0;
+				//side = 0;
 			}
 			else
 			{
 				side_dist.y += delta_dist.y;
 				map.y += step.y;
-				side = 1;
+				//side = 1;
 			}
 			//! the map will not always be square/rectangular
 			if (map.y < 0 || map.y > ft_tab_len((void **)mlx->map_info.map)
@@ -313,10 +311,18 @@ void	raycasting_routine(t_mlx *mlx)
 				|| mlx->map_info.map[map.y][map.x] == '1')
 			{
 				t_vec2	start;
-				start.x = (int)mlx->pj.pos.x;
-				start.y = (int)mlx->pj.pos.y;
+				//pos.x = (map_start.x + (mlx->pj.pos.x * pxl_unit)) + (pxl_unit - size) / 2;
+				
+				start.x = (map_start.x + ((int)mlx->pj.pos.x * mlx->map_info.pxl_unit)) + (mlx->map_info.pxl_unit - (mlx->map_info.pxl_unit)) / 2;
+				start.y = (map_start.y + ((int)mlx->pj.pos.y * mlx->map_info.pxl_unit)) + (mlx->map_info.pxl_unit - (mlx->map_info.pxl_unit)) / 2;
+				map.x = (map_start.x + (map.x * mlx->map_info.pxl_unit)) + (mlx->map_info.pxl_unit - (mlx->map_info.pxl_unit)) / 2;
+				map.y = (map_start.y + (map.y * mlx->map_info.pxl_unit)) + (mlx->map_info.pxl_unit - (mlx->map_info.pxl_unit)) / 2;
+				start.x += (mlx->map_info.pxl_unit / 2);
+				start.y += (mlx->map_info.pxl_unit / 2);
+				map.x += (mlx->map_info.pxl_unit / 2);
+				map.y += (mlx->map_info.pxl_unit / 2);
+				printf("[%d]-[%d][%d]_[%d][%d]\n", x, start.y, start.x, map.y, map.x);
 				draw_line(mlx, start, map, color);
-				printf("HIT-[%d][%d]_[%d][%d]\n", start.y, start.x, map.y, map.x);
 				hit = 1;
 			}
 		}
@@ -341,6 +347,7 @@ void	draw_pj(t_mlx *mlx, t_vec2 map_start, int pxl_unit)
 	pos.x += size / 2;
 	dir.y = pos.y - (pxl_unit * sinf(mlx->pj.rot * (M_PI / 180)));
 	dir.x = pos.x - (pxl_unit * cosf(mlx->pj.rot * (M_PI / 180)));
+	printf("pj-[%d][%d]\n", pos.y, pos.x);
 	color = make_color(255, 0, 255, 0);
 	draw_line(mlx, pos, dir, color);
 }
@@ -349,12 +356,10 @@ void	draw_minimap(t_mlx *mlx, t_vec2 pos, int pxl_unit)
 {
 	t_color	color;
 	t_vec2	imap;
-	int		check;
 	int		xaddr;
 
 	xaddr = pos.x;
 	imap.y = 0;
-	check = 0;
 	while (mlx->map_info.map[imap.y] != NULL)
 	{
 		imap.x = 0;
@@ -399,7 +404,6 @@ void	minimap_manager(t_mlx *mlx, int corner)
 	t_vec2	map_size;
 	t_vec2	map_start;
 	t_vec2	offset;
-	int		pxl_unit;
 
 	if (corner == CENTER)
 	{
@@ -411,9 +415,10 @@ void	minimap_manager(t_mlx *mlx, int corner)
 		area_size.x = mlx->map_info.screen.x / 4;
 		area_size.y = mlx->map_info.screen.y / 4;
 	}
-	pxl_unit = map_pxl_unit(area_size, mlx->map_info.map);
-	map_size.x = ft_strlen(mlx->map_info.map[0]) * pxl_unit;
-	map_size.y = ft_tab_len((void **)mlx->map_info.map) * pxl_unit;
+	if (mlx->map_info.pxl_unit == 0)
+		mlx->map_info.pxl_unit = map_pxl_unit(area_size, mlx->map_info.map);
+	map_size.x = ft_strlen(mlx->map_info.map[0]) * mlx->map_info.pxl_unit;
+	map_size.y = ft_tab_len((void **)mlx->map_info.map) * mlx->map_info.pxl_unit;
 	offset.x = (area_size.x - map_size.x) / 2;
 	offset.y = (area_size.y - map_size.y) / 2;
 	area_start.x = 0;
@@ -429,8 +434,9 @@ void	minimap_manager(t_mlx *mlx, int corner)
 	}
 	map_start.x = area_start.x + offset.x;
 	map_start.y = area_start.y + offset.y;
-	draw_minimap(mlx, map_start, pxl_unit);
-	draw_pj(mlx, map_start, pxl_unit);
+	draw_minimap(mlx, map_start, mlx->map_info.pxl_unit);
+	draw_pj(mlx, map_start, mlx->map_info.pxl_unit);
+	raycasting_routine(mlx, map_start);
 }
 
 #define ESC 65307
@@ -524,7 +530,6 @@ int	update_all(t_mlx *mlx)
 	// minimap_manager(mlx, T_RIGHT);
 	// minimap_manager(mlx, B_LEFT);
 	// minimap_manager(mlx, B_RIGHT);
-	raycasting_routine(mlx);
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.img, 0, 0);
 	return (EXIT_SUCCESS);
 }
