@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 18:30:53 by amarini-          #+#    #+#             */
-/*   Updated: 2022/05/17 18:54:13 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/05/22 18:55:30 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,17 @@ void	raycasting_routine(t_mlx *mlx)
 	// double	perp_wall_dist;
 	t_vec2	step;
 	int		hit;
-	int		side;
+	//int		side;
 
 	x = 0;
-	map.x = (int)mlx->pj.pos.x;
-	map.y = (int)mlx->pj.pos.y;
 	while (x < mlx->map_info.screen.x)
 	{
+		map.x = (int)mlx->pj.pos.x;
+		map.y = (int)mlx->pj.pos.y;
 		hit = 0;
 		camera_x = 2 * x / (double)mlx->map_info.screen.x - 1;
 		ray_dir.x = mlx->pj.dir.x + mlx->pj.plane.x * camera_x;
 		ray_dir.y = mlx->pj.dir.y + mlx->pj.plane.y * camera_x;
-
 		if (ray_dir.x == 0)
 			delta_dist.x = 1e30;
 		else
@@ -71,13 +70,13 @@ void	raycasting_routine(t_mlx *mlx)
 			{
 				side_dist.x += delta_dist.x;
 				map.x += step.x;
-				side = 0;
+				//side = 0;
 			}
 			else
 			{
 				side_dist.y += delta_dist.y;
 				map.y += step.y;
-				side = 1;
+				//side = 1;
 			}
 			//! the map will not always be square/rectangular
 			if (map.y < 0 || map.y > ft_tab_len((void **)mlx->map_info.map)
