@@ -123,16 +123,6 @@ void	raycasting_routine(t_mlx *mlx);
 # define ERROR_LIMIT 20
 
 /*
-* This struct is used to store error message and location.
-*/
-typedef struct s_parsing_error
-{
-	char	*message;
-	int		line;
-	int		column;
-}	t_parsing_error;
-
-/*
 * This struct is used for the parsing of the map file.
 * It will keep track of what elements has been found in the map file.
 * It will also store a list of errors that occured during the parsing.
@@ -145,8 +135,28 @@ typedef struct s_parser
 	unsigned char	east_texture_count;
 	unsigned char	floor_color_count;
 	unsigned char	ceil_color_count;
-	t_parsing_error	errors[ERROR_LIMIT];
+	char			errors[ERROR_LIMIT][100];
+	int				error_count;
 }	t_parser;
+
+/*
+*	Print an error if one of the parameters is missing.
+*	Print every encountered error.
+*	Return 0 if no errors, the number of errors otherwise.
+*/
+int	end_parser(const t_parser *parser);
+
+/*
+*	Will format an error message if the error count is less than 20.
+*	This function still use dynamic allocation for atoi.
+*/
+void	add_error(t_parser *parser, const char *description
+	, int line, int column);
+
+/*
+*	Will recognize the token and increment the corresponding counter.
+*/
+void	add_to_args_count(t_parser *parser, char token, char next_token);
 
 /*
 *	This function will run tests on the path and then on the file.
