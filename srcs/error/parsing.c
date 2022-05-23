@@ -6,21 +6,22 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 16:12:32 by amarini-          #+#    #+#             */
-/*   Updated: 2022/05/23 22:30:06 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/05/23 23:28:15 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
 static const char	*g_parser_error_message[] = {
-	"Error\nRedefinition of North texture at line ",
-	"Error\nRedefinition of South texture at line ",
-	"Error\nRedefinition of West texture at line ",
-	"Error\nRedefinition of East texture at line ",
-	"Error\nRedefinition of Floor color at line ",
-	"Error\nRedefinition of Ceiling color at line ",
+	"Error\nMultiple definition of North texture at line ",
+	"Error\nMultiple definition of South texture at line ",
+	"Error\nMultiple definition of West texture at line ",
+	"Error\nMultiple definition of East texture at line ",
+	"Error\nMultiple definition of Floor color at line ",
+	"Error\nMultiple definition of Ceiling color at line ",
 	"Error\nUnrecognized parameter at line ",
 	"Error\nMissing parameter at line ",
+	"Error\nMissing map at line ",
 };
 
 /*
@@ -70,12 +71,44 @@ static void	get_data(char *line, int l, int c, t_parser *parser)
 		add_error(parser, g_parser_error_message[6], l, c);
 }
 
-static void	parse_lines(char **lines, t_parser *parser)
+/*
+*	Parse the map content.
+*	Return the line position of the map.
+*/
+static int	parse_map_content(char **lines, t_parser *parser)
 {
 	int			l;
 	int			c;
 
 	l = ft_tab_len((void **)lines) - 1;
+	(void)parser;
+	while (l >= 0)
+	{
+		c = 0;
+		if (lines[l][c] == '\0')
+			return (l);
+		while (lines[l][c] != '\0' && lines[l][c] == ' ')
+			++c;
+		if ((lines[l][c] == '\0' && c != 0)
+			|| (lines[l][c] == 'N' && lines[l][c + 1] == 'O')
+			|| (lines[l][c] == 'S' && lines[l][c + 1] == 'O')
+			|| (lines[l][c] == 'W' && lines[l][c + 1] == 'E')
+			|| (lines[l][c] == 'E' && lines[l][c + 1] == 'A')
+			|| (lines[l][c] == 'F') || (lines[l][c] == 'C'))
+			return (l);
+		--l;
+	}
+	return (l);
+}
+
+static void	parse_lines(char **lines, t_parser *parser)
+{
+	int			l;
+	int			c;
+
+	l = parse_map_content(lines, parser);
+	if (lines[l + 1] == NULL)
+		add_error(parser, g_parser_error_message[8], l, 0);
 	while (l >= 0)
 	{
 		c = 0;
