@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 12:43:25 by ldutriez          #+#    #+#             */
-/*   Updated: 2022/05/23 13:00:59 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/05/23 21:59:07 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,13 @@ void	add_error(t_parser *parser, const char *description
 		return ;
 	ft_strcpy((char *)description, parser->errors[parser->error_count]);
 	index = ft_strlen((char *)description);
-	tmp = ft_itoa(line);
+	tmp = ft_itoa(line + 1);
 	ft_strcpy(tmp, parser->errors[parser->error_count] + index);
 	index += ft_strlen(tmp);
 	free(tmp);
 	ft_strcpy(" column ", parser->errors[parser->error_count] + index);
 	index += 8;
-	tmp = ft_itoa(column);
+	tmp = ft_itoa(column + 1);
 	ft_strcpy(tmp, parser->errors[parser->error_count] + index);
 	index += ft_strlen(tmp);
 	free(tmp);
