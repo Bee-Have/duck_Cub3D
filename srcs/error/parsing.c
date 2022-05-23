@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 16:12:32 by amarini-          #+#    #+#             */
-/*   Updated: 2022/05/23 21:58:49 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/05/23 22:30:06 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,8 @@ static void	parse_lines(char **lines, t_parser *parser)
 	int			l;
 	int			c;
 
-	l = 0;
-	while (lines[l])
+	l = ft_tab_len((void **)lines) - 1;
+	while (l >= 0)
 	{
 		c = 0;
 		while (lines[l][c] != '\0' && lines[l][c] == ' ')
@@ -85,7 +85,7 @@ static void	parse_lines(char **lines, t_parser *parser)
 			get_data(lines[l], l, c, parser);
 		else if (lines[l][c] == '\0' && c != 0)
 			add_error(parser, g_parser_error_message[7], l, c);
-		++l;
+		--l;
 	}
 }
 
