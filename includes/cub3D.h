@@ -116,6 +116,6 @@ int		key_press(int keycode, t_mlx *mlx);
 int		key_release(int keycode, t_mlx *mlx);
 int		update_keys_events(t_mlx *mlx);
 // raycasting
-void	raycasting_routine(t_mlx *mlx);
+//void	raycasting_routine(t_mlx *mlx);
 
 #endif
