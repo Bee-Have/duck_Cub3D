@@ -118,9 +118,41 @@ int		update_keys_events(t_mlx *mlx);///////////////////////////////
 // raycasting
 void	raycasting_routine(t_mlx *mlx);
 
-////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////PARSING RELATED/////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
-int		parse_map(t_mlx *mlx, char *file);
+//? PARSING
+
+# define ERROR_LIMIT 20
+
+/*
+* This struct is used to store error message and location.
+*/
+typedef struct s_parsing_error
+{
+	char	*message;
+	int		line;
+	int		column;
+}	t_parsing_error;
+
+/*
+* This struct is used for the parsing of the map file.
+* It will keep track of what elements has been found in the map file.
+* It will also store a list of errors that occured during the parsing.
+*/
+typedef struct s_parser
+{
+	unsigned char	north_texture_count;
+	unsigned char	south_texture_count;
+	unsigned char	west_texture_count;
+	unsigned char	east_texture_count;
+	unsigned char	floor_color_count;
+	unsigned char	ceil_color_count;
+	t_parsing_error	errors[ERROR_LIMIT];
+}	t_parser;
+
+/*
+*	This function will run tests on the path and then on the file.
+* If everything is correct the map data will be saved in the mlx struct.
+* Return 0 on success, 1 on error.
+*/
+int	parse_map(t_mlx *mlx, char *file);
 
 #endif
