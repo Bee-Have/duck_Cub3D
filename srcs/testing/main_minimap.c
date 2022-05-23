@@ -79,7 +79,7 @@ t_pj	init_pj(char **map)
 	pj.dir.x = pj.pos.x - (cosf(pj.rot * (M_PI / 180)));
 	pj.dir.y = pj.pos.y - (sinf(pj.rot * (M_PI / 180)));
 	pj.plane.x = 0;
-	pj.plane.x = 0.66;
+	pj.plane.y = 1;
 	return (pj);
 }
 
@@ -243,7 +243,7 @@ void	raycasting_routine(t_mlx *mlx, t_vec2 map_start)
 	int		x;
 	double	camera_x;
 	t_pos	ray_dir;
-	t_vec2	map;
+	t_pos	map;
 	t_pos	side_dist;
 	t_pos	delta_dist;
 	// double	perp_wall_dist;
@@ -255,8 +255,8 @@ void	raycasting_routine(t_mlx *mlx, t_vec2 map_start)
 	color = make_color(255, 0, 0, 0);
 	while (x < mlx->map_info.screen.x)
 	{
-		map.x = (int)mlx->pj.pos.x;
-		map.y = (int)mlx->pj.pos.y;
+		map.x = mlx->pj.pos.x;
+		map.y = mlx->pj.pos.y;
 		hit = 0;
 		camera_x = 2 * x / (double)mlx->map_info.screen.x - 1;
 		ray_dir.x = mlx->pj.dir.x + mlx->pj.plane.x * camera_x;
@@ -264,11 +264,11 @@ void	raycasting_routine(t_mlx *mlx, t_vec2 map_start)
 		if (ray_dir.x == 0)
 			delta_dist.x = 1e30;
 		else
-			delta_dist.x = fabs(1 / ray_dir.x);
+			delta_dist.x = /*fabs*/(1 / ray_dir.x);
 		if (ray_dir.y == 0)
 			delta_dist.y = 1e30;
 		else
-			delta_dist.y = fabs(1 / ray_dir.y);
+			delta_dist.y = /*fabs*/(1 / ray_dir.y);
 
 		if (ray_dir.x < 0)
 		{
@@ -306,23 +306,25 @@ void	raycasting_routine(t_mlx *mlx, t_vec2 map_start)
 				//side = 1;
 			}
 			//! the map will not always be square/rectangular
-			if (map.y < 0 || map.y > ft_tab_len((void **)mlx->map_info.map)
-				|| map.x < 0 || map.x > (int)ft_strlen(mlx->map_info.map[0])
-				|| mlx->map_info.map[map.y][map.x] == '1')
+			if ((int)map.y < 0 || (int)map.y > ft_tab_len((void **)mlx->map_info.map)
+				|| (int)map.x < 0 || (int)map.x > (int)ft_strlen(mlx->map_info.map[0])
+				|| mlx->map_info.map[(int)map.y][(int)map.x] == '1')
 			{
 				t_vec2	start;
+				t_vec2	end;
 				//pos.x = (map_start.x + (mlx->pj.pos.x * pxl_unit)) + (pxl_unit - size) / 2;
 				
-				start.x = (map_start.x + ((int)mlx->pj.pos.x * mlx->map_info.pxl_unit)) + (mlx->map_info.pxl_unit - (mlx->map_info.pxl_unit)) / 2;
-				start.y = (map_start.y + ((int)mlx->pj.pos.y * mlx->map_info.pxl_unit)) + (mlx->map_info.pxl_unit - (mlx->map_info.pxl_unit)) / 2;
-				map.x = (map_start.x + (map.x * mlx->map_info.pxl_unit)) + (mlx->map_info.pxl_unit - (mlx->map_info.pxl_unit)) / 2;
-				map.y = (map_start.y + (map.y * mlx->map_info.pxl_unit)) + (mlx->map_info.pxl_unit - (mlx->map_info.pxl_unit)) / 2;
+				start.x = (map_start.x + (mlx->pj.pos.x * mlx->map_info.pxl_unit)) + (mlx->map_info.pxl_unit - (mlx->map_info.pxl_unit)) / 2;
+				start.y = (map_start.y + (mlx->pj.pos.y * mlx->map_info.pxl_unit)) + (mlx->map_info.pxl_unit - (mlx->map_info.pxl_unit)) / 2;
+				end.x = (map_start.x + ((mlx->pj.pos.x + side_dist.x
+				) * mlx->map_info.pxl_unit)) + (mlx->map_info.pxl_unit - (mlx->map_info.pxl_unit)) / 2;
+				end.y = (map_start.y + ((mlx->pj.pos.y + side_dist.y) * mlx->map_info.pxl_unit)) + (mlx->map_info.pxl_unit - (mlx->map_info.pxl_unit)) / 2;
 				start.x += (mlx->map_info.pxl_unit / 2);
 				start.y += (mlx->map_info.pxl_unit / 2);
-				map.x += (mlx->map_info.pxl_unit / 2);
-				map.y += (mlx->map_info.pxl_unit / 2);
-				printf("[%d]-[%d][%d]_[%d][%d]\n", x, start.y, start.x, map.y, map.x);
-				draw_line(mlx, start, map, color);
+				end.x += (mlx->map_info.pxl_unit / 2);
+				end.y += (mlx->map_info.pxl_unit / 2);
+				printf("[%d]-[%d][%d]_[%d][%d]\n", x, start.y, start.x, end.y, end.x);
+				draw_line(mlx, start, end, color);
 				hit = 1;
 			}
 		}
