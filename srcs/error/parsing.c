@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 16:12:32 by amarini-          #+#    #+#             */
-/*   Updated: 2022/05/23 13:01:06 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/05/23 14:26:05 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,20 +53,20 @@ static void	get_data(char *line, int l, int c, t_parser *parser)
 {
 	add_to_args_count(parser, line[c], line[c + 1]);
 	if (line[c] == 'N' && parser->north_texture_count > 1)
-		add_error(parser, g_parser_error_message[0], l, c);
+		add_error(parser, g_parser_error_message[0], l, c + 1);
 	else if (line[c] == 'S' && parser->south_texture_count > 1)
-		add_error(parser, g_parser_error_message[1], l, c);
+		add_error(parser, g_parser_error_message[1], l, c + 1);
 	else if (line[c] == 'W' && parser->west_texture_count > 1)
-		add_error(parser, g_parser_error_message[2], l, c);
+		add_error(parser, g_parser_error_message[2], l, c + 1);
 	else if (line[c] == 'E' && parser->east_texture_count > 1)
-		add_error(parser, g_parser_error_message[3], l, c);
+		add_error(parser, g_parser_error_message[3], l, c + 1);
 	else if (line[c] == 'F' && parser->floor_color_count > 1)
-		add_error(parser, g_parser_error_message[4], l, c);
+		add_error(parser, g_parser_error_message[4], l, c + 1);
 	else if (line[c] == 'C' && parser->ceil_color_count > 1)
-		add_error(parser, g_parser_error_message[5], l, c);
+		add_error(parser, g_parser_error_message[5], l, c + 1);
 	else if (line[c] != 'N' && line[c] != 'S' && line[c] != 'W'
 		&& line[c] != 'E' && line[c] != 'F' && line[c] != 'C')
-		add_error(parser, g_parser_error_message[6], l, c);
+		add_error(parser, g_parser_error_message[6], l, c + 1);
 }
 
 static void	parse_line(char *line, t_parser *parser)
@@ -90,20 +90,20 @@ static void	parse_line(char *line, t_parser *parser)
 static int	parse_file_content(t_mlx *mlx, char *path_to_file)
 {
 	t_parser	parser;
-	int			file_fd;
-	char		*line;
+	char		**content;
+	int			i;
 
 	(void)mlx;
 	ft_bzero(&parser, sizeof(t_parser));
-	file_fd = open(path_to_file, O_RDONLY);
-	while (get_next_line(file_fd, &line) == b_true)
+	content = ft_get_file(path_to_file);
+	i = 0;
+	while (content && content[i])
 	{
-		parse_line(line, &parser);
-		free(line);
+		parse_line(content[i], &parser);
+		++i;
 	}
-	parse_line(line, &parser);
-	free(line);
-	close(file_fd);
+	ft_print_str_tab("File content", content);
+	ft_free_tab((void **)content);
 	return (end_parser(&parser));
 }
 
