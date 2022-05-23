@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 16:12:32 by amarini-          #+#    #+#             */
-/*   Updated: 2022/05/23 23:28:15 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/05/24 00:07:18 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ static const char	*g_parser_error_message[] = {
 	"Error\nUnrecognized parameter at line ",
 	"Error\nMissing parameter at line ",
 	"Error\nMissing map at line ",
+	"Error\nUnvalid character at line ",
 };
 
 /*
@@ -71,6 +72,23 @@ static void	get_data(char *line, int l, int c, t_parser *parser)
 		add_error(parser, g_parser_error_message[6], l, c);
 }
 
+static void	parse_map_line(char **lines, int l, t_parser *parser)
+{
+	int	i;
+
+	i = 0;
+	while (lines[l][i] != '\0')
+	{
+		if (lines[l][i] == ' ' || lines[l][i] == '0' || lines[l][i] == '1'
+			|| lines[l][i] == 'N' || lines[l][i] == 'S' || lines[l][i] == 'W'
+			|| lines[l][i] == 'E')
+			;
+		else
+			add_error(parser, g_parser_error_message[9], l, i);
+		i++;
+	}
+}
+
 /*
 *	Parse the map content.
 *	Return the line position of the map.
@@ -96,6 +114,7 @@ static int	parse_map_content(char **lines, t_parser *parser)
 			|| (lines[l][c] == 'E' && lines[l][c + 1] == 'A')
 			|| (lines[l][c] == 'F') || (lines[l][c] == 'C'))
 			return (l);
+		parse_map_line(lines, l, parser);
 		--l;
 	}
 	return (l);
