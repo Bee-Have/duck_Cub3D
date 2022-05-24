@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 16:12:32 by amarini-          #+#    #+#             */
-/*   Updated: 2022/05/24 19:45:40 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/05/24 20:06:01 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,20 +42,26 @@ static int	check_path_validity(char *path_to_file)
 static void	get_data(char *line, int l, int c, t_parser *parser)
 {
 	add_to_args_count(parser, line[c], line[c + 1]);
-	if (line[c] == 'N' && parser->north_texture_count > 1)
+	if (line[c] == 'N' && line[c + 1] == 'O' && parser->north_texture_count > 1)
 		add_error(parser, P_ERR_NO, l, c);
-	else if (line[c] == 'S' && parser->south_texture_count > 1)
+	else if (line[c] == 'S' && line[c + 1] == 'O'
+		&& parser->south_texture_count > 1)
 		add_error(parser, P_ERR_SO, l, c);
-	else if (line[c] == 'W' && parser->west_texture_count > 1)
+	else if (line[c] == 'W' && line[c + 1] == 'E'
+		&& parser->west_texture_count > 1)
 		add_error(parser, P_ERR_WE, l, c);
-	else if (line[c] == 'E' && parser->east_texture_count > 1)
+	else if (line[c] == 'E' && line[c + 1] == 'A'
+		&& parser->east_texture_count > 1)
 		add_error(parser, P_ERR_EA, l, c);
 	else if (line[c] == 'F' && parser->floor_color_count > 1)
 		add_error(parser, P_ERR_F, l, c);
 	else if (line[c] == 'C' && parser->ceil_color_count > 1)
 		add_error(parser, P_ERR_C, l, c);
-	else if (line[c] != 'N' && line[c] != 'S' && line[c] != 'W'
-		&& line[c] != 'E' && line[c] != 'F' && line[c] != 'C')
+	else if ((line[c] != 'N' || line[c + 1] != 'O')
+		&& (line[c] != 'S' || line[c + 1] != 'O')
+		&& (line[c] != 'W' || line[c + 1] != 'E')
+		&& (line[c] != 'E' || line[c + 1] != 'A')
+		&& line[c] != 'F' && line[c] != 'C')
 		add_error(parser, P_ERR_UNKNOWN_PARAM, l, c);
 }
 
