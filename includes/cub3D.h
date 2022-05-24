@@ -122,6 +122,19 @@ void	raycasting_routine(t_mlx *mlx);
 
 # define ERROR_LIMIT 20
 
+# define P_ERR_NO "Error\nMultiple definition of North texture at line "
+# define P_ERR_SO "Error\nMultiple definition of South texture at line "
+# define P_ERR_WE "Error\nMultiple definition of West texture at line "
+# define P_ERR_EA "Error\nMultiple definition of East texture at line "
+# define P_ERR_F "Error\nMultiple definition of Floor color at line "
+# define P_ERR_C "Error\nMultiple definition of Ceiling color at line "
+# define P_ERR_UNKNOWN_PARAM "Error\nUnrecognized parameter at line "
+# define P_ERR_MISSING_PARAM "Error\nMissing parameter at line "
+# define P_ERR_MISSING_MAP "Error\nMissing map at line "
+# define P_ERR_UNVALID_CHAR "Error\nUnvalid character at line "
+# define P_ERR_START_POS "Error\nMultiple definition of start position at line "
+# define P_ERR_UNCLOSED_MAP "Error\nMap is not closed at line "
+
 /*
 * This struct is used for the parsing of the map file.
 * It will keep track of what elements has been found in the map file.
@@ -158,6 +171,12 @@ void	add_error(t_parser *parser, const char *description
 *	Will recognize the token and increment the corresponding counter.
 */
 void	add_to_args_count(t_parser *parser, char token, char next_token);
+
+/*
+*	Parse the map content.
+*	Return the line position of the map.
+*/
+int	parse_map_content(char **lines, t_parser *parser);
 
 /*
 *	This function will run tests on the path and then on the file.
