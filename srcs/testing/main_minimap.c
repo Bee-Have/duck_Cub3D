@@ -76,8 +76,8 @@ t_pj	init_pj(char **map)
 		pj.rot = 180;
 	else if (map[(int)pj.pos.y][(int)pj.pos.x] == 'W')
 		pj.rot = 0;
-	pj.dir.x = pj.pos.x - (cosf(pj.rot * (M_PI / 180)));
-	pj.dir.y = pj.pos.y - (sinf(pj.rot * (M_PI / 180)));
+	pj.dir.x = pj.pos.x - (SPEED * cosf(pj.rot * (M_PI / 180)));
+	pj.dir.y = pj.pos.y - (SPEED * sinf(pj.rot * (M_PI / 180)));
 	pj.plane.x = 0;
 	pj.plane.y = 1;
 	return (pj);
@@ -312,17 +312,17 @@ void	raycasting_routine(t_mlx *mlx, t_vec2 map_start)
 			{
 				t_vec2	start;
 				t_vec2	end;
-				//pos.x = (map_start.x + (mlx->pj.pos.x * pxl_unit)) + (pxl_unit - size) / 2;
+				int		size;
 				
-				start.x = (map_start.x + (mlx->pj.pos.x * mlx->map_info.pxl_unit)) + (mlx->map_info.pxl_unit - (mlx->map_info.pxl_unit)) / 2;
-				start.y = (map_start.y + (mlx->pj.pos.y * mlx->map_info.pxl_unit)) + (mlx->map_info.pxl_unit - (mlx->map_info.pxl_unit)) / 2;
-				end.x = (map_start.x + ((mlx->pj.pos.x + side_dist.x
-				) * mlx->map_info.pxl_unit)) + (mlx->map_info.pxl_unit - (mlx->map_info.pxl_unit)) / 2;
-				end.y = (map_start.y + ((mlx->pj.pos.y + side_dist.y) * mlx->map_info.pxl_unit)) + (mlx->map_info.pxl_unit - (mlx->map_info.pxl_unit)) / 2;
-				start.x += (mlx->map_info.pxl_unit / 2);
-				start.y += (mlx->map_info.pxl_unit / 2);
-				end.x += (mlx->map_info.pxl_unit / 2);
-				end.y += (mlx->map_info.pxl_unit / 2);
+				size = mlx->map_info.pxl_unit / 2;
+				start.x = (map_start.x + (mlx->pj.pos.x * mlx->map_info.pxl_unit)) + (mlx->map_info.pxl_unit - size) / 2;
+				start.y = (map_start.y + (mlx->pj.pos.y * mlx->map_info.pxl_unit)) + (mlx->map_info.pxl_unit - size) / 2;
+				start.x += size / 2;
+				start.y += size / 2;
+				end.x = (map_start.x + (map.x * mlx->map_info.pxl_unit)) + (mlx->map_info.pxl_unit - size) / 2;
+				end.y = (map_start.y + (map.y * mlx->map_info.pxl_unit)) + (mlx->map_info.pxl_unit - size) / 2;
+				end.x += size / 2;
+				end.y += size / 2;
 				printf("[%d]-[%d][%d]_[%d][%d]\n", x, start.y, start.x, end.y, end.x);
 				draw_line(mlx, start, end, color);
 				hit = 1;
@@ -521,6 +521,8 @@ int	update_keys_events(t_mlx *mlx)
 		mlx->pj.pos.x = mlx->pj.pos.x + (SPEED * cosf((mlx->pj.rot - 90) * (M_PI / 180)));
 		mlx->pj.pos.y = mlx->pj.pos.y + (SPEED * sinf((mlx->pj.rot - 90) * (M_PI / 180)));
 	}
+	mlx->pj.dir.x = mlx->pj.pos.x - (SPEED * cosf(mlx->pj.rot * (M_PI / 180)));
+	mlx->pj.dir.y = mlx->pj.pos.y - (SPEED * sinf(mlx->pj.rot * (M_PI / 180)));
 	return (EXIT_SUCCESS);
 }
 
