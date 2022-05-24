@@ -79,7 +79,7 @@ t_pj	init_pj(char **map)
 	pj.dir.x = pj.pos.x - (SPEED * cosf(pj.rot * (M_PI / 180)));
 	pj.dir.y = pj.pos.y - (SPEED * sinf(pj.rot * (M_PI / 180)));
 	pj.plane.x = 0;
-	pj.plane.y = 1;
+	pj.plane.y = 0.5;
 	return (pj);
 }
 
@@ -252,7 +252,6 @@ void	raycasting_routine(t_mlx *mlx, t_vec2 map_start)
 	//int		side;
 
 	x = 0;
-	color = make_color(255, 0, 0, 0);
 	while (x < mlx->map_info.screen.x)
 	{
 		map.x = mlx->pj.pos.x;
@@ -323,8 +322,22 @@ void	raycasting_routine(t_mlx *mlx, t_vec2 map_start)
 				end.y = (map_start.y + (map.y * mlx->map_info.pxl_unit)) + (mlx->map_info.pxl_unit - size) / 2;
 				end.x += size / 2;
 				end.y += size / 2;
-				printf("[%d]-[%d][%d]_[%d][%d]\n", x, start.y, start.x, end.y, end.x);
+				color = make_color(255, 0, 0, 0);
 				draw_line(mlx, start, end, color);
+				
+				size = mlx->map_info.pxl_unit / 2;
+				start.x = (map_start.x + ((mlx->pj.dir.x + mlx->pj.plane.x) * mlx->map_info.pxl_unit)) + (mlx->map_info.pxl_unit - size) / 2;
+				start.y = (map_start.y + ((mlx->pj.dir.y + mlx->pj.plane.y) * mlx->map_info.pxl_unit)) + (mlx->map_info.pxl_unit - size) / 2;
+				start.x += size / 2;
+				start.y += size / 2;
+				end.x = (map_start.x + ((mlx->pj.dir.x - mlx->pj.plane.x) * mlx->map_info.pxl_unit)) + (mlx->map_info.pxl_unit - size) / 2;
+				end.y = (map_start.y + ((mlx->pj.dir.y - mlx->pj.plane.y) * mlx->map_info.pxl_unit)) + (mlx->map_info.pxl_unit - size) / 2;
+				end.x += size / 2;
+				end.y += size / 2;
+				//printf("[%d]-[%d][%d]_[%d][%d]\n", x, start.y, start.x, end.y, end.x);
+				color = make_color(255, 0, 255, 0);
+				draw_line(mlx, start, end, color);
+				
 				hit = 1;
 			}
 		}
@@ -489,17 +502,25 @@ int	key_release(int keycode, t_mlx *mlx)
 
 int	update_keys_events(t_mlx *mlx)
 {
+	double	old_plane_x;
+
 	if (mlx->event.is_left_pressed == 1)
 	{
 		mlx->pj.rot -= R_SPEED;
 		if (mlx->pj.rot < 0)
 			mlx->pj.rot = 360 - (mlx->pj.rot * -1);
+		old_plane_x = mlx->pj.plane.x;
+		mlx->pj.plane.x = mlx->pj.plane.x * cos(-R_SPEED * (M_PI / 180)) - mlx->pj.plane.y * sin(-R_SPEED * (M_PI / 180));
+		mlx->pj.plane.y = old_plane_x * sin(-R_SPEED * (M_PI / 180)) + mlx->pj.plane.y * cos(-R_SPEED * (M_PI / 180));
 	}
 	if (mlx->event.is_right_pressed == 1)
 	{
 		mlx->pj.rot += R_SPEED;
 		if (mlx->pj.rot > 360)
 			mlx->pj.rot = 0 + (mlx->pj.rot - 360);
+		old_plane_x = mlx->pj.plane.x;
+		mlx->pj.plane.x = mlx->pj.plane.x * cos(R_SPEED * (M_PI / 180)) - mlx->pj.plane.y * sin(R_SPEED * (M_PI / 180));
+		mlx->pj.plane.y = old_plane_x * sin(R_SPEED * (M_PI / 180)) + mlx->pj.plane.y * cos(R_SPEED * (M_PI / 180));
 	}
 	if (mlx->event.is_s_pressed == 1)
 	{
