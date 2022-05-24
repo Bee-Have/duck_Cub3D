@@ -148,7 +148,7 @@ typedef struct s_parser
 	unsigned char	east_texture_count;
 	unsigned char	floor_color_count;
 	unsigned char	ceil_color_count;
-	unsigned char	starting_pos_count;
+	unsigned char	start_pos_count;
 	char			errors[ERROR_LIMIT][100];
 	int				error_count;
 }	t_parser;

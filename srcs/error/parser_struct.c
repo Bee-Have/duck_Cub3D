@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 12:43:25 by ldutriez          #+#    #+#             */
-/*   Updated: 2022/05/23 21:59:07 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/05/24 20:35:17 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,29 +52,31 @@ void	add_error(t_parser *parser, const char *description
 	++parser->error_count;
 }
 
-int	end_parser(const t_parser *parser)
+int	end_parser(const t_parser *p)
 {
 	int	index;
 
 	index = 0;
-	while (index < parser->error_count)
+	while (index < p->error_count)
 	{
-		ft_putstr_fd(2, (char *)parser->errors[index]);
+		ft_putstr_fd(2, (char *)p->errors[index]);
 		++index;
 	}
-	if (parser->north_texture_count == 0)
+	if (p->north_texture_count == 0)
 		ft_putstr_fd(2, "Error\nNorth texture missing.\n");
-	if (parser->south_texture_count == 0)
+	if (p->south_texture_count == 0)
 		ft_putstr_fd(2, "Error\nSouth texture missing.\n");
-	if (parser->west_texture_count == 0)
+	if (p->west_texture_count == 0)
 		ft_putstr_fd(2, "Error\nWest texture missing.\n");
-	if (parser->east_texture_count == 0)
+	if (p->east_texture_count == 0)
 		ft_putstr_fd(2, "Error\nEast texture missing.\n");
-	if (parser->floor_color_count == 0)
+	if (p->floor_color_count == 0)
 		ft_putstr_fd(2, "Error\nFloor color missing.\n");
-	if (parser->ceil_color_count == 0)
+	if (p->ceil_color_count == 0)
 		ft_putstr_fd(2, "Error\nCeil color missing.\n");
-	return (index + !parser->north_texture_count + !parser->south_texture_count
-		+ !parser->west_texture_count + !parser->east_texture_count
-		+ !parser->floor_color_count + !parser->ceil_color_count);
+	if (p->start_pos_count == 0)
+		ft_putstr_fd(2, "Error\nStarting position missing.\n");
+	return (index + !p->north_texture_count + !p->south_texture_count
+		+ !p->west_texture_count + !p->east_texture_count
+		+ !p->floor_color_count + !p->ceil_color_count + !p->start_pos_count);
 }

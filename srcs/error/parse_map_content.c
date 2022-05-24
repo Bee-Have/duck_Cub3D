@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 19:09:38 by ldutriez          #+#    #+#             */
-/*   Updated: 2022/05/24 19:38:24 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/05/24 20:25:17 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ static void	parse_map_line(char **lines, int l, t_parser *parser)
 			|| lines[l][i] == 'E')
 		{
 			check_enclosing_map(lines, l, i, parser);
-			++parser->starting_pos_count;
-			if (parser->starting_pos_count > 1)
+			++parser->start_pos_count;
+			if (parser->start_pos_count > 1)
 				add_error(parser, P_ERR_START_POS, l, i);
 		}
 		else if (lines[l][i] != ' ' && lines[l][i] != '1')
