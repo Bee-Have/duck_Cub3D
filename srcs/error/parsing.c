@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 16:12:32 by amarini-          #+#    #+#             */
-/*   Updated: 2022/05/24 00:07:18 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/05/24 17:06:57 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static const char	*g_parser_error_message[] = {
 	"Error\nMissing parameter at line ",
 	"Error\nMissing map at line ",
 	"Error\nUnvalid character at line ",
+	"Error\nMultiple definition of start position at line ",
 };
 
 /*
@@ -79,10 +80,15 @@ static void	parse_map_line(char **lines, int l, t_parser *parser)
 	i = 0;
 	while (lines[l][i] != '\0')
 	{
-		if (lines[l][i] == ' ' || lines[l][i] == '0' || lines[l][i] == '1'
-			|| lines[l][i] == 'N' || lines[l][i] == 'S' || lines[l][i] == 'W'
-			|| lines[l][i] == 'E')
+		if (lines[l][i] == ' ' || lines[l][i] == '0' || lines[l][i] == '1')
 			;
+		else if (lines[l][i] == 'N' || lines[l][i] == 'S' || lines[l][i] == 'W'
+			|| lines[l][i] == 'E')
+		{
+			++parser->starting_pos_count;
+			if (parser->starting_pos_count > 1)
+				add_error(parser, g_parser_error_message[10], l, i);
+		}
 		else
 			add_error(parser, g_parser_error_message[9], l, i);
 		i++;
