@@ -79,7 +79,7 @@ t_pj	init_pj(char **map)
 	pj.dir.x = pj.pos.x - (SPEED * cosf(pj.rot * (M_PI / 180)));
 	pj.dir.y = pj.pos.y - (SPEED * sinf(pj.rot * (M_PI / 180)));
 	pj.plane.x = 0;
-	pj.plane.y = 0.5;
+	pj.plane.y = 0.2;
 	return (pj);
 }
 
@@ -258,8 +258,8 @@ void	raycasting_routine(t_mlx *mlx, t_vec2 map_start)
 		map.y = mlx->pj.pos.y;
 		hit = 0;
 		camera_x = 2 * x / (double)mlx->map_info.screen.x - 1;
-		ray_dir.x = (mlx->pj.pos.x - mlx->pj.dir.x) + mlx->pj.plane.x * camera_x;
-		ray_dir.y = (mlx->pj.pos.x - mlx->pj.dir.y) + mlx->pj.plane.y * camera_x;
+		ray_dir.x = (mlx->pj.dir.x - mlx->pj.pos.x) + mlx->pj.plane.x * camera_x;
+		ray_dir.y = (mlx->pj.dir.y - mlx->pj.pos.y) + mlx->pj.plane.y * camera_x;
 		if (ray_dir.x == 0)
 			delta_dist.x = 1e30;
 		else
