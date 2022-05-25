@@ -1,0 +1,13 @@
+NO ./simple_parsing.cub
+SO ./simple_parsing.cub
+WE ./simple_parsing.cub
+EA ./simple_parsing.cub
+
+F 220,100,0
+C 225,30,0
+
+111111
+100101
+101001
+1100W1
+111111
