@@ -26,8 +26,9 @@ vpath %.c $(foreach dir, $(SRC_DIR), $(dir):)
 SRC = main.c \
 	init_structs.c init_mlx.c init_pj.c \
 	mlx_routine.c routine_manager.c \
+	key_events.c \
 	raycasting.c \
-	key_events.c
+	draw_pxl.c draw_circle.c draw_square.c draw_line.c
 
 OBJ = $(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
 

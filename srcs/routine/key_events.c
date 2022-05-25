@@ -6,7 +6,7 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 15:38:13 by amarini-          #+#    #+#             */
-/*   Updated: 2022/05/25 17:23:40 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/05/25 18:14:42 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,17 +51,25 @@ int	key_release(int keycode, t_system *sys)
 
 int	update_keys_events(t_system *sys)
 {
+	double	old_plane_x;
+
 	if (sys->events.is_left_pressed == 1)
 	{
 		sys->pj.rot -= R_SPEED;
 		if (sys->pj.rot < 0)
 			sys->pj.rot = 360 - (sys->pj.rot * -1);
+		old_plane_x = sys->pj.plane.x;
+		sys->pj.plane.x = sys->pj.plane.x * cos(-R_SPEED * (M_PI / 180)) - sys->pj.plane.y * sin(-R_SPEED * (M_PI / 180));
+		sys->pj.plane.y = old_plane_x * sin(-R_SPEED * (M_PI / 180)) + sys->pj.plane.y * cos(-R_SPEED * (M_PI / 180));
 	}
 	if (sys->events.is_right_pressed == 1)
 	{
 		sys->pj.rot += R_SPEED;
 		if (sys->pj.rot > 360)
 			sys->pj.rot = 0 + (sys->pj.rot - 360);
+		old_plane_x = sys->pj.plane.x;
+		sys->pj.plane.x = sys->pj.plane.x * cos(R_SPEED * (M_PI / 180)) - sys->pj.plane.y * sin(R_SPEED * (M_PI / 180));
+		sys->pj.plane.y = old_plane_x * sin(R_SPEED * (M_PI / 180)) + sys->pj.plane.y * cos(R_SPEED * (M_PI / 180));
 	}
 	if (sys->events.is_s_pressed == 1)
 	{
@@ -83,5 +91,7 @@ int	update_keys_events(t_system *sys)
 		sys->pj.pos.x += (SPEED * cosf((sys->pj.rot - 90) * (M_PI / 180)));
 		sys->pj.pos.y += (SPEED * sinf((sys->pj.rot - 90) * (M_PI / 180)));
 	}
+	sys->pj.dir.x = sys->pj.pos.x - (SPEED * cosf(sys->pj.rot * (M_PI / 180)));
+	sys->pj.dir.y = sys->pj.pos.y - (SPEED * sinf(sys->pj.rot * (M_PI / 180)));
 	return (EXIT_SUCCESS);
 }

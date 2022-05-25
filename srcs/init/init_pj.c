@@ -6,7 +6,7 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 15:25:34 by amarini-          #+#    #+#             */
-/*   Updated: 2022/05/25 17:12:11 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/05/25 19:02:18 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,11 @@ t_pj	init_pj(char **map)
 	pj.rot = 0;
 	if (map[(int)pj.pos.y][(int)pj.pos.x] == 'N')
 		pj.rot = 90;
-	if (map[(int)pj.pos.y][(int)pj.pos.x] == 'S')
+	else if (map[(int)pj.pos.y][(int)pj.pos.x] == 'S')
 		pj.rot = 270;
-	if (map[(int)pj.pos.y][(int)pj.pos.x] == 'E')
+	else if (map[(int)pj.pos.y][(int)pj.pos.x] == 'E')
 		pj.rot = 0;
-	if (map[(int)pj.pos.y][(int)pj.pos.x] == 'W')
+	else if (map[(int)pj.pos.y][(int)pj.pos.x] == 'W')
 		pj.rot = 180;
 	pj.dir.x = pj.pos.x - (SPEED * cosf(pj.rot * (M_PI / 180)));
 	pj.dir.y = pj.pos.y - (SPEED * sinf(pj.rot * (M_PI / 180)));
