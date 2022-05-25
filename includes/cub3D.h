@@ -114,7 +114,7 @@ typedef struct s_system
 	t_mlx			mlx;
 	t_textures		textures;
 
-	t_screen_info	screen_info;
+	t_screen_info	s_i;
 	t_event			events;
 	t_pj			pj;
 }			t_system;
@@ -132,14 +132,14 @@ t_pj	init_pj(char **map);
 
 //? ROUTINE
 // mlx
-void	mlx_routine(t_mlx *mlx);
+void	mlx_routine(t_system *sys);
 // update
-int		update_all(t_mlx *mlx);
+int		update_all(t_system *sys);
 // keys events
-int		key_press(int keycode, t_mlx *mlx);
-int		key_release(int keycode, t_mlx *mlx);
-int		update_keys_events(t_mlx *mlx);
+int		key_press(int keycode, t_system *sys);
+int		key_release(int keycode, t_system *sys);
+int		update_keys_events(t_system *sys);
 // raycasting
-//void	raycasting_routine(t_mlx *mlx);
+//void	raycasting_routine(t_system *sys);
 
 #endif
