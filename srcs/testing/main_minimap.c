@@ -79,7 +79,7 @@ t_pj	init_pj(char **map)
 	pj.dir.x = pj.pos.x - (SPEED * cosf(pj.rot * (M_PI / 180)));
 	pj.dir.y = pj.pos.y - (SPEED * sinf(pj.rot * (M_PI / 180)));
 	pj.plane.x = 0;
-	pj.plane.y = 0.2;
+	pj.plane.y = 0.5;
 	return (pj);
 }
 
@@ -346,13 +346,21 @@ void	raycasting_routine(t_mlx *mlx, t_vec2 map_start)
 				if (draw_end >= mlx->map_info.screen.y)
 					draw_end = mlx->map_info.screen.y - 1;
 
+				start.x = x;
+				end.x = x;
+				color = make_color(255, 0, 0, 255); // blue
+				start.y = 0;
+				end.y = draw_start;
+				draw_line(mlx, start, end, color);
+				color = make_color(255, 255, 255, 255); // white
+				start.y = draw_end;
+				end.y = mlx->map_info.screen.y;
+				draw_line(mlx, start, end, color);
 				if (side == 1)
-					color = make_color(255, 255, 0, 0); //red
+					color = make_color(255, 255, 0, 0); // red
 				else
 					color = make_color(255, 0, 255, 0); // greed
-				start.x = x;
 				start.y = draw_start;
-				end.x = x;
 				end.y = draw_end;
 				draw_line(mlx, start, end, color);
 			}
