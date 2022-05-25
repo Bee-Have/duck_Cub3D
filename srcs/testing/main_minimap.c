@@ -246,10 +246,10 @@ void	raycasting_routine(t_mlx *mlx, t_vec2 map_start)
 	t_pos	map;
 	t_pos	side_dist;
 	t_pos	delta_dist;
-	// double	perp_wall_dist;
+	double	perp_wall_dist;
 	t_vec2	step;
 	int		hit;
-	//int		side;
+	int		side;
 
 	x = 0;
 	while (x < mlx->map_info.screen.x)
@@ -296,13 +296,13 @@ void	raycasting_routine(t_mlx *mlx, t_vec2 map_start)
 			{
 				side_dist.x += delta_dist.x;
 				map.x += step.x;
-				//side = 0;
+				side = 0;
 			}
 			else
 			{
 				side_dist.y += delta_dist.y;
 				map.y += step.y;
-				//side = 1;
+				side = 1;
 			}
 			//! the map will not always be square/rectangular
 			if ((int)map.y < 0 || (int)map.y > ft_tab_len((void **)mlx->map_info.map)
@@ -313,27 +313,48 @@ void	raycasting_routine(t_mlx *mlx, t_vec2 map_start)
 				t_vec2	end;
 				int		size;
 				
+				// drawing general ray
 				size = mlx->map_info.pxl_unit / 2;
-				
 				start.x = (map_start.x + (mlx->pj.pos.x * mlx->map_info.pxl_unit)) + size;
 				start.y = (map_start.y + (mlx->pj.pos.y * mlx->map_info.pxl_unit)) + size;
-				// end.x = (map_start.x + (side_dist.x * mlx->map_info.pxl_unit)) + size;
-				// end.y = (map_start.y + (side_dist.y * mlx->map_info.pxl_unit)) + size;
 				end.x = (map_start.x + (map.x * mlx->map_info.pxl_unit)) + size;
 				end.y = (map_start.y + (map.y * mlx->map_info.pxl_unit)) + size;
 				color = make_color(255, 0, 0, 0);
 				draw_line(mlx, start, end, color);
-
+				// drawing camera plane
 				size = mlx->map_info.pxl_unit / 2;
 				start.x = (map_start.x + ((mlx->pj.dir.x + mlx->pj.plane.x) * mlx->map_info.pxl_unit)) + size;
 				start.y = (map_start.y + ((mlx->pj.dir.y + mlx->pj.plane.y) * mlx->map_info.pxl_unit)) + size;
 				end.x = (map_start.x + ((mlx->pj.dir.x - mlx->pj.plane.x) * mlx->map_info.pxl_unit)) + size;
 				end.y = (map_start.y + ((mlx->pj.dir.y - mlx->pj.plane.y) * mlx->map_info.pxl_unit)) + size;
-				//printf("[%d]-[%d][%d]_[%d][%d]\n", x, start.y, start.x, end.y, end.x);
 				color = make_color(255, 0, 255, 0);
 				draw_line(mlx, start, end, color);
-				
 				hit = 1;
+
+				int		line_height;
+				int		draw_start;
+				int		draw_end;
+				if (side == 0)
+					perp_wall_dist = side_dist.x - delta_dist.x;
+				else
+					perp_wall_dist = side_dist.y - delta_dist.y;
+				line_height = (int)(mlx->map_info.screen.y / perp_wall_dist);
+				draw_start = -line_height / 2 + mlx->map_info.screen.y / 2;
+				if (draw_start < 0)
+					draw_start = 0;
+				draw_end = line_height / 2 + mlx->map_info.screen.y / 2;
+				if (draw_end >= mlx->map_info.screen.y)
+					draw_end = mlx->map_info.screen.y - 1;
+
+				if (side == 1)
+					color = make_color(255, 255, 0, 0); //red
+				else
+					color = make_color(255, 0, 255, 0); // greed
+				start.x = x;
+				start.y = draw_start;
+				end.x = x;
+				end.y = draw_end;
+				draw_line(mlx, start, end, color);
 			}
 		}
 		++x;
@@ -545,8 +566,8 @@ int	update_keys_events(t_mlx *mlx)
 int	update_all(t_mlx *mlx)
 {
 	update_keys_events(mlx);
-	minimap_manager(mlx, CENTER);
-	// minimap_manager(mlx, T_LEFT);
+	// minimap_manager(mlx, CENTER);
+	minimap_manager(mlx, T_LEFT);
 	// minimap_manager(mlx, T_RIGHT);
 	// minimap_manager(mlx, B_LEFT);
 	// minimap_manager(mlx, B_RIGHT);
