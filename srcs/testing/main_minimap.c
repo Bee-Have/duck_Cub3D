@@ -79,7 +79,7 @@ t_pj	init_pj(char **map)
 	pj.dir.x = pj.pos.x - (SPEED * cosf(pj.rot * (M_PI / 180)));
 	pj.dir.y = pj.pos.y - (SPEED * sinf(pj.rot * (M_PI / 180)));
 	pj.plane.x = 0;
-	pj.plane.y = 0.5;
+	pj.plane.y = 0.1;
 	return (pj);
 }
 
