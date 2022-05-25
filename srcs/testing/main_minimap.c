@@ -254,8 +254,8 @@ void	raycasting_routine(t_mlx *mlx, t_vec2 map_start)
 	x = 0;
 	while (x < mlx->map_info.screen.x)
 	{
-		map.x = mlx->pj.pos.x;
-		map.y = mlx->pj.pos.y;
+		map.x = (int)mlx->pj.pos.x;
+		map.y = (int)mlx->pj.pos.y;
 		hit = 0;
 		camera_x = 2 * x / (double)mlx->map_info.screen.x - 1;
 		ray_dir.x = (mlx->pj.dir.x - mlx->pj.pos.x) + mlx->pj.plane.x * camera_x;
@@ -263,11 +263,11 @@ void	raycasting_routine(t_mlx *mlx, t_vec2 map_start)
 		if (ray_dir.x == 0)
 			delta_dist.x = 1e30;
 		else
-			delta_dist.x = /*fabs*/(1 / ray_dir.x);
+			delta_dist.x = fabs(1 / ray_dir.x);
 		if (ray_dir.y == 0)
 			delta_dist.y = 1e30;
 		else
-			delta_dist.y = /*fabs*/(1 / ray_dir.y);
+			delta_dist.y = fabs(1 / ray_dir.y);
 
 		if (ray_dir.x < 0)
 		{
@@ -317,6 +317,8 @@ void	raycasting_routine(t_mlx *mlx, t_vec2 map_start)
 				
 				start.x = (map_start.x + (mlx->pj.pos.x * mlx->map_info.pxl_unit)) + size;
 				start.y = (map_start.y + (mlx->pj.pos.y * mlx->map_info.pxl_unit)) + size;
+				// end.x = (map_start.x + (side_dist.x * mlx->map_info.pxl_unit)) + size;
+				// end.y = (map_start.y + (side_dist.y * mlx->map_info.pxl_unit)) + size;
 				end.x = (map_start.x + (map.x * mlx->map_info.pxl_unit)) + size;
 				end.y = (map_start.y + (map.y * mlx->map_info.pxl_unit)) + size;
 				color = make_color(255, 0, 0, 0);
