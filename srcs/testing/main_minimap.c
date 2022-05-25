@@ -258,8 +258,8 @@ void	raycasting_routine(t_mlx *mlx, t_vec2 map_start)
 		map.y = mlx->pj.pos.y;
 		hit = 0;
 		camera_x = 2 * x / (double)mlx->map_info.screen.x - 1;
-		ray_dir.x = mlx->pj.dir.x + mlx->pj.plane.x * camera_x;
-		ray_dir.y = mlx->pj.dir.y + mlx->pj.plane.y * camera_x;
+		ray_dir.x = (mlx->pj.pos.x - mlx->pj.dir.x) + mlx->pj.plane.x * camera_x;
+		ray_dir.y = (mlx->pj.pos.x - mlx->pj.dir.y) + mlx->pj.plane.y * camera_x;
 		if (ray_dir.x == 0)
 			delta_dist.x = 1e30;
 		else
@@ -314,26 +314,19 @@ void	raycasting_routine(t_mlx *mlx, t_vec2 map_start)
 				int		size;
 				
 				size = mlx->map_info.pxl_unit / 2;
-				start.x = (map_start.x + (mlx->pj.pos.x * mlx->map_info.pxl_unit)) + (mlx->map_info.pxl_unit - size) / 2;
-				start.y = (map_start.y + (mlx->pj.pos.y * mlx->map_info.pxl_unit)) + (mlx->map_info.pxl_unit - size) / 2;
-				start.x += size / 2;
-				start.y += size / 2;
-				end.x = (map_start.x + (map.x * mlx->map_info.pxl_unit)) + (mlx->map_info.pxl_unit - size) / 2;
-				end.y = (map_start.y + (map.y * mlx->map_info.pxl_unit)) + (mlx->map_info.pxl_unit - size) / 2;
-				end.x += size / 2;
-				end.y += size / 2;
+				
+				start.x = (map_start.x + (mlx->pj.pos.x * mlx->map_info.pxl_unit)) + size;
+				start.y = (map_start.y + (mlx->pj.pos.y * mlx->map_info.pxl_unit)) + size;
+				end.x = (map_start.x + (map.x * mlx->map_info.pxl_unit)) + size;
+				end.y = (map_start.y + (map.y * mlx->map_info.pxl_unit)) + size;
 				color = make_color(255, 0, 0, 0);
 				draw_line(mlx, start, end, color);
-				
+
 				size = mlx->map_info.pxl_unit / 2;
-				start.x = (map_start.x + ((mlx->pj.dir.x + mlx->pj.plane.x) * mlx->map_info.pxl_unit)) + (mlx->map_info.pxl_unit - size) / 2;
-				start.y = (map_start.y + ((mlx->pj.dir.y + mlx->pj.plane.y) * mlx->map_info.pxl_unit)) + (mlx->map_info.pxl_unit - size) / 2;
-				start.x += size / 2;
-				start.y += size / 2;
-				end.x = (map_start.x + ((mlx->pj.dir.x - mlx->pj.plane.x) * mlx->map_info.pxl_unit)) + (mlx->map_info.pxl_unit - size) / 2;
-				end.y = (map_start.y + ((mlx->pj.dir.y - mlx->pj.plane.y) * mlx->map_info.pxl_unit)) + (mlx->map_info.pxl_unit - size) / 2;
-				end.x += size / 2;
-				end.y += size / 2;
+				start.x = (map_start.x + ((mlx->pj.dir.x + mlx->pj.plane.x) * mlx->map_info.pxl_unit)) + size;
+				start.y = (map_start.y + ((mlx->pj.dir.y + mlx->pj.plane.y) * mlx->map_info.pxl_unit)) + size;
+				end.x = (map_start.x + ((mlx->pj.dir.x - mlx->pj.plane.x) * mlx->map_info.pxl_unit)) + size;
+				end.y = (map_start.y + ((mlx->pj.dir.y - mlx->pj.plane.y) * mlx->map_info.pxl_unit)) + size;
 				//printf("[%d]-[%d][%d]_[%d][%d]\n", x, start.y, start.x, end.y, end.x);
 				color = make_color(255, 0, 255, 0);
 				draw_line(mlx, start, end, color);
