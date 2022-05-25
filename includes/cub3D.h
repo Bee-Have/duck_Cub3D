@@ -44,10 +44,10 @@ typedef struct s_vec2
 
 typedef struct s_pj
 {
-	t_pos	pos;
+	t_vec2	pos;
 	int		rot;
-	t_pos	dir;
-	t_pos	plane;
+	t_vec2	dir;
+	t_vec2	plane;
 }			t_pj;
 
 typedef struct s_color
@@ -61,7 +61,7 @@ typedef struct s_color
 
 typedef struct s_screen_info
 {
-	t_vec2	screen;
+	t_int2	screen;
 	char	**map;
 	int		pxl_unit;
 
@@ -102,7 +102,7 @@ typedef struct s_textures
 	t_img	east_texture;
 }			t_textures;
 
-typedef struct s_mlx;
+typedef struct s_mlx
 {
 	void	*mlx;
 	void	*win;
@@ -121,10 +121,12 @@ typedef struct s_system
 
 //? INIT
 // structs
-t_map_info	init_map_info(char **map, int width, int height);
+t_color			make_color(unsigned char a, unsigned char r, unsigned char g, unsigned char b);
+t_screen_info	init_screen_info(char **map, int width, int height);
 // mlx
 t_img	init_img(void);
-t_mlx	*init_mlx(int width, int height);
+t_event	init_events(void);
+t_mlx	init_mlx(int width, int height);
 // gameplay
 t_pj	init_pj(char **map);
 

@@ -6,15 +6,15 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 15:25:34 by amarini-          #+#    #+#             */
-/*   Updated: 2022/05/17 20:06:21 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/05/25 17:12:11 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-static t_pos	get_pj_pos(char **map)
+static t_vec2	get_pj_pos(char **map)
 {
-	t_pos	pj;
+	t_vec2	pj;
 	int		row;
 	int		col;
 
@@ -54,9 +54,9 @@ t_pj	init_pj(char **map)
 		pj.rot = 0;
 	if (map[(int)pj.pos.y][(int)pj.pos.x] == 'W')
 		pj.rot = 180;
-	pj.dir.x = pj.pos.x - (cosf(pj.rot * (M_PI / 180)));
-	pj.dir.y = pj.pos.y - (sinf(pj.rot * (M_PI / 180)));
+	pj.dir.x = pj.pos.x - (SPEED * cosf(pj.rot * (M_PI / 180)));
+	pj.dir.y = pj.pos.y - (SPEED * sinf(pj.rot * (M_PI / 180)));
 	pj.plane.x = 0;
-	pj.plane.y = 0.66;
+	pj.plane.y = 0.1;
 	return (pj);
 }

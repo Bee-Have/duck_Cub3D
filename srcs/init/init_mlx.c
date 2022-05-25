@@ -6,7 +6,7 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 18:09:36 by amarini-          #+#    #+#             */
-/*   Updated: 2022/05/17 18:24:40 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/05/25 17:06:30 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 t_img	init_img(void)
 {
 	t_img	img;
+	img.path = NULL;
+	img.img = NULL;
 	img.addr = NULL;
 	img.bits_pxl = 0;
 	img.line_len = 0;
@@ -22,31 +24,28 @@ t_img	init_img(void)
 	return (img);
 }
 
-static void	init_events(t_mlx *mlx)
+t_event	init_events(void)
 {
-	mlx->event.is_w_pressed = 0;
-	mlx->event.is_a_pressed = 0;
-	mlx->event.is_s_pressed = 0;
-	mlx->event.is_d_pressed = 0;
-	mlx->event.is_left_pressed = 0;
-	mlx->event.is_right_pressed = 0;
-	return ;
+	t_event	events;
+
+	events.is_w_pressed = 0;
+	events.is_a_pressed = 0;
+	events.is_s_pressed = 0;
+	events.is_d_pressed = 0;
+	events.is_left_pressed = 0;
+	events.is_right_pressed = 0;
+	return (events);
 }
 
-t_mlx	*init_mlx(int width, int height)
+t_mlx	init_mlx(int width, int height)
 {
-	t_mlx	*mlx;
+	t_mlx	mlx;
 
-	mlx = (t_mlx *)malloc(sizeof(t_mlx));
-	//send error if pb w/ malloc
-	if (!mlx)
-		return (NULL);
-	mlx->mlx = mlx_init();
-	mlx->win = mlx_new_window(mlx->mlx, width, height, "cub3D");
-	mlx->img = init_img();
-	mlx->img.img = mlx_new_image(mlx->mlx, width, height);
-	mlx->img.addr = mlx_get_data_addr(mlx->img.img, &mlx->img.bits_pxl
-								, &mlx->img.line_len, &mlx->img.endian);
-	init_events(mlx);
+	mlx.mlx = mlx_init();
+	mlx.win = mlx_new_window(mlx.mlx, width, height, "cub3D");
+	mlx.img = init_img();
+	mlx.img.img = mlx_new_image(mlx.mlx, width, height);
+	mlx.img.addr = mlx_get_data_addr(mlx.img.img, &mlx.img.bits_pxl
+								, &mlx.img.line_len, &mlx.img.endian);
 	return (mlx);
 }
