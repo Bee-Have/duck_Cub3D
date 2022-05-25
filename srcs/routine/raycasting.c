@@ -6,7 +6,7 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 18:30:53 by amarini-          #+#    #+#             */
-/*   Updated: 2022/05/25 19:18:42 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/05/25 19:24:41 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,23 +105,23 @@ void	raycasting_routine(t_system *sys)
 				// draw ceiling
 				start.y = 0;
 				end.y = draw_start;
-				printf("[%c]-[%d][%d]-[%d][%d]\n", sys->s_i.ceiling.code, start.y, start.x, end.y, end.x);
+				printf("ceiling-blue-[%d][%d]-[%d][%d]\n", start.y, start.x, end.y, end.x);
 				draw_line(sys, start, end, sys->s_i.ceiling);
 				// draw floor
 				start.y = draw_end;
 				end.y = sys->s_i.screen.y;
-				printf("[%c]-[%d][%d]-[%d][%d]\n", sys->s_i.floor.code, start.y, start.x, end.y, end.x);
+				printf("floor-white-[%d][%d]-[%d][%d]\n", start.y, start.x, end.y, end.x);
 				draw_line(sys, start, end, sys->s_i.floor);
 				start.y = draw_start;
 				end.y = draw_end;
 				if (side == 0)
 				{
-					printf("[%c]-[%d][%d]-[%d][%d]\n", sys->s_i.wall_north.code, start.y, start.x, end.y, end.x);
+					printf("wall_north-[%d][%d]-[%d][%d]\n", start.y, start.x, end.y, end.x);
 					draw_line(sys, start, end, sys->s_i.wall_north);
 				}
 				else
 				{
-					printf("[%c]-[%d][%d]-[%d][%d]\n", sys->s_i.wall_south.code, start.y, start.x, end.y, end.x);
+					printf("wall_south-[%d][%d]-[%d][%d]\n", start.y, start.x, end.y, end.x);
 					draw_line(sys, start, end, sys->s_i.wall_south);
 				}
 			}
