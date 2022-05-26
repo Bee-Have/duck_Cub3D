@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 18:30:53 by amarini-          #+#    #+#             */
-/*   Updated: 2022/05/26 16:28:46 by user42           ###   ########.fr       */
+/*   Updated: 2022/05/26 17:56:10 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	raycasting_routine(t_system *sys)
 {
-	t_color	color;
 	int		x;
 	double	camera_x;
 	t_vec2	ray_dir;
@@ -86,24 +85,6 @@ void	raycasting_routine(t_system *sys)
 			{
 				t_int2	start;
 				t_int2	end;
-				//int		size;
-				
-				//// drawing general ray
-				//size = sys->s_i.pxl_unit / 2;
-				//start.x = (map_start.x + (sys->pj.pos.x * sys->s_i.pxl_unit)) + size;
-				//start.y = (map_start.y + (sys->pj.pos.y * sys->s_i.pxl_unit)) + size;
-				//end.x = (map_start.x + (map.x * sys->s_i.pxl_unit)) + size;
-				//end.y = (map_start.y + (map.y * sys->s_i.pxl_unit)) + size;
-				//color = make_color(255, 0, 0, 0);
-				//draw_line(sys, start, end, color);
-				//// drawing camera plane
-				//size = sys->s_i.pxl_unit / 2;
-				//start.x = (map_start.x + ((sys->pj.dir.x + sys->pj.plane.x) * sys->s_i.pxl_unit)) + size;
-				//start.y = (map_start.y + ((sys->pj.dir.y + sys->pj.plane.y) * sys->s_i.pxl_unit)) + size;
-				//end.x = (map_start.x + ((sys->pj.dir.x - sys->pj.plane.x) * sys->s_i.pxl_unit)) + size;
-				//end.y = (map_start.y + ((sys->pj.dir.y - sys->pj.plane.y) * sys->s_i.pxl_unit)) + size;
-				//color = make_color(255, 0, 255, 0);
-				//draw_line(sys, start, end, color);
 				hit = 1;
 
 				int		line_height;
@@ -123,21 +104,18 @@ void	raycasting_routine(t_system *sys)
 
 				start.x = x;
 				end.x = x;
-				color = make_color(255, 0, 0, 255); // blue
 				start.y = 0;
 				end.y = draw_start;
-				draw_line(sys, start, end, color);
-				color = make_color(255, 255, 255, 255); // white
+				draw_line(sys, start, end, sys->s_i.ceiling);
 				start.y = draw_end;
 				end.y = sys->s_i.screen.y;
-				draw_line(sys, start, end, color);
-				if (side == 1)
-					color = make_color(255, 255, 0, 0); // red
-				else
-					color = make_color(255, 0, 255, 0); // greed
+				draw_line(sys, start, end, sys->s_i.floor);
 				start.y = draw_start;
 				end.y = draw_end;
-				draw_line(sys, start, end, color);
+				if (side == 1)
+					draw_line(sys, start, end, sys->s_i.wall_north);
+				else
+					draw_line(sys, start, end, sys->s_i.wall_south);
 			}
 		}
 		++x;
