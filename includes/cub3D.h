@@ -140,7 +140,7 @@ int		key_press(int keycode, t_system *sys);
 int		key_release(int keycode, t_system *sys);
 int		update_keys_events(t_system *sys);
 // raycasting
-//void	raycasting_routine(t_system *sys);
+void	raycasting_routine(t_system *sys);
 // drawing tools
 void	draw_pxl(t_system *sys, t_int2 pos, t_color color);
 void	draw_square(t_system *sys, t_color color, t_int2 pos, int size);
