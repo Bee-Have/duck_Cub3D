@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 16:10:57 by amarini-          #+#    #+#             */
-/*   Updated: 2022/05/22 20:46:25 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/05/26 14:42:26 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,12 @@ int	main(int ac, char **av)
 {
 	t_mlx	*mlx;
 
-	// call parsing
-	if (ac != 2 /*|| parsing function returns bad*/)
+	if (ac != 2)
+	{
+		ft_putstr_fd(2, "Error\nUsage: cub3D path_to_file.cub\n");
 		return (EXIT_FAILURE);
-	// init mlx
-	//! WARNING window size will be given from file
+	}
 	mlx = init_mlx(1920, 1080);
-
 	if (parse_map(mlx, av[1]) != 0)
 		return (EXIT_FAILURE);
 	// init map
