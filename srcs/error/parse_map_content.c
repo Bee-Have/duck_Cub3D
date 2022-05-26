@@ -6,54 +6,69 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 19:09:38 by ldutriez          #+#    #+#             */
-/*   Updated: 2022/05/24 20:25:17 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/05/26 20:19:42 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-static void	check_enclosing_map(char **lines, int l, int c, t_parser *parser)
+static void	check_if_not_last(t_d_list lines, int l, int c, t_parser *parser)
 {
-	int	line_length;
-	int	index;
+	int		index;
 
-	line_length = ft_strlen(lines[l]);
 	index = 0;
-	if (c == 0 || c == line_length - 1
-		|| l == 0 || l == ft_tab_len((void **)lines) - 1
-		|| lines[l][c - 1] == ' ' || lines[l][c + 1] == ' '
-		|| c >= (int)ft_strlen(lines[l - 1]) || lines[l - 1][c] == ' '
-		|| c >= (int)ft_strlen(lines[l + 1]) || lines[l + 1][c] == ' ')
-		return (add_error(parser, P_ERR_UNCLOSED_MAP, l, c));
-	while (lines[l - 1][index] != '\0' && lines[l - 1][index] == ' ')
+	while (((char *)lines->prev->data)[index] != '\0'
+		&& ((char *)lines->prev->data)[index] == ' ')
 		++index;
-	if ((lines[l - 1][index] == '\0' && index != 0)
-		|| (lines[l - 1][index] == 'N' && lines[l - 1][index + 1] == 'O')
-		|| (lines[l - 1][index] == 'S' && lines[l - 1][index + 1] == 'O')
-		|| (lines[l - 1][index] == 'W' && lines[l - 1][index + 1] == 'E')
-		|| (lines[l - 1][index] == 'E' && lines[l - 1][index + 1] == 'A')
-		|| (lines[l - 1][index] == 'F') || (lines[l - 1][index] == 'C'))
+	if ((((char *)lines->prev->data)[index] == '\0' && index != 0)
+		|| (((char *)lines->prev->data)[index] == 'N'
+			&& ((char *)lines->prev->data)[index + 1] == 'O')
+		|| (((char *)lines->prev->data)[index] == 'S'
+			&& ((char *)lines->prev->data)[index + 1] == 'O')
+		|| (((char *)lines->prev->data)[index] == 'W'
+			&& ((char *)lines->prev->data)[index + 1] == 'E')
+		|| (((char *)lines->prev->data)[index] == 'E'
+			&& ((char *)lines->prev->data)[index + 1] == 'A')
+		|| (((char *)lines->prev->data)[index] == 'F')
+		|| (((char *)lines->prev->data)[index] == 'C'))
 		add_error(parser, P_ERR_UNCLOSED_MAP, l, c);
 }
 
-static void	parse_map_line(char **lines, int l, t_parser *parser)
+static void	check_enclosing_map(t_d_list lines, int l, int c, t_parser *parser)
 {
-	int	i;
+	if (c == 0
+		|| c == (int)ft_strlen((char *)lines->data) - 1
+		|| lines->prev == NULL || lines->next == NULL
+		|| ((char *)lines->data)[c - 1] == ' '
+		|| ((char *)lines->data)[c + 1] == ' '
+		|| c >= (int)ft_strlen((char *)lines->prev->data)
+		|| ((char *)lines->prev->data)[c] == ' '
+		|| c >= (int)ft_strlen((char *)lines->next->data)
+		|| ((char *)lines->next->data)[c] == ' ')
+		return (add_error(parser, P_ERR_UNCLOSED_MAP, l, c));
+	check_if_not_last(lines, l, c, parser);
+}
+
+static void	parse_map_line(t_d_list lines, int l, t_parser *parser)
+{
+	int		i;
+	char	*line;
 
 	i = 0;
-	while (lines[l][i] != '\0')
+	line = (char *)lines->data;
+	while (line[i] != '\0')
 	{
-		if (lines[l][i] == '0')
+		if (line[i] == '0')
 			check_enclosing_map(lines, l, i, parser);
-		else if (lines[l][i] == 'N' || lines[l][i] == 'S' || lines[l][i] == 'W'
-			|| lines[l][i] == 'E')
+		else if (line[i] == 'N' || line[i] == 'S' || line[i] == 'W'
+			|| line[i] == 'E')
 		{
 			check_enclosing_map(lines, l, i, parser);
 			++parser->start_pos_count;
 			if (parser->start_pos_count > 1)
 				add_error(parser, P_ERR_START_POS, l, i);
 		}
-		else if (lines[l][i] != ' ' && lines[l][i] != '1')
+		else if (line[i] != ' ' && line[i] != '1')
 			add_error(parser, P_ERR_UNVALID_CHAR, l, i);
 		i++;
 	}
@@ -63,28 +78,31 @@ static void	parse_map_line(char **lines, int l, t_parser *parser)
 *	Parse the map content.
 *	Return the line position of the map.
 */
-int	parse_map_content(char **lines, t_parser *parser)
+int	parse_map_content(t_d_list *lines, t_parser *parser)
 {
 	int			l;
 	int			c;
+	char		*line;
 
-	l = ft_tab_len((void **)lines) - 1;
-	while (l >= 0)
+	l = ft_d_list_size((*lines)) - 1;
+	while ((*lines) != NULL)
 	{
+		line = (char *)(*lines)->data;
 		c = 0;
-		if (lines[l][c] == '\0')
+		if (line[c] == '\0')
 			return (l);
-		while (lines[l][c] != '\0' && lines[l][c] == ' ')
+		while (line[c] != '\0' && line[c] == ' ')
 			++c;
-		if ((lines[l][c] == '\0' && c != 0)
-			|| (lines[l][c] == 'N' && lines[l][c + 1] == 'O')
-			|| (lines[l][c] == 'S' && lines[l][c + 1] == 'O')
-			|| (lines[l][c] == 'W' && lines[l][c + 1] == 'E')
-			|| (lines[l][c] == 'E' && lines[l][c + 1] == 'A')
-			|| (lines[l][c] == 'F') || (lines[l][c] == 'C'))
+		if ((line[c] == '\0' && c != 0)
+			|| (line[c] == 'N' && line[c + 1] == 'O')
+			|| (line[c] == 'S' && line[c + 1] == 'O')
+			|| (line[c] == 'W' && line[c + 1] == 'E')
+			|| (line[c] == 'E' && line[c + 1] == 'A')
+			|| (line[c] == 'F') || (line[c] == 'C'))
 			return (l);
-		parse_map_line(lines, l, parser);
+		parse_map_line((*lines), l, parser);
 		--l;
+		(*lines) = (*lines)->prev;
 	}
 	return (l);
 }
