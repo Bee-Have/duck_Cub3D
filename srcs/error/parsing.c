@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 16:12:32 by amarini-          #+#    #+#             */
-/*   Updated: 2022/05/24 20:06:01 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/05/26 14:37:51 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,6 @@ static int	parse_file_content(t_mlx *mlx, char *path_to_file)
 	ft_bzero(&parser, sizeof(t_parser));
 	content = ft_get_file(path_to_file);
 	parse_lines(content, &parser);
-	ft_print_str_tab("File content", content);
 	ft_free_tab((void **)content);
 	return (end_parser(&parser));
 }
