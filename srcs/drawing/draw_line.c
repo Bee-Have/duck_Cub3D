@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   draw_line.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 16:13:42 by amarini-          #+#    #+#             */
-/*   Updated: 2022/05/25 18:06:48 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/05/26 16:28:34 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-static void	switch_vec2(t_int2 *vector)
+void	switch_vec2(t_int2 *vector)
 {
 	int	tmp;
 
@@ -22,12 +22,14 @@ static void	switch_vec2(t_int2 *vector)
 }
 
 //m = slope
-static void	plot_pxl(t_system *sys, t_int2 start, t_int2 end, t_int2 m, int decide, t_color color)
+void	plot_pxl(t_system *sys, t_int2 start, t_int2 end, t_int2 m, int decide, t_color color)
 {
+	// t_color	color;
 	int		err;
 	int		i;
 	int		len;
 
+	// color = make_color(255, 0, 255, 0);
 	err = 2 * m.y - m.x;
 	len = 1;
 	i = 0;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_square.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 16:16:27 by amarini-          #+#    #+#             */
-/*   Updated: 2022/05/25 17:55:45 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/05/26 16:25:55 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,3 @@ void	draw_square(t_system *sys, t_color color, t_int2 pos, int size)
 		++check.y;
 	}
 }
-

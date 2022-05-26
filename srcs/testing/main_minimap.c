@@ -333,6 +333,7 @@ void	raycasting_routine(t_mlx *mlx, t_int2 map_start)
 				int		line_height;
 				int		draw_start;
 				int		draw_end;
+
 				if (side == 0)
 					perp_wall_dist = side_dist.x - delta_dist.x;
 				else

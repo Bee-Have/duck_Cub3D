@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 18:30:53 by amarini-          #+#    #+#             */
-/*   Updated: 2022/05/25 19:24:41 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/05/26 16:28:46 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 
 void	raycasting_routine(t_system *sys)
 {
+	t_color	color;
 	int		x;
 	double	camera_x;
 	t_vec2	ray_dir;
-	t_int2	map;
+	t_vec2	map;
 	t_vec2	side_dist;
 	t_vec2	delta_dist;
 	double	perp_wall_dist;
@@ -42,6 +43,7 @@ void	raycasting_routine(t_system *sys)
 			delta_dist.y = 1e30;
 		else
 			delta_dist.y = fabs(1 / ray_dir.y);
+
 		if (ray_dir.x < 0)
 		{
 			step.x = -1;
@@ -78,17 +80,35 @@ void	raycasting_routine(t_system *sys)
 				side = 1;
 			}
 			//! the map will not always be square/rectangular
-			if (map.y < 0 || map.y > ft_tab_len((void **)sys->s_i.map)
-				|| map.x < 0 || map.x > (int)ft_strlen(sys->s_i.map[0])
-				|| sys->s_i.map[map.y][map.x] == '1')
+			if ((int)map.y < 0 || (int)map.y > ft_tab_len((void **)sys->s_i.map)
+				|| (int)map.x < 0 || (int)map.x > (int)ft_strlen(sys->s_i.map[0])
+				|| sys->s_i.map[(int)map.y][(int)map.x] == '1')
 			{
+				t_int2	start;
+				t_int2	end;
+				//int		size;
+				
+				//// drawing general ray
+				//size = sys->s_i.pxl_unit / 2;
+				//start.x = (map_start.x + (sys->pj.pos.x * sys->s_i.pxl_unit)) + size;
+				//start.y = (map_start.y + (sys->pj.pos.y * sys->s_i.pxl_unit)) + size;
+				//end.x = (map_start.x + (map.x * sys->s_i.pxl_unit)) + size;
+				//end.y = (map_start.y + (map.y * sys->s_i.pxl_unit)) + size;
+				//color = make_color(255, 0, 0, 0);
+				//draw_line(sys, start, end, color);
+				//// drawing camera plane
+				//size = sys->s_i.pxl_unit / 2;
+				//start.x = (map_start.x + ((sys->pj.dir.x + sys->pj.plane.x) * sys->s_i.pxl_unit)) + size;
+				//start.y = (map_start.y + ((sys->pj.dir.y + sys->pj.plane.y) * sys->s_i.pxl_unit)) + size;
+				//end.x = (map_start.x + ((sys->pj.dir.x - sys->pj.plane.x) * sys->s_i.pxl_unit)) + size;
+				//end.y = (map_start.y + ((sys->pj.dir.y - sys->pj.plane.y) * sys->s_i.pxl_unit)) + size;
+				//color = make_color(255, 0, 255, 0);
+				//draw_line(sys, start, end, color);
+				hit = 1;
+
 				int		line_height;
 				int		draw_start;
 				int		draw_end;
-				t_int2	start;
-				t_int2	end;
-
-				hit = 1;
 				if (side == 0)
 					perp_wall_dist = side_dist.x - delta_dist.x;
 				else
@@ -100,30 +120,24 @@ void	raycasting_routine(t_system *sys)
 				draw_end = line_height / 2 + sys->s_i.screen.y / 2;
 				if (draw_end >= sys->s_i.screen.y)
 					draw_end = sys->s_i.screen.y - 1;
+
 				start.x = x;
 				end.x = x;
-				// draw ceiling
+				color = make_color(255, 0, 0, 255); // blue
 				start.y = 0;
 				end.y = draw_start;
-				printf("ceiling-blue-[%d][%d]-[%d][%d]\n", start.y, start.x, end.y, end.x);
-				draw_line(sys, start, end, sys->s_i.ceiling);
-				// draw floor
+				draw_line(sys, start, end, color);
+				color = make_color(255, 255, 255, 255); // white
 				start.y = draw_end;
 				end.y = sys->s_i.screen.y;
-				printf("floor-white-[%d][%d]-[%d][%d]\n", start.y, start.x, end.y, end.x);
-				draw_line(sys, start, end, sys->s_i.floor);
+				draw_line(sys, start, end, color);
+				if (side == 1)
+					color = make_color(255, 255, 0, 0); // red
+				else
+					color = make_color(255, 0, 255, 0); // greed
 				start.y = draw_start;
 				end.y = draw_end;
-				if (side == 0)
-				{
-					printf("wall_north-[%d][%d]-[%d][%d]\n", start.y, start.x, end.y, end.x);
-					draw_line(sys, start, end, sys->s_i.wall_north);
-				}
-				else
-				{
-					printf("wall_south-[%d][%d]-[%d][%d]\n", start.y, start.x, end.y, end.x);
-					draw_line(sys, start, end, sys->s_i.wall_south);
-				}
+				draw_line(sys, start, end, color);
 			}
 		}
 		++x;
