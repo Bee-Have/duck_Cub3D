@@ -59,6 +59,15 @@ typedef struct s_color
 	unsigned int	code;
 }					t_color;
 
+typedef struct s_raycasting
+{
+	int		x;
+	t_vec2	side_dist;
+	t_vec2	delta_dist;
+	t_int2	step;
+	int		side;
+}				t_raycasting;
+
 typedef struct s_screen_info
 {
 	t_int2	screen;
