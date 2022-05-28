@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 18:30:53 by amarini-          #+#    #+#             */
-/*   Updated: 2022/05/26 17:56:10 by user42           ###   ########.fr       */
+/*   Updated: 2022/05/26 18:27:40 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,9 @@ void	raycasting_routine(t_system *sys)
 	int		x;
 	double	camera_x;
 	t_vec2	ray_dir;
-	t_vec2	map;
+	t_int2	map;
 	t_vec2	side_dist;
 	t_vec2	delta_dist;
-	double	perp_wall_dist;
 	t_int2	step;
 	int		hit;
 	int		side;
@@ -42,7 +41,6 @@ void	raycasting_routine(t_system *sys)
 			delta_dist.y = 1e30;
 		else
 			delta_dist.y = fabs(1 / ray_dir.y);
-
 		if (ray_dir.x < 0)
 		{
 			step.x = -1;
@@ -63,7 +61,6 @@ void	raycasting_routine(t_system *sys)
 			step.y = 1;
 			side_dist.y = (map.y + 1.0 - sys->pj.pos.y) * delta_dist.y;
 		}
-
 		while (hit == 0)
 		{
 			if (side_dist.x < side_dist.y)
@@ -79,14 +76,14 @@ void	raycasting_routine(t_system *sys)
 				side = 1;
 			}
 			//! the map will not always be square/rectangular
-			if ((int)map.y < 0 || (int)map.y > ft_tab_len((void **)sys->s_i.map)
-				|| (int)map.x < 0 || (int)map.x > (int)ft_strlen(sys->s_i.map[0])
-				|| sys->s_i.map[(int)map.y][(int)map.x] == '1')
+			if (map.y < 0 || map.y > ft_tab_len((void **)sys->s_i.map)
+				|| map.x < 0 || map.x > (int)ft_strlen(sys->s_i.map[0])
+				|| sys->s_i.map[map.y][map.x] == '1')
 			{
+				hit = 1;
+				double	perp_wall_dist;
 				t_int2	start;
 				t_int2	end;
-				hit = 1;
-
 				int		line_height;
 				int		draw_start;
 				int		draw_end;
@@ -101,7 +98,6 @@ void	raycasting_routine(t_system *sys)
 				draw_end = line_height / 2 + sys->s_i.screen.y / 2;
 				if (draw_end >= sys->s_i.screen.y)
 					draw_end = sys->s_i.screen.y - 1;
-
 				start.x = x;
 				end.x = x;
 				start.y = 0;
