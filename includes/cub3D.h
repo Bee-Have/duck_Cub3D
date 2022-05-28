@@ -176,7 +176,7 @@ void	add_to_args_count(t_parser *parser, char token, char next_token);
 *	Parse the map content.
 *	Return the line position of the map.
 */
-int	parse_map_content(char **lines, t_parser *parser);
+int	parse_map_content(t_d_list *lines, t_parser *parser);
 
 /*
 *	This function will run tests on the path and then on the file.

@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 16:12:32 by amarini-          #+#    #+#             */
-/*   Updated: 2022/05/26 14:37:51 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/05/26 19:58:29 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,42 +65,49 @@ static void	get_data(char *line, int l, int c, t_parser *parser)
 		add_error(parser, P_ERR_UNKNOWN_PARAM, l, c);
 }
 
-static void	parse_lines(char **lines, t_parser *parser)
+static void	parse_lines(t_d_list lines, t_parser *parser)
 {
 	int			l;
 	int			c;
+	char		*line;
 
-	l = parse_map_content(lines, parser);
-	if (lines[l + 1] == NULL)
+	l = parse_map_content(&lines, parser);
+	if (lines->next == NULL)
 		add_error(parser, P_ERR_MISSING_MAP, l, 0);
-	while (l >= 0)
+	while (lines != NULL)
 	{
+		line = lines->data;
 		c = 0;
-		while (lines[l][c] != '\0' && lines[l][c] == ' ')
+		while (line[c] != '\0' && line[c] == ' ')
 			++c;
-		if (lines[l][c] != '\0')
-			get_data(lines[l], l, c, parser);
-		else if (lines[l][c] == '\0' && c != 0)
+		if (line[c] != '\0')
+			get_data(line, l, c, parser);
+		else if (line[c] == '\0' && c != 0)
 			add_error(parser, P_ERR_MISSING_PARAM, l, c);
 		--l;
+		lines = lines->prev;
 	}
 }
 
 /*
 *	Will check if the content of the map is valid.
-* A mlx structure will be fill with the parsed data.
-* Return 0 on success, otherwise return the number of errors catched.
+*	A mlx structure will be fill with the parsed data.
+*	Return 0 on success, otherwise return the number of errors catched.
 */
 static int	parse_file_content(t_mlx *mlx, char *path_to_file)
 {
 	t_parser	parser;
-	char		**content;
+	t_d_list	content;
 
 	(void)mlx;
 	ft_bzero(&parser, sizeof(t_parser));
-	content = ft_get_file(path_to_file);
+	content = ft_get_file_in_list(path_to_file);
+	while (content->next != NULL)
+		content = content->next;
 	parse_lines(content, &parser);
-	ft_free_tab((void **)content);
+	while (content->prev != NULL)
+		content = content->prev;
+	ft_d_list_clear(&content, free);
 	return (end_parser(&parser));
 }
 
