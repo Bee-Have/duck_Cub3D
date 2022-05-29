@@ -66,7 +66,7 @@ typedef struct s_raycasting
 	t_vec2	delta_dist;
 	t_int2	step;
 	int		side;
-}				t_raycasting;
+}				t_raycast;
 
 typedef struct s_screen_info
 {
@@ -94,8 +94,6 @@ typedef struct s_event
 
 typedef struct s_img
 {
-	char	*path; //??
-
 	void	*img;
 	char	*addr;
 	int		bits_pxl;
