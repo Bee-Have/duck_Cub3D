@@ -3,23 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   init_pj.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 15:25:34 by amarini-          #+#    #+#             */
-/*   Updated: 2022/05/17 20:06:21 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/05/29 14:49:41 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-static t_pos	get_pj_pos(char **map)
+static t_vec2	get_pj_pos(char **map)
 {
-	t_pos	pj;
+	t_vec2	pj;
 	int		row;
 	int		col;
 
-	pj.x = -1;
-	pj.y = -1;
+	pj = make_vec2(-1, -1);
 	row = 0;
 	while (map[row] != NULL)
 	{
@@ -48,15 +47,14 @@ t_pj	init_pj(char **map)
 	pj.rot = 0;
 	if (map[(int)pj.pos.y][(int)pj.pos.x] == 'N')
 		pj.rot = 90;
-	if (map[(int)pj.pos.y][(int)pj.pos.x] == 'S')
+	else if (map[(int)pj.pos.y][(int)pj.pos.x] == 'S')
 		pj.rot = 270;
-	if (map[(int)pj.pos.y][(int)pj.pos.x] == 'E')
+	else if (map[(int)pj.pos.y][(int)pj.pos.x] == 'E')
 		pj.rot = 0;
-	if (map[(int)pj.pos.y][(int)pj.pos.x] == 'W')
+	else if (map[(int)pj.pos.y][(int)pj.pos.x] == 'W')
 		pj.rot = 180;
-	pj.dir.x = pj.pos.x - (cosf(pj.rot * (M_PI / 180)));
-	pj.dir.y = pj.pos.y - (sinf(pj.rot * (M_PI / 180)));
-	pj.plane.x = 0;
-	pj.plane.y = 0.66;
+	pj.dir = make_vec2(pj.pos.y - (SPEED * sinf(pj.rot * (M_PI / 180)))
+						, pj.pos.x - (SPEED * cosf(pj.rot * (M_PI / 180))));
+	pj.plane = make_vec2(0.1, 0);
 	return (pj);
 }

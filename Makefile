@@ -26,13 +26,15 @@ PARSING_FILES = parsing.c parser_struct.c parse_map_content.c init_config.c
 INIT_FILES = init_structs.c init_mlx.c init_pj.c
 ROUTINE_FILES = mlx_routine.c routine_manager.c
 ENGINE_FILES = raycasting.c key_events.c
+DRAW_TOOLS = draw_pxl.c draw_circle.c draw_square.c draw_line.c
 
 #SRC = main_minimap.c
 SRC = main.c \
-			$(INIT_FILES) \
-			$(ENGINE_FILES) \
-			$(ROUTINE_FILES) \
-			$(PARSING_FILES)
+	$(PARSING_FILES) \
+	$(INIT_FILES) \
+	$(ENGINE_FILES) \
+	$(ROUTINE_FILES) \
+	$(DRAW_TOOLS)
 
 OBJ = $(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
 

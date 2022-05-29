@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   draw_line.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 16:13:42 by amarini-          #+#    #+#             */
-/*   Updated: 2022/05/16 16:14:32 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/05/29 14:38:24 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void	switch_vec2(t_vec2 *vector)
+void	switch_vec2(t_int2 *vector)
 {
 	int	tmp;
 
@@ -22,14 +22,12 @@ void	switch_vec2(t_vec2 *vector)
 }
 
 //m = slope
-void	plot_pxl(t_mlx *mlx, t_vec2 start, t_vec2 end, t_vec2 m, int decide)
+void	plot_pxl(t_system *sys, t_int2 start, t_int2 end, t_int2 m, int decide, t_color color)
 {
-	t_color	color;
 	int		err;
 	int		i;
 	int		len;
 
-	color = make_color(255, 0, 255, 0);
 	err = 2 * m.y - m.x;
 	len = 1;
 	i = 0;
@@ -44,11 +42,11 @@ void	plot_pxl(t_mlx *mlx, t_vec2 start, t_vec2 end, t_vec2 m, int decide)
 			if (decide == 1)
 			{
 				switch_vec2(&start);
-				draw_square(mlx, color, start, len);
+				draw_square(sys, color, start, len);
 				switch_vec2(&start);
 			}
 			else
-				draw_square(mlx, color, start, len);
+				draw_square(sys, color, start, len);
 			err = err + 2 * m.y;
 		}
 		else
@@ -60,11 +58,11 @@ void	plot_pxl(t_mlx *mlx, t_vec2 start, t_vec2 end, t_vec2 m, int decide)
 			if (decide == 1)
 			{
 				switch_vec2(&start);
-				draw_square(mlx, color, start, len);
+				draw_square(sys, color, start, len);
 				switch_vec2(&start);
 			}
 			else
-				draw_square(mlx, color, start, len);
+				draw_square(sys, color, start, len);
 			err = err + 2 * m.y - 2 * m.x;
 		}
 		++i;
@@ -72,24 +70,19 @@ void	plot_pxl(t_mlx *mlx, t_vec2 start, t_vec2 end, t_vec2 m, int decide)
 }
 
 //m = slope
-void	draw_line(t_mlx *mlx, t_vec2 start, t_vec2 end)
+void	draw_line(t_system *sys, t_int2 start, t_int2 end, t_color color)
 {
-	int		dx;
-	int		dy;
-	t_vec2	m;
+	t_int2	m;
 
-	dx = abs(end.x - start.x);
-	dy = abs(end.y - start.y);
-	m.x = dx;
-	m.y = dy;
-	if (dx < dy)
+	m = make_int2(abs(end.y - start.y), abs(end.x - start.x));
+	if (m.x < m.y)
 	{
 		switch_vec2(&start);
 		switch_vec2(&end);
 		switch_vec2(&m);
-		plot_pxl(mlx, start, end, m, 1);
+		plot_pxl(sys, start, end, m, 1, color);
 	}
 	else
-		plot_pxl(mlx, start, end, m, 0);
+		plot_pxl(sys, start, end, m, 0, color);
 }
 

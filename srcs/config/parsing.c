@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 16:12:32 by amarini-          #+#    #+#             */
-/*   Updated: 2022/05/29 21:03:53 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/05/29 21:57:00 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ static int	check_path_validity(char *path_to_file)
 **	Add an error to the parser if the data is not valid or if the param is
 **	already set.
 */
-static void	get_data(t_mlx *mlx, char *line, t_vec2 pos, t_parser *parser)
+static void	get_data(t_system *sys, char *line, t_int2 pos, t_parser *parser)
 {
 	add_to_args_count(parser, line[pos.x], line[pos.x + 1]);
-	init_config(mlx, line, pos, parser);
+	init_config(sys, line, pos, parser);
 	if (line[pos.x] == 'N' && line[pos.x + 1] == 'O'
 		&& parser->north_texture_count > 1)
 		add_error(parser, P_ERR_NO, pos.y, pos.x);
@@ -73,15 +73,15 @@ static void	get_data(t_mlx *mlx, char *line, t_vec2 pos, t_parser *parser)
 		add_error(parser, P_ERR_UNKNOWN_PARAM, pos.y, pos.x);
 }
 
-static void	parse_lines(t_mlx *mlx, t_d_list lines, t_parser *parser)
+static void	parse_lines(t_system *sys, t_d_list lines, t_parser *parser)
 {
-	t_vec2		pos;
+	t_int2		pos;
 	char		*line;
 
 	pos.y = parse_map_content(&lines, parser);
 	if (lines->next == NULL)
 		add_error(parser, P_ERR_MISSING_MAP, pos.y, 0);
-	init_map(mlx, lines, pos);
+	init_map(sys, lines, pos);
 	while (lines != NULL)
 	{
 		line = lines->data;
@@ -89,7 +89,7 @@ static void	parse_lines(t_mlx *mlx, t_d_list lines, t_parser *parser)
 		while (line[pos.x] != '\0' && line[pos.x] == ' ')
 			++pos.x;
 		if (line[pos.x] != '\0')
-			get_data(mlx, line, pos, parser);
+			get_data(sys, line, pos, parser);
 		else if (line[pos.x] == '\0' && pos.x != 0)
 			add_error(parser, P_ERR_MISSING_PARAM, pos.y, pos.x);
 		--pos.y;
@@ -102,7 +102,7 @@ static void	parse_lines(t_mlx *mlx, t_d_list lines, t_parser *parser)
 *	A mlx structure will be fill with the parsed data.
 *	Return 0 on success, otherwise return the number of errors catched.
 */
-static int	parse_file_content(t_mlx *mlx, char *path_to_file)
+static int	parse_file_content(t_system *sys, char *path_to_file)
 {
 	t_parser	parser;
 	t_d_list	content;
@@ -111,20 +111,24 @@ static int	parse_file_content(t_mlx *mlx, char *path_to_file)
 	content = ft_get_file_in_list(path_to_file);
 	while (content->next != NULL)
 		content = content->next;
-	parse_lines(mlx, content, &parser);
+	parse_lines(sys, content, &parser);
 	while (content->prev != NULL)
 		content = content->prev;
 	ft_d_list_clear(&content, free);
 	return (end_parser(&parser));
 }
 
-int	parse_map(t_mlx *mlx, char *path_to_file)
+/*
+*	Will load the map into the mlx structure if correct.
+*	Return 0 on success, otherwise return 1.
+*/
+int	parse_map(t_system *sys, char *path_to_file)
 {
 	int			error_count;
 
 	if (check_path_validity(path_to_file) != 0)
 		return (1);
-	error_count = parse_file_content(mlx, path_to_file);
+	error_count = parse_file_content(sys, path_to_file);
 	if (error_count != 0)
 	{
 		printf("%d errors generated\n", error_count);

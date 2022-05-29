@@ -30,32 +30,25 @@
 #define R_SPEED 5
 
 // structs
-typedef struct s_vec2
+typedef struct s_int2
 {
 	int	x;
 	int	y;
-}			t_vec2;
+}			t_int2;
 
-typedef struct s_pos
+typedef struct s_vec2
 {
 	double	x;
 	double	y;
-}			t_pos;
+}			t_vec2;
 
 typedef struct s_pj
 {
-	t_pos	pos;
-	t_pos	dir;
-	t_pos	plane;
+	t_vec2	pos;
 	int		rot;
+	t_vec2	dir;
+	t_vec2	plane;
 }			t_pj;
-
-typedef struct s_map_info
-{
-	char	**map;
-	int		pxl_unit;
-	t_vec2	screen;
-}			t_map_info;
 
 typedef struct s_color
 {
@@ -64,16 +57,30 @@ typedef struct s_color
 	unsigned char	g;
 	unsigned char	b;
 	unsigned int	code;
-}			t_color;
+}					t_color;
 
-typedef struct s_img
+typedef struct s_raycasting
 {
-	void	*img;
-	char	*addr;
-	int		bits_pxl;
-	int		line_len;
-	int		endian;
-}			t_img;
+	int		x;
+	t_vec2	side_dist;
+	t_vec2	delta_dist;
+	t_int2	step;
+	int		side;
+}				t_raycast;
+
+typedef struct s_screen_info
+{
+	t_int2	screen;
+	char	**map;
+	int		pxl_unit;
+
+	t_color	floor;
+	t_color	ceiling;
+	t_color	wall_north;//tmp
+	t_color	wall_south;//tmp
+	t_color	wall_east;//tmp
+	t_color	wall_west;//tmp
+}			t_screen_info;
 
 typedef struct s_event
 {
@@ -85,38 +92,69 @@ typedef struct s_event
 	char	is_right_pressed;
 }			t_event;
 
+typedef struct s_img
+{
+	void	*img;
+	char	*addr;
+	int		bits_pxl;
+	int		line_len;
+	int		endian;
+}			t_img;
+
+typedef struct s_textures
+{
+	t_img	north_texture;
+	t_img	south_texture;
+	t_img	west_texture;
+	t_img	east_texture;
+}			t_textures;
+
 typedef struct s_mlx
 {
 	void	*mlx;
 	void	*win;
 	t_img	img;
-
-	t_event	event;
-
-	t_map_info	map_info;
-	t_pj	pj;
 }			t_mlx;
+
+typedef struct s_system
+{
+	t_mlx			mlx;
+	t_textures		textures;
+
+	t_screen_info	s_i;
+	t_event			events;
+	t_pj			pj;
+}			t_system;
 
 //? INIT
 // structs
-t_map_info	init_map_info(char **map, int width, int height);
+t_int2			make_int2(int y, int x);
+t_vec2			make_vec2(double y, double x);
+t_color			make_color(unsigned char a, unsigned char r, unsigned char g, unsigned char b);
+t_screen_info	init_screen_info(char **map, int width, int height);
 // mlx
 t_img	init_img(void);
-t_mlx	*init_mlx(int width, int height);
+t_event	init_events(void);
+t_mlx	init_mlx(int width, int height);
 // gameplay
 t_pj	init_pj(char **map);
 
 //? ROUTINE
 // mlx
-void	mlx_routine(t_mlx *mlx);
+void	mlx_routine(t_system *sys);
 // update
-int		update_all(t_mlx *mlx);
+int		update_all(t_system *sys);
 // keys events
-int		key_press(int keycode, t_mlx *mlx);
-int		key_release(int keycode, t_mlx *mlx);
-int		update_keys_events(t_mlx *mlx);///////////////////////////////
+int		key_press(int keycode, t_system *sys);
+int		key_release(int keycode, t_system *sys);
+int		update_keys_events(t_system *sys);
 // raycasting
-void	raycasting_routine(t_mlx *mlx);
+void	raycasting_routine(t_system *sys);
+// drawing tools
+void	draw_pxl(t_system *sys, t_int2 pos, t_color color);
+void	draw_square(t_system *sys, t_color color, t_int2 pos, int size);
+void	draw_line(t_system *sys, t_int2 start, t_int2 end, t_color color);
+void	draw_circle(t_system *sys, t_color color, t_int2 pos, int size);
 
 //? PARSING
 
@@ -182,20 +220,20 @@ int	parse_map_content(t_d_list *lines, t_parser *parser);
 
 /*
 *	This function will run tests on the path and then on the file.
-*	If everything is correct the config data will be saved in the mlx struct.
+*	If everything is correct the config data will be saved in the system struct.
 *	Return 0 on success, 1 on error.
 */
-int	parse_map(t_mlx *mlx, char *file);
+int	parse_map(t_system *sys, char *file);
 
 /*
-*	Fill the correct mlx struct with the data of the line.
+*	Fill the correct system struct with the data of the line.
 *	If not valid, add an error to the parser.
 */
-void	init_config(t_mlx *mlx, char *line, t_vec2 pos, t_parser *parser);
+void	init_config(t_system *sys, char *line, t_int2 pos, t_parser *parser);
 
 /*
-*	Take what have been parsed and fill the mlx struct.
+*	Take what have been parsed and fill the system struct.
 */
-void	init_map(t_mlx *mlx, t_d_list lines, t_vec2 pos);
+void	init_map(t_system *sys, t_d_list lines, t_int2 pos);
 
 #endif

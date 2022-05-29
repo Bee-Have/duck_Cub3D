@@ -1,0 +1,88 @@
+typedef struct s_int2
+{
+	int	x;
+	int	y;
+}			t_int2;
+
+typedef struct s_vec2
+{
+	double	x;
+	double	y;
+}			t_vec2;
+
+typedef struct s_pj
+{
+	t_pos	pos;
+	int		rot;
+	t_pos	dir;
+	t_pos	plane;
+}			t_pj;
+
+typedef struct s_color
+{
+	unsigned char	a;
+	unsigned char	r;
+	unsigned char	g;
+	unsigned char	b;
+	unsigned char	code;
+}					t_color;
+
+typedef struct s_screen_info
+{
+	t_vec2	screen;
+	char	**map;
+	int		pxl_unit;
+
+	t_color	floor;
+	t_color	ceiling;
+	t_color	wall_north;//tmp
+	t_color	wall_south;//tmp
+	t_color	wall_east;//tmp
+	t_color	wall_west;//tmp
+}			t_screen_info;
+
+typedef struct s_event
+{
+	char	is_w_pressed;
+	char	is_a_pressed;
+	char	is_s_pressed;
+	char	is_d_pressed;
+	char	is_left_pressed;
+	char	is_right_pressed;
+}			t_event;
+
+typedef struct s_img
+{
+	char	*path; //??
+
+	void	*img;
+	char	*addr;
+	int		bits_pxl;
+	int		line_len;
+	int		endian;
+}			t_img;
+
+typedef struct s_textures
+{
+	t_img	north_texture;
+	t_img	south_texture;
+	t_img	west_texture;
+	t_img	east_texture;
+}			t_textures;
+
+typedef struct s_mlx;
+{
+	void	*mlx;
+	void	*win;
+	t_img	img;
+}			t_mlx;
+
+typedef struct s_system
+{
+	t_mlx			mlx;
+	t_textures		textures;
+
+	t_screen_info	screen_info;
+	t_event			events;
+	t_pj			pj;
+}			t_system;
