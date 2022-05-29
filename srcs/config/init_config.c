@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 20:07:59 by ldutriez          #+#    #+#             */
-/*   Updated: 2022/05/29 20:37:46 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/05/29 21:05:45 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 static void	init_texture(t_mlx *mlx, char *line, t_vec2 pos, t_parser *parser)
 {
 	void	*img;
-	// char	*addr;
 	t_vec2	size;
 
 	pos.x += 2;
@@ -25,10 +24,9 @@ static void	init_texture(t_mlx *mlx, char *line, t_vec2 pos, t_parser *parser)
 	if (ft_is_valid_file_path(line + pos.x) == b_false)
 		return (add_error(parser, P_ERR_TEXTURE, pos.y, pos.x));
 	img = mlx_xpm_file_to_image(mlx->mlx, line + pos.x, &size.x, &size.y);
-	// addr = mlx_get_data_addr();
 	if (img == NULL)
 		add_error(parser, P_ERR_TEXTURE, pos.y, pos.x);
-	free(img);	
+	free(img);
 }
 
 static unsigned char	get_color_component(char *line, t_vec2 pos
@@ -92,4 +90,28 @@ void	init_config(t_mlx *mlx, char *line, t_vec2 pos, t_parser *parser)
 	else if ((line[pos.x] == 'F' && parser->floor_color_count == 1)
 		|| (line[pos.x] == 'C' && parser->ceil_color_count == 1))
 		init_color(mlx, line, pos, parser);
+}
+
+void	init_map(t_mlx *mlx, t_d_list lines, t_vec2 pos)
+{
+	int			map_len;
+	char		**map;
+	int			index;
+
+	(void)mlx;
+	lines = lines->next;
+	map_len = ft_d_list_size(lines) - pos.y;
+	map = (char **)malloc(sizeof(char *) * (map_len + 1));
+	if (map == NULL)
+		return ;
+	index = 0;
+	while (lines != NULL)
+	{
+		map[index] = ft_strdup((char *)lines->data);
+		lines = lines->next;
+		index++;
+	}
+	// mlx->map = map;
+	map[index] = NULL;
+	ft_print_str_tab("Map", map);
 }

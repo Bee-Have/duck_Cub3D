@@ -193,4 +193,9 @@ int	parse_map(t_mlx *mlx, char *file);
 */
 void	init_config(t_mlx *mlx, char *line, t_vec2 pos, t_parser *parser);
 
+/*
+*	Take what have been parsed and fill the mlx struct.
+*/
+void	init_map(t_mlx *mlx, t_d_list lines, t_vec2 pos);
+
 #endif
