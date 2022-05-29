@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_pj.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 15:25:34 by amarini-          #+#    #+#             */
-/*   Updated: 2022/05/25 19:02:18 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/05/29 14:49:41 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@ static t_vec2	get_pj_pos(char **map)
 	int		row;
 	int		col;
 
-	pj.x = -1;
-	pj.y = -1;
+	pj = make_vec2(-1, -1);
 	row = 0;
 	while (map[row] != NULL)
 	{
@@ -54,9 +53,8 @@ t_pj	init_pj(char **map)
 		pj.rot = 0;
 	else if (map[(int)pj.pos.y][(int)pj.pos.x] == 'W')
 		pj.rot = 180;
-	pj.dir.x = pj.pos.x - (SPEED * cosf(pj.rot * (M_PI / 180)));
-	pj.dir.y = pj.pos.y - (SPEED * sinf(pj.rot * (M_PI / 180)));
-	pj.plane.x = 0;
-	pj.plane.y = 0.1;
+	pj.dir = make_vec2(pj.pos.y - (SPEED * sinf(pj.rot * (M_PI / 180)))
+						, pj.pos.x - (SPEED * cosf(pj.rot * (M_PI / 180))));
+	pj.plane = make_vec2(0.1, 0);
 	return (pj);
 }

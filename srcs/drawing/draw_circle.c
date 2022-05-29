@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 16:15:33 by amarini-          #+#    #+#             */
-/*   Updated: 2022/05/26 16:26:33 by user42           ###   ########.fr       */
+/*   Updated: 2022/05/29 14:35:13 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,9 @@ void	draw_circle(t_system *sys, t_color color, t_int2 pos, int size)
 	float	dist;
 	int		x;
 
-	center.x = pos.x + size / 2;
-	center.y = pos.y + size / 2;
+	center = make_int2(pos.y + size / 2, pos.x + size / 2);
 	x = pos.x;
-	check.y = 0;
+	check = make_int2(0, 0);
 	while (pos.y < 1080 && check.y < size)
 	{
 		pos.x = x;

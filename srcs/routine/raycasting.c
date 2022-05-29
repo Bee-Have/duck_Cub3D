@@ -6,17 +6,27 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 18:30:53 by amarini-          #+#    #+#             */
-/*   Updated: 2022/05/28 21:39:31 by user42           ###   ########.fr       */
+/*   Updated: 2022/05/29 14:51:32 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
+//here, int2, x/y do not represent x/y, just 2 ints
+void	draw_collumn(t_system *sys, t_raycasting cast_info, t_int2 bounds, t_color color)
+{
+	t_int2	start;
+	t_int2	end;
+	
+	start = make_int2(bounds.y, cast_info.x);
+	end = make_int2(bounds.x, cast_info.x);
+	draw_line(sys, start, end, color);
+}
+
 int	casting_rays(t_system *sys, t_raycasting cast_info)
 {
 	double	perp_wall_dist;
-	t_int2	start;
-	t_int2	end;
+	t_int2	bounds;
 	int		line_height;
 	int		wall_start;
 	int		wall_end;
@@ -32,20 +42,15 @@ int	casting_rays(t_system *sys, t_raycasting cast_info)
 	wall_end = line_height / 2 + sys->s_i.screen.y / 2;
 	if (wall_end >= sys->s_i.screen.y)
 		wall_end = sys->s_i.screen.y - 1;
-	start.x = cast_info.x;
-	end.x = cast_info.x;
-	start.y = 0;
-	end.y = wall_start;
-	draw_line(sys, start, end, sys->s_i.ceiling);
-	start.y = wall_end;
-	end.y = sys->s_i.screen.y;
-	draw_line(sys, start, end, sys->s_i.floor);
-	start.y = wall_start;
-	end.y = wall_end;
+	bounds = make_int2(0, wall_start);
+	draw_collumn(sys, cast_info, bounds, sys->s_i.ceiling);
+	bounds = make_int2(wall_end, sys->s_i.screen.y - 1);
+	draw_collumn(sys, cast_info, bounds, sys->s_i.floor);
+	bounds = make_int2(wall_start, wall_end);
 	if (cast_info.side == 1)
-		draw_line(sys, start, end, sys->s_i.wall_south);
+		draw_collumn(sys, cast_info, bounds, sys->s_i.wall_south);
 	else
-		draw_line(sys, start, end, sys->s_i.wall_west);
+		draw_collumn(sys, cast_info, bounds, sys->s_i.wall_west);
 	return (1);
 }
 
@@ -54,8 +59,7 @@ void	wall_hitting_tests(t_system *sys, t_raycasting cast_info)
 	t_int2	map;
 	int		hit;
 	
-	map.x = (int)sys->pj.pos.x;
-	map.y = (int)sys->pj.pos.y;
+	map = make_int2((int)sys->pj.pos.y, (int)sys->pj.pos.x);
 	hit = 0;
 	while (hit == 0)
 	{
@@ -89,8 +93,8 @@ void	raycasting_routine(t_system *sys)
 	while (cast_info.x < sys->s_i.screen.x)
 	{
 		camera_x = 2 * cast_info.x / (double)sys->s_i.screen.x - 1;
-		ray_dir.x = (sys->pj.dir.x - sys->pj.pos.x) + sys->pj.plane.x * camera_x;
-		ray_dir.y = (sys->pj.dir.y - sys->pj.pos.y) + sys->pj.plane.y * camera_x;
+		ray_dir = make_vec2((sys->pj.dir.y - sys->pj.pos.y) + sys->pj.plane.y * camera_x
+					, (sys->pj.dir.x - sys->pj.pos.x) + sys->pj.plane.x * camera_x);
 		if (ray_dir.x == 0)
 			cast_info.delta_dist.x = 1e30;
 		else

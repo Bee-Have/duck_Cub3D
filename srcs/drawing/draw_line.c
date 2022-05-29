@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 16:13:42 by amarini-          #+#    #+#             */
-/*   Updated: 2022/05/26 16:28:34 by user42           ###   ########.fr       */
+/*   Updated: 2022/05/29 14:38:24 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,10 @@ void	switch_vec2(t_int2 *vector)
 //m = slope
 void	plot_pxl(t_system *sys, t_int2 start, t_int2 end, t_int2 m, int decide, t_color color)
 {
-	// t_color	color;
 	int		err;
 	int		i;
 	int		len;
 
-	// color = make_color(255, 0, 255, 0);
 	err = 2 * m.y - m.x;
 	len = 1;
 	i = 0;
@@ -74,15 +72,10 @@ void	plot_pxl(t_system *sys, t_int2 start, t_int2 end, t_int2 m, int decide, t_c
 //m = slope
 void	draw_line(t_system *sys, t_int2 start, t_int2 end, t_color color)
 {
-	int		dx;
-	int		dy;
 	t_int2	m;
 
-	dx = abs(end.x - start.x);
-	dy = abs(end.y - start.y);
-	m.x = dx;
-	m.y = dy;
-	if (dx < dy)
+	m = make_int2(abs(end.y - start.y), abs(end.x - start.x));
+	if (m.x < m.y)
 	{
 		switch_vec2(&start);
 		switch_vec2(&end);
