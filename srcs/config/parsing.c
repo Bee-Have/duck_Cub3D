@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 16:12:32 by amarini-          #+#    #+#             */
-/*   Updated: 2022/05/29 20:40:36 by user42           ###   ########.fr       */
+/*   Updated: 2022/05/29 21:57:00 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,52 +39,60 @@ static int	check_path_validity(char *path_to_file)
 	return (0);
 }
 
-static void	get_data(char *line, int l, int c, t_parser *parser)
+/*
+**	Increment the counter of data crossed for this specific param.
+**	Init the correct data in the mlx struct.
+**	Add an error to the parser if the data is not valid or if the param is
+**	already set.
+*/
+static void	get_data(t_system *sys, char *line, t_int2 pos, t_parser *parser)
 {
-	add_to_args_count(parser, line[c], line[c + 1]);
-	if (line[c] == 'N' && line[c + 1] == 'O' && parser->north_texture_count > 1)
-		add_error(parser, P_ERR_NO, l, c);
-	else if (line[c] == 'S' && line[c + 1] == 'O'
+	add_to_args_count(parser, line[pos.x], line[pos.x + 1]);
+	init_config(sys, line, pos, parser);
+	if (line[pos.x] == 'N' && line[pos.x + 1] == 'O'
+		&& parser->north_texture_count > 1)
+		add_error(parser, P_ERR_NO, pos.y, pos.x);
+	else if (line[pos.x] == 'S' && line[pos.x + 1] == 'O'
 		&& parser->south_texture_count > 1)
-		add_error(parser, P_ERR_SO, l, c);
-	else if (line[c] == 'W' && line[c + 1] == 'E'
+		add_error(parser, P_ERR_SO, pos.y, pos.x);
+	else if (line[pos.x] == 'W' && line[pos.x + 1] == 'E'
 		&& parser->west_texture_count > 1)
-		add_error(parser, P_ERR_WE, l, c);
-	else if (line[c] == 'E' && line[c + 1] == 'A'
+		add_error(parser, P_ERR_WE, pos.y, pos.x);
+	else if (line[pos.x] == 'E' && line[pos.x + 1] == 'A'
 		&& parser->east_texture_count > 1)
-		add_error(parser, P_ERR_EA, l, c);
-	else if (line[c] == 'F' && parser->floor_color_count > 1)
-		add_error(parser, P_ERR_F, l, c);
-	else if (line[c] == 'C' && parser->ceil_color_count > 1)
-		add_error(parser, P_ERR_C, l, c);
-	else if ((line[c] != 'N' || line[c + 1] != 'O')
-		&& (line[c] != 'S' || line[c + 1] != 'O')
-		&& (line[c] != 'W' || line[c + 1] != 'E')
-		&& (line[c] != 'E' || line[c + 1] != 'A')
-		&& line[c] != 'F' && line[c] != 'C')
-		add_error(parser, P_ERR_UNKNOWN_PARAM, l, c);
+		add_error(parser, P_ERR_EA, pos.y, pos.x);
+	else if (line[pos.x] == 'F' && parser->floor_color_count > 1)
+		add_error(parser, P_ERR_F, pos.y, pos.x);
+	else if (line[pos.x] == 'C' && parser->ceil_color_count > 1)
+		add_error(parser, P_ERR_C, pos.y, pos.x);
+	else if ((line[pos.x] != 'N' || line[pos.x + 1] != 'O')
+		&& (line[pos.x] != 'S' || line[pos.x + 1] != 'O')
+		&& (line[pos.x] != 'W' || line[pos.x + 1] != 'E')
+		&& (line[pos.x] != 'E' || line[pos.x + 1] != 'A')
+		&& line[pos.x] != 'F' && line[pos.x] != 'C')
+		add_error(parser, P_ERR_UNKNOWN_PARAM, pos.y, pos.x);
 }
 
-static void	parse_lines(t_d_list lines, t_parser *parser)
+static void	parse_lines(t_system *sys, t_d_list lines, t_parser *parser)
 {
-	int			l;
-	int			c;
+	t_int2		pos;
 	char		*line;
 
-	l = parse_map_content(&lines, parser);
+	pos.y = parse_map_content(&lines, parser);
 	if (lines->next == NULL)
-		add_error(parser, P_ERR_MISSING_MAP, l, 0);
+		add_error(parser, P_ERR_MISSING_MAP, pos.y, 0);
+	init_map(sys, lines, pos);
 	while (lines != NULL)
 	{
 		line = lines->data;
-		c = 0;
-		while (line[c] != '\0' && line[c] == ' ')
-			++c;
-		if (line[c] != '\0')
-			get_data(line, l, c, parser);
-		else if (line[c] == '\0' && c != 0)
-			add_error(parser, P_ERR_MISSING_PARAM, l, c);
-		--l;
+		pos.x = 0;
+		while (line[pos.x] != '\0' && line[pos.x] == ' ')
+			++pos.x;
+		if (line[pos.x] != '\0')
+			get_data(sys, line, pos, parser);
+		else if (line[pos.x] == '\0' && pos.x != 0)
+			add_error(parser, P_ERR_MISSING_PARAM, pos.y, pos.x);
+		--pos.y;
 		lines = lines->prev;
 	}
 }
@@ -99,12 +107,11 @@ static int	parse_file_content(t_system *sys, char *path_to_file)
 	t_parser	parser;
 	t_d_list	content;
 
-	(void)sys;
 	ft_bzero(&parser, sizeof(t_parser));
 	content = ft_get_file_in_list(path_to_file);
 	while (content->next != NULL)
 		content = content->next;
-	parse_lines(content, &parser);
+	parse_lines(sys, content, &parser);
 	while (content->prev != NULL)
 		content = content->prev;
 	ft_d_list_clear(&content, free);

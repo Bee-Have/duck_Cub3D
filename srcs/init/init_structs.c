@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 18:14:04 by amarini-          #+#    #+#             */
-/*   Updated: 2022/05/29 14:52:11 by user42           ###   ########.fr       */
+/*   Updated: 2022/05/29 22:30:23 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ t_screen_info	init_screen_info(char **map, int width, int height)
 	// this part will be partly automatised && some of them will be textures
 	s_i.floor = make_color(255, 255, 255, 255);// white
 	s_i.ceiling = make_color(255, 0, 0, 255);// blue
+	//to throw away
 	s_i.wall_north = make_color(255, 255, 0, 0);// red
 	s_i.wall_south = make_color(255, 0, 255, 0);// green
 	s_i.wall_east = make_color(255, 0, 0, 0);// black

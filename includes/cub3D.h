@@ -172,6 +172,8 @@ void	draw_circle(t_system *sys, t_color color, t_int2 pos, int size);
 # define P_ERR_UNVALID_CHAR "Error\nUnvalid character at line "
 # define P_ERR_START_POS "Error\nMultiple definition of start position at line "
 # define P_ERR_UNCLOSED_MAP "Error\nMap is not closed at line "
+# define P_ERR_COLOR "Error\nInvalid color formatting at line "
+# define P_ERR_TEXTURE "Error\nInvalid texture at line "
 
 /*
 * This struct is used for the parsing of the map file.
@@ -218,9 +220,20 @@ int	parse_map_content(t_d_list *lines, t_parser *parser);
 
 /*
 *	This function will run tests on the path and then on the file.
-* If everything is correct the map data will be saved in the mlx struct.
-* Return 0 on success, 1 on error.
+*	If everything is correct the config data will be saved in the system struct.
+*	Return 0 on success, 1 on error.
 */
 int	parse_map(t_system *sys, char *file);
+
+/*
+*	Fill the correct system struct with the data of the line.
+*	If not valid, add an error to the parser.
+*/
+void	init_config(t_system *sys, char *line, t_int2 pos, t_parser *parser);
+
+/*
+*	Take what have been parsed and fill the system struct.
+*/
+void	init_map(t_system *sys, t_d_list lines, t_int2 pos);
 
 #endif

@@ -6,11 +6,20 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 12:43:25 by ldutriez          #+#    #+#             */
-/*   Updated: 2022/05/24 20:35:17 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/05/29 19:45:53 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
+
+#define STATIC_P_ERR_NO "Error\nNorth texture missing"
+#define STATIC_P_ERR_SO "Error\nSouth texture missing"
+#define STATIC_P_ERR_WE "Error\nWest texture missing"
+#define STATIC_P_ERR_EA "Error\nEast texture missing"
+#define STATIC_P_ERR_F "Error\nFloor color missing"
+#define STATIC_P_ERR_C "Error\nCeilling color missing"
+#define STATIC_P_ERR_START_POS "Error\nStarting position missing"
+#define MULTIPLE " or redefined a multiple of 256 time.\n"
 
 void	add_to_args_count(t_parser *parser, char token, char next_token)
 {
@@ -63,19 +72,19 @@ int	end_parser(const t_parser *p)
 		++index;
 	}
 	if (p->north_texture_count == 0)
-		ft_putstr_fd(2, "Error\nNorth texture missing.\n");
+		ft_putstr_fd(2, STATIC_P_ERR_NO MULTIPLE);
 	if (p->south_texture_count == 0)
-		ft_putstr_fd(2, "Error\nSouth texture missing.\n");
+		ft_putstr_fd(2, STATIC_P_ERR_SO MULTIPLE);
 	if (p->west_texture_count == 0)
-		ft_putstr_fd(2, "Error\nWest texture missing.\n");
+		ft_putstr_fd(2, STATIC_P_ERR_WE MULTIPLE);
 	if (p->east_texture_count == 0)
-		ft_putstr_fd(2, "Error\nEast texture missing.\n");
+		ft_putstr_fd(2, STATIC_P_ERR_EA MULTIPLE);
 	if (p->floor_color_count == 0)
-		ft_putstr_fd(2, "Error\nFloor color missing.\n");
+		ft_putstr_fd(2, STATIC_P_ERR_F MULTIPLE);
 	if (p->ceil_color_count == 0)
-		ft_putstr_fd(2, "Error\nCeil color missing.\n");
+		ft_putstr_fd(2, STATIC_P_ERR_C MULTIPLE);
 	if (p->start_pos_count == 0)
-		ft_putstr_fd(2, "Error\nStarting position missing.\n");
+		ft_putstr_fd(2, STATIC_P_ERR_START_POS MULTIPLE);
 	return (index + !p->north_texture_count + !p->south_texture_count
 		+ !p->west_texture_count + !p->east_texture_count
 		+ !p->floor_color_count + !p->ceil_color_count + !p->start_pos_count);
