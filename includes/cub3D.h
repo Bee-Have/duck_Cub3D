@@ -156,4 +156,71 @@ void	draw_square(t_system *sys, t_color color, t_int2 pos, int size);
 void	draw_line(t_system *sys, t_int2 start, t_int2 end, t_color color);
 void	draw_circle(t_system *sys, t_color color, t_int2 pos, int size);
 
+//? PARSING
+
+# define ERROR_LIMIT 20
+
+# define P_ERR_NO "Error\nMultiple definition of North texture at line "
+# define P_ERR_SO "Error\nMultiple definition of South texture at line "
+# define P_ERR_WE "Error\nMultiple definition of West texture at line "
+# define P_ERR_EA "Error\nMultiple definition of East texture at line "
+# define P_ERR_F "Error\nMultiple definition of Floor color at line "
+# define P_ERR_C "Error\nMultiple definition of Ceiling color at line "
+# define P_ERR_UNKNOWN_PARAM "Error\nUnrecognized parameter at line "
+# define P_ERR_MISSING_PARAM "Error\nMissing parameter at line "
+# define P_ERR_MISSING_MAP "Error\nMissing map at line "
+# define P_ERR_UNVALID_CHAR "Error\nUnvalid character at line "
+# define P_ERR_START_POS "Error\nMultiple definition of start position at line "
+# define P_ERR_UNCLOSED_MAP "Error\nMap is not closed at line "
+
+/*
+* This struct is used for the parsing of the map file.
+* It will keep track of what elements has been found in the map file.
+* It will also store a list of errors that occured during the parsing.
+*/
+typedef struct s_parser
+{
+	unsigned char	north_texture_count;
+	unsigned char	south_texture_count;
+	unsigned char	west_texture_count;
+	unsigned char	east_texture_count;
+	unsigned char	floor_color_count;
+	unsigned char	ceil_color_count;
+	unsigned char	start_pos_count;
+	char			errors[ERROR_LIMIT][100];
+	int				error_count;
+}	t_parser;
+
+/*
+*	Print an error if one of the parameters is missing.
+*	Print every encountered error.
+*	Return 0 if no errors, the number of errors otherwise.
+*/
+int	end_parser(const t_parser *parser);
+
+/*
+*	Will format an error message if the error count is less than 20.
+*	This function still use dynamic allocation for atoi.
+*/
+void	add_error(t_parser *parser, const char *description
+	, int line, int column);
+
+/*
+*	Will recognize the token and increment the corresponding counter.
+*/
+void	add_to_args_count(t_parser *parser, char token, char next_token);
+
+/*
+*	Parse the map content.
+*	Return the line position of the map.
+*/
+int	parse_map_content(t_d_list *lines, t_parser *parser);
+
+/*
+*	This function will run tests on the path and then on the file.
+* If everything is correct the map data will be saved in the mlx struct.
+* Return 0 on success, 1 on error.
+*/
+int	parse_map(t_system *sys, char *file);
+
 #endif
