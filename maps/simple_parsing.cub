@@ -1,7 +1,7 @@
-NO ./simple_parsing.cub
-SO ./simple_parsing.cub
-WE ./simple_parsing.cub
-EA ./simple_parsing.cub
+NO ./ressources/bluestone.xpm
+SO ./ressources/colorstone.xpm
+WE ./ressources/greystone.xpm
+EA ./ressources/mossy.xpm
 
 F 220,100,0
 C 225,30,0
