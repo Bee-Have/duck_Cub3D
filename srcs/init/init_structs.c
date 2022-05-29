@@ -6,11 +6,29 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 18:14:04 by amarini-          #+#    #+#             */
-/*   Updated: 2022/05/26 15:32:02 by user42           ###   ########.fr       */
+/*   Updated: 2022/05/28 21:57:05 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
+
+t_int2	make_int2(int y, int x)
+{
+	t_int2	vector;
+	
+	vector.y = y;
+	vector.x = x;
+	return (vector);
+}
+
+t_vec2	make_vec2(double y, double x)
+{
+	t_vec2	vector;
+	
+	vector.y = y;
+	vector.x = x;
+	return (vector);
+}
 
 t_color	make_color(unsigned char a, unsigned char r, unsigned char g, unsigned char b)
 {

@@ -130,6 +130,8 @@ typedef struct s_system
 
 //? INIT
 // structs
+t_int2			make_int2(int y, int x);
+t_vec2			make_vec2(double y, double x);
 t_color			make_color(unsigned char a, unsigned char r, unsigned char g, unsigned char b);
 t_screen_info	init_screen_info(char **map, int width, int height);
 // mlx
