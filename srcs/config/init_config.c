@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 20:07:59 by ldutriez          #+#    #+#             */
-/*   Updated: 2022/05/29 18:59:10 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/05/29 20:37:46 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,21 @@
 
 static void	init_texture(t_mlx *mlx, char *line, t_vec2 pos, t_parser *parser)
 {
-	(void)mlx;
-	(void)line;
-	(void)pos;
-	(void)parser;
+	void	*img;
+	// char	*addr;
+	t_vec2	size;
+
+	pos.x += 2;
+	while (line[pos.x] == ' ')
+		pos.x++;
+	printf("Current texture path: {%s}\n", line + pos.x);
+	if (ft_is_valid_file_path(line + pos.x) == b_false)
+		return (add_error(parser, P_ERR_TEXTURE, pos.y, pos.x));
+	img = mlx_xpm_file_to_image(mlx->mlx, line + pos.x, &size.x, &size.y);
+	// addr = mlx_get_data_addr();
+	if (img == NULL)
+		add_error(parser, P_ERR_TEXTURE, pos.y, pos.x);
+	free(img);	
 }
 
 static unsigned char	get_color_component(char *line, t_vec2 pos
@@ -69,10 +80,14 @@ static void	init_color(t_mlx *mlx, char *line, t_vec2 pos, t_parser *parser)
 
 void	init_config(t_mlx *mlx, char *line, t_vec2 pos, t_parser *parser)
 {
-	if ((line[pos.x] == 'N' && line[pos.x + 1] == 'O')
-		|| (line[pos.x] == 'S' && line[pos.x + 1] == 'O')
-		|| (line[pos.x] == 'W' && line[pos.x + 1] == 'E')
-		|| (line[pos.x] == 'E' && line[pos.x + 1] == 'A'))
+	if ((line[pos.x] == 'N' && line[pos.x + 1] == 'O'
+			&& parser->north_texture_count == 1)
+		|| (line[pos.x] == 'S' && line[pos.x + 1] == 'O'
+			&& parser->south_texture_count == 1)
+		|| (line[pos.x] == 'W' && line[pos.x + 1] == 'E'
+			&& parser->west_texture_count == 1)
+		|| (line[pos.x] == 'E' && line[pos.x + 1] == 'A'
+			&& parser->east_texture_count == 1))
 		init_texture(mlx, line, pos, parser);
 	else if ((line[pos.x] == 'F' && parser->floor_color_count == 1)
 		|| (line[pos.x] == 'C' && parser->ceil_color_count == 1))

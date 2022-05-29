@@ -135,6 +135,7 @@ void	raycasting_routine(t_mlx *mlx);
 # define P_ERR_START_POS "Error\nMultiple definition of start position at line "
 # define P_ERR_UNCLOSED_MAP "Error\nMap is not closed at line "
 # define P_ERR_COLOR "Error\nInvalid color formatting at line "
+# define P_ERR_TEXTURE "Error\nInvalid texture at line "
 
 /*
 * This struct is used for the parsing of the map file.
