@@ -134,6 +134,7 @@ void	raycasting_routine(t_mlx *mlx);
 # define P_ERR_UNVALID_CHAR "Error\nUnvalid character at line "
 # define P_ERR_START_POS "Error\nMultiple definition of start position at line "
 # define P_ERR_UNCLOSED_MAP "Error\nMap is not closed at line "
+# define P_ERR_COLOR "Error\nInvalid color formatting at line "
 
 /*
 * This struct is used for the parsing of the map file.
@@ -180,9 +181,15 @@ int	parse_map_content(t_d_list *lines, t_parser *parser);
 
 /*
 *	This function will run tests on the path and then on the file.
-* If everything is correct the map data will be saved in the mlx struct.
-* Return 0 on success, 1 on error.
+*	If everything is correct the config data will be saved in the mlx struct.
+*	Return 0 on success, 1 on error.
 */
 int	parse_map(t_mlx *mlx, char *file);
+
+/*
+*	Fill the correct mlx struct with the data of the line.
+*	If not valid, add an error to the parser.
+*/
+void	init_config(t_mlx *mlx, char *line, t_vec2 pos, t_parser *parser);
 
 #endif
