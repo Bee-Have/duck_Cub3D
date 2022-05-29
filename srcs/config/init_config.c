@@ -107,7 +107,8 @@ void	init_map(t_mlx *mlx, t_d_list lines, t_vec2 pos)
 	index = 0;
 	while (lines != NULL)
 	{
-		map[index] = ft_strdup((char *)lines->data);
+		map[index] = (char *)lines->data;
+		lines->data = NULL;
 		lines = lines->next;
 		index++;
 	}
