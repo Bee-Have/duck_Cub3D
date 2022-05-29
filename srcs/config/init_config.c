@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 20:07:59 by ldutriez          #+#    #+#             */
-/*   Updated: 2022/05/29 18:32:57 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/05/29 18:59:10 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ static unsigned char	get_color_component(char *line, t_vec2 pos
 	return (color_component);
 }
 
+// If color already defined, return.
 static void	init_color(t_mlx *mlx, char *line, t_vec2 pos, t_parser *parser)
 {
 	int	r;
@@ -73,6 +74,7 @@ void	init_config(t_mlx *mlx, char *line, t_vec2 pos, t_parser *parser)
 		|| (line[pos.x] == 'W' && line[pos.x + 1] == 'E')
 		|| (line[pos.x] == 'E' && line[pos.x + 1] == 'A'))
 		init_texture(mlx, line, pos, parser);
-	else if (line[pos.x] == 'F' || line[pos.x] == 'C')
+	else if ((line[pos.x] == 'F' && parser->floor_color_count == 1)
+		|| (line[pos.x] == 'C' && parser->ceil_color_count == 1))
 		init_color(mlx, line, pos, parser);
 }
