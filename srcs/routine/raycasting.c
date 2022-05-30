@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 18:30:53 by amarini-          #+#    #+#             */
-/*   Updated: 2022/05/30 16:41:04 by user42           ###   ########.fr       */
+/*   Updated: 2022/05/30 17:29:21 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,26 @@ void	draw_collumn(t_system *sys, t_raycast cast_info, t_int2 wall_limits)
 
 	start = make_int2(0, cast_info.x);
 	end = make_int2(wall_limits.y, cast_info.x);
-	draw_line(sys, start, end, sys->s_i.ceiling);
+	draw_line(sys, start, end, make_color(255, 0, 0, 255));
 	start = make_int2(wall_limits.x, cast_info.x);
 	end = make_int2(W_HEIGHT - 1, cast_info.x);
-	draw_line(sys, start, end, sys->s_i.floor);
+	draw_line(sys, start, end, make_color(255, 255, 255, 255));
 	start = make_int2(wall_limits.y, cast_info.x);
 	end = make_int2(wall_limits.x, cast_info.x);
 	if (cast_info.side == 1)
-		draw_line(sys, start, end, sys->s_i.wall_south);
+	{
+		if ((int)sys->pj.pos.y < cast_info.hit.y)
+			draw_line(sys, start, end, make_color(255, 0, 255, 0));
+		else
+			draw_line(sys, start, end, make_color(255, 255, 0, 0));
+	}
 	else
-		draw_line(sys, start, end, sys->s_i.wall_west);
+	{
+		if ((int)sys->pj.pos.x < cast_info.hit.x)
+			draw_line(sys, start, end, make_color(255, 255, 255, 0));
+		else
+			draw_line(sys, start, end, make_color(255, 0, 0, 0));
+	}
 }
 
 int	render_rays(t_system *sys, t_raycast cast_info)
@@ -58,29 +68,29 @@ int	render_rays(t_system *sys, t_raycast cast_info)
 
 void	casting_rays(t_system *sys, t_raycast cast_info)
 {
-	t_int2	map;
-	int		hit;
+	int		hit_bool;
 
-	map = make_int2((int)sys->pj.pos.y, (int)sys->pj.pos.x);
-	hit = 0;
-	while (hit == 0)
+	cast_info.hit = make_int2((int)sys->pj.pos.y, (int)sys->pj.pos.x);
+	hit_bool = 0;
+	while (hit_bool == 0)
 	{
 		if (cast_info.side_dist.x < cast_info.side_dist.y)
 		{
 			cast_info.side_dist.x += cast_info.delta_dist.x;
-			map.x += cast_info.step.x;
+			cast_info.hit.x += cast_info.step.x;
 			cast_info.side = 0;
 		}
 		else
 		{
 			cast_info.side_dist.y += cast_info.delta_dist.y;
-			map.y += cast_info.step.y;
+			cast_info.hit.y += cast_info.step.y;
 			cast_info.side = 1;
 		}
-		if (map.y < 0 || map.y > ft_tab_len((void **)sys->s_i.map)
-			|| map.x < 0 || map.x > (int)ft_strlen(sys->s_i.map[map.y])
-			|| sys->s_i.map[map.y][map.x] == '1')
-			hit = render_rays(sys, cast_info);
+		if (cast_info.hit.y < 0 || cast_info.hit.x < 0
+			|| cast_info.hit.y > ft_tab_len((void **)sys->s_i.map)
+			|| cast_info.hit.x > (int)ft_strlen(sys->s_i.map[cast_info.hit.y])
+			|| sys->s_i.map[cast_info.hit.y][cast_info.hit.x] == '1')
+			hit_bool = render_rays(sys, cast_info);
 	}
 }
 

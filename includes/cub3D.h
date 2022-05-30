@@ -66,6 +66,7 @@ typedef struct s_color
 typedef struct s_raycasting
 {
 	int		x;
+	t_int2	hit;
 	t_vec2	side_dist;
 	t_vec2	delta_dist;
 	t_int2	step;
@@ -79,10 +80,6 @@ typedef struct s_screen_info
 
 	t_color	floor;
 	t_color	ceiling;
-	t_color	wall_north;//tmp
-	t_color	wall_south;//tmp
-	t_color	wall_east;//tmp
-	t_color	wall_west;//tmp
 }			t_screen_info;
 
 typedef struct s_event
