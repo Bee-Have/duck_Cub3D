@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 18:30:53 by amarini-          #+#    #+#             */
-/*   Updated: 2022/05/30 17:29:21 by user42           ###   ########.fr       */
+/*   Updated: 2022/05/30 18:51:51 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,28 +18,24 @@ void	draw_collumn(t_system *sys, t_raycast cast_info, t_int2 wall_limits)
 	t_int2	start;
 	t_int2	end;
 
-	start = make_int2(0, cast_info.x);
-	end = make_int2(wall_limits.y, cast_info.x);
-	draw_line(sys, start, end, make_color(255, 0, 0, 255));
-	start = make_int2(wall_limits.x, cast_info.x);
-	end = make_int2(W_HEIGHT - 1, cast_info.x);
-	draw_line(sys, start, end, make_color(255, 255, 255, 255));
+	if (cast_info.hit.y < 0 || cast_info.hit.x < 0
+		|| cast_info.hit.y > ft_tab_len((void **)sys->s_i.map)
+		|| cast_info.hit.x > (int)ft_strlen(sys->s_i.map[cast_info.hit.y]))
+		wall_limits = make_int2(W_HEIGHT / 2, W_HEIGHT / 2);
+	draw_line(sys, make_int2(0, cast_info.x),
+		make_int2(wall_limits.y, cast_info.x), make_color(255, 0, 0, 255));
+	draw_line(sys, make_int2(wall_limits.x, cast_info.x),
+		make_int2(W_HEIGHT - 1, cast_info.x), make_color(255, 255, 255, 255));
 	start = make_int2(wall_limits.y, cast_info.x);
 	end = make_int2(wall_limits.x, cast_info.x);
-	if (cast_info.side == 1)
-	{
-		if ((int)sys->pj.pos.y < cast_info.hit.y)
-			draw_line(sys, start, end, make_color(255, 0, 255, 0));
-		else
-			draw_line(sys, start, end, make_color(255, 255, 0, 0));
-	}
-	else
-	{
-		if ((int)sys->pj.pos.x < cast_info.hit.x)
-			draw_line(sys, start, end, make_color(255, 255, 255, 0));
-		else
-			draw_line(sys, start, end, make_color(255, 0, 0, 0));
-	}
+	if (cast_info.side == 1 && (int)sys->pj.pos.y < cast_info.hit.y)
+		draw_line(sys, start, end, make_color(255, 0, 255, 0));
+	else if (cast_info.side == 1 && (int)sys->pj.pos.y > cast_info.hit.y)
+		draw_line(sys, start, end, make_color(255, 255, 0, 0));
+	else if (cast_info.side == 0 && (int)sys->pj.pos.x < cast_info.hit.x)
+		draw_line(sys, start, end, make_color(255, 255, 255, 0));
+	else if (cast_info.side == 0 && (int)sys->pj.pos.x > cast_info.hit.x)
+		draw_line(sys, start, end, make_color(255, 0, 0, 0));
 }
 
 int	render_rays(t_system *sys, t_raycast cast_info)
