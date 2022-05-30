@@ -131,10 +131,10 @@ typedef struct s_system
 
 //? INIT
 // structs
-t_int2			make_int2(int y, int x);
-t_vec2			make_vec2(double y, double x);
-t_color			make_color(unsigned char a, unsigned char r, unsigned char g, unsigned char b);
-t_screen_info	init_screen_info(void);
+t_int2	make_int2(int y, int x);
+t_vec2	make_vec2(double y, double x);
+t_color	make_color(unsigned char a, unsigned char r, unsigned char g,
+			unsigned char b);
 // mlx
 t_img	init_img(void);
 t_event	init_events(void);
@@ -207,8 +207,8 @@ int	end_parser(const t_parser *parser);
 *	Will format an error message if the error count is less than 20.
 *	This function still use dynamic allocation for atoi.
 */
-void	add_error(t_parser *parser, const char *description
-	, int line, int column);
+void	add_error(t_parser *parser, const char *description,
+	int line, int column);
 
 /*
 *	Will recognize the token and increment the corresponding counter.
