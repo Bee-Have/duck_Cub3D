@@ -1,3 +1,11 @@
+NO ./ressources/bluestone.xpm
+SO ./ressources/colorstone.xpm
+WE ./ressources/greystone.xpm
+EA ./ressources/mossy.xpm
+
+F 25,255,255
+C 10,52,255
+
 1111111111111111111111
 1000000010000000000001
 1011111010111111101111
