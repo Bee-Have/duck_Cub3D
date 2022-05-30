@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 15:25:34 by amarini-          #+#    #+#             */
-/*   Updated: 2022/05/29 14:49:41 by user42           ###   ########.fr       */
+/*   Updated: 2022/05/30 17:05:31 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ t_pj	init_pj(char **map)
 	else if (map[(int)pj.pos.y][(int)pj.pos.x] == 'S')
 		pj.rot = 270;
 	else if (map[(int)pj.pos.y][(int)pj.pos.x] == 'E')
-		pj.rot = 0;
-	else if (map[(int)pj.pos.y][(int)pj.pos.x] == 'W')
 		pj.rot = 180;
+	else if (map[(int)pj.pos.y][(int)pj.pos.x] == 'W')
+		pj.rot = 0;
 	pj.dir = make_vec2(pj.pos.y - (SPEED * sinf(pj.rot * (M_PI / 180)))
 						, pj.pos.x - (SPEED * cosf(pj.rot * (M_PI / 180))));
 	pj.plane = make_vec2(0.1, 0);
