@@ -68,6 +68,15 @@ typedef struct s_raycasting
 	int		side;
 }				t_raycast;
 
+typedef struct s_img
+{
+	void	*img;
+	char	*addr;
+	int		bits_pxl;
+	int		line_len;
+	int		endian;
+}			t_img;
+
 typedef struct s_screen_info
 {
 	t_int2	screen;
@@ -76,6 +85,11 @@ typedef struct s_screen_info
 
 	t_color	floor;
 	t_color	ceiling;
+	t_img	north_texture;
+	t_img	south_texture;
+	t_img	west_texture;
+	t_img	east_texture;
+	
 	t_color	wall_north;//tmp
 	t_color	wall_south;//tmp
 	t_color	wall_east;//tmp
@@ -92,22 +106,6 @@ typedef struct s_event
 	char	is_right_pressed;
 }			t_event;
 
-typedef struct s_img
-{
-	void	*img;
-	char	*addr;
-	int		bits_pxl;
-	int		line_len;
-	int		endian;
-}			t_img;
-
-typedef struct s_textures
-{
-	t_img	north_texture;
-	t_img	south_texture;
-	t_img	west_texture;
-	t_img	east_texture;
-}			t_textures;
 
 typedef struct s_mlx
 {
@@ -119,7 +117,6 @@ typedef struct s_mlx
 typedef struct s_system
 {
 	t_mlx			mlx;
-	t_textures		textures;
 
 	t_screen_info	s_i;
 	t_event			events;
