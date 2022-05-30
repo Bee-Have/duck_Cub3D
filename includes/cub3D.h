@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3D.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/30 17:56:34 by user42            #+#    #+#             */
+/*   Updated: 2022/05/30 17:56:38 by user42           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -8,6 +20,10 @@
 
 #ifndef CUB3D_H
 #define CUB3D_H
+
+// window/screen size
+#define W_HEIGHT 1080
+#define W_WIDTH 1920
 
 // minimap general position
 #define T_LEFT 0
@@ -62,6 +78,7 @@ typedef struct s_color
 typedef struct s_raycasting
 {
 	int		x;
+	t_int2	hit;
 	t_vec2	side_dist;
 	t_vec2	delta_dist;
 	t_int2	step;
@@ -79,7 +96,6 @@ typedef struct s_img
 
 typedef struct s_screen_info
 {
-	t_int2	screen;
 	char	**map;
 	int		pxl_unit;
 
@@ -89,11 +105,6 @@ typedef struct s_screen_info
 	t_img	south_texture;
 	t_img	west_texture;
 	t_img	east_texture;
-	
-	t_color	wall_north;//tmp
-	t_color	wall_south;//tmp
-	t_color	wall_east;//tmp
-	t_color	wall_west;//tmp
 }			t_screen_info;
 
 typedef struct s_event
@@ -125,20 +136,20 @@ typedef struct s_system
 
 //? INIT
 // structs
-t_int2			make_int2(int y, int x);
-t_vec2			make_vec2(double y, double x);
-t_color			make_color(unsigned char a, unsigned char r, unsigned char g, unsigned char b);
-t_screen_info	init_screen_info(char **map, int width, int height);
+t_int2	make_int2(int y, int x);
+t_vec2	make_vec2(double y, double x);
+t_color	make_color(unsigned char a, unsigned char r, unsigned char g,
+			unsigned char b);
 // mlx
 t_img	init_img(void);
 t_event	init_events(void);
-t_mlx	init_mlx(int width, int height);
+t_mlx	init_mlx(void);
 // gameplay
 t_pj	init_pj(char **map);
 
 //? ROUTINE
 // mlx
-void	mlx_routine(t_system *sys);
+void	mlx_routine(t_system sys);
 // update
 int		update_all(t_system *sys);
 // keys events
@@ -201,8 +212,8 @@ int	end_parser(const t_parser *parser);
 *	Will format an error message if the error count is less than 20.
 *	This function still use dynamic allocation for atoi.
 */
-void	add_error(t_parser *parser, const char *description
-	, int line, int column);
+void	add_error(t_parser *parser, const char *description,
+	int line, int column);
 
 /*
 *	Will recognize the token and increment the corresponding counter.

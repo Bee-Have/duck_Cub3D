@@ -1,4 +1,5 @@
 /objs
+libft/objs
 cub3D
 *.log
 **.vscode
