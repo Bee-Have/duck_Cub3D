@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3D.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/30 17:56:34 by user42            #+#    #+#             */
+/*   Updated: 2022/05/30 17:56:38 by user42           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -73,6 +85,15 @@ typedef struct s_raycasting
 	int		side;
 }				t_raycast;
 
+typedef struct s_img
+{
+	void	*img;
+	char	*addr;
+	int		bits_pxl;
+	int		line_len;
+	int		endian;
+}			t_img;
+
 typedef struct s_screen_info
 {
 	char	**map;
@@ -80,6 +101,10 @@ typedef struct s_screen_info
 
 	t_color	floor;
 	t_color	ceiling;
+	t_img	north_texture;
+	t_img	south_texture;
+	t_img	west_texture;
+	t_img	east_texture;
 }			t_screen_info;
 
 typedef struct s_event
@@ -92,22 +117,6 @@ typedef struct s_event
 	char	is_right_pressed;
 }			t_event;
 
-typedef struct s_img
-{
-	void	*img;
-	char	*addr;
-	int		bits_pxl;
-	int		line_len;
-	int		endian;
-}			t_img;
-
-typedef struct s_textures
-{
-	t_img	north_texture;
-	t_img	south_texture;
-	t_img	west_texture;
-	t_img	east_texture;
-}			t_textures;
 
 typedef struct s_mlx
 {
@@ -119,7 +128,6 @@ typedef struct s_mlx
 typedef struct s_system
 {
 	t_mlx			mlx;
-	t_textures		textures;
 
 	t_screen_info	s_i;
 	t_event			events;
