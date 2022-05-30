@@ -144,7 +144,7 @@ t_pj	init_pj(char **map);
 
 //? ROUTINE
 // mlx
-void	mlx_routine(t_system *sys);
+void	mlx_routine(t_system sys);
 // update
 int		update_all(t_system *sys);
 // keys events
