@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 18:14:04 by amarini-          #+#    #+#             */
-/*   Updated: 2022/05/29 22:30:23 by user42           ###   ########.fr       */
+/*   Updated: 2022/05/30 16:38:03 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,11 @@ t_color	make_color(unsigned char a, unsigned char r, unsigned char g, unsigned c
 	return (color);
 }
 
-t_screen_info	init_screen_info(char **map, int width, int height)
+t_screen_info	init_screen_info(void)
 {
 	t_screen_info	s_i;
 
-	s_i.screen.x = width;
-	s_i.screen.y = height;
-	s_i.map = map;
+	s_i.map = NULL;
 	s_i.pxl_unit = 0;
 	// this part will be partly automatised && some of them will be textures
 	s_i.floor = make_color(255, 255, 255, 255);// white

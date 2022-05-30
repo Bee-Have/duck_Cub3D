@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 16:10:57 by amarini-          #+#    #+#             */
-/*   Updated: 2022/05/29 22:07:24 by user42           ###   ########.fr       */
+/*   Updated: 2022/05/30 16:37:05 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ int	main(int ac, char **av)
 		return (EXIT_FAILURE);
 	// init mlx
 	//! WARNING window size will be given from file
-	sys->s_i = init_screen_info(ft_get_file(av[1]), 1920, 1080);
-	sys->mlx = init_mlx(1920, 1080);
+	sys->s_i = init_screen_info();
+	sys->mlx = init_mlx();
 	if (parse_map(sys, av[1]) != 0)
 		return (EXIT_FAILURE);
 	// init map

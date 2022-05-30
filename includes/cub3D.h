@@ -9,6 +9,10 @@
 #ifndef CUB3D_H
 #define CUB3D_H
 
+// window/screen size
+#define W_HEIGHT 1080
+#define W_WIDTH 1920
+
 // minimap general position
 #define T_LEFT 0
 #define T_RIGHT 1
@@ -70,7 +74,6 @@ typedef struct s_raycasting
 
 typedef struct s_screen_info
 {
-	t_int2	screen;
 	char	**map;
 	int		pxl_unit;
 
@@ -131,11 +134,11 @@ typedef struct s_system
 t_int2			make_int2(int y, int x);
 t_vec2			make_vec2(double y, double x);
 t_color			make_color(unsigned char a, unsigned char r, unsigned char g, unsigned char b);
-t_screen_info	init_screen_info(char **map, int width, int height);
+t_screen_info	init_screen_info(void);
 // mlx
 t_img	init_img(void);
 t_event	init_events(void);
-t_mlx	init_mlx(int width, int height);
+t_mlx	init_mlx(void);
 // gameplay
 t_pj	init_pj(char **map);
 

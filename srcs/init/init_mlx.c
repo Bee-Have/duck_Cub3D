@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 18:09:36 by amarini-          #+#    #+#             */
-/*   Updated: 2022/05/29 20:44:01 by user42           ###   ########.fr       */
+/*   Updated: 2022/05/30 16:39:09 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,14 @@ t_event	init_events(void)
 	return (events);
 }
 
-t_mlx	init_mlx(int width, int height)
+t_mlx	init_mlx(void)
 {
 	t_mlx	mlx;
 
 	mlx.mlx = mlx_init();
-	mlx.win = mlx_new_window(mlx.mlx, width, height, "cub3D");
+	mlx.win = mlx_new_window(mlx.mlx, W_WIDTH, W_HEIGHT, "cub3D");
 	mlx.img = init_img();
-	mlx.img.img = mlx_new_image(mlx.mlx, width, height);
+	mlx.img.img = mlx_new_image(mlx.mlx, W_WIDTH, W_HEIGHT);
 	mlx.img.addr = mlx_get_data_addr(mlx.img.img, &mlx.img.bits_pxl
 								, &mlx.img.line_len, &mlx.img.endian);
 	return (mlx);
