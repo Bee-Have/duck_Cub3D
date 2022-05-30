@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_config.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 20:07:59 by ldutriez          #+#    #+#             */
-/*   Updated: 2022/05/29 22:31:16 by user42           ###   ########.fr       */
+/*   Updated: 2022/05/30 16:31:31 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,31 +50,31 @@ static unsigned char	get_color_component(char *line, t_int2 pos
 // If color already defined, return.
 static void	init_color(t_system *sys, char *line, t_int2 pos, t_parser *parser)
 {
-	int	r;
-	int	g;
-	int	b;
+	t_color	*color;
 
-	(void)sys;
+	color = &sys->s_i.floor;
+	if (line[pos.x] == 'C')
+		color = &sys->s_i.ceiling;
 	pos.x++;
 	while (line[pos.x] != '\0' && line[pos.x] == ' ')
 		pos.x++;
-	r = get_color_component(line, pos, parser);
+	color->r = get_color_component(line, pos, parser);
 	while (line[pos.x] != '\0' && line[pos.x] != ','
 		&& ft_is_digit(line[pos.x]) == b_true)
 		pos.x++;
 	if (line[pos.x] == ',')
 		pos.x++;
-	g = get_color_component(line, pos, parser);
+	color->g = get_color_component(line, pos, parser);
 	while (line[pos.x] != '\0' && line[pos.x] != ',')
 		pos.x++;
 	if (line[pos.x] == ',')
 		pos.x++;
-	b = get_color_component(line, pos, parser);
+	color->b = get_color_component(line, pos, parser);
 	while (ft_is_digit(line[pos.x]) == b_true)
 		pos.x++;
 	if (line[pos.x] != '\0')
 		add_error(parser, P_ERR_COLOR, pos.y, pos.x);
-	printf("color code after parsing: {%d, %d, %d}\n", r, g, b);
+	*color = make_color(255, color->r, color->g, color->b);
 }
 
 void	init_config(t_system *sys, char *line, t_int2 pos, t_parser *parser)
