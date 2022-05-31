@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 15:38:13 by amarini-          #+#    #+#             */
-/*   Updated: 2022/05/30 17:05:18 by user42           ###   ########.fr       */
+/*   Updated: 2022/05/31 21:11:57 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,21 +55,21 @@ int	update_keys_events(t_system *sys)
 
 	if (sys->events.is_left_pressed == 1)
 	{
-		sys->pj.rot += R_SPEED;
-		if (sys->pj.rot > 360)
-			sys->pj.rot = 0 + (sys->pj.rot - 360);
-		old_plane_x = sys->pj.plane.x;
-		sys->pj.plane.x = sys->pj.plane.x * cos(R_SPEED * (M_PI / 180)) - sys->pj.plane.y * sin(R_SPEED * (M_PI / 180));
-		sys->pj.plane.y = old_plane_x * sin(R_SPEED * (M_PI / 180)) + sys->pj.plane.y * cos(R_SPEED * (M_PI / 180));
-	}
-	if (sys->events.is_right_pressed == 1)
-	{
 		sys->pj.rot -= R_SPEED;
 		if (sys->pj.rot < 0)
 			sys->pj.rot = 360 - (sys->pj.rot * -1);
 		old_plane_x = sys->pj.plane.x;
 		sys->pj.plane.x = sys->pj.plane.x * cos(-R_SPEED * (M_PI / 180)) - sys->pj.plane.y * sin(-R_SPEED * (M_PI / 180));
 		sys->pj.plane.y = old_plane_x * sin(-R_SPEED * (M_PI / 180)) + sys->pj.plane.y * cos(-R_SPEED * (M_PI / 180));
+	}
+	if (sys->events.is_right_pressed == 1)
+	{
+		sys->pj.rot += R_SPEED;
+		if (sys->pj.rot > 360)
+			sys->pj.rot = 0 + (sys->pj.rot - 360);
+		old_plane_x = sys->pj.plane.x;
+		sys->pj.plane.x = sys->pj.plane.x * cos(R_SPEED * (M_PI / 180)) - sys->pj.plane.y * sin(R_SPEED * (M_PI / 180));
+		sys->pj.plane.y = old_plane_x * sin(R_SPEED * (M_PI / 180)) + sys->pj.plane.y * cos(R_SPEED * (M_PI / 180));
 	}
 	if (sys->events.is_s_pressed == 1)
 	{
@@ -83,14 +83,15 @@ int	update_keys_events(t_system *sys)
 	}
 	if (sys->events.is_a_pressed == 1)
 	{
-		sys->pj.pos.x += (SPEED * cosf((sys->pj.rot - 90) * (M_PI / 180)));
-		sys->pj.pos.y += (SPEED * sinf((sys->pj.rot - 90) * (M_PI / 180)));
-	}
-	if (sys->events.is_d_pressed == 1)
-	{
 		sys->pj.pos.x += (SPEED * cosf((sys->pj.rot + 90) * (M_PI / 180)));
 		sys->pj.pos.y += (SPEED * sinf((sys->pj.rot + 90) * (M_PI / 180)));
 	}
+	if (sys->events.is_d_pressed == 1)
+	{
+		sys->pj.pos.x += (SPEED * cosf((sys->pj.rot - 90) * (M_PI / 180)));
+		sys->pj.pos.y += (SPEED * sinf((sys->pj.rot - 90) * (M_PI / 180)));
+	}
+
 	sys->pj.dir.x = sys->pj.pos.x - (SPEED * cosf(sys->pj.rot * (M_PI / 180)));
 	sys->pj.dir.y = sys->pj.pos.y - (SPEED * sinf(sys->pj.rot * (M_PI / 180)));
 	return (EXIT_SUCCESS);
