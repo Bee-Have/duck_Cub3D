@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 19:09:38 by ldutriez          #+#    #+#             */
-/*   Updated: 2022/05/26 20:19:42 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/05/31 20:02:33 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,35 +74,41 @@ static void	parse_map_line(t_d_list lines, int l, t_parser *parser)
 	}
 }
 
+static void	update_line_max_size(char *line, t_parser *parser)
+{
+	if (parser->line_max_size < ft_strlen(line))
+		parser->line_max_size = ft_strlen(line);
+}
+
 /*
 *	Parse the map content.
 *	Return the line position of the map.
 */
 int	parse_map_content(t_d_list *lines, t_parser *parser)
 {
-	int			l;
-	int			c;
-	char		*line;
+	t_int2	pos;
+	char	*line;
 
-	l = ft_d_list_size((*lines)) - 1;
+	pos.y = ft_d_list_size((*lines)) - 1;
 	while ((*lines) != NULL)
 	{
 		line = (char *)(*lines)->data;
-		c = 0;
-		if (line[c] == '\0')
-			return (l);
-		while (line[c] != '\0' && line[c] == ' ')
-			++c;
-		if ((line[c] == '\0' && c != 0)
-			|| (line[c] == 'N' && line[c + 1] == 'O')
-			|| (line[c] == 'S' && line[c + 1] == 'O')
-			|| (line[c] == 'W' && line[c + 1] == 'E')
-			|| (line[c] == 'E' && line[c + 1] == 'A')
-			|| (line[c] == 'F') || (line[c] == 'C'))
-			return (l);
-		parse_map_line((*lines), l, parser);
-		--l;
+		pos.x = 0;
+		if (line[pos.x] == '\0')
+			return (pos.y);
+		while (line[pos.x] != '\0' && line[pos.x] == ' ')
+			++pos.x;
+		if ((line[pos.x] == '\0' && pos.x != 0)
+			|| (line[pos.x] == 'N' && line[pos.x + 1] == 'O')
+			|| (line[pos.x] == 'S' && line[pos.x + 1] == 'O')
+			|| (line[pos.x] == 'W' && line[pos.x + 1] == 'E')
+			|| (line[pos.x] == 'E' && line[pos.x + 1] == 'A')
+			|| (line[pos.x] == 'F') || (line[pos.x] == 'C'))
+			return (pos.y);
+		parse_map_line((*lines), pos.y, parser);
+		update_line_max_size(line, parser);
+		--pos.y;
 		(*lines) = (*lines)->prev;
 	}
-	return (l);
+	return (pos.y);
 }

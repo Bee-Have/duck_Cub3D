@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 18:30:53 by amarini-          #+#    #+#             */
-/*   Updated: 2022/05/30 18:51:51 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/05/31 18:55:00 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	draw_collumn(t_system *sys, t_raycast cast_info, t_int2 wall_limits)
 	t_int2	end;
 
 	if (cast_info.hit.y < 0 || cast_info.hit.x < 0
-		|| cast_info.hit.y > ft_tab_len((void **)sys->s_i.map)
-		|| cast_info.hit.x > (int)ft_strlen(sys->s_i.map[cast_info.hit.y]))
+		|| cast_info.hit.y >= ft_tab_len((void **)sys->s_i.map)
+		|| cast_info.hit.x >= (int)ft_strlen(sys->s_i.map[cast_info.hit.y]))
 		wall_limits = make_int2(W_HEIGHT / 2, W_HEIGHT / 2);
 	draw_line(sys, make_int2(0, cast_info.x),
 		make_int2(wall_limits.y, cast_info.x), make_color(255, 0, 0, 255));
@@ -83,8 +83,8 @@ void	casting_rays(t_system *sys, t_raycast cast_info)
 			cast_info.side = 1;
 		}
 		if (cast_info.hit.y < 0 || cast_info.hit.x < 0
-			|| cast_info.hit.y > ft_tab_len((void **)sys->s_i.map)
-			|| cast_info.hit.x > (int)ft_strlen(sys->s_i.map[cast_info.hit.y])
+			|| cast_info.hit.y >= ft_tab_len((void **)sys->s_i.map)
+			|| cast_info.hit.x >= (int)ft_strlen(sys->s_i.map[cast_info.hit.y])
 			|| sys->s_i.map[cast_info.hit.y][cast_info.hit.x] == '1')
 			hit_bool = render_rays(sys, cast_info);
 	}

@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 20:07:59 by ldutriez          #+#    #+#             */
-/*   Updated: 2022/05/30 17:13:33 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/05/31 20:28:02 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,23 +103,27 @@ void	init_config(t_system *sys, char *line, t_int2 pos, t_parser *parser)
 		init_color(sys, line, pos, parser);
 }
 
-void	init_map(t_system *sys, t_d_list lines, t_int2 pos)
+void	init_map(t_system *sys, t_d_list lines, t_int2 pos, t_parser *parser)
 {
-	int			map_len;
 	char		**map;
 	int			index;
 
-	(void)sys;
+	if (parser->error_count > 0)
+		return ;
 	lines = lines->next;
-	map_len = ft_d_list_size(lines) - pos.y;
-	map = (char **)malloc(sizeof(char *) * (map_len + 1));
+	map = (char **)malloc(sizeof(char *) * (ft_d_list_size(lines) - pos.y + 1));
 	if (map == NULL)
 		return ;
 	index = 0;
 	while (lines != NULL)
 	{
-		map[index] = (char *)lines->data;
-		lines->data = NULL;
+		map[index] = (char *)malloc(sizeof(char) * (parser->line_max_size + 1));
+		if (map[index] == NULL)
+			break ;
+		map[index][parser->line_max_size] = '\0';
+		ft_strcpy((char *)lines->data, map[index]);
+		ft_memset(map[index] + ft_strlen((char *)lines->data), ' ',
+			parser->line_max_size - ft_strlen((char *)lines->data));
 		lines = lines->next;
 		index++;
 	}
