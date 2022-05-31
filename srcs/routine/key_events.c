@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 15:38:13 by amarini-          #+#    #+#             */
-/*   Updated: 2022/05/31 20:18:58 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/05/31 22:47:30 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,9 +95,9 @@ static void	rotate_player(t_system *sys, char dir)
 int	update_keys_events(t_system *sys)
 {
 	if (sys->events.is_left_pressed == 1)
-		rotate_player(sys, 'L');
-	if (sys->events.is_right_pressed == 1)
 		rotate_player(sys, 'R');
+	if (sys->events.is_right_pressed == 1)
+		rotate_player(sys, 'L');
 	if (sys->events.is_s_pressed == 1)
 		move_player(sys, make_vec2((SPEED * sinf(sys->pj.rot TO_DEG)),
 				(SPEED * cosf(sys->pj.rot TO_DEG))));
@@ -105,11 +105,11 @@ int	update_keys_events(t_system *sys)
 		move_player(sys, make_vec2(-(SPEED * sinf(sys->pj.rot TO_DEG)),
 				-(SPEED * cosf(sys->pj.rot TO_DEG))));
 	if (sys->events.is_a_pressed == 1)
-		move_player(sys, make_vec2(-(SPEED * sinf((sys->pj.rot + 90) TO_DEG)),
-				-(SPEED * cosf((sys->pj.rot + 90) TO_DEG))));
-	if (sys->events.is_d_pressed == 1)
 		move_player(sys, make_vec2((SPEED * sinf((sys->pj.rot + 90) TO_DEG)),
 				(SPEED * cosf((sys->pj.rot + 90) TO_DEG))));
+	if (sys->events.is_d_pressed == 1)
+		move_player(sys, make_vec2((SPEED * sinf((sys->pj.rot - 90) TO_DEG)),
+				(SPEED * cosf((sys->pj.rot - 90) TO_DEG))));
 	sys->pj.dir.x = sys->pj.pos.x - (SPEED * cosf(sys->pj.rot TO_DEG));
 	sys->pj.dir.y = sys->pj.pos.y - (SPEED * sinf(sys->pj.rot TO_DEG));
 	return (EXIT_SUCCESS);
