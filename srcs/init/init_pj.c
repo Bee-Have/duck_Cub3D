@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 15:25:34 by amarini-          #+#    #+#             */
-/*   Updated: 2022/05/31 21:12:42 by user42           ###   ########.fr       */
+/*   Updated: 2022/05/31 21:15:43 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,5 @@ t_pj	init_pj(char **map)
 	}
 	pj.dir = make_vec2(pj.pos.y - (SPEED * sinf(pj.rot * (M_PI / 180))),
 						pj.pos.x - (SPEED * cosf(pj.rot * (M_PI / 180))));
-	//pj.plane = make_vec2(-0.1, 0);
 	return (pj);
 }
