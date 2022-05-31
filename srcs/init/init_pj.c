@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 15:25:34 by amarini-          #+#    #+#             */
-/*   Updated: 2022/05/30 17:05:31 by user42           ###   ########.fr       */
+/*   Updated: 2022/05/31 19:54:50 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ t_pj	init_pj(char **map)
 	t_pj	pj;
 
 	pj.pos = get_pj_pos(map);
+	pj.pos.y += 0.5;
+	pj.pos.x += 0.5;
 	pj.rot = 0;
 	if (map[(int)pj.pos.y][(int)pj.pos.x] == 'N')
 		pj.rot = 90;
