@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 15:25:34 by amarini-          #+#    #+#             */
-/*   Updated: 2022/05/30 17:05:31 by user42           ###   ########.fr       */
+/*   Updated: 2022/05/31 21:15:43 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,17 +44,30 @@ t_pj	init_pj(char **map)
 	t_pj	pj;
 
 	pj.pos = get_pj_pos(map);
+	pj.pos.y += 0.5;
+	pj.pos.x += 0.5;
 	pj.rot = 0;
 	if (map[(int)pj.pos.y][(int)pj.pos.x] == 'N')
+	{
 		pj.rot = 90;
+		pj.plane = make_vec2(0, 0.1);
+	}
 	else if (map[(int)pj.pos.y][(int)pj.pos.x] == 'S')
+	{
 		pj.rot = 270;
+		pj.plane = make_vec2(0, -0.1);
+	}
 	else if (map[(int)pj.pos.y][(int)pj.pos.x] == 'E')
+	{
 		pj.rot = 180;
+		pj.plane = make_vec2(0.1, 0);
+	}
 	else if (map[(int)pj.pos.y][(int)pj.pos.x] == 'W')
+	{
 		pj.rot = 0;
-	pj.dir = make_vec2(pj.pos.y - (SPEED * sinf(pj.rot * (M_PI / 180)))
-						, pj.pos.x - (SPEED * cosf(pj.rot * (M_PI / 180))));
-	pj.plane = make_vec2(0.1, 0);
+		pj.plane = make_vec2(-0.1, 0);
+	}
+	pj.dir = make_vec2(pj.pos.y - (SPEED * sinf(pj.rot * (M_PI / 180))),
+						pj.pos.x - (SPEED * cosf(pj.rot * (M_PI / 180))));
 	return (pj);
 }
