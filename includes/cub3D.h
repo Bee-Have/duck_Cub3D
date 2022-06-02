@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 17:56:34 by user42            #+#    #+#             */
-/*   Updated: 2022/05/30 17:56:38 by user42           ###   ########.fr       */
+/*   Updated: 2022/05/31 20:36:27 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,6 +199,7 @@ typedef struct s_parser
 	unsigned char	start_pos_count;
 	char			errors[ERROR_LIMIT][100];
 	int				error_count;
+	size_t			line_max_size;
 }	t_parser;
 
 /*
@@ -241,7 +242,8 @@ void	init_config(t_system *sys, char *line, t_int2 pos, t_parser *parser);
 
 /*
 *	Take what have been parsed and fill the system struct.
+*	If an error occured, the map is not allocated.
 */
-void	init_map(t_system *sys, t_d_list lines, t_int2 pos);
+void	init_map(t_system *sys, t_d_list lines, t_int2 pos, t_parser *parser);
 
 #endif
