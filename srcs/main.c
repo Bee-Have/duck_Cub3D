@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 16:10:57 by amarini-          #+#    #+#             */
-/*   Updated: 2022/05/30 17:12:12 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/04 13:13:46 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	main(int ac, char **av)
 	sys.pj = init_pj(sys.s_i.map);
 	// start mlx routine
 	mlx_routine(sys);
-	ft_free_tab((void **)sys.s_i.map);
+	if (sys.s_i.map != NULL)
+		end_simulation(&sys);
 	return (EXIT_SUCCESS);
 }
