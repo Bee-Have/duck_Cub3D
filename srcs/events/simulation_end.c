@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   simulation_end.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 19:26:03 by user42            #+#    #+#             */
-/*   Updated: 2022/06/04 14:08:27 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/06/04 15:13:58 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,15 @@
 // 	mlx_destroy_image(sys->mlx.mlx, sys->s_i.east_texture.img);
 // }
 
-void	end_simulation(t_system *sys)
+void	end_simulation(t_system *sys, int exit_code)
 {
-	ft_free_tab((void **)sys->s_i.map);
+	if (sys->s_i.map != NULL)
+		ft_free_tab((void **)sys->s_i.map);
 	sys->s_i.map = NULL;
 	// free_textures(sys);
 	mlx_destroy_image(sys->mlx.mlx, sys->mlx.img.img);
 	mlx_destroy_window(sys->mlx.mlx, sys->mlx.win);
 	mlx_destroy_display(sys->mlx.mlx);
 	sys->mlx.mlx = NULL;
-	exit(EXIT_SUCCESS);
+	exit(exit_code);
 }

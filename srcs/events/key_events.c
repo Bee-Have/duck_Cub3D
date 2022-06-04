@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_events.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 15:38:13 by amarini-          #+#    #+#             */
-/*   Updated: 2022/06/04 13:14:31 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/06/04 15:14:39 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 int	key_press(int keycode, t_system *sys)
 {
 	if (keycode == ESC)
-		end_simulation(sys);
+		end_simulation(sys, EXIT_SUCCESS);
 	if (keycode == R_LEFT)
 		sys->events.is_left_pressed = 1;
 	else if (keycode == R_RIGHT)
