@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 16:12:32 by amarini-          #+#    #+#             */
-/*   Updated: 2022/05/31 19:07:06 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/06/04 12:14:00 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ static void	parse_lines(t_system *sys, t_d_list lines, t_parser *parser)
 	char		*line;
 
 	pos.y = parse_map_content(&lines, parser);
-	if (lines->next == NULL)
+	if (lines != NULL && lines->next == NULL)
 		add_error(parser, P_ERR_MISSING_MAP, pos.y, 0);
 	init_map(sys, lines, pos, parser);
 	while (lines != NULL)
