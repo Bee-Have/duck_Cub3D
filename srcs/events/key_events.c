@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 15:38:13 by amarini-          #+#    #+#             */
-/*   Updated: 2022/05/31 22:47:30 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/06/04 15:14:39 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,8 @@
 
 int	key_press(int keycode, t_system *sys)
 {
-	//! ESC event will have to be more complete with free of malloced elems
 	if (keycode == ESC)
-		mlx_destroy_window(sys->mlx.mlx, sys->mlx.win);
+		end_simulation(sys, EXIT_SUCCESS);
 	if (keycode == R_LEFT)
 		sys->events.is_left_pressed = 1;
 	else if (keycode == R_RIGHT)

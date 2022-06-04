@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 17:56:34 by user42            #+#    #+#             */
-/*   Updated: 2022/05/31 20:36:27 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/06/04 15:17:05 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,6 +164,8 @@ void	draw_square(t_system *sys, t_color color, t_int2 pos, int size);
 void	draw_line(t_system *sys, t_int2 start, t_int2 end, t_color color);
 void	draw_circle(t_system *sys, t_color color, t_int2 pos, int size);
 
+//? END SIMULATION
+void	end_simulation(t_system *sys, int exit_code);
 //? PARSING
 
 # define ERROR_LIMIT 20
