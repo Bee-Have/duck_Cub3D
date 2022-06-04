@@ -27,6 +27,7 @@ INIT_FILES = init_structs.c init_mlx.c init_pj.c
 ROUTINE_FILES = mlx_routine.c routine_manager.c
 ENGINE_FILES = raycasting.c key_events.c simulation_end.c
 DRAW_TOOLS = draw_pxl.c draw_circle.c draw_square.c draw_line.c
+BONUS = minimap_bonus.c minimap_pj_bonus.c
 
 #SRC = main_minimap.c
 SRC = main.c \
@@ -34,7 +35,8 @@ SRC = main.c \
 	$(INIT_FILES) \
 	$(ENGINE_FILES) \
 	$(ROUTINE_FILES) \
-	$(DRAW_TOOLS)
+	$(DRAW_TOOLS) \
+	$(BONUS)
 
 OBJ = $(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
 
