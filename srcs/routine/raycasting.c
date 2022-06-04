@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 18:30:53 by amarini-          #+#    #+#             */
-/*   Updated: 2022/05/31 22:37:46 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/06/03 18:58:13 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ void	draw_collumn(t_system *sys, t_raycast cast_info, t_int2 wall_limits)
 		|| cast_info.hit.x >= (int)ft_strlen(sys->s_i.map[cast_info.hit.y]))
 		wall_limits = make_int2(W_HEIGHT / 2, W_HEIGHT / 2);
 	draw_line(sys, make_int2(0, cast_info.x),
-		make_int2(wall_limits.y, cast_info.x), make_color(255, 0, 0, 255));
+		make_int2(wall_limits.y, cast_info.x), sys->s_i.ceiling);
 	draw_line(sys, make_int2(wall_limits.x, cast_info.x),
-		make_int2(W_HEIGHT - 1, cast_info.x), make_color(255, 255, 255, 255));
+		make_int2(W_HEIGHT - 1, cast_info.x), sys->s_i.floor);
 	start = make_int2(wall_limits.y, cast_info.x);
 	end = make_int2(wall_limits.x, cast_info.x);
 	if (cast_info.side == 1 && (int)sys->pj.pos.y < cast_info.hit.y)
@@ -42,7 +42,7 @@ int	render_rays(t_system *sys, t_raycast cast_info)
 {
 	double	perp_wall_dist;
 	t_int2	bounds;
-	int		line_height;
+	int		wall_height;
 	int		wall_start;
 	int		wall_end;
 
@@ -50,11 +50,14 @@ int	render_rays(t_system *sys, t_raycast cast_info)
 		perp_wall_dist = cast_info.side_dist.x - cast_info.delta_dist.x;
 	else
 		perp_wall_dist = cast_info.side_dist.y - cast_info.delta_dist.y;
-	line_height = (int)(W_HEIGHT / perp_wall_dist);
-	wall_start = -line_height / 2 + W_HEIGHT / 2;
+	if ((int)perp_wall_dist == 0)
+		wall_height = W_HEIGHT;
+	else
+		wall_height = (int)(W_HEIGHT / perp_wall_dist);
+	wall_start = -wall_height / 2 + W_HEIGHT / 2;
 	if (wall_start < 0)
 		wall_start = 0;
-	wall_end = line_height / 2 + W_HEIGHT / 2;
+	wall_end = wall_height / 2 + W_HEIGHT / 2;
 	if (wall_end >= W_HEIGHT)
 		wall_end = W_HEIGHT - 1;
 	bounds = make_int2(wall_start, wall_end);
@@ -64,7 +67,7 @@ int	render_rays(t_system *sys, t_raycast cast_info)
 
 void	casting_rays(t_system *sys, t_raycast cast_info)
 {
-	int		hit_bool;
+	int	hit_bool;
 
 	cast_info.hit = make_int2((int)sys->pj.pos.y, (int)sys->pj.pos.x);
 	hit_bool = 0;
