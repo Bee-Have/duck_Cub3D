@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 20:07:59 by ldutriez          #+#    #+#             */
-/*   Updated: 2022/05/31 20:28:02 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/06/04 12:15:15 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void	init_map(t_system *sys, t_d_list lines, t_int2 pos, t_parser *parser)
 	char		**map;
 	int			index;
 
-	if (parser->error_count > 0)
+	if (parser->error_count > 0 || lines == NULL)
 		return ;
 	lines = lines->next;
 	map = (char **)malloc(sizeof(char *) * (ft_d_list_size(lines) - pos.y + 1));
