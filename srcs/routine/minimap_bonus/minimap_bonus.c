@@ -6,7 +6,7 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 17:39:49 by amarini-          #+#    #+#             */
-/*   Updated: 2022/06/06 20:05:27 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/06/06 21:29:35 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ static int	minimap_pxl_unit(char **map)
 	pxl_unit.x = (W_WIDTH / 4) / ft_strlen(map[0]);
 	pxl_unit.y = (W_HEIGHT / 4) / ft_tab_len((void **)map);
 	if (pxl_unit.x < pxl_unit.y)
-		return (pxl_unit.y);
-	return (pxl_unit.x);
+		return (pxl_unit.x);
+	return (pxl_unit.y);
 }
 
 static void	render_minimap(t_system *sys, t_int2 pos, int pxl_unit)
@@ -41,10 +41,10 @@ static void	render_minimap(t_system *sys, t_int2 pos, int pxl_unit)
 			if (sys->s_i.map[imap.y][imap.x] == '0')
 				color = make_color(255, 255, 255, 255);
 			if (sys->s_i.map[imap.y][imap.x] == '1')
-				color = make_color(255, 0, 74, 247);
-			else
-				color = make_color(255, 255, 110, 110);
-			draw_square(sys, color, pos, pxl_unit);
+				color = make_color(255, 0, 128, 255);
+			if (sys->s_i.map[imap.y][imap.x] == '0'
+				|| sys->s_i.map[imap.y][imap.x] == '1')
+				draw_square(sys, color, pos, pxl_unit);
 			pos.x += pxl_unit;
 			++imap.x;
 		}
