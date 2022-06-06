@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 16:10:57 by amarini-          #+#    #+#             */
-/*   Updated: 2022/06/04 15:14:30 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/06/06 21:24:47 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	main(int ac, char **av)
 		end_simulation(&sys, EXIT_FAILURE);
 	sys.events = init_events();
 	sys.pj = init_pj(sys.s_i.map);
+	sys.s_i.map[(int)sys.pj.pos.y][(int)sys.pj.pos.x] = '0';
 	// start mlx routine
 	mlx_routine(sys);
 	end_simulation(&sys, EXIT_SUCCESS);
