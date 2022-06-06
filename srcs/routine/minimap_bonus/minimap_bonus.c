@@ -6,7 +6,7 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 17:39:49 by amarini-          #+#    #+#             */
-/*   Updated: 2022/06/06 21:29:35 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/06/06 21:58:22 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,8 @@ void	minimap_routine(t_system *sys, int corner)
 	else if (corner == B_LEFT)
 		area_start.y = W_HEIGHT - ft_tab_len((void **)sys->s_i.map) * pxl_unit;
 	else if (corner == B_RIGHT)
-		area_start = make_int2(W_HEIGHT - ft_tab_len((void **)sys->s_i.map) * pxl_unit,
-				W_WIDTH - ft_strlen(sys->s_i.map[0]) * pxl_unit);
+		area_start = make_int2(W_HEIGHT - ft_tab_len((void **)sys->s_i.map)
+				* pxl_unit, W_WIDTH - ft_strlen(sys->s_i.map[0]) * pxl_unit);
 	map_start = make_int2(area_start.y, area_start.x);
 	render_minimap(sys, map_start, pxl_unit);
 	render_pj_minimap(sys, map_start, pxl_unit);
