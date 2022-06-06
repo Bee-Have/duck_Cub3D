@@ -6,7 +6,7 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 17:56:34 by user42            #+#    #+#             */
-/*   Updated: 2022/06/06 16:58:08 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/06/06 17:24:24 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@
 #define T_RIGHT 1
 #define B_LEFT 2
 #define B_RIGHT 3
-#define CENTER 4
 
 // keycodes :
 #define ESC 65307

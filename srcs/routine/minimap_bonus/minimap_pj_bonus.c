@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_pj_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 18:28:28 by amarini-          #+#    #+#             */
-/*   Updated: 2022/06/06 17:27:57 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/06/06 18:25:53 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	render_pj_minimap(t_system *sys, t_int2 map_start, int pxl_unit)
 	t_int2	dir;
 	t_int2	pos;
 	int		size;
-	
+
 	color = make_color(255, 255, 0, 0);
 	size = pxl_unit / 2;
 	pos.y = (map_start.y + (sys->pj.pos.y * pxl_unit)) - (pxl_unit - size) / 2;
