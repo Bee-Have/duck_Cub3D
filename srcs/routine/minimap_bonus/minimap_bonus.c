@@ -6,7 +6,7 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 17:39:49 by amarini-          #+#    #+#             */
-/*   Updated: 2022/06/06 18:25:46 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/06/06 19:47:59 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,9 @@ void	minimap_routine(t_system *sys, int corner)
 {
 	t_int2	area_start;
 	t_int2	map_start;
-	t_int2	offset;
 	int		pxl_unit;
 
 	pxl_unit = minimap_pxl_unit(sys->s_i.map);
-	offset = make_int2((W_HEIGHT / 4 - ft_tab_len((void **)sys->s_i.map)
-				* pxl_unit) / 2, (W_WIDTH / 4 - ft_strlen(sys->s_i.map[0])
-				* pxl_unit) / 2);
 	area_start = make_int2(0, 0);
 	if (corner == T_RIGHT)
 		area_start.x = W_WIDTH - W_WIDTH / 4;
@@ -71,7 +67,7 @@ void	minimap_routine(t_system *sys, int corner)
 		area_start.y = W_HEIGHT - W_HEIGHT / 4;
 	else if (corner == B_RIGHT)
 		area_start = make_int2(W_HEIGHT - W_HEIGHT / 4, W_WIDTH - W_WIDTH / 4);
-	map_start = make_int2(area_start.y + offset.y, area_start.x + offset.x);
+	map_start = make_int2(area_start.y, area_start.x);
 	render_minimap(sys, map_start, pxl_unit);
 	render_pj_minimap(sys, map_start, pxl_unit);
 }
