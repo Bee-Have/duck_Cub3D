@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 17:56:34 by user42            #+#    #+#             */
-/*   Updated: 2022/06/04 15:17:05 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/06/04 20:55:19 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@
 
 // gameplay pj
 #define SPEED 0.1
-#define R_SPEED 5
+#define R_SPEED 0.2
 
 // structs
 typedef struct s_int2
@@ -61,7 +61,6 @@ typedef struct s_vec2
 typedef struct s_pj
 {
 	t_vec2	pos;
-	int		rot;
 	t_vec2	dir;
 	t_vec2	plane;
 }			t_pj;
