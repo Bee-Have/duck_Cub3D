@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_mlx.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 18:09:36 by amarini-          #+#    #+#             */
-/*   Updated: 2022/05/30 16:39:09 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/06 15:51:22 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 t_img	init_img(void)
 {
 	t_img	img;
+
 	img.img = NULL;
 	img.addr = NULL;
 	img.bits_pxl = 0;
@@ -44,7 +45,7 @@ t_mlx	init_mlx(void)
 	mlx.win = mlx_new_window(mlx.mlx, W_WIDTH, W_HEIGHT, "cub3D");
 	mlx.img = init_img();
 	mlx.img.img = mlx_new_image(mlx.mlx, W_WIDTH, W_HEIGHT);
-	mlx.img.addr = mlx_get_data_addr(mlx.img.img, &mlx.img.bits_pxl
-								, &mlx.img.line_len, &mlx.img.endian);
+	mlx.img.addr = mlx_get_data_addr(mlx.img.img, &mlx.img.bits_pxl,
+			&mlx.img.line_len, &mlx.img.endian);
 	return (mlx);
 }

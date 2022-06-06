@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 18:30:53 by amarini-          #+#    #+#             */
-/*   Updated: 2022/06/03 18:58:13 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/04 17:26:31 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,9 +129,8 @@ void	raycasting_routine(t_system *sys)
 	while (cast_info.x < W_WIDTH)
 	{
 		camera_x = 2 * cast_info.x / (double)W_WIDTH - 1;
-		ray_dir = make_vec2((sys->pj.dir.y - sys->pj.pos.y) + sys->pj.plane.y
-				* camera_x, (sys->pj.dir.x - sys->pj.pos.x)
-				+ sys->pj.plane.x * camera_x);
+		ray_dir = make_vec2(sys->pj.dir.y + sys->pj.plane.y * camera_x,
+			sys->pj.dir.x + sys->pj.plane.x * camera_x);
 		init_casting_info(sys, &cast_info, ray_dir);
 		casting_rays(sys, cast_info);
 		++cast_info.x;
