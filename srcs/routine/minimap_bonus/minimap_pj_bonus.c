@@ -6,7 +6,7 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 18:28:28 by amarini-          #+#    #+#             */
-/*   Updated: 2022/06/06 18:25:53 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/06/06 21:51:13 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,17 @@ void	render_pj_minimap(t_system *sys, t_int2 map_start, int pxl_unit)
 
 	color = make_color(255, 255, 0, 0);
 	size = pxl_unit / 2;
-	pos.y = (map_start.y + (sys->pj.pos.y * pxl_unit)) - (pxl_unit - size) / 2;
-	pos.x = (map_start.x + (sys->pj.pos.x * pxl_unit)) - (pxl_unit - size) / 2;
-	draw_circle(sys, color, pos, size);
+	if (size <= 10)
+		size = pxl_unit;
+	pos.y = (map_start.y + sys->pj.pos.y * pxl_unit) - size / 2;
+	pos.x = (map_start.x + sys->pj.pos.x * pxl_unit) - size / 2;
+	if (size <= 10)
+		draw_square(sys, color, pos, size);
+	else
+		draw_circle(sys, color, pos, size);
 	pos = make_int2(pos.y + size / 2, pos.x + size / 2);
-	dir.y = sys->pj.dir.y * 4 * pxl_unit + pos.y;
-	dir.x = sys->pj.dir.x * 4 * pxl_unit + pos.x;
-	color = make_color(255, 0, 255, 0);
+	dir.y = sys->pj.dir.y * size * pxl_unit + pos.y;
+	dir.x = sys->pj.dir.x * size * pxl_unit + pos.x;
+	color = make_color(255, 0, 0, 0);
 	draw_line(sys, pos, dir, color);
 }
