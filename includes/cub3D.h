@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 17:56:34 by user42            #+#    #+#             */
-/*   Updated: 2022/06/04 20:55:19 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/06/06 17:24:24 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@
 #define T_RIGHT 1
 #define B_LEFT 2
 #define B_RIGHT 3
-#define CENTER 4
 
 // keycodes :
 #define ESC 65307
@@ -246,5 +245,17 @@ void	init_config(t_system *sys, char *line, t_int2 pos, t_parser *parser);
 *	If an error occured, the map is not allocated.
 */
 void	init_map(t_system *sys, t_d_list lines, t_int2 pos, t_parser *parser);
+
+//? BONUS
+
+#define T_LEFT 0
+#define T_RIGHT 1
+#define B_LEFT 2
+#define B_RIGHT 3
+#define CENTER 4
+
+//* minimap
+void	render_pj_minimap(t_system *sys, t_int2 map_start, int pxl_unit);
+void	minimap_routine(t_system *sys, int corner);
 
 #endif

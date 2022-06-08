@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_pxl.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 16:19:28 by amarini-          #+#    #+#             */
-/*   Updated: 2022/05/26 16:25:40 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/06 19:51:18 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void	draw_pxl(t_system *sys, t_int2 pos, t_color color)
 {
 	int	*tmp;
 
-	if (pos.x < 0 || pos.x > 1920 || pos.y < 0 || pos.y > 1080)
+	if (pos.x < 0 || pos.x > W_WIDTH || pos.y < 0 || pos.y > W_HEIGHT)
 		return ;
 	tmp = (int *)sys->mlx.img.addr;
-	tmp[(pos.y * 1920) + pos.x] = color.code;
+	tmp[(pos.y * W_WIDTH) + pos.x] = color.code;
 }

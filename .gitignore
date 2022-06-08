@@ -1,5 +1,7 @@
 /objs
+/objs_bonus
 libft/objs
 cub3D
+duckling3D
 *.log
 **.vscode
