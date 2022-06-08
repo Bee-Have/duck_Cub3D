@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_pj_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 18:28:28 by amarini-          #+#    #+#             */
-/*   Updated: 2022/06/06 21:51:13 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/06/08 12:22:25 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	render_pj_minimap(t_system *sys, t_int2 map_start, int pxl_unit)
 		size = pxl_unit;
 	pos.y = (map_start.y + sys->pj.pos.y * pxl_unit) - size / 2;
 	pos.x = (map_start.x + sys->pj.pos.x * pxl_unit) - size / 2;
-	if (size <= 10)
+	if (pxl_unit / 2 <= 10)
 		draw_square(sys, color, pos, size);
 	else
 		draw_circle(sys, color, pos, size);
