@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 17:56:34 by user42            #+#    #+#             */
-/*   Updated: 2022/06/06 17:24:24 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/06/09 16:57:56 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ typedef struct s_raycasting
 {
 	int		x;
 	t_int2	hit;
+	t_vec2	ray_dir;
 	t_vec2	side_dist;
 	t_vec2	delta_dist;
 	t_int2	step;
@@ -90,6 +91,7 @@ typedef struct s_img
 	int		bits_pxl;
 	int		line_len;
 	int		endian;
+	t_int2	size;
 }			t_img;
 
 typedef struct s_screen_info
