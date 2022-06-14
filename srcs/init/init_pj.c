@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_pj.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 15:25:34 by amarini-          #+#    #+#             */
-/*   Updated: 2022/06/06 16:04:02 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/06/14 18:53:28 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,21 +46,20 @@ t_pj	init_pj(char **map)
 	pj.pos = get_pj_pos(map);
 	pj.pos = make_vec2(pj.pos.y + 0.5, pj.pos.x + 0.5);
 	if (map[(int)pj.pos.y][(int)pj.pos.x] == 'N')
-		pj.dir = make_vec2(SPEED * sin(3 * M_PI / 2),
-				SPEED * cos(3 * M_PI / 2));
+		pj.dir = make_vec2(DIR * sin(3 * M_PI / 2), DIR * cos(3 * M_PI / 2));
 	else if (map[(int)pj.pos.y][(int)pj.pos.x] == 'S')
-		pj.dir = make_vec2(SPEED * sin(M_PI / 2), SPEED * cos(M_PI / 2));
+		pj.dir = make_vec2(DIR * sin(M_PI / 2), DIR * cos(M_PI / 2));
 	else if (map[(int)pj.pos.y][(int)pj.pos.x] == 'E')
-		pj.dir = make_vec2(SPEED * sin(0), SPEED * cos(0));
+		pj.dir = make_vec2(DIR * sin(0), DIR * cos(0));
 	else if (map[(int)pj.pos.y][(int)pj.pos.x] == 'W')
-		pj.dir = make_vec2(SPEED * sin(M_PI), SPEED * cos(M_PI));
+		pj.dir = make_vec2(DIR * sin(M_PI), DIR * cos(M_PI));
 	if (map[(int)pj.pos.y][(int)pj.pos.x] == 'N')
-		pj.plane = make_vec2(0, 0.1);
+		pj.plane = make_vec2(0, 0.3);
 	else if (map[(int)pj.pos.y][(int)pj.pos.x] == 'S')
-		pj.plane = make_vec2(0, -0.1);
+		pj.plane = make_vec2(0, -0.3);
 	else if (map[(int)pj.pos.y][(int)pj.pos.x] == 'E')
-		pj.plane = make_vec2(0.1, 0);
+		pj.plane = make_vec2(0.3, 0);
 	else if (map[(int)pj.pos.y][(int)pj.pos.x] == 'W')
-		pj.plane = make_vec2(-0.1, 0);
+		pj.plane = make_vec2(-0.3, 0);
 	return (pj);
 }
