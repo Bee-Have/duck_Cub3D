@@ -6,7 +6,7 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 20:07:59 by ldutriez          #+#    #+#             */
-/*   Updated: 2022/06/14 18:14:05 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/06/14 18:16:35 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,10 +95,7 @@ void	init_config(t_system *sys, char *line, t_int2 pos, t_parser *parser)
 			&& parser->west_texture_count == 1)
 		|| (line[pos.x] == 'E' && line[pos.x + 1] == 'A'
 			&& parser->east_texture_count == 1))
-	{
-		printf("line-[%c][%c][%s]\n", line[pos.x], line[pos.x + 1], line);
 		init_texture(sys, line, pos, parser);
-	}
 	else if ((line[pos.x] == 'F' && parser->floor_color_count == 1)
 		|| (line[pos.x] == 'C' && parser->ceil_color_count == 1))
 		init_color(sys, line, pos, parser);
