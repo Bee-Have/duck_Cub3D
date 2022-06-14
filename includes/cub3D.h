@@ -6,7 +6,7 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 17:56:34 by user42            #+#    #+#             */
-/*   Updated: 2022/06/14 14:34:32 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/06/14 18:13:44 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ typedef struct s_screen_info
 	t_img	south_texture;
 	t_img	west_texture;
 	t_img	east_texture;
+	t_img	error_texture;
 }			t_screen_info;
 
 typedef struct s_event
