@@ -6,37 +6,11 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 18:30:53 by amarini-          #+#    #+#             */
-/*   Updated: 2022/06/14 18:14:55 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/06/14 18:20:04 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
-
-//here, wall_limits.x/y are both y positions, y = higest part | x = lowest part
-// void	draw_collumn(t_system *sys, t_raycast cast_info, t_int2 wall_limits)
-// {
-// 	t_int2	start;
-// 	t_int2	end;
-
-// 	if (cast_info.hit.y < 0 || cast_info.hit.x < 0
-// 		|| cast_info.hit.y >= ft_tab_len((void **)sys->s_i.map)
-// 		|| cast_info.hit.x >= (int)ft_strlen(sys->s_i.map[cast_info.hit.y]))
-// 		wall_limits = make_int2(W_HEIGHT / 2, W_HEIGHT / 2);
-	// draw_line(sys, make_int2(0, cast_info.x),
-	// 	make_int2(wall_limits.y, cast_info.x), sys->s_i.ceiling);
-	// draw_line(sys, make_int2(wall_limits.x, cast_info.x),
-	// 	make_int2(W_HEIGHT - 1, cast_info.x), sys->s_i.floor);
-// 	start = make_int2(wall_limits.y, cast_info.x);
-// 	end = make_int2(wall_limits.x, cast_info.x);
-// 	if (cast_info.side == 1 && (int)sys->pj.pos.y < cast_info.hit.y)
-// 		draw_line(sys, start, end, make_color(255, 0, 255, 0));
-// 	else if (cast_info.side == 1 && (int)sys->pj.pos.y > cast_info.hit.y)
-// 		draw_line(sys, start, end, make_color(255, 255, 0, 0));
-// 	else if (cast_info.side == 0 && (int)sys->pj.pos.x < cast_info.hit.x)
-// 		draw_line(sys, start, end, make_color(255, 255, 255, 0));
-// 	else if (cast_info.side == 0 && (int)sys->pj.pos.x > cast_info.hit.x)
-// 		draw_line(sys, start, end, make_color(255, 0, 0, 0));
-// }
 
 t_img	wall_texture_assignation(t_system *sys, t_raycast cast_info)
 {
@@ -46,8 +20,7 @@ t_img	wall_texture_assignation(t_system *sys, t_raycast cast_info)
 		return (sys->s_i.south_texture);
 	else if (cast_info.side == 0 && (int)sys->pj.pos.x < cast_info.hit.x)
 		return (sys->s_i.east_texture);
-	// else if (cast_info.side == 0 && (int)sys->pj.pos.x > cast_info.hit.x)
-	return (sys->s_i.east_texture);
+	return (sys->s_i.west_texture);
 }
 
 //here, wall_limits.x/y are both y positions, y = higest part | x = lowest part
@@ -121,7 +94,6 @@ int	render_rays(t_system *sys, t_raycast cast_info)
 		wall_end = W_HEIGHT - 1;
 	bounds = make_int2(wall_start, wall_end);
 	texture_calculations(sys, cast_info, bounds, perp_wall_dist);
-	// draw_collumn(sys, cast_info, bounds);
 	return (1);
 }
 
