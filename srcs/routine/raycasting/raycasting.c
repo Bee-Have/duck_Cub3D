@@ -6,7 +6,7 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 18:30:53 by amarini-          #+#    #+#             */
-/*   Updated: 2022/06/14 18:13:48 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/06/14 18:14:55 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,18 @@
 // 		draw_line(sys, start, end, make_color(255, 0, 0, 0));
 // }
 
+t_img	wall_texture_assignation(t_system *sys, t_raycast cast_info)
+{
+	if (cast_info.side == 1 && (int)sys->pj.pos.y < cast_info.hit.y)
+		return (sys->s_i.north_texture);
+	else if (cast_info.side == 1 && (int)sys->pj.pos.y > cast_info.hit.y)
+		return (sys->s_i.south_texture);
+	else if (cast_info.side == 0 && (int)sys->pj.pos.x < cast_info.hit.x)
+		return (sys->s_i.east_texture);
+	// else if (cast_info.side == 0 && (int)sys->pj.pos.x > cast_info.hit.x)
+	return (sys->s_i.east_texture);
+}
+
 //here, wall_limits.x/y are both y positions, y = higest part | x = lowest part
 void	texture_calculations(t_system *sys, t_raycast cast_info,
 							t_int2 wall_limits, double perp_wall_dist)
@@ -45,7 +57,7 @@ void	texture_calculations(t_system *sys, t_raycast cast_info,
 	t_img	texture;
 	double	wall_hit;
 	
-	texture = sys->s_i.north_texture;
+	texture = wall_texture_assignation(sys, cast_info);
 	if (cast_info.side == 0)
 		wall_hit = sys->pj.pos.y + perp_wall_dist * cast_info.ray_dir.y;
 	else
