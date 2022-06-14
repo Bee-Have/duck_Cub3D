@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_config.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 20:07:59 by ldutriez          #+#    #+#             */
-/*   Updated: 2022/06/04 12:15:15 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/06/14 18:06:57 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ static void	init_texture(t_system *sys, char *line, t_int2 pos
 	t_img	*texture;
 
 	texture = &sys->s_i.north_texture;
-	if (line[pos.x] == 'S' && line[pos.x] == 'O')
+	if (line[pos.x] == 'S' && line[pos.x + 1] == 'O')
 		texture = &sys->s_i.south_texture;
-	else if (line[pos.x] == 'W' && line[pos.x] == 'E')
+	else if (line[pos.x] == 'W' && line[pos.x + 1] == 'E')
 		texture = &sys->s_i.west_texture;
-	else if (line[pos.x] == 'E' && line[pos.x] == 'A')
+	else if (line[pos.x] == 'E' && line[pos.x + 1] == 'A')
 		texture = &sys->s_i.east_texture;
 	pos.x += 2;
 	while (line[pos.x] == ' ')
@@ -38,7 +38,6 @@ static void	init_texture(t_system *sys, char *line, t_int2 pos
 			&texture->line_len, &texture->endian);
 	if (texture->addr == NULL)
 		add_error(parser, P_ERR_TEXTURE, pos.y, pos.x);
-	mlx_destroy_image(sys->mlx.mlx, texture->img);
 }
 
 static unsigned char	get_color_component(char *line, t_int2 pos
@@ -97,7 +96,10 @@ void	init_config(t_system *sys, char *line, t_int2 pos, t_parser *parser)
 			&& parser->west_texture_count == 1)
 		|| (line[pos.x] == 'E' && line[pos.x + 1] == 'A'
 			&& parser->east_texture_count == 1))
+	{
+		printf("line-[%c][%c][%s]\n", line[pos.x], line[pos.x + 1], line);
 		init_texture(sys, line, pos, parser);
+	}
 	else if ((line[pos.x] == 'F' && parser->floor_color_count == 1)
 		|| (line[pos.x] == 'C' && parser->ceil_color_count == 1))
 		init_color(sys, line, pos, parser);
