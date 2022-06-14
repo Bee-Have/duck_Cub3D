@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   draw_circle.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 16:15:33 by amarini-          #+#    #+#             */
-/*   Updated: 2022/05/29 14:35:13 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/14 20:55:27 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "cub3d.h"
 
 void	draw_circle(t_system *sys, t_color color, t_int2 pos, int size)
 {
@@ -28,8 +28,8 @@ void	draw_circle(t_system *sys, t_color color, t_int2 pos, int size)
 		check.x = 0;
 		while (pos.x < 1920 && check.x < size)
 		{
-			dist = sqrt((pos.x - center.x) * (pos.x - center.x) +
-						(pos.y - center.y) * (pos.y - center.y));
+			dist = sqrt((pos.x - center.x) * (pos.x - center.x)
+					+ (pos.y - center.y) * (pos.y - center.y));
 			if (dist < size / 2)
 				draw_pxl(sys, pos, color);
 			++pos.x;

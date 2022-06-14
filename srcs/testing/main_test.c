@@ -1,4 +1,4 @@
-#include "cub3D.h"
+#include "cub3d.h"
 
 t_img	init_img(void)
 {

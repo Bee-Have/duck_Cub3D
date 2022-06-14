@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_pj_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 18:28:28 by amarini-          #+#    #+#             */
-/*   Updated: 2022/06/08 12:22:25 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/14 20:55:27 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "cub3d.h"
 
 void	render_pj_minimap(t_system *sys, t_int2 map_start, int pxl_unit)
 {

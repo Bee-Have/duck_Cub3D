@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   init_pj.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 15:25:34 by amarini-          #+#    #+#             */
-/*   Updated: 2022/06/06 16:04:02 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/06/14 20:55:27 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "cub3d.h"
 
 static t_vec2	get_pj_pos(char **map)
 {

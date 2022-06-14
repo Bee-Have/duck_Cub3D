@@ -6,11 +6,11 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 18:30:53 by amarini-          #+#    #+#             */
-/*   Updated: 2022/06/14 18:04:49 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/06/14 20:58:16 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "cub3d.h"
 
 //here, wall_limits.x/y are both y positions, y = higest part | x = lowest part
 void	draw_collumn(t_system *sys, t_raycast cast_info, t_int2 wall_limits)
@@ -130,7 +130,7 @@ void	raycasting_routine(t_system *sys)
 	{
 		camera_x = 2 * cast_info.x / (double)W_WIDTH - 1;
 		ray_dir = make_vec2(sys->pj.dir.y + sys->pj.plane.y * camera_x,
-			sys->pj.dir.x + sys->pj.plane.x * camera_x);
+				sys->pj.dir.x + sys->pj.plane.x * camera_x);
 		init_casting_info(sys, &cast_info, ray_dir);
 		casting_rays(sys, cast_info);
 		++cast_info.x;

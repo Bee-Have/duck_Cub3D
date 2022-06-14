@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   draw_square.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 16:16:27 by amarini-          #+#    #+#             */
-/*   Updated: 2022/05/29 14:39:07 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/14 20:55:27 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "cub3d.h"
 
 void	draw_square(t_system *sys, t_color color, t_int2 pos, int size)
 {

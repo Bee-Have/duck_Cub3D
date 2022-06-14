@@ -1,48 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3D.h                                            :+:      :+:    :+:   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 17:56:34 by user42            #+#    #+#             */
-/*   Updated: 2022/06/14 18:02:23 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/06/14 20:57:54 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
-#include <limits.h>
-#include "libft.h"
-#include "mlx.h"
-
 #ifndef CUB3D_H
-#define CUB3D_H
+# define CUB3D_H
+
+# include <unistd.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <math.h>
+# include <limits.h>
+# include "libft.h"
+# include "mlx.h"
 
 // window/screen size
-#define W_HEIGHT 1080
-#define W_WIDTH 1920
+# define W_HEIGHT 1080
+# define W_WIDTH 1920
 
 // minimap general position
-#define T_LEFT 0
-#define T_RIGHT 1
-#define B_LEFT 2
-#define B_RIGHT 3
+# define T_LEFT 0
+# define T_RIGHT 1
+# define B_LEFT 2
+# define B_RIGHT 3
 
 // keycodes :
-#define ESC 65307
-#define UP 119
-#define DOWN 115
-#define RIGHT 100
-#define LEFT 97
-#define R_RIGHT 65363
-#define R_LEFT 65361
+# define ESC 65307
+# define UP 119
+# define DOWN 115
+# define RIGHT 100
+# define LEFT 97
+# define R_RIGHT 65363
+# define R_LEFT 65361
 
 // gameplay pj
-#define SPEED 0.1
-#define R_SPEED 0.2
+# define SPEED 0.1
+# define R_SPEED 0.2
 
 // structs
 typedef struct s_int2
@@ -50,6 +50,12 @@ typedef struct s_int2
 	int	x;
 	int	y;
 }			t_int2;
+
+typedef struct s_int4
+{
+	t_int2	start;
+	t_int2	end;
+}			t_int4;
 
 typedef struct s_vec2
 {
@@ -115,7 +121,6 @@ typedef struct s_event
 	char	is_left_pressed;
 	char	is_right_pressed;
 }			t_event;
-
 
 typedef struct s_mlx
 {
@@ -208,14 +213,14 @@ typedef struct s_parser
 *	Print every encountered error.
 *	Return 0 if no errors, the number of errors otherwise.
 */
-int	end_parser(const t_parser *parser);
+int		end_parser(const t_parser *parser);
 
 /*
 *	Will format an error message if the error count is less than 20.
 *	This function still use dynamic allocation for atoi.
 */
 void	add_error(t_parser *parser, const char *description,
-	int line, int column);
+			int line, int column);
 
 /*
 *	Will recognize the token and increment the corresponding counter.
@@ -226,14 +231,14 @@ void	add_to_args_count(t_parser *parser, char token, char next_token);
 *	Parse the map content.
 *	Return the line position of the map.
 */
-int	parse_map_content(t_d_list *lines, t_parser *parser);
+int		parse_map_content(t_d_list *lines, t_parser *parser);
 
 /*
 *	This function will run tests on the path and then on the file.
 *	If everything is correct the config data will be saved in the system struct.
 *	Return 0 on success, 1 on error.
 */
-int	parse_map(t_system *sys, char *file);
+int		parse_map(t_system *sys, char *file);
 
 /*
 *	Fill the correct system struct with the data of the line.
@@ -249,11 +254,11 @@ void	init_map(t_system *sys, t_d_list lines, t_int2 pos, t_parser *parser);
 
 //? BONUS
 
-#define T_LEFT 0
-#define T_RIGHT 1
-#define B_LEFT 2
-#define B_RIGHT 3
-#define CENTER 4
+# define T_LEFT 0
+# define T_RIGHT 1
+# define B_LEFT 2
+# define B_RIGHT 3
+# define CENTER 4
 
 //* minimap
 void	render_pj_minimap(t_system *sys, t_int2 map_start, int pxl_unit);
