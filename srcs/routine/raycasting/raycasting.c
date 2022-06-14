@@ -6,7 +6,7 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 18:30:53 by amarini-          #+#    #+#             */
-/*   Updated: 2022/06/14 18:20:04 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/06/14 18:44:28 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,10 @@ void	texture_calculations(t_system *sys, t_raycast cast_info,
 	t_img	texture;
 	double	wall_hit;
 	
+	if (cast_info.hit.y < 0 || cast_info.hit.x < 0
+		|| cast_info.hit.y >= ft_tab_len((void **)sys->s_i.map)
+		|| cast_info.hit.x >= (int)ft_strlen(sys->s_i.map[cast_info.hit.y]))
+		wall_limits = make_int2(W_HEIGHT / 2, W_HEIGHT / 2);
 	texture = wall_texture_assignation(sys, cast_info);
 	if (cast_info.side == 0)
 		wall_hit = sys->pj.pos.y + perp_wall_dist * cast_info.ray_dir.y;
