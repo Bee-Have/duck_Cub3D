@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 17:56:34 by user42            #+#    #+#             */
-/*   Updated: 2022/06/15 17:06:28 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/06/15 17:47:12 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@
 #define LEFT 97
 #define R_RIGHT 65363
 #define R_LEFT 65361
+#define M 109
 
 // gameplay pj
 #define SPEED 0.1
@@ -114,6 +115,7 @@ typedef struct s_event
 	char	is_d_pressed;
 	char	is_left_pressed;
 	char	is_right_pressed;
+	char	is_m_pressed;
 }			t_event;
 
 

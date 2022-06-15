@@ -32,6 +32,7 @@ DRAW_TOOLS = draw_pxl.c draw_circle.c draw_square.c draw_line.c
 
 ROUTINE_BONUS_FILES = mlx_routine.c routine_manager_bonus.c
 MINIMAP_BONUS_FILES = minimap_bonus.c minimap_pj_bonus.c
+ENGINE_BONUS_FILES = raycasting.c key_events_bonus.c simulation_end.c
 
 #SRC = main_minimap.c
 SRC = main.c \
@@ -44,7 +45,7 @@ SRC = main.c \
 SRC_BONUS = main.c \
 	$(PARSING_FILES) \
 	$(INIT_FILES) \
-	$(ENGINE_FILES) \
+	$(ENGINE_BONUS_FILES) \
 	$(DRAW_TOOLS) \
 	$(ROUTINE_BONUS_FILES) \
 	$(MINIMAP_BONUS_FILES)
