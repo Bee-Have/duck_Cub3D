@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 17:56:34 by user42            #+#    #+#             */
-/*   Updated: 2022/06/14 20:57:54 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/06/15 17:10:50 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,6 @@ typedef struct s_int2
 	int	y;
 }			t_int2;
 
-typedef struct s_int4
-{
-	t_int2	start;
-	t_int2	end;
-}			t_int4;
-
 typedef struct s_vec2
 {
 	double	x;
@@ -78,6 +72,16 @@ typedef struct s_color
 	unsigned char	b;
 	unsigned int	code;
 }					t_color;
+
+//m = slope of line
+typedef struct s_line_info
+{
+	t_int2	start;
+	t_int2	end;
+	t_int2	m;
+	int		decide;
+	int		err;
+}			t_line_info;
 
 typedef struct s_raycasting
 {
@@ -253,12 +257,6 @@ void	init_config(t_system *sys, char *line, t_int2 pos, t_parser *parser);
 void	init_map(t_system *sys, t_d_list lines, t_int2 pos, t_parser *parser);
 
 //? BONUS
-
-# define T_LEFT 0
-# define T_RIGHT 1
-# define B_LEFT 2
-# define B_RIGHT 3
-# define CENTER 4
 
 //* minimap
 void	render_pj_minimap(t_system *sys, t_int2 map_start, int pxl_unit);

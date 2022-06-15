@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_line.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 16:13:42 by amarini-          #+#    #+#             */
-/*   Updated: 2022/06/14 20:55:27 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/06/15 17:43:41 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,51 +21,43 @@ static void	switch_vec2(t_int2 *vector)
 	(*vector).y = tmp;
 }
 
-//m = slope
-//d = decide
-static void	plot_pxl(t_system *sys, t_int4 limits, t_int2 m, int decide,
-				t_color color)
+static void	switch_draw(t_system *sys, t_line_info info, t_color color)
 {
-	int		err;
-	int		i;
-	int		len;
-
-	err = 2 * m.y - m.x;
-	len = 1;
-	i = 0;
-	while (i < m.x)
+	if (info.decide == 1)
 	{
-		if (limits.start.x < limits.end.x)
-			++limits.start.x;
+		switch_vec2(&info.start);
+		draw_pxl(sys, info.start, color);
+		switch_vec2(&info.start);
+	}
+	else
+		draw_pxl(sys, info.start, color);
+}
+
+//m = slope
+static void	plot_pxl(t_system *sys, t_line_info info, t_color color)
+{
+	int		i;
+
+	i = 0;
+	while (i < info.m.x)
+	{
+		if (info.start.x < info.end.x)
+			++info.start.x;
 		else
-			--limits.start.x;
-		if (err < 0)
+			--info.start.x;
+		if (info.err < 0)
 		{
-			if (decide == 1)
-			{
-				switch_vec2(&limits.start);
-				draw_square(sys, color, limits.start, len);
-				switch_vec2(&limits.start);
-			}
-			else
-				draw_square(sys, color, limits.start, len);
-			err = err + 2 * m.y;
+			switch_draw(sys, info, color);
+			info.err = info.err + 2 * info.m.y;
 		}
 		else
 		{
-			if (limits.start.y < limits.end.y)
-				++limits.start.y;
+			if (info.start.y < info.end.y)
+				++info.start.y;
 			else
-				--limits.start.y;
-			if (decide == 1)
-			{
-				switch_vec2(&limits.start);
-				draw_square(sys, color, limits.start, len);
-				switch_vec2(&limits.start);
-			}
-			else
-				draw_square(sys, color, limits.start, len);
-			err = err + 2 * m.y - 2 * m.x;
+				--info.start.y;
+			switch_draw(sys, info, color);
+			info.err = info.err + 2 * info.m.y - 2 * info.m.x;
 		}
 		++i;
 	}
@@ -74,19 +66,19 @@ static void	plot_pxl(t_system *sys, t_int4 limits, t_int2 m, int decide,
 //m = slope
 void	draw_line(t_system *sys, t_int2 start, t_int2 end, t_color color)
 {
-	t_int2	m;
-	t_int4	limits;
+	t_line_info	info;
 
-	m = make_int2(abs(end.y - start.y), abs(end.x - start.x));
-	limits.start = start;
-	limits.end = end;
-	if (m.x < m.y)
+	info.m = make_int2(abs(end.y - start.y), abs(end.x - start.x));
+	info.start = start;
+	info.end = end;
+	info.decide = 0;
+	if (info.m.x < info.m.y)
 	{
-		switch_vec2(&limits.start);
-		switch_vec2(&limits.end);
-		switch_vec2(&m);
-		plot_pxl(sys, limits, m, 1, color);
+		switch_vec2(&info.start);
+		switch_vec2(&info.end);
+		switch_vec2(&info.m);
+		info.decide = 1;
 	}
-	else
-		plot_pxl(sys, limits, m, 0, color);
+	info.err = 2 * info.m.y - info.m.x;
+	plot_pxl(sys, info, color);
 }
