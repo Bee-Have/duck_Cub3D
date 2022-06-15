@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 15:38:13 by amarini-          #+#    #+#             */
-/*   Updated: 2022/06/15 18:03:40 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/06/15 18:07:02 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int	key_press(int keycode, t_system *sys)
 		sys->events.is_a_pressed = 1;
 	if (keycode == RIGHT)
 		sys->events.is_d_pressed = 1;
+	if (keycode == M)
+		sys->events.is_m_pressed = 1;
 	return (EXIT_SUCCESS);
 }
 
@@ -45,8 +47,6 @@ int	key_release(int keycode, t_system *sys)
 		sys->events.is_a_pressed = 0;
 	if (keycode == RIGHT)
 		sys->events.is_d_pressed = 0;
-	if (keycode == M)
-		sys->events.is_m_pressed = 1;
 	return (EXIT_SUCCESS);
 }
 
