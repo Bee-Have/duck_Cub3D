@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 17:56:34 by user42            #+#    #+#             */
-/*   Updated: 2022/06/15 18:29:52 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/15 18:44:54 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@
 # define R_LEFT 65361
 
 // gameplay pj
-#define DIR 0.3
-#define SPEED 3
-#define R_SPEED 0.2
+# define DIR 0.3
+# define SPEED 3
+# define R_SPEED 0.2
 
 // structs
 typedef struct s_int2
