@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 17:39:49 by amarini-          #+#    #+#             */
-/*   Updated: 2022/06/15 17:01:46 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/06/15 17:20:59 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@ static void	draw_square_in_range(t_system *sys, t_color color, t_int2 pos
 	long long	dist;
 
 	current_pos.y = pos.y;
+	raw_dist = make_int2(ref_point.y - pos.y, ref_point.x - pos.x);
+	dist = (raw_dist.x * raw_dist.x + raw_dist.y * raw_dist.y);
+	if (dist >= TILE_SIZE * 320)
+		return ;
 	while (current_pos.y < pos.y + TILE_SIZE)
 	{
 		current_pos.x = pos.x;
