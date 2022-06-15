@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 17:56:34 by user42            #+#    #+#             */
-/*   Updated: 2022/06/15 17:10:50 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/15 18:29:52 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,9 @@
 # define R_LEFT 65361
 
 // gameplay pj
-# define SPEED 0.1
-# define R_SPEED 0.2
+#define DIR 0.3
+#define SPEED 3
+#define R_SPEED 0.2
 
 // structs
 typedef struct s_int2
@@ -86,7 +87,9 @@ typedef struct s_line_info
 typedef struct s_raycasting
 {
 	int		x;
+	int		wall_height;
 	t_int2	hit;
+	t_vec2	ray_dir;
 	t_vec2	side_dist;
 	t_vec2	delta_dist;
 	t_int2	step;
@@ -100,6 +103,7 @@ typedef struct s_img
 	int		bits_pxl;
 	int		line_len;
 	int		endian;
+	t_int2	size;
 }			t_img;
 
 typedef struct s_screen_info
