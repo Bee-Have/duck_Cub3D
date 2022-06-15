@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   routine_manager.c                                  :+:      :+:    :+:   */
+/*   routine_manager_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 16:03:57 by amarini-          #+#    #+#             */
-/*   Updated: 2022/06/04 18:43:28 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/06/15 17:00:50 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,8 @@ int	update_all(t_system *sys)
 	mlx_put_image_to_window(sys->mlx.mlx, sys->mlx.win, sys->mlx.img.img, 0, 0);
 	// bonus
 	minimap_routine(sys, T_LEFT);
+	minimap_routine(sys, B_LEFT);
+	minimap_routine(sys, T_RIGHT);
+	minimap_routine(sys, B_RIGHT);
 	return (EXIT_SUCCESS);
 }

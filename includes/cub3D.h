@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 17:56:34 by user42            #+#    #+#             */
-/*   Updated: 2022/06/06 17:24:24 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/06/15 17:06:28 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,15 @@
 #define CUB3D_H
 
 // window/screen size
-#define W_HEIGHT 1080
-#define W_WIDTH 1920
+#define W_HEIGHT 600
+#define W_WIDTH 800
 
 // minimap general position
 #define T_LEFT 0
 #define T_RIGHT 1
 #define B_LEFT 2
 #define B_RIGHT 3
+#define TILE_SIZE 32
 
 // keycodes :
 #define ESC 65307
@@ -255,7 +256,7 @@ void	init_map(t_system *sys, t_d_list lines, t_int2 pos, t_parser *parser);
 #define CENTER 4
 
 //* minimap
-void	render_pj_minimap(t_system *sys, t_int2 map_start, int pxl_unit);
+void	render_pj_minimap(t_system *sys, t_int2 pj_pos);
 void	minimap_routine(t_system *sys, int corner);
 
 #endif

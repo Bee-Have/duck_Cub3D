@@ -3,28 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 17:39:49 by amarini-          #+#    #+#             */
-/*   Updated: 2022/06/06 21:58:22 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/06/15 17:01:46 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-// this might need to change for pxl_unit.x
-static int	minimap_pxl_unit(char **map)
+static void	draw_square_in_range(t_system *sys, t_color color, t_int2 pos
+			, t_int2 ref_point)
 {
-	t_int2	pxl_unit;
+	t_int2		current_pos;
+	t_int2		raw_dist;
+	long long	dist;
 
-	pxl_unit.x = (W_WIDTH / 4) / ft_strlen(map[0]);
-	pxl_unit.y = (W_HEIGHT / 4) / ft_tab_len((void **)map);
-	if (pxl_unit.x < pxl_unit.y)
-		return (pxl_unit.x);
-	return (pxl_unit.y);
+	current_pos.y = pos.y;
+	while (current_pos.y < pos.y + TILE_SIZE)
+	{
+		current_pos.x = pos.x;
+		while (current_pos.x < pos.x + TILE_SIZE)
+		{
+			raw_dist = make_int2(ref_point.y - current_pos.y,
+					ref_point.x - current_pos.x);
+			dist = (raw_dist.x * raw_dist.x + raw_dist.y * raw_dist.y);
+			if (dist < TILE_SIZE * 120)
+				draw_pxl(sys, current_pos, color);
+			++current_pos.x;
+		}
+		++current_pos.y;
+	}
 }
 
-static void	render_minimap(t_system *sys, t_int2 pos, int pxl_unit)
+static void	render_minimap(t_system *sys, t_int2 pos, t_int2 pj_pos)
 {
 	t_color	color;
 	t_int2	imap;
@@ -44,11 +56,11 @@ static void	render_minimap(t_system *sys, t_int2 pos, int pxl_unit)
 				color = make_color(255, 0, 128, 255);
 			if (sys->s_i.map[imap.y][imap.x] == '0'
 				|| sys->s_i.map[imap.y][imap.x] == '1')
-				draw_square(sys, color, pos, pxl_unit);
-			pos.x += pxl_unit;
+				draw_square_in_range(sys, color, pos, pj_pos);
+			pos.x += TILE_SIZE;
 			++imap.x;
 		}
-		pos.y += pxl_unit;
+		pos.y += TILE_SIZE;
 		++imap.y;
 	}
 }
@@ -57,18 +69,21 @@ void	minimap_routine(t_system *sys, int corner)
 {
 	t_int2	area_start;
 	t_int2	map_start;
-	int		pxl_unit;
+	t_int2	pj_pos;
+	int		half_size;
 
-	pxl_unit = minimap_pxl_unit(sys->s_i.map);
-	area_start = make_int2(0, 0);
+	half_size = TILE_SIZE / 4;
+	pj_pos = make_int2(64, 64);
 	if (corner == T_RIGHT)
-		area_start.x = W_WIDTH - ft_strlen(sys->s_i.map[0]) * pxl_unit;
+		pj_pos = make_int2(64, W_WIDTH - 64);
 	else if (corner == B_LEFT)
-		area_start.y = W_HEIGHT - ft_tab_len((void **)sys->s_i.map) * pxl_unit;
+		pj_pos = make_int2(W_HEIGHT - 64, 64);
 	else if (corner == B_RIGHT)
-		area_start = make_int2(W_HEIGHT - ft_tab_len((void **)sys->s_i.map)
-				* pxl_unit, W_WIDTH - ft_strlen(sys->s_i.map[0]) * pxl_unit);
+		pj_pos = make_int2(W_HEIGHT - 64, W_WIDTH - 64);
+	area_start = make_int2(-sys->pj.pos.y * TILE_SIZE + pj_pos.y + half_size,
+			-sys->pj.pos.x * TILE_SIZE + pj_pos.x + half_size);
 	map_start = make_int2(area_start.y, area_start.x);
-	render_minimap(sys, map_start, pxl_unit);
-	render_pj_minimap(sys, map_start, pxl_unit);
+	render_minimap(sys, map_start,
+		make_int2(pj_pos.y + half_size, pj_pos.x + half_size));
+	render_pj_minimap(sys, pj_pos);
 }
