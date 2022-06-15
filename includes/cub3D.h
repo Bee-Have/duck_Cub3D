@@ -6,7 +6,7 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 17:56:34 by user42            #+#    #+#             */
-/*   Updated: 2022/06/14 18:02:23 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/06/14 19:01:27 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 #define CUB3D_H
 
 // window/screen size
-#define W_HEIGHT 1080
-#define W_WIDTH 1920
+#define W_HEIGHT 720
+#define W_WIDTH 1280
 
 // minimap general position
 #define T_LEFT 0
@@ -41,7 +41,8 @@
 #define R_LEFT 65361
 
 // gameplay pj
-#define SPEED 0.1
+#define DIR 0.3
+#define SPEED 3
 #define R_SPEED 0.2
 
 // structs
@@ -76,7 +77,9 @@ typedef struct s_color
 typedef struct s_raycasting
 {
 	int		x;
+	int		wall_height;
 	t_int2	hit;
+	t_vec2	ray_dir;
 	t_vec2	side_dist;
 	t_vec2	delta_dist;
 	t_int2	step;
@@ -90,6 +93,7 @@ typedef struct s_img
 	int		bits_pxl;
 	int		line_len;
 	int		endian;
+	t_int2	size;
 }			t_img;
 
 typedef struct s_screen_info
