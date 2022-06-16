@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map_content.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 19:09:38 by ldutriez          #+#    #+#             */
-/*   Updated: 2022/05/31 20:02:33 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/06/14 20:55:27 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "cub3d.h"
 
 static void	check_if_not_last(t_d_list lines, int l, int c, t_parser *parser)
 {

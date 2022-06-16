@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   key_events.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 15:38:13 by amarini-          #+#    #+#             */
-/*   Updated: 2022/06/14 18:53:49 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/06/15 18:28:56 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "cub3d.h"
 
 int	key_press(int keycode, t_system *sys)
 {
