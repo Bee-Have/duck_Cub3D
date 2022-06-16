@@ -6,7 +6,7 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 17:56:34 by user42            #+#    #+#             */
-/*   Updated: 2022/06/16 16:45:43 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/06/16 16:48:09 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@
 // gameplay pj
 # define DIR 0.4
 # define SPEED 2.5
-# define R_SPEED 0.2
+# define R_SPEED 0.15
 
 // structs
 typedef struct s_int2
