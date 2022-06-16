@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   simulation_end.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 19:26:03 by user42            #+#    #+#             */
-/*   Updated: 2022/06/04 15:13:58 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/06/16 17:10:51 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 // 	mlx_destroy_image(sys->mlx.mlx, sys->s_i.east_texture.img);
 // }
 
-void	end_simulation(t_system *sys, int exit_code)
+int	end_simulation(t_system *sys, int exit_code)
 {
 	if (sys->s_i.map != NULL)
 		ft_free_tab((void **)sys->s_i.map);

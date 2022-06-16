@@ -6,7 +6,7 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 17:56:34 by user42            #+#    #+#             */
-/*   Updated: 2022/06/14 19:01:27 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/06/16 17:11:13 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,7 +168,7 @@ void	draw_line(t_system *sys, t_int2 start, t_int2 end, t_color color);
 void	draw_circle(t_system *sys, t_color color, t_int2 pos, int size);
 
 //? END SIMULATION
-void	end_simulation(t_system *sys, int exit_code);
+int		end_simulation(t_system *sys, int exit_code);
 //? PARSING
 
 # define ERROR_LIMIT 20
