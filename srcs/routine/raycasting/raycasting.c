@@ -6,7 +6,7 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 18:30:53 by amarini-          #+#    #+#             */
-/*   Updated: 2022/06/16 16:34:04 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/06/16 16:43:10 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 int	render_rays(t_system *sys, t_raycast cast_info)
 {
 	double	wall_dist;
-	t_int2	bounds;
 	int		wall_start;
 	int		wall_end;
 

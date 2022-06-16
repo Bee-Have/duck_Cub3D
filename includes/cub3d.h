@@ -6,7 +6,7 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 17:56:34 by user42            #+#    #+#             */
-/*   Updated: 2022/06/16 16:31:39 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/06/16 16:45:43 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@
 # define R_LEFT 65361
 
 // gameplay pj
-# define DIR 0.3
-# define SPEED 3
+# define DIR 0.4
+# define SPEED 2.5
 # define R_SPEED 0.2
 
 // structs
@@ -172,7 +172,7 @@ int		update_keys_events(t_system *sys);
 // raycasting
 void	raycasting_routine(t_system *sys);
 void	texture_calculations(t_system *sys, t_raycast cast_info,
-			t_int2 wall_limits, double wall_dist);
+			double wall_dist);
 // drawing tools
 void	draw_pxl(t_system *sys, t_int2 pos, t_color color);
 void	draw_square(t_system *sys, t_color color, t_int2 pos, int size);
