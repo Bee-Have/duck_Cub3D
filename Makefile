@@ -41,7 +41,7 @@ SRC = main.c \
 	$(ROUTINE_FILES) \
 	$(DRAW_TOOLS)
 
-SRC_BONUS = main.c \
+SRC_BONUS = main_bonus.c \
 	$(PARSING_FILES) \
 	$(INIT_FILES) \
 	$(ENGINE_FILES) \

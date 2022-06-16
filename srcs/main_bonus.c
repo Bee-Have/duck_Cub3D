@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 16:10:57 by amarini-          #+#    #+#             */
-/*   Updated: 2022/06/16 22:23:45 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/06/16 22:23:07 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ int	main(int ac, char **av)
 		return (EXIT_FAILURE);
 	}
 	// init mlx
-	ft_strcpy("cub3D", window_name);
-	sys.s_i.collision = 0;
+	ft_strcpy("duckling3D", window_name);
+	sys.s_i.collision = 1;
 	sys.mlx = init_mlx(window_name);
 	if (parse_map(&sys, av[1]) != 0)
 		end_simulation(&sys, EXIT_FAILURE);

@@ -6,7 +6,7 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 17:56:34 by user42            #+#    #+#             */
-/*   Updated: 2022/06/16 19:25:35 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/06/16 22:10:25 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ typedef struct s_img
 typedef struct s_screen_info
 {
 	char	**map;
+	int		collision;
 	int		pxl_unit;
 
 	t_color	floor;
@@ -146,7 +147,7 @@ t_color	make_color(unsigned char a, unsigned char r, unsigned char g,
 // mlx
 t_img	init_img(void);
 t_event	init_events(void);
-t_mlx	init_mlx(void);
+t_mlx	init_mlx(char window_name[10]);
 // gameplay
 t_pj	init_pj(char **map);
 
