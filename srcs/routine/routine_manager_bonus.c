@@ -6,15 +6,15 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 16:03:57 by amarini-          #+#    #+#             */
-/*   Updated: 2022/06/15 18:04:28 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/06/16 22:12:52 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "cub3d.h"
 
 int	update_all(t_system *sys)
 {
-	static int map_pos = T_LEFT;
+	static int	map_pos = T_LEFT;
 
 	if (sys->events.is_m_pressed == 1)
 	{

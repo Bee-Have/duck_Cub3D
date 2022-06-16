@@ -6,11 +6,11 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 18:28:28 by amarini-          #+#    #+#             */
-/*   Updated: 2022/06/15 16:54:11 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/06/16 22:06:24 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "cub3d.h"
 
 void	render_pj_minimap(t_system *sys, t_int2 pj_pos)
 {

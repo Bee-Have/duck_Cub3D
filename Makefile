@@ -27,12 +27,12 @@ vpath %.c $(foreach dir, $(SRC_DIR), $(dir):)
 PARSING_FILES = parsing.c parser_struct.c parse_map_content.c init_config.c
 INIT_FILES = init_structs.c init_mlx.c init_pj.c
 ROUTINE_FILES = mlx_routine.c routine_manager.c
-ENGINE_FILES = raycasting.c key_events.c simulation_end.c
+ENGINE_FILES = raycasting.c raycasting_texture.c key_events.c simulation_end.c
 DRAW_TOOLS = draw_pxl.c draw_circle.c draw_square.c draw_line.c
 
 ROUTINE_BONUS_FILES = mlx_routine.c routine_manager_bonus.c
 MINIMAP_BONUS_FILES = minimap_bonus.c minimap_pj_bonus.c
-ENGINE_BONUS_FILES = raycasting.c key_events_bonus.c simulation_end.c
+ENGINE_BONUS_FILES = raycasting.c raycasting_texture.c key_events_bonus.c simulation_end.c
 
 #SRC = main_minimap.c
 SRC = main.c \

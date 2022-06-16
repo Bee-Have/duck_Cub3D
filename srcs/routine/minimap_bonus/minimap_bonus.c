@@ -6,11 +6,11 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 17:39:49 by amarini-          #+#    #+#             */
-/*   Updated: 2022/06/15 17:20:59 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/06/16 22:13:09 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "cub3d.h"
 
 static void	draw_square_in_range(t_system *sys, t_color color, t_int2 pos
 			, t_int2 ref_point)
@@ -79,11 +79,12 @@ void	minimap_routine(t_system *sys, int corner)
 	half_size = TILE_SIZE / 4;
 	pj_pos = make_int2(64, 64);
 	if (corner == T_RIGHT)
-		pj_pos = make_int2(64, W_WIDTH - 64);
+		pj_pos = make_int2(64, W_WIDTH - 64 - half_size * 2);
 	else if (corner == B_LEFT)
-		pj_pos = make_int2(W_HEIGHT - 64, 64);
+		pj_pos = make_int2(W_HEIGHT - 64 - half_size * 2, 64);
 	else if (corner == B_RIGHT)
-		pj_pos = make_int2(W_HEIGHT - 64, W_WIDTH - 64);
+		pj_pos = make_int2(W_HEIGHT - 64 - half_size * 2,
+				W_WIDTH - 64 - half_size * 2);
 	area_start = make_int2(-sys->pj.pos.y * TILE_SIZE + pj_pos.y + half_size,
 			-sys->pj.pos.x * TILE_SIZE + pj_pos.x + half_size);
 	map_start = make_int2(area_start.y, area_start.x);

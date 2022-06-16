@@ -3,42 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   init_config.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 20:07:59 by ldutriez          #+#    #+#             */
-/*   Updated: 2022/06/04 12:15:15 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/06/15 18:36:54 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "cub3d.h"
 
 static void	init_texture(t_system *sys, char *line, t_int2 pos
 															, t_parser *parser)
 {
-	t_int2	size;
 	t_img	*texture;
 
 	texture = &sys->s_i.north_texture;
-	if (line[pos.x] == 'S' && line[pos.x] == 'O')
+	if (line[pos.x] == 'S' && line[pos.x + 1] == 'O')
 		texture = &sys->s_i.south_texture;
-	else if (line[pos.x] == 'W' && line[pos.x] == 'E')
+	else if (line[pos.x] == 'W' && line[pos.x + 1] == 'E')
 		texture = &sys->s_i.west_texture;
-	else if (line[pos.x] == 'E' && line[pos.x] == 'A')
+	else if (line[pos.x] == 'E' && line[pos.x + 1] == 'A')
 		texture = &sys->s_i.east_texture;
 	pos.x += 2;
 	while (line[pos.x] == ' ')
 		pos.x++;
 	if (ft_is_valid_file_path(line + pos.x) == b_false)
 		return (add_error(parser, P_ERR_TEXTURE, pos.y, pos.x));
-	texture->img = mlx_xpm_file_to_image(sys->mlx.mlx, line + pos.x, &size.x,
-			&size.y);
+	texture->img = mlx_xpm_file_to_image(sys->mlx.mlx, line + pos.x,
+			&texture->size.x, &texture->size.y);
 	if (texture->img == NULL)
 		add_error(parser, P_ERR_TEXTURE, pos.y, pos.x);
 	texture->addr = mlx_get_data_addr(texture->img, &texture->bits_pxl,
 			&texture->line_len, &texture->endian);
 	if (texture->addr == NULL)
 		add_error(parser, P_ERR_TEXTURE, pos.y, pos.x);
-	mlx_destroy_image(sys->mlx.mlx, texture->img);
 }
 
 static unsigned char	get_color_component(char *line, t_int2 pos
