@@ -6,7 +6,7 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 15:38:13 by amarini-          #+#    #+#             */
-/*   Updated: 2022/06/14 18:53:49 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/06/16 19:23:04 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,36 +74,36 @@ static void	move_player(t_system *sys, char c_dir)
 		sys->pj.pos.y = dir.y;
 }
 
-static void	rotate_player(t_system *sys, char dir)
+void	rotate_player(t_system *sys, char dir, double speed)
 {
 	if (dir == 'R')
 	{
-		sys->pj.dir = make_vec2(sys->pj.dir.x * sin(R_SPEED)
-				+ sys->pj.dir.y * cos(R_SPEED), sys->pj.dir.x * cos(R_SPEED)
-				- sys->pj.dir.y * sin(R_SPEED));
-		sys->pj.plane = make_vec2(sys->pj.plane.x * sin(R_SPEED)
-				+ sys->pj.plane.y * cos(R_SPEED),
-				sys->pj.plane.x * cos(R_SPEED)
-				- sys->pj.plane.y * sin(R_SPEED));
+		sys->pj.dir = make_vec2(sys->pj.dir.x * sin(speed)
+				+ sys->pj.dir.y * cos(speed), sys->pj.dir.x * cos(speed)
+				- sys->pj.dir.y * sin(speed));
+		sys->pj.plane = make_vec2(sys->pj.plane.x * sin(speed)
+				+ sys->pj.plane.y * cos(speed),
+				sys->pj.plane.x * cos(speed)
+				- sys->pj.plane.y * sin(speed));
 	}
 	else if (dir == 'L')
 	{
-		sys->pj.dir = make_vec2(sys->pj.dir.x * sin(-R_SPEED)
-				+ sys->pj.dir.y * cos(-R_SPEED), sys->pj.dir.x * cos(-R_SPEED)
-				- sys->pj.dir.y * sin(-R_SPEED));
-		sys->pj.plane = make_vec2(sys->pj.plane.x * sin(-R_SPEED)
-				+ sys->pj.plane.y * cos(-R_SPEED),
-				sys->pj.plane.x * cos(-R_SPEED)
-				- sys->pj.plane.y * sin(-R_SPEED));
+		sys->pj.dir = make_vec2(sys->pj.dir.x * sin(-speed)
+				+ sys->pj.dir.y * cos(-speed), sys->pj.dir.x * cos(-speed)
+				- sys->pj.dir.y * sin(-speed));
+		sys->pj.plane = make_vec2(sys->pj.plane.x * sin(-speed)
+				+ sys->pj.plane.y * cos(-speed),
+				sys->pj.plane.x * cos(-speed)
+				- sys->pj.plane.y * sin(-speed));
 	}
 }
 
 int	update_keys_events(t_system *sys)
 {
 	if (sys->events.is_left_pressed == 1)
-		rotate_player(sys, 'L');
+		rotate_player(sys, 'L', R_SPEED);
 	if (sys->events.is_right_pressed == 1)
-		rotate_player(sys, 'R');
+		rotate_player(sys, 'R', R_SPEED);
 	if (sys->events.is_w_pressed == 1)
 		move_player(sys, 'W');
 	if (sys->events.is_s_pressed == 1)
