@@ -6,11 +6,11 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 17:22:27 by amarini-          #+#    #+#             */
-/*   Updated: 2022/06/16 22:41:59 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/06/16 23:15:56 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "duckling3d_bonus.h"
 
 int	mouse_move(int x, int y, t_system *sys)
 {

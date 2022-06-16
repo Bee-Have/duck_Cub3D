@@ -6,7 +6,7 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 17:56:34 by user42            #+#    #+#             */
-/*   Updated: 2022/06/16 22:42:04 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/06/16 23:06:03 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -267,20 +267,11 @@ void	init_map(t_system *sys, t_d_list lines, t_int2 pos, t_parser *parser);
 
 //? BONUS
 
-<<<<<<< HEAD:includes/cub3d.h
-#define T_LEFT 0
-#define T_RIGHT 1
-#define B_LEFT 2
-#define B_RIGHT 3
-#define CENTER 4
-# define MOUSE_SPEED 0.02
-=======
->>>>>>> master:includes/cub3d.h
 //* minimap
-void	render_pj_minimap(t_system *sys, t_int2 map_start, int pxl_unit);
-void	minimap_routine(t_system *sys, int corner);
+// void	render_pj_minimap(t_system *sys, t_int2 map_start, int pxl_unit);
+// void	minimap_routine(t_system *sys, int corner);
 
 //* events
-int		mouse_move(int x, int y, t_system *sys);
+// int		mouse_move(int x, int y, t_system *sys);
 
 #endif

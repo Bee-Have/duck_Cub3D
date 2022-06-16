@@ -6,11 +6,11 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 18:28:28 by amarini-          #+#    #+#             */
-/*   Updated: 2022/06/14 20:55:27 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/06/16 23:15:56 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "duckling3d_bonus.h"
 
 void	render_pj_minimap(t_system *sys, t_int2 map_start, int pxl_unit)
 {
