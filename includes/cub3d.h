@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 17:56:34 by user42            #+#    #+#             */
-/*   Updated: 2022/06/16 16:48:09 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/06/16 22:15:44 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,15 @@
 # include "mlx.h"
 
 // window/screen size
-# define W_HEIGHT 1080
-# define W_WIDTH 1920
+# define W_HEIGHT 600
+# define W_WIDTH 800
 
 // minimap general position
 # define T_LEFT 0
 # define T_RIGHT 1
 # define B_LEFT 2
 # define B_RIGHT 3
+# define TILE_SIZE 32
 
 // keycodes :
 # define ESC 65307
@@ -39,6 +40,7 @@
 # define LEFT 97
 # define R_RIGHT 65363
 # define R_LEFT 65361
+# define M 109
 
 // gameplay pj
 # define DIR 0.4
@@ -129,6 +131,7 @@ typedef struct s_event
 	char	is_d_pressed;
 	char	is_left_pressed;
 	char	is_right_pressed;
+	char	is_m_pressed;
 }			t_event;
 
 typedef struct s_mlx
@@ -266,7 +269,7 @@ void	init_map(t_system *sys, t_d_list lines, t_int2 pos, t_parser *parser);
 //? BONUS
 
 //* minimap
-void	render_pj_minimap(t_system *sys, t_int2 map_start, int pxl_unit);
+void	render_pj_minimap(t_system *sys, t_int2 pj_pos);
 void	minimap_routine(t_system *sys, int corner);
 
 #endif
