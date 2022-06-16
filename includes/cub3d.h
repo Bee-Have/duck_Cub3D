@@ -6,7 +6,7 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 17:56:34 by user42            #+#    #+#             */
-/*   Updated: 2022/06/16 22:40:37 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/06/16 22:42:04 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -267,7 +267,7 @@ void	init_map(t_system *sys, t_d_list lines, t_int2 pos, t_parser *parser);
 
 //? BONUS
 
-<<<<<<< HEAD:includes/cub3D.h
+<<<<<<< HEAD:includes/cub3d.h
 #define T_LEFT 0
 #define T_RIGHT 1
 #define B_LEFT 2

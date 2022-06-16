@@ -6,11 +6,11 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 15:35:55 by amarini-          #+#    #+#             */
-/*   Updated: 2022/06/16 18:44:27 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/06/16 22:41:59 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "cub3d.h"
 
 void	mlx_routine(t_system sys)
 {
