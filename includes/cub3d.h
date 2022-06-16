@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 17:56:34 by user42            #+#    #+#             */
-/*   Updated: 2022/06/15 18:44:54 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/16 16:31:39 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ typedef struct s_raycasting
 	t_vec2	ray_dir;
 	t_vec2	side_dist;
 	t_vec2	delta_dist;
+	t_int2	wall_limits;
 	t_int2	step;
 	int		side;
 }				t_raycast;
@@ -170,6 +171,8 @@ int		key_release(int keycode, t_system *sys);
 int		update_keys_events(t_system *sys);
 // raycasting
 void	raycasting_routine(t_system *sys);
+void	texture_calculations(t_system *sys, t_raycast cast_info,
+			t_int2 wall_limits, double wall_dist);
 // drawing tools
 void	draw_pxl(t_system *sys, t_int2 pos, t_color color);
 void	draw_square(t_system *sys, t_color color, t_int2 pos, int size);

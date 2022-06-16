@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 18:30:53 by amarini-          #+#    #+#             */
-/*   Updated: 2022/06/15 18:40:33 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/16 16:34:04 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,27 @@
 
 int	render_rays(t_system *sys, t_raycast cast_info)
 {
-	double	perp_wall_dist;
+	double	wall_dist;
 	t_int2	bounds;
 	int		wall_start;
 	int		wall_end;
 
 	if (cast_info.side == 0)
-		perp_wall_dist = cast_info.side_dist.x - cast_info.delta_dist.x;
+		wall_dist = cast_info.side_dist.x - cast_info.delta_dist.x;
 	else
-		perp_wall_dist = cast_info.side_dist.y - cast_info.delta_dist.y;
-	if ((int)perp_wall_dist == 0)
+		wall_dist = cast_info.side_dist.y - cast_info.delta_dist.y;
+	if ((int)wall_dist == 0)
 		cast_info.wall_height = W_HEIGHT;
 	else
-		cast_info.wall_height = (int)(W_HEIGHT / perp_wall_dist);
+		cast_info.wall_height = (int)(W_HEIGHT / wall_dist);
 	wall_start = -cast_info.wall_height / 2 + W_HEIGHT / 2;
 	if (wall_start < 0)
 		wall_start = 0;
 	wall_end = cast_info.wall_height / 2 + W_HEIGHT / 2;
 	if (wall_end >= W_HEIGHT)
 		wall_end = W_HEIGHT - 1;
-	bounds = make_int2(wall_start, wall_end);
-	texture_calculations(sys, cast_info, bounds, perp_wall_dist);
+	cast_info.wall_limits = make_int2(wall_start, wall_end);
+	texture_calculations(sys, cast_info, wall_dist);
 	return (1);
 }
 
@@ -101,8 +101,9 @@ void	raycasting_routine(t_system *sys)
 	while (cast_info.x < W_WIDTH)
 	{
 		camera_x = 2 * cast_info.x / (double)W_WIDTH - 1;
-		cast_info.ray_dir = make_vec2(sys->pj.dir.y + sys->pj.plane.y * camera_x,
-				sys->pj.dir.x + sys->pj.plane.x * camera_x);
+		cast_info.ray_dir = make_vec2(sys->pj.dir.y + sys->pj.plane.y
+				* camera_x, sys->pj.dir.x + sys->pj.plane.x
+				* camera_x);
 		init_casting_info(sys, &cast_info);
 		casting_rays(sys, cast_info);
 		++cast_info.x;
