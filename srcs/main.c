@@ -6,11 +6,11 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 16:10:57 by amarini-          #+#    #+#             */
-/*   Updated: 2022/06/16 22:23:45 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/06/16 22:39:35 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "cub3d.h"
 
 int	main(int ac, char **av)
 {
@@ -23,7 +23,6 @@ int	main(int ac, char **av)
 		ft_putstr_fd(2, "Error\nUsage: cub3D path_to_file.cub\n");
 		return (EXIT_FAILURE);
 	}
-	// init mlx
 	ft_strcpy("cub3D", window_name);
 	sys.s_i.collision = 0;
 	sys.mlx = init_mlx(window_name);
@@ -32,7 +31,6 @@ int	main(int ac, char **av)
 	sys.events = init_events();
 	sys.pj = init_pj(sys.s_i.map);
 	sys.s_i.map[(int)sys.pj.pos.y][(int)sys.pj.pos.x] = '0';
-	// start mlx routine
 	mlx_routine(sys);
 	end_simulation(&sys, EXIT_SUCCESS);
 	return (EXIT_SUCCESS);

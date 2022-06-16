@@ -6,13 +6,13 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 16:13:42 by amarini-          #+#    #+#             */
-/*   Updated: 2022/05/29 14:38:24 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/15 17:43:41 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "cub3d.h"
 
-void	switch_vec2(t_int2 *vector)
+static void	switch_vec2(t_int2 *vector)
 {
 	int	tmp;
 
@@ -21,49 +21,43 @@ void	switch_vec2(t_int2 *vector)
 	(*vector).y = tmp;
 }
 
-//m = slope
-void	plot_pxl(t_system *sys, t_int2 start, t_int2 end, t_int2 m, int decide, t_color color)
+static void	switch_draw(t_system *sys, t_line_info info, t_color color)
 {
-	int		err;
-	int		i;
-	int		len;
-
-	err = 2 * m.y - m.x;
-	len = 1;
-	i = 0;
-	while (i < m.x)
+	if (info.decide == 1)
 	{
-		if (start.x < end.x)
-			++start.x;
+		switch_vec2(&info.start);
+		draw_pxl(sys, info.start, color);
+		switch_vec2(&info.start);
+	}
+	else
+		draw_pxl(sys, info.start, color);
+}
+
+//m = slope
+static void	plot_pxl(t_system *sys, t_line_info info, t_color color)
+{
+	int		i;
+
+	i = 0;
+	while (i < info.m.x)
+	{
+		if (info.start.x < info.end.x)
+			++info.start.x;
 		else
-			--start.x;
-		if (err < 0)
+			--info.start.x;
+		if (info.err < 0)
 		{
-			if (decide == 1)
-			{
-				switch_vec2(&start);
-				draw_square(sys, color, start, len);
-				switch_vec2(&start);
-			}
-			else
-				draw_square(sys, color, start, len);
-			err = err + 2 * m.y;
+			switch_draw(sys, info, color);
+			info.err = info.err + 2 * info.m.y;
 		}
 		else
 		{
-			if (start.y < end.y)
-				++start.y;
+			if (info.start.y < info.end.y)
+				++info.start.y;
 			else
-				--start.y;
-			if (decide == 1)
-			{
-				switch_vec2(&start);
-				draw_square(sys, color, start, len);
-				switch_vec2(&start);
-			}
-			else
-				draw_square(sys, color, start, len);
-			err = err + 2 * m.y - 2 * m.x;
+				--info.start.y;
+			switch_draw(sys, info, color);
+			info.err = info.err + 2 * info.m.y - 2 * info.m.x;
 		}
 		++i;
 	}
@@ -72,17 +66,19 @@ void	plot_pxl(t_system *sys, t_int2 start, t_int2 end, t_int2 m, int decide, t_c
 //m = slope
 void	draw_line(t_system *sys, t_int2 start, t_int2 end, t_color color)
 {
-	t_int2	m;
+	t_line_info	info;
 
-	m = make_int2(abs(end.y - start.y), abs(end.x - start.x));
-	if (m.x < m.y)
+	info.m = make_int2(abs(end.y - start.y), abs(end.x - start.x));
+	info.start = start;
+	info.end = end;
+	info.decide = 0;
+	if (info.m.x < info.m.y)
 	{
-		switch_vec2(&start);
-		switch_vec2(&end);
-		switch_vec2(&m);
-		plot_pxl(sys, start, end, m, 1, color);
+		switch_vec2(&info.start);
+		switch_vec2(&info.end);
+		switch_vec2(&info.m);
+		info.decide = 1;
 	}
-	else
-		plot_pxl(sys, start, end, m, 0, color);
+	info.err = 2 * info.m.y - info.m.x;
+	plot_pxl(sys, info, color);
 }
-

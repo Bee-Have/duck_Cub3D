@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parser_struct.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 12:43:25 by ldutriez          #+#    #+#             */
-/*   Updated: 2022/05/29 19:45:53 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/06/14 20:55:27 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "cub3d.h"
 
 #define STATIC_P_ERR_NO "Error\nNorth texture missing"
 #define STATIC_P_ERR_SO "Error\nSouth texture missing"

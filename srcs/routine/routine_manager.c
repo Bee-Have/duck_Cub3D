@@ -6,11 +6,11 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 16:03:57 by amarini-          #+#    #+#             */
-/*   Updated: 2022/06/06 18:40:47 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/06/14 20:55:27 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "cub3d.h"
 
 int	update_all(t_system *sys)
 {

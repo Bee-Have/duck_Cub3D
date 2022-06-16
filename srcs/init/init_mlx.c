@@ -6,11 +6,11 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 18:09:36 by amarini-          #+#    #+#             */
-/*   Updated: 2022/06/16 22:10:27 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/06/16 22:39:48 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "cub3d.h"
 
 t_img	init_img(void)
 {

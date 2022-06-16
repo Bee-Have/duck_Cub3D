@@ -6,11 +6,11 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 15:38:13 by amarini-          #+#    #+#             */
-/*   Updated: 2022/06/16 22:30:50 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/06/16 22:40:47 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "cub3d.h"
 
 int	key_press(int keycode, t_system *sys)
 {

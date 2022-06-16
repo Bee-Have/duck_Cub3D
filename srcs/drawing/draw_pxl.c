@@ -6,11 +6,11 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 16:19:28 by amarini-          #+#    #+#             */
-/*   Updated: 2022/06/06 19:51:18 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/06/14 20:55:27 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "cub3d.h"
 
 void	draw_pxl(t_system *sys, t_int2 pos, t_color color)
 {

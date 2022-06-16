@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   init_structs.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 18:14:04 by amarini-          #+#    #+#             */
-/*   Updated: 2022/06/06 15:50:26 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/06/14 20:55:27 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "cub3d.h"
 
 t_int2	make_int2(int y, int x)
 {
