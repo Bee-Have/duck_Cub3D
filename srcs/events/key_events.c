@@ -6,7 +6,7 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 15:38:13 by amarini-          #+#    #+#             */
-/*   Updated: 2022/06/21 14:24:58 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/06/21 14:36:03 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,18 +68,10 @@ static void	move_player(t_system *sys, char c_dir)
 						+ sys->pj.dir.y * cos(M_PI_2)) * DIR * SPEED),
 				sys->pj.pos.x + ((sys->pj.dir.x * cos(M_PI_2) - sys->pj.dir.y
 						* sin(M_PI_2)) * DIR * SPEED));
-	if (sys->s_i.collision == 0 || (sys->s_i.collision == 1
-		&& sys->s_i.map[(int)dir.y][(int)dir.x] != '1'))
-	{
-		if (dir.x > 0 && dir.x < ft_strlen(sys->s_i.map[(int)sys->pj.pos.y])
-			&& (sys->s_i.collision == 0 || (sys->s_i.collision == 1
-			&& sys->s_i.map[(int)sys->pj.pos.y][(int)dir.x] != '1')))
-			sys->pj.pos.x = dir.x;
-		if (dir.y > 0 && dir.y < ft_tab_len((void **)sys->s_i.map)
-			&& (sys->s_i.collision == 0 || (sys->s_i.collision == 1
-			&& sys->s_i.map[(int)dir.y][(int)sys->pj.pos.x] != '1')))
-			sys->pj.pos.y = dir.y;
-	}
+	if (dir.x > 0 && dir.x < ft_strlen(sys->s_i.map[(int)sys->pj.pos.y]))
+		sys->pj.pos.x = dir.x;
+	if (dir.y > 0 && dir.y < ft_tab_len((void **)sys->s_i.map))
+		sys->pj.pos.y = dir.y;
 }
 
 void	rotate_player(t_system *sys, char dir, double speed)

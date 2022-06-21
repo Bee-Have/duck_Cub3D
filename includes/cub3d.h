@@ -6,7 +6,7 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 17:56:34 by user42            #+#    #+#             */
-/*   Updated: 2022/06/21 14:15:48 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/06/21 14:43:01 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,6 @@ typedef struct s_img
 typedef struct s_screen_info
 {
 	char	**map;
-	int		collision;
 	int		pxl_unit;
 
 	t_color	floor;

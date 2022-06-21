@@ -6,7 +6,7 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 15:38:13 by amarini-          #+#    #+#             */
-/*   Updated: 2022/06/21 14:27:34 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/06/21 14:43:08 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,11 @@ static void	move_player(t_system *sys, char c_dir)
 						+ sys->pj.dir.y * cos(M_PI_2)) * DIR * SPEED),
 				sys->pj.pos.x + ((sys->pj.dir.x * cos(M_PI_2) - sys->pj.dir.y
 						* sin(M_PI_2)) * DIR * SPEED));
-	if (dir.x > 0 && dir.x < ft_strlen(sys->s_i.map[(int)sys->pj.pos.y]))
+	if (dir.x > 0 && dir.x < ft_strlen(sys->s_i.map[(int)sys->pj.pos.y])
+		&& sys->s_i.map[(int)sys->pj.pos.y][(int)dir.x] != '1')
 		sys->pj.pos.x = dir.x;
-	if (dir.y > 0 && dir.y < ft_tab_len((void **)sys->s_i.map))
+	if (dir.y > 0 && dir.y < ft_tab_len((void **)sys->s_i.map)
+		&& sys->s_i.map[(int)dir.y][(int)sys->pj.pos.x] != '1')
 		sys->pj.pos.y = dir.y;
 }
 
