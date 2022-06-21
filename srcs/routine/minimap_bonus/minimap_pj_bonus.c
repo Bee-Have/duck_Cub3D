@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_pj_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 18:28:28 by amarini-          #+#    #+#             */
-/*   Updated: 2022/06/16 22:06:24 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/06/16 23:38:44 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "duckling3d_bonus.h"
 
 void	render_pj_minimap(t_system *sys, t_int2 pj_pos)
 {

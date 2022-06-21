@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 17:56:34 by user42            #+#    #+#             */
-/*   Updated: 2022/06/16 22:15:44 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/06/21 14:51:09 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 # include "mlx.h"
 
 // window/screen size
-# define W_HEIGHT 600
-# define W_WIDTH 800
+# define W_HEIGHT 1080
+# define W_WIDTH 1920
 
 // minimap general position
 # define T_LEFT 0
@@ -44,7 +44,7 @@
 
 // gameplay pj
 # define DIR 0.4
-# define SPEED 2.5
+# define SPEED 2
 # define R_SPEED 0.15
 
 // structs
@@ -159,7 +159,7 @@ t_color	make_color(unsigned char a, unsigned char r, unsigned char g,
 // mlx
 t_img	init_img(void);
 t_event	init_events(void);
-t_mlx	init_mlx(void);
+t_mlx	init_mlx(char window_name[10]);
 // gameplay
 t_pj	init_pj(char **map);
 
@@ -171,6 +171,7 @@ int		update_all(t_system *sys);
 // keys events
 int		key_press(int keycode, t_system *sys);
 int		key_release(int keycode, t_system *sys);
+void	rotate_player(t_system *sys, char dir, double speed);
 int		update_keys_events(t_system *sys);
 // raycasting
 void	raycasting_routine(t_system *sys);
@@ -183,7 +184,7 @@ void	draw_line(t_system *sys, t_int2 start, t_int2 end, t_color color);
 void	draw_circle(t_system *sys, t_color color, t_int2 pos, int size);
 
 //? END SIMULATION
-void	end_simulation(t_system *sys, int exit_code);
+int		end_simulation(t_system *sys, int exit_code);
 //? PARSING
 
 # define ERROR_LIMIT 20
@@ -265,11 +266,5 @@ void	init_config(t_system *sys, char *line, t_int2 pos, t_parser *parser);
 *	If an error occured, the map is not allocated.
 */
 void	init_map(t_system *sys, t_d_list lines, t_int2 pos, t_parser *parser);
-
-//? BONUS
-
-//* minimap
-void	render_pj_minimap(t_system *sys, t_int2 pj_pos);
-void	minimap_routine(t_system *sys, int corner);
 
 #endif

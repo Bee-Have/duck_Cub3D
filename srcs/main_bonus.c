@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 16:10:57 by amarini-          #+#    #+#             */
-/*   Updated: 2022/06/21 14:42:55 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/06/21 14:42:52 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "duckling3d_bonus.h"
 
 int	main(int ac, char **av)
 {
@@ -23,7 +23,7 @@ int	main(int ac, char **av)
 		ft_putstr_fd(2, "Error\nUsage: cub3D path_to_file.cub\n");
 		return (EXIT_FAILURE);
 	}
-	ft_strcpy("cub3D", window_name);
+	ft_strcpy("duckling3D", window_name);
 	sys.mlx = init_mlx(window_name);
 	if (parse_map(&sys, av[1]) != 0)
 		end_simulation(&sys, EXIT_FAILURE);

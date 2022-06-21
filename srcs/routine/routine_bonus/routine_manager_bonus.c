@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   routine_manager_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 16:03:57 by amarini-          #+#    #+#             */
-/*   Updated: 2022/06/16 22:12:52 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/06/16 23:38:33 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "duckling3d_bonus.h"
 
 int	update_all(t_system *sys)
 {

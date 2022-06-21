@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 17:39:49 by amarini-          #+#    #+#             */
-/*   Updated: 2022/06/16 22:13:09 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/06/16 23:39:01 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "duckling3d_bonus.h"
 
 static void	draw_square_in_range(t_system *sys, t_color color, t_int2 pos
 			, t_int2 ref_point)

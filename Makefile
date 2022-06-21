@@ -30,11 +30,11 @@ ROUTINE_FILES = mlx_routine.c routine_manager.c
 ENGINE_FILES = raycasting.c raycasting_texture.c key_events.c simulation_end.c
 DRAW_TOOLS = draw_pxl.c draw_circle.c draw_square.c draw_line.c
 
-ROUTINE_BONUS_FILES = mlx_routine.c routine_manager_bonus.c
+ROUTINE_BONUS_FILES = mlx_routine_bonus.c routine_manager_bonus.c
+EVENT_BONUS_FILES = mouse_events_bonus.c key_events_bonus.c simulation_end.c
 MINIMAP_BONUS_FILES = minimap_bonus.c minimap_pj_bonus.c
-ENGINE_BONUS_FILES = raycasting.c raycasting_texture.c key_events_bonus.c simulation_end.c
+ENGINE_BONUS_FILES = raycasting.c raycasting_texture.c
 
-#SRC = main_minimap.c
 SRC = main.c \
 	$(PARSING_FILES) \
 	$(INIT_FILES) \
@@ -42,12 +42,13 @@ SRC = main.c \
 	$(ROUTINE_FILES) \
 	$(DRAW_TOOLS)
 
-SRC_BONUS = main.c \
+SRC_BONUS = main_bonus.c \
 	$(PARSING_FILES) \
 	$(INIT_FILES) \
 	$(ENGINE_BONUS_FILES) \
-	$(DRAW_TOOLS) \
 	$(ROUTINE_BONUS_FILES) \
+	$(EVENT_BONUS_FILES) \
+	$(DRAW_TOOLS) \
 	$(MINIMAP_BONUS_FILES)
 
 OBJ = $(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))

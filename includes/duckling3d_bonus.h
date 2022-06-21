@@ -1,22 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx_routine.c                                      :+:      :+:    :+:   */
+/*   duckling3d_bonus.h                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/17 15:35:55 by amarini-          #+#    #+#             */
-/*   Updated: 2022/06/16 22:39:08 by amarini-         ###   ########.fr       */
+/*   Created: 2022/05/30 17:56:34 by user42            #+#    #+#             */
+/*   Updated: 2022/06/21 14:48:32 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#ifndef DUCKLING3D_BONUS_H
+# define DUCKLING3D_BONUS_H
 
-void	mlx_routine(t_system sys)
-{
-	mlx_loop_hook(sys.mlx.mlx, update_all, &sys);
-	mlx_hook(sys.mlx.win, 2, 1L << 0, key_press, &sys);
-	mlx_hook(sys.mlx.win, 3, 1L << 1, key_release, &sys);
-	mlx_hook(sys.mlx.win, 17, 1L << 17, end_simulation, &sys);
-	mlx_loop(sys.mlx.mlx);
-}
+# include "cub3d.h"
+# include "libft.h"
+# include "mlx.h"
+
+# define MOUSE_SPEED 0.02
+
+//* minimap
+void	render_pj_minimap(t_system *sys, t_int2 pj_pos);
+void	minimap_routine(t_system *sys, int corner);
+
+//* events
+int		mouse_move(int x, int y, t_system *sys);
+
+#endif

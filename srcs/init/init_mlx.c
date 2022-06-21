@@ -6,7 +6,7 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 18:09:36 by amarini-          #+#    #+#             */
-/*   Updated: 2022/06/14 20:55:27 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/06/16 22:39:48 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,12 @@ t_event	init_events(void)
 	return (events);
 }
 
-t_mlx	init_mlx(void)
+t_mlx	init_mlx(char window_name[10])
 {
 	t_mlx	mlx;
 
 	mlx.mlx = mlx_init();
-	mlx.win = mlx_new_window(mlx.mlx, W_WIDTH, W_HEIGHT, "cub3D");
+	mlx.win = mlx_new_window(mlx.mlx, W_WIDTH, W_HEIGHT, window_name);
 	mlx.img = init_img();
 	mlx.img.img = mlx_new_image(mlx.mlx, W_WIDTH, W_HEIGHT);
 	mlx.img.addr = mlx_get_data_addr(mlx.img.img, &mlx.img.bits_pxl,
