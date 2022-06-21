@@ -6,7 +6,7 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 15:38:13 by amarini-          #+#    #+#             */
-/*   Updated: 2022/06/21 14:25:57 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/06/21 14:27:34 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,21 +55,21 @@ static void	move_player(t_system *sys, char c_dir)
 	t_vec2	dir;
 
 	if (c_dir == 'W')
-		dir = make_vec2(sys->pj.pos.y + (sys->pj.dir.y * SPEED * 6),
-				sys->pj.pos.x + (sys->pj.dir.x * SPEED * 6));
+		dir = make_vec2(sys->pj.pos.y + (sys->pj.dir.y * DIR * SPEED),
+				sys->pj.pos.x + (sys->pj.dir.x * DIR * SPEED));
 	else if (c_dir == 'S')
-		dir = make_vec2(sys->pj.pos.y - (sys->pj.dir.y * SPEED * 6),
-				sys->pj.pos.x - (sys->pj.dir.x * SPEED * 6));
+		dir = make_vec2(sys->pj.pos.y - (sys->pj.dir.y * DIR * SPEED),
+				sys->pj.pos.x - (sys->pj.dir.x * DIR * SPEED));
 	else if (c_dir == 'A')
 		dir = make_vec2(sys->pj.pos.y + ((sys->pj.dir.x * sin(M_PI * 3 / 2)
-						+ sys->pj.dir.y * cos(M_PI * 3 / 2)) * SPEED * 6),
+						+ sys->pj.dir.y * cos(M_PI * 3 / 2)) * DIR * SPEED),
 				sys->pj.pos.x + ((sys->pj.dir.x * cos(M_PI * 3 / 2)
-						- sys->pj.dir.y * sin(M_PI * 3 / 2)) * SPEED * 6));
+						- sys->pj.dir.y * sin(M_PI * 3 / 2)) * DIR * SPEED));
 	else
 		dir = make_vec2(sys->pj.pos.y + ((sys->pj.dir.x * sin(M_PI_2)
-						+ sys->pj.dir.y * cos(M_PI_2)) * SPEED * 6),
+						+ sys->pj.dir.y * cos(M_PI_2)) * DIR * SPEED),
 				sys->pj.pos.x + ((sys->pj.dir.x * cos(M_PI_2) - sys->pj.dir.y
-						* sin(M_PI_2)) * SPEED * 6));
+						* sin(M_PI_2)) * DIR * SPEED));
 	if (dir.x > 0 && dir.x < ft_strlen(sys->s_i.map[(int)sys->pj.pos.y]))
 		sys->pj.pos.x = dir.x;
 	if (dir.y > 0 && dir.y < ft_tab_len((void **)sys->s_i.map))
