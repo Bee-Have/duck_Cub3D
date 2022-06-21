@@ -6,7 +6,7 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 17:56:34 by user42            #+#    #+#             */
-/*   Updated: 2022/06/16 23:39:31 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/06/21 14:15:48 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 # include "mlx.h"
 
 // window/screen size
-# define W_HEIGHT 600
-# define W_WIDTH 800
+# define W_HEIGHT 1080
+# define W_WIDTH 1920
 
 // minimap general position
 # define T_LEFT 0
@@ -44,7 +44,7 @@
 
 // gameplay pj
 # define DIR 0.4
-# define SPEED 2.5
+# define SPEED 2
 # define R_SPEED 0.15
 
 // structs
@@ -271,7 +271,7 @@ void	init_map(t_system *sys, t_d_list lines, t_int2 pos, t_parser *parser);
 //? BONUS
 
 //* minimap
-void	render_pj_minimap(t_system *sys, t_int2 pj_pos);
-void	minimap_routine(t_system *sys, int corner);
+// void	render_pj_minimap(t_system *sys, t_int2 pj_pos);
+// void	minimap_routine(t_system *sys, int corner);
 
 #endif

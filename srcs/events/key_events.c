@@ -6,7 +6,7 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 15:38:13 by amarini-          #+#    #+#             */
-/*   Updated: 2022/06/16 22:40:47 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/06/21 14:24:58 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static void	move_player(t_system *sys, char c_dir)
 		dir = make_vec2(sys->pj.pos.y + ((sys->pj.dir.x * sin(M_PI_2)
 						+ sys->pj.dir.y * cos(M_PI_2)) * DIR * SPEED),
 				sys->pj.pos.x + ((sys->pj.dir.x * cos(M_PI_2) - sys->pj.dir.y
-						* sin(M_PI_2)) * DIR * 6));
+						* sin(M_PI_2)) * DIR * SPEED));
 	if (sys->s_i.collision == 0 || (sys->s_i.collision == 1
 		&& sys->s_i.map[(int)dir.y][(int)dir.x] != '1'))
 	{
