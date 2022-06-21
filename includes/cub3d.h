@@ -6,7 +6,7 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 17:56:34 by user42            #+#    #+#             */
-/*   Updated: 2022/06/21 14:43:01 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/06/21 14:51:09 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -266,11 +266,5 @@ void	init_config(t_system *sys, char *line, t_int2 pos, t_parser *parser);
 *	If an error occured, the map is not allocated.
 */
 void	init_map(t_system *sys, t_d_list lines, t_int2 pos, t_parser *parser);
-
-//? BONUS
-
-//* minimap
-// void	render_pj_minimap(t_system *sys, t_int2 pj_pos);
-// void	minimap_routine(t_system *sys, int corner);
 
 #endif
