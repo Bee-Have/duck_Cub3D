@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 17:22:27 by amarini-          #+#    #+#             */
-/*   Updated: 2022/06/21 20:27:29 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/06/22 19:36:03 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,14 @@
 
 int	mouse_move(int x, int y, t_system *sys)
 {
-	static t_int2	old_pos = {0, 0};
 	int				diff;
 
-	if (old_pos.y == 0 && old_pos.x == 0 && y != 0 && x != 0)
-		old_pos = make_int2(y, x);
+	(void)y;
 	mlx_mouse_move(sys->mlx.mlx, sys->mlx.win, W_WIDTH / 2, W_HEIGHT / 2);
-	diff = old_pos.x - x;
+	diff = W_WIDTH / 2 - x;
 	if (diff < 0)
-		rotate_player(sys, 'R', MOUSE_SPEED);
+		rotate_player(sys, 'R', MOUSE_SPEED * abs(diff));
 	else if (diff > 0)
-		rotate_player(sys, 'L', MOUSE_SPEED);
-	old_pos = make_int2(y, x);
+		rotate_player(sys, 'L', MOUSE_SPEED * abs(diff));
 	return (EXIT_SUCCESS);
 }
