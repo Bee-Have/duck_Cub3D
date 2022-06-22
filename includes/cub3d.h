@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 17:56:34 by user42            #+#    #+#             */
-/*   Updated: 2022/06/21 14:51:09 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/06/22 19:53:21 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,6 @@
 # define W_HEIGHT 1080
 # define W_WIDTH 1920
 
-// minimap general position
-# define T_LEFT 0
-# define T_RIGHT 1
-# define B_LEFT 2
-# define B_RIGHT 3
-# define TILE_SIZE 32
-
 // keycodes :
 # define ESC 65307
 # define UP 119
@@ -40,7 +33,6 @@
 # define LEFT 97
 # define R_RIGHT 65363
 # define R_LEFT 65361
-# define M 109
 
 // gameplay pj
 # define DIR 0.4

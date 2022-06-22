@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   key_events_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 15:38:13 by amarini-          #+#    #+#             */
-/*   Updated: 2022/06/21 14:43:08 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/06/22 19:54:18 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "duckling3d_bonus.h"
 
 int	key_press(int keycode, t_system *sys)
 {
