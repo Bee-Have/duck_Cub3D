@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 16:03:57 by amarini-          #+#    #+#             */
-/*   Updated: 2022/06/22 19:51:33 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/06/22 19:59:30 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	update_all(t_system *sys)
 	}
 	update_keys_events(sys);
 	if (map_pos == CENTER)
-		;// map_routine(sys);
+		map_routine(sys);
 	else
 	{
 		raycasting_routine(sys);

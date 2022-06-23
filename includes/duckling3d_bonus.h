@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 17:56:34 by user42            #+#    #+#             */
-/*   Updated: 2022/06/22 19:53:17 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/06/22 19:59:21 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 //* minimap
 void	render_pj_minimap(t_system *sys, t_int2 pj_pos);
 void	minimap_routine(t_system *sys, int corner);
+void	map_routine(t_system *sys);
 
 //* minimap general position
 # define T_LEFT 0

@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 17:56:34 by user42            #+#    #+#             */
-/*   Updated: 2022/06/22 19:53:21 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/06/22 20:32:44 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,6 +172,7 @@ void	texture_calculations(t_system *sys, t_raycast cast_info,
 // drawing tools
 void	draw_pxl(t_system *sys, t_int2 pos, t_color color);
 void	draw_square(t_system *sys, t_color color, t_int2 pos, int size);
+void	draw_rect(t_system *sys, t_color color, t_int2 pos, t_int2 size);
 void	draw_line(t_system *sys, t_int2 start, t_int2 end, t_color color);
 void	draw_circle(t_system *sys, t_color color, t_int2 pos, int size);
 
