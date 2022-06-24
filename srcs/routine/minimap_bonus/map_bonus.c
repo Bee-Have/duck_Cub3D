@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 19:57:20 by ldutriez          #+#    #+#             */
-/*   Updated: 2022/06/23 15:01:31 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/06/24 15:35:34 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,20 +57,19 @@ void	render_pj(t_system *sys, t_int2 map_start)
 	t_color	color;
 	t_int2	pos;
 	t_int2	dir;
+	t_int2	middle;
 	int		size;
 
 	size = sys->s_i.pxl_unit / 2;
 	color = make_color(255, 255, 0, 0);
-	pos.x = (map_start.x + (sys->pj.pos.x * sys->s_i.pxl_unit)) + (sys->s_i.pxl_unit - size) / 2;
-	pos.y = (map_start.y + (sys->pj.pos.y * sys->s_i.pxl_unit)) + (sys->s_i.pxl_unit - size) / 2;
+	pos.x = (map_start.x + (sys->pj.pos.x * sys->s_i.pxl_unit) - size / 2);
+	pos.y = (map_start.y + (sys->pj.pos.y * sys->s_i.pxl_unit) - size / 2);
 	draw_circle(sys, color, pos, size);
-	pos.y += size / 2;
-	pos.x += size / 2;
-
-	dir.y = sys->pj.dir.y * size * sys->s_i.pxl_unit + (sys->s_i.pxl_unit - size) / 2;
-	dir.x = sys->pj.dir.x * size * sys->s_i.pxl_unit + (sys->s_i.pxl_unit - size) / 2;
+	middle = make_int2(pos.y + size / 2, pos.x + size / 2);
+	dir.y = sys->pj.dir.y * sys->s_i.pxl_unit * 2 + middle.y;
+	dir.x = sys->pj.dir.x * sys->s_i.pxl_unit * 2 + middle.x;
 	color = make_color(255, 0, 255, 0);
-	draw_line(sys, pos, dir, color);
+	draw_line(sys, middle, dir, color);
 }
 
 void	map_routine(t_system *sys)
