@@ -5,6 +5,11 @@ CC = cc
 
 CFLAGS = -Wall -Wextra -Werror
 
+DEBUG =
+ifdef DEBUG
+CFLAGS += -g3 -fsanitize=address
+endif
+
 SRC_DIR = $(shell find srcs -type d)
 
 OBJ_DIR = objs
