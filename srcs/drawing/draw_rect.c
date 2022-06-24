@@ -1,27 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mouse_events_bonus.c                               :+:      :+:    :+:   */
+/*   draw_rect.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/16 17:22:27 by amarini-          #+#    #+#             */
-/*   Updated: 2022/06/22 19:36:03 by ldutriez         ###   ########.fr       */
+/*   Created: 2022/05/16 16:16:27 by amarini-          #+#    #+#             */
+/*   Updated: 2022/06/22 20:31:55 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "duckling3d_bonus.h"
+#include "cub3d.h"
 
-int	mouse_move(int x, int y, t_system *sys)
+void	draw_rect(t_system *sys, t_color color, t_int2 pos, t_int2 size)
 {
-	int				diff;
+	int		x;
+	t_int2	check;
 
-	(void)y;
-	mlx_mouse_move(sys->mlx.mlx, sys->mlx.win, W_WIDTH / 2, W_HEIGHT / 2);
-	diff = W_WIDTH / 2 - x;
-	if (diff < 0)
-		rotate_player(sys, 'R', MOUSE_SPEED * abs(diff));
-	else if (diff > 0)
-		rotate_player(sys, 'L', MOUSE_SPEED * abs(diff));
-	return (EXIT_SUCCESS);
+	x = pos.x;
+	check = make_int2(0, 0);
+	while (pos.y < 1080 && check.y < size.y)
+	{
+		pos.x = x;
+		check.x = 0;
+		while (pos.x < 1920 && check.x < size.x)
+		{
+			draw_pxl(sys, pos, color);
+			++pos.x;
+			++check.x;
+		}
+		++pos.y;
+		++check.y;
+	}
 }
