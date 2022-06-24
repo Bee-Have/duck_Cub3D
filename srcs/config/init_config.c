@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_config.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 20:07:59 by ldutriez          #+#    #+#             */
-/*   Updated: 2022/06/15 18:36:54 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/24 17:12:44 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,5 +126,6 @@ void	init_map(t_system *sys, t_d_list lines, t_int2 pos, t_parser *parser)
 		index++;
 	}
 	sys->s_i.map = map;
+	sys->s_i.map_height = index;
 	map[index] = NULL;
 }

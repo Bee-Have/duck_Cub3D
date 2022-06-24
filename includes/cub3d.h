@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 17:56:34 by user42            #+#    #+#             */
-/*   Updated: 2022/06/24 15:40:10 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/06/24 16:49:37 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 # include "mlx.h"
 
 // window/screen size
-# define W_HEIGHT 1080
-# define W_WIDTH 1920
+# define W_HEIGHT 720
+# define W_WIDTH 1280
 
 // keycodes :
 # define ESC 65307
@@ -83,6 +83,7 @@ typedef struct s_raycasting
 	int		x;
 	int		wall_height;
 	t_int2	hit;
+	int		tile_dist;
 	t_vec2	ray_dir;
 	t_vec2	side_dist;
 	t_vec2	delta_dist;
@@ -104,6 +105,8 @@ typedef struct s_img
 typedef struct s_screen_info
 {
 	char	**map;
+	int		map_height;
+	int		map_width;
 	int		pxl_unit;
 
 	t_color	floor;

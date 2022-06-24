@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 18:30:53 by amarini-          #+#    #+#             */
-/*   Updated: 2022/06/16 16:43:10 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/06/24 17:21:09 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,11 @@ void	casting_rays(t_system *sys, t_raycast cast_info)
 			cast_info.side = 1;
 		}
 		if (cast_info.hit.y < 0 || cast_info.hit.x < 0
-			|| cast_info.hit.y >= ft_tab_len((void **)sys->s_i.map)
-			|| cast_info.hit.x >= (int)ft_strlen(sys->s_i.map[cast_info.hit.y])
+			|| cast_info.hit.y >= sys->s_i.map_height
+			|| cast_info.hit.x >= sys->s_i.map_width
 			|| sys->s_i.map[cast_info.hit.y][cast_info.hit.x] == '1')
 			hit_bool = render_rays(sys, cast_info);
+		++cast_info.tile_dist;
 	}
 }
 
@@ -104,6 +105,7 @@ void	raycasting_routine(t_system *sys)
 				* camera_x, sys->pj.dir.x + sys->pj.plane.x
 				* camera_x);
 		init_casting_info(sys, &cast_info);
+		cast_info.tile_dist = 0;
 		casting_rays(sys, cast_info);
 		++cast_info.x;
 	}

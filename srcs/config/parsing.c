@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 16:12:32 by amarini-          #+#    #+#             */
-/*   Updated: 2022/06/14 20:55:27 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/06/24 16:53:42 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ static void	parse_lines(t_system *sys, t_d_list lines, t_parser *parser)
 	if (lines != NULL && lines->next == NULL)
 		add_error(parser, P_ERR_MISSING_MAP, pos.y, 0);
 	init_map(sys, lines, pos, parser);
+	sys->s_i.map_width = parser->line_max_size;
 	while (lines != NULL)
 	{
 		line = lines->data;
