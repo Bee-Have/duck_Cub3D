@@ -25,7 +25,7 @@ INC = -I$(LIBFT_DIR)/includes -I$(MLX_DIR) -I$(INC_DIR)
 vpath %.c $(foreach dir, $(SRC_DIR), $(dir):)
 
 PARSING_FILES = parsing.c parser_struct.c parse_map_content.c init_config.c
-INIT_FILES = init_structs.c init_mlx.c init_pj.c
+INIT_FILES = init_structs.c init_mlx.c init_pj.c is_power_of_two.c
 ROUTINE_FILES = mlx_routine.c routine_manager.c
 ENGINE_FILES = raycasting.c raycasting_texture.c key_events.c simulation_end.c
 DRAW_TOOLS = draw_pxl.c draw_circle.c draw_square.c draw_rect.c draw_line.c

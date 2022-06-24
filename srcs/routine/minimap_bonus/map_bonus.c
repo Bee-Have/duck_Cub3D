@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   map_bonus.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 19:57:20 by ldutriez          #+#    #+#             */
-/*   Updated: 2022/06/24 18:28:43 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/06/24 19:39:21 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "duckling3d_bonus.h"
 
-static int	map_pxl_unit(t_system * sys)
+static int	map_pxl_unit(t_system *sys)
 {
 	t_int2	pxl_unit;
 

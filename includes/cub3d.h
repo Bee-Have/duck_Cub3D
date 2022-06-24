@@ -6,7 +6,7 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 17:56:34 by user42            #+#    #+#             */
-/*   Updated: 2022/06/24 18:47:02 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/06/24 19:36:31 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -262,5 +262,10 @@ void	init_config(t_system *sys, char *line, t_int2 pos, t_parser *parser);
 *	If an error occured, the map is not allocated.
 */
 void	init_map(t_system *sys, t_d_list lines, t_int2 pos, t_parser *parser);
+
+/*
+*	Check either if the value is a power of two or zero.
+*/
+unsigned char	is_power_of_two(int x);
 
 #endif
