@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 19:57:20 by ldutriez          #+#    #+#             */
-/*   Updated: 2022/06/24 15:35:34 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/06/24 16:00:09 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ void	render_pj(t_system *sys, t_int2 map_start)
 	int		size;
 
 	size = sys->s_i.pxl_unit / 2;
+	if (size < 10)
+		size = sys->s_i.pxl_unit;
 	color = make_color(255, 255, 0, 0);
 	pos.x = (map_start.x + (sys->pj.pos.x * sys->s_i.pxl_unit) - size / 2);
 	pos.y = (map_start.y + (sys->pj.pos.y * sys->s_i.pxl_unit) - size / 2);
@@ -83,10 +85,8 @@ void	map_routine(t_system *sys)
 	map_size.y = ft_tab_len((void **)sys->s_i.map) * sys->s_i.pxl_unit;
 	offset.x = (W_WIDTH - map_size.x) / 2;
 	offset.y = (W_HEIGHT - map_size.y) / 2;
+	draw_rect(sys, make_color(255, 0, 0, 0),
+		make_int2(0, 0), make_int2(W_HEIGHT, W_WIDTH));
 	render_map(sys, offset);
 	render_pj(sys, offset);
-	draw_rect(sys, make_color(255, 0, 0, 0),
-		make_int2(0, 0), make_int2(W_HEIGHT, offset.x));
-	draw_rect(sys, make_color(255, 0, 0, 0),
-		make_int2(0, W_WIDTH - offset.x), make_int2(W_HEIGHT, offset.x));
 }
