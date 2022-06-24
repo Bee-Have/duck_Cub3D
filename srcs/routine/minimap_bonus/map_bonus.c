@@ -6,18 +6,18 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 19:57:20 by ldutriez          #+#    #+#             */
-/*   Updated: 2022/06/24 16:00:09 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/06/24 18:28:43 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "duckling3d_bonus.h"
 
-static int	map_pxl_unit(char **map)
+static int	map_pxl_unit(t_system * sys)
 {
 	t_int2	pxl_unit;
 
-	pxl_unit.x = W_WIDTH / ft_strlen(map[0]);
-	pxl_unit.y = W_HEIGHT / ft_tab_len((void **)map);
+	pxl_unit.x = W_WIDTH / sys->s_i.map_width;
+	pxl_unit.y = W_HEIGHT / sys->s_i.map_height;
 	if (pxl_unit.x < pxl_unit.y)
 		return (pxl_unit.x);
 	return (pxl_unit.y);
@@ -80,9 +80,9 @@ void	map_routine(t_system *sys)
 	t_int2	offset;
 
 	if (sys->s_i.pxl_unit == 0)
-		sys->s_i.pxl_unit = map_pxl_unit(sys->s_i.map);
-	map_size.x = ft_strlen(sys->s_i.map[0]) * sys->s_i.pxl_unit;
-	map_size.y = ft_tab_len((void **)sys->s_i.map) * sys->s_i.pxl_unit;
+		sys->s_i.pxl_unit = map_pxl_unit(sys);
+	map_size.x = sys->s_i.map_width * sys->s_i.pxl_unit;
+	map_size.y = sys->s_i.map_height * sys->s_i.pxl_unit;
 	offset.x = (W_WIDTH - map_size.x) / 2;
 	offset.y = (W_HEIGHT - map_size.y) / 2;
 	draw_rect(sys, make_color(255, 0, 0, 0),

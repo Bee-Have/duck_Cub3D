@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 16:10:57 by amarini-          #+#    #+#             */
-/*   Updated: 2022/06/21 14:42:55 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/06/24 17:09:10 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	main(int ac, char **av)
 	sys.mlx = init_mlx(window_name);
 	if (parse_map(&sys, av[1]) != 0)
 		end_simulation(&sys, EXIT_FAILURE);
+	printf("Parsing done\n");
 	sys.events = init_events();
 	sys.pj = init_pj(sys.s_i.map);
 	sys.s_i.map[(int)sys.pj.pos.y][(int)sys.pj.pos.x] = '0';

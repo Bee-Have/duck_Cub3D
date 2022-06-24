@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 18:40:06 by user42            #+#    #+#             */
-/*   Updated: 2022/06/16 22:14:49 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/06/24 17:21:07 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,12 @@ void	texture_calculations(t_system *sys, t_raycast cast_info,
 	t_int2	text_pos;
 
 	if (cast_info.hit.y < 0 || cast_info.hit.x < 0
-		|| cast_info.hit.y >= ft_tab_len((void **)sys->s_i.map)
-		|| cast_info.hit.x >= (int)ft_strlen(sys->s_i.map[cast_info.hit.y]))
+		|| cast_info.hit.y >= sys->s_i.map_height
+		|| cast_info.hit.x >= sys->s_i.map_width)
+	{
 		cast_info.wall_limits = make_int2(W_HEIGHT / 2, W_HEIGHT / 2);
+		texture_collumn(sys, cast_info, texture, text_pos);
+	}
 	texture = wall_texture_assignation(sys, cast_info);
 	if (cast_info.side == 0)
 		wall_hit = sys->pj.pos.y + wall_dist * cast_info.ray_dir.y;

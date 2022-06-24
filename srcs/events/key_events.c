@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_events.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 15:38:13 by amarini-          #+#    #+#             */
-/*   Updated: 2022/06/21 14:36:03 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/06/24 17:14:48 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,9 @@ static void	move_player(t_system *sys, char c_dir)
 						+ sys->pj.dir.y * cos(M_PI_2)) * DIR * SPEED),
 				sys->pj.pos.x + ((sys->pj.dir.x * cos(M_PI_2) - sys->pj.dir.y
 						* sin(M_PI_2)) * DIR * SPEED));
-	if (dir.x > 0 && dir.x < ft_strlen(sys->s_i.map[(int)sys->pj.pos.y]))
+	if (dir.x > 0 && dir.x < sys->s_i.map_width)
 		sys->pj.pos.x = dir.x;
-	if (dir.y > 0 && dir.y < ft_tab_len((void **)sys->s_i.map))
+	if (dir.y > 0 && dir.y < sys->s_i.map_height)
 		sys->pj.pos.y = dir.y;
 }
 
