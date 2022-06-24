@@ -6,13 +6,13 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 19:57:20 by ldutriez          #+#    #+#             */
-/*   Updated: 2022/06/24 17:16:56 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/06/24 18:28:43 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "duckling3d_bonus.h"
 
-static int	map_pxl_unit(char **map)
+static int	map_pxl_unit(t_system * sys)
 {
 	t_int2	pxl_unit;
 
@@ -80,7 +80,7 @@ void	map_routine(t_system *sys)
 	t_int2	offset;
 
 	if (sys->s_i.pxl_unit == 0)
-		sys->s_i.pxl_unit = map_pxl_unit(sys->s_i.map);
+		sys->s_i.pxl_unit = map_pxl_unit(sys);
 	map_size.x = sys->s_i.map_width * sys->s_i.pxl_unit;
 	map_size.y = sys->s_i.map_height * sys->s_i.pxl_unit;
 	offset.x = (W_WIDTH - map_size.x) / 2;
