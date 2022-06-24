@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_pj.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 15:25:34 by amarini-          #+#    #+#             */
-/*   Updated: 2022/06/15 18:28:42 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/24 20:51:43 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,12 @@ t_pj	init_pj(char **map)
 	else if (map[(int)pj.pos.y][(int)pj.pos.x] == 'W')
 		pj.dir = make_vec2(DIR * sin(M_PI), DIR * cos(M_PI));
 	if (map[(int)pj.pos.y][(int)pj.pos.x] == 'N')
-		pj.plane = make_vec2(0, 0.3);
+		pj.plane = make_vec2(0, PLANE);
 	else if (map[(int)pj.pos.y][(int)pj.pos.x] == 'S')
-		pj.plane = make_vec2(0, -0.3);
+		pj.plane = make_vec2(0, -PLANE);
 	else if (map[(int)pj.pos.y][(int)pj.pos.x] == 'E')
-		pj.plane = make_vec2(0.3, 0);
+		pj.plane = make_vec2(PLANE, 0);
 	else if (map[(int)pj.pos.y][(int)pj.pos.x] == 'W')
-		pj.plane = make_vec2(-0.3, 0);
+		pj.plane = make_vec2(-PLANE, 0);
 	return (pj);
 }

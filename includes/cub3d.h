@@ -6,7 +6,7 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 17:56:34 by user42            #+#    #+#             */
-/*   Updated: 2022/06/24 19:36:31 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/06/24 20:53:18 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,9 @@
 # define R_LEFT 65361
 
 // gameplay pj
-# define DIR 0.6
-# define SPEED 1
+# define DIR 0.9
+# define PLANE 0.66
+# define SPEED 0.7
 # define R_SPEED 0.2
 
 // structs
