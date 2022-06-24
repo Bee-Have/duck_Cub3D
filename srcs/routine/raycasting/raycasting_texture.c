@@ -6,7 +6,7 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 18:40:06 by user42            #+#    #+#             */
-/*   Updated: 2022/06/24 19:39:38 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/06/24 19:53:19 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,9 @@ void	texture_calculations(t_system *sys, t_raycast cast_info,
 		wall_hit = sys->pj.pos.x + wall_dist * cast_info.ray_dir.x;
 	wall_hit -= floor(wall_hit);
 	text_pos.x = (int)(wall_hit * (double)texture.size.x);
-	if (cast_info.side == 0 && cast_info.ray_dir.x > 0)
+	if (cast_info.side == 0 && cast_info.ray_dir.x < 0)
 		text_pos.x = texture.size.x - text_pos.x - 1;
-	if (cast_info.side == 1 && cast_info.ray_dir.y < 0)
+	if (cast_info.side == 1 && cast_info.ray_dir.y > 0)
 		text_pos.x = texture.size.x - text_pos.x - 1;
 	texture_collumn(sys, cast_info, texture, text_pos);
 }
