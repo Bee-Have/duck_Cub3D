@@ -3,12 +3,7 @@ NAME_BONUS = duckling3D
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror -g3
-
-DEBUG =
-ifdef DEBUG
-CFLAGS += -fsanitize=address
-endif
+CFLAGS = -Wall -Wextra -Werror
 
 SRC_DIR = $(shell find srcs -type d)
 

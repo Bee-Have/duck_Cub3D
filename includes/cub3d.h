@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 17:56:34 by user42            #+#    #+#             */
-/*   Updated: 2022/06/22 20:32:44 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/06/24 15:40:10 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@
 # define R_LEFT 65361
 
 // gameplay pj
-# define DIR 0.4
-# define SPEED 2
-# define R_SPEED 0.15
+# define DIR 0.6
+# define SPEED 1
+# define R_SPEED 0.2
 
 // structs
 typedef struct s_int2
