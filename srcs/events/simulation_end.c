@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   simulation_end.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 19:26:03 by user42            #+#    #+#             */
-/*   Updated: 2022/06/16 22:40:02 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/06/24 18:44:44 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,14 @@
 //! I will implement this part when the textures will be properly used
 static void	free_textures(t_system *sys)
 {
-	mlx_destroy_image(sys->mlx.mlx, sys->s_i.north_texture.img);
-	mlx_destroy_image(sys->mlx.mlx, sys->s_i.south_texture.img);
-	mlx_destroy_image(sys->mlx.mlx, sys->s_i.west_texture.img);
-	mlx_destroy_image(sys->mlx.mlx, sys->s_i.east_texture.img);
+	if (sys->s_i.north_texture.img != NULL)
+		mlx_destroy_image(sys->mlx.mlx, sys->s_i.north_texture.img);
+	if (sys->s_i.south_texture.img != NULL)
+		mlx_destroy_image(sys->mlx.mlx, sys->s_i.south_texture.img);
+	if (sys->s_i.west_texture.img != NULL)
+		mlx_destroy_image(sys->mlx.mlx, sys->s_i.west_texture.img);
+	if (sys->s_i.east_texture.img != NULL)
+		mlx_destroy_image(sys->mlx.mlx, sys->s_i.east_texture.img);
 }
 
 int	end_simulation(t_system *sys, int exit_code)
