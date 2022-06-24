@@ -1,7 +1,7 @@
-NO ./ressources/bluestone.xpm
-SO ./ressources/colorstone.xpm
-WE ./ressources/greystone.xpm
-EA ./ressources/mossy.xpm
+NO ./ressources/frog.xpm
+SO ./ressources/frog.xpm
+WE ./ressources/frog.xpm
+EA ./ressources/frog.xpm
 
 F 0,255,255
 C 173,248,255
@@ -10,8 +10,8 @@ C 173,248,255
 10000000001
 10000000001
 10000000001
-10000100001
+100001000W1
 10000000001
 10000000001
-100000000N1
+10000000001
 11111111111

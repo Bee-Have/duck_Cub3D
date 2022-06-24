@@ -6,7 +6,7 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 17:56:34 by user42            #+#    #+#             */
-/*   Updated: 2022/06/24 20:53:18 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/06/24 21:04:16 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -267,6 +267,6 @@ void	init_map(t_system *sys, t_d_list lines, t_int2 pos, t_parser *parser);
 /*
 *	Check either if the value is a power of two or zero.
 */
-unsigned char	is_power_of_two(int x);
+char	is_power_of_two(int x);
 
 #endif
