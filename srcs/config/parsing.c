@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 16:12:32 by amarini-          #+#    #+#             */
-/*   Updated: 2022/06/24 16:53:42 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/06/25 20:02:57 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,8 @@ int	parse_map(t_system *sys, char *path_to_file)
 	error_count = parse_file_content(sys, path_to_file);
 	if (error_count != 0)
 	{
-		printf("%d errors generated\n", error_count);
+		ft_putnbr_fd(2, error_count);
+		ft_putstr_fd(2, " errors generated\n");
 		return (1);
 	}
 	return (0);
