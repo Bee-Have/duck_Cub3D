@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_mlx.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 18:09:36 by amarini-          #+#    #+#             */
-/*   Updated: 2022/06/16 22:39:48 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/06/25 19:59:40 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,17 @@ t_mlx	init_mlx(char window_name[10])
 	t_mlx	mlx;
 
 	mlx.mlx = mlx_init();
+	if (mlx.mlx == NULL)
+	{
+		ft_putstr_fd(2, "Error\nUnable to init mlx\n");
+		exit(1);
+	}
 	mlx.win = mlx_new_window(mlx.mlx, W_WIDTH, W_HEIGHT, window_name);
+	if (mlx.win == NULL)
+	{
+		ft_putstr_fd(2, "Error\nUnable to create a window\n");
+		exit(1);
+	}
 	mlx.img = init_img();
 	mlx.img.img = mlx_new_image(mlx.mlx, W_WIDTH, W_HEIGHT);
 	mlx.img.addr = mlx_get_data_addr(mlx.img.img, &mlx.img.bits_pxl,
