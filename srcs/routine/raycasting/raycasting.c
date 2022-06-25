@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 18:30:53 by amarini-          #+#    #+#             */
-/*   Updated: 2022/06/25 20:07:34 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/06/25 20:28:34 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	render_rays(t_system *sys, t_raycast cast_info)
 		wall_dist = cast_info.side_dist.x - cast_info.delta_dist.x;
 	else
 		wall_dist = cast_info.side_dist.y - cast_info.delta_dist.y;
-	if ((int)wall_dist == 0)
+	if (wall_dist == (double)0)
 		cast_info.wall_height = W_HEIGHT;
 	else
 		cast_info.wall_height = (int)(W_HEIGHT / wall_dist);
