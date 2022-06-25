@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   is_power_of_two.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 19:34:03 by amarini-          #+#    #+#             */
-/*   Updated: 2022/06/24 19:38:51 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/06/25 19:33:30 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-unsigned char	is_power_of_two(int x)
+char	is_power_of_two(int x)
 {
 	return ((x & (x - 1)) == 0);
 }
