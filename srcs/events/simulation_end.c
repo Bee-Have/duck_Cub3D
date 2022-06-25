@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 19:26:03 by user42            #+#    #+#             */
-/*   Updated: 2022/06/24 18:44:44 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/06/25 19:36:51 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	end_simulation(t_system *sys, int exit_code)
 	mlx_destroy_image(sys->mlx.mlx, sys->mlx.img.img);
 	mlx_destroy_window(sys->mlx.mlx, sys->mlx.win);
 	mlx_destroy_display(sys->mlx.mlx);
+	free(sys->mlx.mlx);
 	sys->mlx.mlx = NULL;
 	exit(exit_code);
 }
