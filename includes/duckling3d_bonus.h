@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 17:56:34 by user42            #+#    #+#             */
-/*   Updated: 2022/06/25 20:33:31 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/06/27 19:42:53 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,11 @@ void	map_routine(t_system *sys);
 //* events
 int		mouse_move(int x, int y, t_system *sys);
 
+//* routine
+int		save_bmp(t_system *sys);
+
 //* keycodes :
 # define M 109
+# define F2 65471
 
 #endif
