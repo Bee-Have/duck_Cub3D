@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 16:30:21 by ncoudsi           #+#    #+#             */
-/*   Updated: 2021/05/28 03:53:22 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/25 21:27:44 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,12 @@ char	*ft_itoa(long long int nbr)
 	base = "0123456789";
 	result = ft_itoa_base(nbr, base);
 	return (result);
+}
+
+void	ft_itoa_r(char *result, long long int nbr)
+{
+	char	*base;
+
+	base = "0123456789";
+	ft_itoa_base_r(result, nbr, base);
 }

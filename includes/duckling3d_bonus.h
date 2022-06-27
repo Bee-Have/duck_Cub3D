@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   duckling3d_bonus.h                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 17:56:34 by user42            #+#    #+#             */
-/*   Updated: 2022/06/24 15:45:29 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/06/25 20:33:31 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "cub3d.h"
 # include "libft.h"
 # include "mlx.h"
+# include <time.h>
 
 # define MOUSE_SPEED 0.001
 

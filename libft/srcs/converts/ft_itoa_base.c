@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa_base.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/30 11:49:49 by tguilbar          #+#    #+#             */
-/*   Updated: 2021/05/28 03:52:53 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/25 21:22:05 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,29 @@ char	*ft_itoa_base(long long int nbr, char *base)
 	}
 	result[nbr_len] = base[abs_nbr % base_len];
 	return (result);
+}
+
+void	ft_itoa_base_r(char *result, long long int nbr, char *base)
+{
+	size_t					base_len;
+	size_t					nbr_len;
+	unsigned long long int	abs_nbr;
+
+	base_len = ft_strlen(base);
+	nbr_len = ft_nbrlen(nbr, base_len);
+	if (nbr < 0)
+	{
+		result[0] = '-';
+		abs_nbr = -nbr;
+	}
+	else
+		abs_nbr = nbr;
+	nbr_len--;
+	while (abs_nbr >= base_len)
+	{
+		result[nbr_len] = base[abs_nbr % base_len];
+		abs_nbr /= base_len;
+		nbr_len--;
+	}
+	result[nbr_len] = base[abs_nbr % base_len];
 }
