@@ -6,7 +6,7 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 18:40:06 by user42            #+#    #+#             */
-/*   Updated: 2022/06/24 19:53:19 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/06/28 00:38:51 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ static void	texture_collumn(t_system *sys, t_raycast cast_info, t_img text,
 	int		y;
 	t_color	color;
 
-	draw_line(sys, make_int2(0, cast_info.x),
+	draw_line(sys, make_int2(-1, cast_info.x),
 		make_int2(cast_info.wall_limits.y, cast_info.x), sys->s_i.ceiling);
 	draw_line(sys, make_int2(cast_info.wall_limits.x, cast_info.x),
-		make_int2(W_HEIGHT - 1, cast_info.x), sys->s_i.floor);
+		make_int2(W_HEIGHT, cast_info.x), sys->s_i.floor);
 	step = 1.0 * text.size.y / cast_info.wall_height;
 	tex_hit = (cast_info.wall_limits.y - W_HEIGHT
 			/ 2 + cast_info.wall_height / 2) * step;
