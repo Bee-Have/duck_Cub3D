@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft_converts.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 16:29:47 by ldutriez          #+#    #+#             */
-/*   Updated: 2021/05/28 03:50:17 by user42           ###   ########.fr       */
+/*   Updated: 2022/06/25 21:27:22 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,23 @@ char			*ft_itoa_base(long long int nbr, char *base);
 
 /*
 **	Converting an integer value into a string filled with numerical characters
+**	refering to the value, in a set base. The first argument need to be at least
+**	nbr length long.
+*/
+void			ft_itoa_base_r(char *result, long long int nbr, char *base);
+
+/*
+**	Converting an integer value into a string filled with numerical characters
 **	refering to the value.
 */
 char			*ft_itoa(long long int nbr);
+
+/*
+**	Converting an integer value into a string filled with numerical characters
+**	refering to the value. The first argument need to be at least
+**	nbr length long.
+*/
+void			ft_itoa_r(char *result, long long int nbr);
 
 /*
 **	Converting an integer value into a string filled with numerical characters
