@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 17:56:34 by user42            #+#    #+#             */
-/*   Updated: 2022/06/27 19:42:53 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/06/27 23:22:20 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include "libft.h"
 # include "mlx.h"
 # include <time.h>
+# include <sys/types.h>
+# include <sys/stat.h>
 
 # define MOUSE_SPEED 0.001
 

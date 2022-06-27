@@ -6,11 +6,11 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 17:58:34 by ldutriez          #+#    #+#             */
-/*   Updated: 2022/06/27 19:57:29 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/06/27 23:24:43 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "duckling3d_bonus.h"
 
 static void	set_int_in_char(unsigned char *start, int value)
 {
@@ -76,12 +76,15 @@ static int	write_bmp_data(t_system *sys, int fd)
 
 int	save_bmp(t_system *sys)
 {
-	int	filesize;
-	int	file;
+	int			filesize;
+	int			file;
+	struct stat	st;
 
+	if (stat("./screenshots", &st) == -1)
+		mkdir("./screenshots", 0700);
 	sys->events.is_f2_pressed = 0;
 	filesize = 54 + (3 * W_WIDTH * W_HEIGHT);
-	file = open("./screenshots.bmp",
+	file = open("./screenshots/file.bmp",
 			O_WRONLY | O_CREAT | O_TRUNC | O_APPEND, 0644);
 	if (file < 0)
 		return (0);
