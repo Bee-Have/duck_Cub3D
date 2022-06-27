@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 17:58:34 by ldutriez          #+#    #+#             */
-/*   Updated: 2022/06/27 23:24:43 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/06/27 23:37:54 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,19 +76,23 @@ static int	write_bmp_data(t_system *sys, int fd)
 
 int	save_bmp(t_system *sys)
 {
-	int			filesize;
 	int			file;
 	struct stat	st;
+	char		title[35];
+	time_t		t;
+	struct tm	tm;
 
+	t = time(NULL);
+	tm = *localtime(&t);
+	sprintf(title, "./screenshots/%d-%02d-%02d-%02d:%02d:%02d.bmp", tm.tm_year
+		+ 1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec);
 	if (stat("./screenshots", &st) == -1)
 		mkdir("./screenshots", 0700);
 	sys->events.is_f2_pressed = 0;
-	filesize = 54 + (3 * W_WIDTH * W_HEIGHT);
-	file = open("./screenshots/file.bmp",
-			O_WRONLY | O_CREAT | O_TRUNC | O_APPEND, 0644);
+	file = open(title, O_WRONLY | O_CREAT | O_TRUNC | O_APPEND, 0644);
 	if (file < 0)
 		return (0);
-	if (!write_bmp_header(file, filesize))
+	if (!write_bmp_header(file, 54 + (3 * W_WIDTH * W_HEIGHT)))
 		return (0);
 	if (!write_bmp_data(sys, file))
 		return (0);
