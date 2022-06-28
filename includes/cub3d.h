@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 17:56:34 by user42            #+#    #+#             */
-/*   Updated: 2022/06/25 20:07:36 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/06/28 02:46:31 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@
 # define R_LEFT 65361
 
 // gameplay pj
-# define DIR 0.9
-# define PLANE 0.66
-# define SPEED 0.7
-# define R_SPEED 0.2
+# define DIR 0.7
+# define PLANE 0.7
+# define SPEED 0.2
+# define R_SPEED 0.1
 
 // structs
 typedef struct s_int2
