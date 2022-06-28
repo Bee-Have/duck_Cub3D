@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 16:03:57 by amarini-          #+#    #+#             */
-/*   Updated: 2022/06/27 17:47:34 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/06/27 20:02:19 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,24 @@ static void	fps_counter(t_system *sys)
 		5, W_HEIGHT / 2, 0x00FFFFFF, to_print);
 }
 
+static void	enable_screenshot(t_system *sys)
+{
+	if (sys->events.is_f2_pressed == 1)
+		mlx_string_put(sys->mlx.mlx, sys->mlx.win,
+			W_WIDTH / 2, W_HEIGHT / 2, 0x00FFFFFF, "Taking a screen shot!");
+	if (sys->events.is_f2_pressed == 1)
+		sys->events.is_f2_pressed = 2;
+}
+
 int	update_all(t_system *sys)
 {
-	static int		map_pos = T_LEFT;
+	static int	map_pos = T_LEFT;
 
 	if (sys->events.is_m_pressed == 1)
-	{
-		map_pos++;
 		sys->events.is_m_pressed = 0;
-		if (map_pos > CENTER)
+	if (sys->events.is_m_pressed == 1)
+		if (++map_pos > CENTER)
 			map_pos = T_LEFT;
-	}
 	update_keys_events(sys);
 	if (map_pos == CENTER)
 		map_routine(sys);
@@ -50,7 +57,10 @@ int	update_all(t_system *sys)
 		raycasting_routine(sys);
 		minimap_routine(sys, map_pos);
 	}
+	if (sys->events.is_f2_pressed == 2)
+		save_bmp(sys);
 	mlx_put_image_to_window(sys->mlx.mlx, sys->mlx.win, sys->mlx.img.img, 0, 0);
+	enable_screenshot(sys);
 	fps_counter(sys);
 	return (EXIT_SUCCESS);
 }

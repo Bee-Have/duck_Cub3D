@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 17:56:34 by user42            #+#    #+#             */
-/*   Updated: 2022/06/25 20:07:36 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/06/27 19:40:34 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,7 @@ typedef struct s_event
 	char	is_left_pressed;
 	char	is_right_pressed;
 	char	is_m_pressed;
+	char	is_f2_pressed;
 }			t_event;
 
 typedef struct s_mlx

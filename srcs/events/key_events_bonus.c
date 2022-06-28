@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 15:38:13 by amarini-          #+#    #+#             */
-/*   Updated: 2022/06/24 17:15:26 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/06/27 19:43:20 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int	key_press(int keycode, t_system *sys)
 		sys->events.is_d_pressed = 1;
 	if (keycode == M)
 		sys->events.is_m_pressed = 1;
+	if (keycode == F2)
+		sys->events.is_f2_pressed = 1;
 	return (EXIT_SUCCESS);
 }
 
