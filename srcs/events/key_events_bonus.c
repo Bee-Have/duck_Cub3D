@@ -6,7 +6,7 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 15:38:13 by amarini-          #+#    #+#             */
-/*   Updated: 2022/06/28 03:44:02 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/06/28 03:53:41 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,10 @@ static void	move_player(t_system *sys, char c_dir)
 				sys->pj.pos.x + ((sys->pj.dir.x * cos(M_PI_2) - sys->pj.dir.y
 						* sin(M_PI_2)) * DIR * SPEED));
 	if (d.x > 0 && d.x < sys->s_i.map_width && (sys->events.is_v_pressed == 1
-		|| sys->s_i.map[(int)sys->pj.pos.y][(int)d.x] != '1'))
+			|| sys->s_i.map[(int)sys->pj.pos.y][(int)d.x] != '1'))
 		sys->pj.pos.x = d.x;
 	if (d.y > 0 && d.y < sys->s_i.map_height && (sys->events.is_v_pressed == 1
-		|| sys->s_i.map[(int)d.y][(int)sys->pj.pos.x] != '1'))
+			|| sys->s_i.map[(int)d.y][(int)sys->pj.pos.x] != '1'))
 		sys->pj.pos.y = d.y;
 }
 

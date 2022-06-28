@@ -6,10 +6,9 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 17:56:34 by user42            #+#    #+#             */
-/*   Updated: 2022/06/28 03:44:18 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/06/28 03:53:49 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef DUCKLING3D_BONUS_H
 # define DUCKLING3D_BONUS_H
