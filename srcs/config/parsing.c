@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 16:12:32 by amarini-          #+#    #+#             */
-/*   Updated: 2022/06/25 20:02:57 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/06/28 06:11:42 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ static int	check_path_validity(char *path_to_file)
 		ft_putstr_fd(2, "Error\nFile path is too short.\n");
 		return (1);
 	}
-	if (ft_strcmp(path_to_file + path_length - 4, ".cub") == b_false)
+	if (ft_strcmp(path_to_file + path_length - 4, ".cub") == b_false
+		|| ft_strcmp(path_to_file + path_length - 5, "/.cub") == b_true)
 	{
 		ft_putstr_fd(2, "Error\nFile extension is not \".cub\".\n");
 		return (1);
