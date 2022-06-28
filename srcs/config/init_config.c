@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_config.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 20:07:59 by ldutriez          #+#    #+#             */
-/*   Updated: 2022/06/24 19:39:03 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/06/28 06:55:25 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	init_texture(t_system *sys, char *line, t_int2 pos
 			&texture->size.x, &texture->size.y);
 	if (texture->img == NULL || is_power_of_two(texture->size.x) == b_false
 		|| is_power_of_two(texture->size.y) == b_false)
-		add_error(parser, P_ERR_TEXTURE, pos.y, pos.x);
+		return (add_error(parser, P_ERR_TEXTURE, pos.y, pos.x));
 	texture->addr = mlx_get_data_addr(texture->img, &texture->bits_pxl,
 			&texture->line_len, &texture->endian);
 	if (texture->addr == NULL)
