@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 10:59:27 by ldutriez          #+#    #+#             */
-/*   Updated: 2022/06/28 08:01:28 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/06/28 08:51:38 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	get_next_line(int fd, char **line)
 
 	read_return = 1;
 	if (line == NULL || fd < 0 || BUFFER_SIZE <= 0)
-		return (critical_error);
+		return (critical_error(&storage));
 	buffer = ft_strnew(BUFFER_SIZE);
 	if (buffer == NULL)
 		return (IS_AN_ERROR);
