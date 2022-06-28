@@ -6,7 +6,7 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 17:56:34 by user42            #+#    #+#             */
-/*   Updated: 2022/06/28 00:59:21 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/06/28 03:01:15 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,6 @@ int		mouse_move(int x, int y, t_system *sys);
 
 //* keycodes :
 # define M 109
+# define V 118
 
 #endif
