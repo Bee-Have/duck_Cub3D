@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   duckling3d_bonus.h                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 17:56:34 by user42            #+#    #+#             */
-/*   Updated: 2022/06/27 23:22:20 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/06/28 03:53:49 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 
-# define MOUSE_SPEED 0.001
+# define MOUSE_SPEED 0.0003
 
 //* minimap
 void	render_pj_minimap(t_system *sys, t_int2 pj_pos);
@@ -43,6 +43,7 @@ int		save_bmp(t_system *sys);
 
 //* keycodes :
 # define M 109
+# define V 118
 # define F2 65471
 
 #endif

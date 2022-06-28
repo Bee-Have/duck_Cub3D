@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 18:30:53 by amarini-          #+#    #+#             */
-/*   Updated: 2022/06/25 20:28:34 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/06/28 02:45:41 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ int	render_rays(t_system *sys, t_raycast cast_info)
 		cast_info.wall_height = (int)(W_HEIGHT / wall_dist);
 	wall_start = -cast_info.wall_height / 2 + W_HEIGHT / 2;
 	if (wall_start < 0)
-		wall_start = 0;
+		wall_start = -1;
 	wall_end = cast_info.wall_height / 2 + W_HEIGHT / 2;
-	if (wall_end >= W_HEIGHT)
-		wall_end = W_HEIGHT - 1;
+	if (wall_end > W_HEIGHT)
+		wall_end = W_HEIGHT;
 	cast_info.wall_limits = make_int2(wall_start, wall_end);
 	texture_calculations(sys, cast_info, wall_dist);
 	return (1);

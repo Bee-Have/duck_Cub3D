@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 16:03:57 by amarini-          #+#    #+#             */
-/*   Updated: 2022/06/27 20:02:19 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/06/28 03:58:15 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ int	update_all(t_system *sys)
 	static int	map_pos = T_LEFT;
 
 	if (sys->events.is_m_pressed == 1)
-		sys->events.is_m_pressed = 0;
-	if (sys->events.is_m_pressed == 1)
 		if (++map_pos > CENTER)
 			map_pos = T_LEFT;
+	if (sys->events.is_m_pressed == 1)
+		sys->events.is_m_pressed = 0;
 	update_keys_events(sys);
 	if (map_pos == CENTER)
 		map_routine(sys);

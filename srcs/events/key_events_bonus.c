@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_events_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 15:38:13 by amarini-          #+#    #+#             */
-/*   Updated: 2022/06/27 19:43:20 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/06/28 03:53:41 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int	key_press(int keycode, t_system *sys)
 		sys->events.is_d_pressed = 1;
 	if (keycode == M)
 		sys->events.is_m_pressed = 1;
+	if (keycode == V)
+		sys->events.is_v_pressed = !sys->events.is_v_pressed;
 	if (keycode == F2)
 		sys->events.is_f2_pressed = 1;
 	return (EXIT_SUCCESS);
@@ -54,30 +56,30 @@ int	key_release(int keycode, t_system *sys)
 
 static void	move_player(t_system *sys, char c_dir)
 {
-	t_vec2	dir;
+	t_vec2	d;
 
 	if (c_dir == 'W')
-		dir = make_vec2(sys->pj.pos.y + (sys->pj.dir.y * DIR * SPEED),
+		d = make_vec2(sys->pj.pos.y + (sys->pj.dir.y * DIR * SPEED),
 				sys->pj.pos.x + (sys->pj.dir.x * DIR * SPEED));
 	else if (c_dir == 'S')
-		dir = make_vec2(sys->pj.pos.y - (sys->pj.dir.y * DIR * SPEED),
+		d = make_vec2(sys->pj.pos.y - (sys->pj.dir.y * DIR * SPEED),
 				sys->pj.pos.x - (sys->pj.dir.x * DIR * SPEED));
 	else if (c_dir == 'A')
-		dir = make_vec2(sys->pj.pos.y + ((sys->pj.dir.x * sin(M_PI * 3 / 2)
+		d = make_vec2(sys->pj.pos.y + ((sys->pj.dir.x * sin(M_PI * 3 / 2)
 						+ sys->pj.dir.y * cos(M_PI * 3 / 2)) * DIR * SPEED),
 				sys->pj.pos.x + ((sys->pj.dir.x * cos(M_PI * 3 / 2)
 						- sys->pj.dir.y * sin(M_PI * 3 / 2)) * DIR * SPEED));
 	else
-		dir = make_vec2(sys->pj.pos.y + ((sys->pj.dir.x * sin(M_PI_2)
+		d = make_vec2(sys->pj.pos.y + ((sys->pj.dir.x * sin(M_PI_2)
 						+ sys->pj.dir.y * cos(M_PI_2)) * DIR * SPEED),
 				sys->pj.pos.x + ((sys->pj.dir.x * cos(M_PI_2) - sys->pj.dir.y
 						* sin(M_PI_2)) * DIR * SPEED));
-	if (dir.x > 0 && dir.x < sys->s_i.map_width
-		&& sys->s_i.map[(int)sys->pj.pos.y][(int)dir.x] != '1')
-		sys->pj.pos.x = dir.x;
-	if (dir.y > 0 && dir.y < sys->s_i.map_height
-		&& sys->s_i.map[(int)dir.y][(int)sys->pj.pos.x] != '1')
-		sys->pj.pos.y = dir.y;
+	if (d.x > 0 && d.x < sys->s_i.map_width && (sys->events.is_v_pressed == 1
+			|| sys->s_i.map[(int)sys->pj.pos.y][(int)d.x] != '1'))
+		sys->pj.pos.x = d.x;
+	if (d.y > 0 && d.y < sys->s_i.map_height && (sys->events.is_v_pressed == 1
+			|| sys->s_i.map[(int)d.y][(int)sys->pj.pos.x] != '1'))
+		sys->pj.pos.y = d.y;
 }
 
 void	rotate_player(t_system *sys, char dir, double speed)
