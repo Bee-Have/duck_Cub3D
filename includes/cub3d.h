@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 17:56:34 by user42            #+#    #+#             */
-/*   Updated: 2022/06/28 05:09:30 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/06/28 08:03:30 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -257,6 +257,11 @@ int		parse_map(t_system *sys, char *file);
 *	If not valid, add an error to the parser.
 */
 void	init_config(t_system *sys, char *line, t_int2 pos, t_parser *parser);
+
+/*
+**	Check if the size of the xpm is not negative.
+*/
+char	is_valid_xpm_size(char *path);
 
 /*
 *	Take what have been parsed and fill the system struct.

@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 20:07:59 by ldutriez          #+#    #+#             */
-/*   Updated: 2022/06/28 06:55:25 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/06/28 08:03:00 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ static void	init_texture(t_system *sys, char *line, t_int2 pos
 	pos.x += 2;
 	while (line[pos.x] == ' ')
 		pos.x++;
-	if (ft_is_valid_file_path(line + pos.x) == b_false)
+	if (ft_is_valid_file_path(line + pos.x) == b_false
+		|| is_valid_xpm_size(line + pos.x) == b_false)
 		return (add_error(parser, P_ERR_TEXTURE, pos.y, pos.x));
 	texture->img = mlx_xpm_file_to_image(sys->mlx.mlx, line + pos.x,
 			&texture->size.x, &texture->size.y);

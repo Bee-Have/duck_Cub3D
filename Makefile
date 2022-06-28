@@ -3,7 +3,7 @@ NAME_BONUS = duckling3D
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g3
 
 DEBUG =
 ifdef DEBUG
@@ -24,7 +24,8 @@ INC = -I$(LIBFT_DIR)/includes -I$(MLX_DIR) -I$(INC_DIR)
 
 vpath %.c $(foreach dir, $(SRC_DIR), $(dir):)
 
-PARSING_FILES = parsing.c parser_struct.c parse_map_content.c init_config.c
+PARSING_FILES = parsing.c parser_struct.c parse_map_content.c init_config.c \
+				parse_xpm.c
 INIT_FILES = init_structs.c init_mlx.c init_pj.c is_power_of_two.c
 ROUTINE_FILES = mlx_routine.c routine_manager.c
 ENGINE_FILES = raycasting.c raycasting_texture.c key_events.c simulation_end.c

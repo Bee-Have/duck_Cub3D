@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 10:59:27 by ldutriez          #+#    #+#             */
-/*   Updated: 2022/06/06 21:01:42 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/06/28 08:01:28 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,13 @@ static void	remove_line(char **storage)
 	free(tmp);
 }
 
+static int	critical_error(char **storage)
+{
+	free(*storage);
+	*storage = NULL;
+	return (IS_AN_ERROR);
+}
+
 int	get_next_line(int fd, char **line)
 {
 	static char	*storage = NULL;
@@ -59,7 +66,7 @@ int	get_next_line(int fd, char **line)
 
 	read_return = 1;
 	if (line == NULL || fd < 0 || BUFFER_SIZE <= 0)
-		return (IS_AN_ERROR);
+		return (critical_error);
 	buffer = ft_strnew(BUFFER_SIZE);
 	if (buffer == NULL)
 		return (IS_AN_ERROR);
