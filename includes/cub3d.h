@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 17:56:34 by user42            #+#    #+#             */
-/*   Updated: 2022/06/28 03:44:36 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/06/28 05:09:30 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,7 +155,6 @@ t_color	make_color(unsigned char a, unsigned char r, unsigned char g,
 			unsigned char b);
 // mlx
 t_img	init_img(void);
-t_event	init_events(void);
 t_mlx	init_mlx(char window_name[10]);
 // gameplay
 t_pj	init_pj(char **map);

@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 18:09:36 by amarini-          #+#    #+#             */
-/*   Updated: 2022/06/25 19:59:40 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/06/28 04:54:08 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,6 @@ t_img	init_img(void)
 	img.line_len = 0;
 	img.endian = 0;
 	return (img);
-}
-
-t_event	init_events(void)
-{
-	t_event	events;
-
-	events.is_w_pressed = 0;
-	events.is_a_pressed = 0;
-	events.is_s_pressed = 0;
-	events.is_d_pressed = 0;
-	events.is_left_pressed = 0;
-	events.is_right_pressed = 0;
-	return (events);
 }
 
 t_mlx	init_mlx(char window_name[10])
