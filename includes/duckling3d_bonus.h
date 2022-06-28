@@ -6,9 +6,10 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 17:56:34 by user42            #+#    #+#             */
-/*   Updated: 2022/06/28 03:01:15 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/06/28 03:44:18 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef DUCKLING3D_BONUS_H
 # define DUCKLING3D_BONUS_H
@@ -17,6 +18,8 @@
 # include "libft.h"
 # include "mlx.h"
 # include <time.h>
+# include <sys/types.h>
+# include <sys/stat.h>
 
 # define MOUSE_SPEED 0.0003
 
@@ -36,8 +39,12 @@ void	map_routine(t_system *sys);
 //* events
 int		mouse_move(int x, int y, t_system *sys);
 
+//* routine
+int		save_bmp(t_system *sys);
+
 //* keycodes :
 # define M 109
 # define V 118
+# define F2 65471
 
 #endif

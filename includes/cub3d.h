@@ -6,7 +6,7 @@
 /*   By: amarini- <amarini-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 17:56:34 by user42            #+#    #+#             */
-/*   Updated: 2022/06/28 02:58:04 by amarini-         ###   ########.fr       */
+/*   Updated: 2022/06/28 03:44:36 by amarini-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,7 @@ typedef struct s_event
 	char	is_right_pressed;
 	char	is_m_pressed;
 	char	is_v_pressed;
+	char	is_f2_pressed;
 }			t_event;
 
 typedef struct s_mlx
